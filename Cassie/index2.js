@@ -423,6 +423,11 @@ function createSizeButtons() {
     body.appendChild(table);
 }
 
+function finishButtonPress6() {
+    removeButtons();
+    createEditButtons();
+}
+
 /**
  * resizes the entity
  * @param {int} amount changed
