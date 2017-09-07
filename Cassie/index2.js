@@ -93,7 +93,7 @@ function display() {
 function finishButtonPress1() {
     removeButtons();
 }
- 
+
 function removeButtons() {
     var center = document.querySelector("center");
     var buttonTable = document.getElementById("buttonTable");
@@ -374,7 +374,7 @@ function createColorButtons() {
     button.setAttribute("type", "button");
     button.setAttribute("class", "finishButton");
     button.innerText = "Finish";
-    body.appendChild(button);   
+    body.appendChild(button);
 }
 
 //12) Remove COlor Picker, FInish, Add: Move, Rotate, Size, Color, Finish
@@ -403,7 +403,7 @@ function createSizeButtons() {
     body.appendChild(button);
 
     var button = document.createElement("button");
-    button.setAttribute("onClick", "resizeSphere(1)");
+    button.setAttribute("onClick", "resizeSphere(0.1)");
     button.setAttribute("class", "button");
     button.innerText = "+";
     var cell = document.createElement("td");
@@ -411,7 +411,7 @@ function createSizeButtons() {
     row.appendChild(cell);
 
     var button = document.createElement("button");
-    button.setAttribute("onClick", "resizeSphere(-1)");
+    button.setAttribute("onClick", "resizeSphere(-0.1)");
     button.setAttribute("class", "button");
     button.innerText = "-";
     var cell = document.createElement("td");
@@ -431,29 +431,29 @@ function resizeSphere(change) {
     var s = document.getElementById("sphere");
     var scene = document.querySelector("a-scene");
     var type = s.getAttribute("id");
+
     if (type == "box") {
-        s.setAttribute('width', s.getAttribute('width') + change);
-        s.setAttribute('height', s.getAttribute('height') + change);
-        s.setAttribute('depth', s.getAttribute('depth') + change);
+        s.setAttribute('width', parseFloat(s.getAttribute('width')) + change);
+        s.setAttribute('height', parseFloat(s.getAttribute('height')) + change);
+        s.setAttribute('depth', parseFloat(s.getAttribute('depth')) + change);
     } else if (type == "circle"  || type == "dodecahedron"  || type == "octahedron" || type == "sphere" || type == "tetrahedron") {
-        s.setAttribute('radius', s.getAttribute('radius') + 0.1);
-        console.log(change);
+        s.setAttribute('radius', parseFloat(s.getAttribute('radius')) + change);
     } else if (type == "cone") {
-        s.setAttribute('radiusBottom', s.getAttribute('radiusBottom') + change);
-        s.setAttribute('radiusTop', s.getAttribute('radiusTop') + change);
-        s.setAttribute('height', s.getAttribute('height') + change);
+        s.setAttribute('radiusBottom', parseFloat(s.getAttribute('radiusBottom')) + change);
+        s.setAttribute('radiusTop', parseFloat(s.getAttribute('radiusTop')) + change);
+        s.setAttribute('height', parseFloat(s.getAttribute('height')) + change);
     } else if (type == "cylinder") {
-        s.setAttribute('radius', s.getAttribute('radius') + change);
-        s.setAttribute('height', s.getAttribute('height') + change);
+        s.setAttribute('radius', parseFloat(s.getAttribute('radius')) + change);
+        s.setAttribute('height', parseFloat(s.getAttribute('height')) + change);
     } else if (type == "plane") {
-        s.setAttribute('width', s.getAttribute('width') + change);
-        s.setAttribute('height', s.getAttribute('height') + change);
+        s.setAttribute('width', parseFloat(s.getAttribute('width')) + change);
+        s.setAttribute('height', parseFloat(s.getAttribute('height')) + change);
     } else if (type == "ring") {
-        s.setAttribute('raidusInner', s.getAttribute('radiusInner') + change);
-        s.setAttribute('radiusOuter', s.getAttribute('radiusOuter') + change);
+        s.setAttribute('raidusInner', parseFloat(s.getAttribute('radiusInner')) + change);
+        s.setAttribute('radiusOuter', parseFloat(s.getAttribute('radiusOuter')) + change);
     } else if (type == "torus" || type == "torusKnot") {
-        s.setAttribute('radius', s.getAttribute('radius') + change);
-        s.setAttribute('radiusTubular', s.getAttribute('radiusTubular') + change);
+        s.setAttribute('radius', parseFloat(s.getAttribute('radius')) + change);
+        s.setAttribute('radiusTubular', parseFloat(s.getAttribute('radiusTubular')) + change);
     } else if (type == "triangle") {
         s.setAttribute('VertexA', {x: s.getAttribute('VertexA').x * (change * 2), y: s.getAttribute('VertexA').y * (change * 2), z: s.getAttribute('VertexA').z});
         s.setAttribute('VertexB', {x: s.getAttribute('VertexB').x * (change * 2), y: s.getAttribute('VertexB').y * (change * 2), z: s.getAttribute('VertexB').z});
