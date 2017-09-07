@@ -1,0 +1,14 @@
+{
+  "name": "multi-user-community-AR-AEL",
+  "version": "1.0.0",
+  "description": "Community Tableau Vivant AR",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "consolidate": "^0.14.5",
+    "express": "^4.15.4",
+    "mustache": "^2.3.0"
+  }
+}
