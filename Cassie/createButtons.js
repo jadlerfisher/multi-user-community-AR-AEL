@@ -132,6 +132,10 @@ function createMoveButtons() {
     var bT = [["+X", "+Y", "+Z"], ["-X", "-Y", "-Z"]];
     createButtonTable(bF, bT);
 
+    var item = document.getElementById("item");
+    var position = [item.getAttribute("position").x, item.getAttribute("position").y, item.getAttribute("position").z];
+    changes.push(["move", position]);
+
     //Finish Button
     var body = document.querySelector("center");
     body.appendChild(createFinishButton(3));
@@ -142,6 +146,9 @@ function createRotateButtons() {
     var bF = [["rotateSphere(-5, false)", "rotateSphere(5, false)"]];
     var bT = [["<-", "->"]];
     createButtonTable(bF, bT);
+    var origRotate = document.getElementById("item").getAttribute("rotation").y;
+    console.log(origRotate);
+    changes.push(["rotate", origRotate]);
 
     //Finish Button
     var body = document.querySelector("center");
@@ -173,6 +180,21 @@ function createSizeButtons() {
     var bF = [["resizeSphere(0.1)", "resizeSphere(-0.1)"]];
     var bT = [["+", "-"]];
     createButtonTable(bF, bT);
+    var item = document.getElementById("item");
+    var type = item.getAttribute("class");
+    if (type === "model") {
+        var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
+    } else {
+        var sizeInfo = [item.getAttribute("width"), item.getAttribute("height"), item.getAttribute("depth"), item.getAttribute("radius"),
+        item.getAttribute("radiusBottom"), item.getAttribute("radiusTop"), item.getAttribute("radiusInner"), item.getAttribute("radiusOuter"),
+        item.getAttribute("radiusTubular"), item.getAttribute("VertexA"), item.getAttribute("VertexB"), item.getAttribute("VertexC")];
+    }
+    changes.push(["size", sizeInfo]);
+    var str = "";
+    for (var i = 0; i < sizeInfo.length - 3; i++) {
+        str = str + changes[changes.length - 1][1][i] + " ";
+    }
+    console.log(str);
     
     //Finish Button
     var body = document.querySelector("center");

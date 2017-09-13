@@ -72,34 +72,13 @@ function moveSphere(axis, direction, undoing) {
   // change the coordinate position of the sphere based on input 'axis' in the direction of input 'direction'
   switch (axis) {
     case "x":
-      s.setAttribute('position', { x: direction === 'up' ? _x + 1 : _x - 1, y: _y, z: _z });
-      if (!undoing) {
-        if (direction === 'up') {
-          changes.push(["move", "x", "down"]);
-        } else {
-          changes.push(["move", "x", "up"]);
-        }
-      }
+      s.setAttribute('position', { x: direction === 'up' ? _x + 0.2 : _x - 0.2, y: _y, z: _z });
       break;
     case "y":
-      s.setAttribute('position', { x: _x, y: direction === 'up' ? _y + 1 : _y - 1, z: _z });
-      if (!undoing) {
-        if (direction === 'up') {
-          changes.push(["move", "y", "down"]);
-        } else {
-          changes.push(["move", "y", "up"]);
-        }
-      }
+      s.setAttribute('position', { x: _x, y: direction === 'up' ? _y + 0.2 : _y - 0.2, z: _z });
       break;
     case "z":
-      s.setAttribute('position', { x: _x, y: _y, z: direction === 'up' ? _z + 1 : _z - 1 });
-      if (!undoing) {
-        if (direction === 'up') {
-          changes.push(["move", "z", "down"]);
-        } else {
-          changes.push(["move", "z", "up"]);
-        }
-      }
+      s.setAttribute('position', { x: _x, y: _y, z: direction === 'up' ? _z + 0.2 : _z - 0.2 });
       break;
   }
 }
@@ -117,10 +96,6 @@ function rotateSphere(degrees, undoing) {
     var _x = s.getAttribute('rotation').x;
     var _z = s.getAttribute('rotation').z;
     s.setAttribute('rotation', { x: _x, y: _y + degrees, z: _z });
-
-    if (!undoing) {
-      changes.push(["rotate", degrees * -1]);
-    }
 }
 
 /**
@@ -245,9 +220,6 @@ function resizeSphere(change, undoing) {
         s.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
       }
     }
-    if (!undoing) {
-      changes.push(["size", change * -1]);
-    }
 }
 
 function update(jscolor) {
@@ -269,4 +241,51 @@ function setColor(col) {
     } else {
       item.setAttribute("color", col);
     }
+}
+function setPosition(_x,_y,_z) {
+  var item = document.getElementById("item");
+  item.setAttribute("position", {x: _x, y: _y, z: _z});
+}
+function setSize(sizeInfo) {
+  var s = document.getElementById("item");
+  var type = s.getAttribute("class");
+  if (type === "model") {
+    var sX = sizeInfo[0][0];
+    var sY = sizeInfo[0][1];
+    var sZ = sizeInfo[0][2];
+    s.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
+  } else {
+    var w_change = sizeInfo[0];
+    var h_change = sizeInfo[1];
+    var d_change = sizeInfo[2];
+    console.log(w_change + " " + h_change + " " + d_change);
+    // var r_change = sizeInfo[3];
+    // var rB_change = sizeInfo[4];
+    // var rT_change = sizeInfo[5];
+    // var rI_change = sizeInfo[6];
+    // var rO_change = sizeInfo[7];
+    // var rT_change = sizeInfo[8];
+    // var vertexA_change = sizeInfo[9];
+    // var VertexB_change = sizeInfo[10];
+    // var VertexC_change = sizeInfo[11];
+    s.setAttribute('width', w_change);
+    s.setAttribute('height', h_change);
+    s.setAttribute('depth', d_change);
+    // s.setAttribute('radius', r_change);
+    // s.setAttribute('radiusBottom', rB_change);
+    // s.setAttribute('radiusTop', rT_change);
+    // s.setAttribute('raidusInner', rI_change);
+    // s.setAttribute('radiusOuter', rO_change);
+    // s.setAttribute('radiusTubular', rT_change);
+    // s.setAttribute('VertexA', vertexA_change);
+    // s.setAttribute('VertexB', VertexB_change);
+    // s.setAttribute('VertexC', VertexC_change);
+  }
+}
+function setRotation(theta) {
+  console.log("Set Rotation " + theta);
+  var item = document.getElementById("item");
+  var _x = item.getAttribute("rotation").x;
+  var _z = item.getAttribute("rotation").z;
+  item.setAttribute("rotation", {x: _x, y: theta, z: _z});
 }

@@ -52,12 +52,18 @@ function undoButtonPress() {
   console.log("Undo!");
   if (changes.length > 0) {
     var lastMove = changes.pop(changes.length - 1);
+    console.log(lastMove[0]);
     if (lastMove[0] === "move") {
-      moveSphere(lastMove[1], lastMove[2], true);
+      setPosition(lastMove[1][0], lastMove[1][1], lastMove[1][2]);
     } else if (lastMove[0] === "rotate") {
-      rotateSphere(lastMove[1], true);
+      setRotation(lastMove[1]);
     } else if (lastMove[0] === "size") {
-      resizeSphere(lastMove[1], true);
+        var str = "";
+        for (var i = 0; i < lastMove[1].length - 3; i++) {
+            str = str + lastMove[1][i] + " ";
+        }
+        console.log(str);
+      setSize(lastMove[1]);
     } else if (lastMove[0] === "color") {
         setColor(lastMove[1]);
     }
