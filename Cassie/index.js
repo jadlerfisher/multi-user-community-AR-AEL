@@ -2,7 +2,7 @@ var buttonExists = true;
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"];
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"];
 var itemNum = 0;
-var models = ["obj: #pokemon-obj; mtl: #pokemon-mtl"];
+var models = ["obj: #pokemon-obj"];
 var changes = [];
 
 function init() {
@@ -20,6 +20,7 @@ function displayModel(i) {
   model.setAttribute('position', '0 1.25 -5');
   model.setAttribute("rotation", "-90 0 0");
   model.setAttribute("scale", "1 1 1");
+  model.setAttribute("material", "color: #0000FF");
   scene.appendChild(model);
 }
 
@@ -249,8 +250,23 @@ function resizeSphere(change, undoing) {
     }
 }
 
-//14) Remove: +, -, Finish, Add: Move, Rotate, Color, Size, Finish
-function finishButtonPress6() {
-  removeButtons();
-  createEditButtons();
+function update(jscolor) {
+    // 'jscolor' instance can be used as a string
+    var item = document.getElementById("item");
+    if (item.getAttribute('class') === 'model') {
+      //var objModel = item.getAttribute("obj-model").obj;
+      //item.setAttribute("obj-model", "obj: objModel");
+      item.setAttribute("material", "color: #" + jscolor);
+    } else {
+      item.setAttribute("color", '#' + jscolor);
+    }
+}
+function setColor(col) {
+    // 'jscolor' instance can be used as a string
+    var item = document.getElementById("item");
+    if (item.getAttribute("class") === "model") {
+      item.setAttribute("material", "color: " + col);
+    } else {
+      item.setAttribute("color", col);
+    }
 }

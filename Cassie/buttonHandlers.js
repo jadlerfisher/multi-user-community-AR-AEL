@@ -58,6 +58,8 @@ function undoButtonPress() {
       rotateSphere(lastMove[1], true);
     } else if (lastMove[0] === "size") {
       resizeSphere(lastMove[1], true);
+    } else if (lastMove[0] === "color") {
+        setColor(lastMove[1]);
     }
   }
 }

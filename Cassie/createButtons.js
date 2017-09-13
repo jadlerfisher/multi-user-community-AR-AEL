@@ -149,7 +149,20 @@ function createRotateButtons() {
 }
 
 function createColorButtons() {
-
+    var body = document.querySelector("center");
+    var input = document.createElement('INPUT')
+    var picker = new jscolor(input)
+    if (!(document.getElementById("item").getAttribute('class') === "model")) {
+        var origColor = document.getElementById("item").getAttribute('color');
+        changes.push(["color", origColor]);
+    } else {
+        var origColor = document.getElementById("item").getAttribute("material").color;
+        console.log(origColor);
+        changes.push(["color", origColor]);
+    }
+    picker.fromString(origColor);
+    input.setAttribute("id", "buttonTable");
+    body.appendChild(input);
     //Finish Button
     var body = document.querySelector("center");
     body.appendChild(createFinishButton(5));   

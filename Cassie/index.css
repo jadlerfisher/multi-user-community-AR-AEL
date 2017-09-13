@@ -51,6 +51,16 @@ td, th {
     z-index: 1;
     width:90%;
 }
+input{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  width: 90%;
+  padding: 15px 32px;
+  margin: 4px 5%;
+}
 .buttonSummon {
     background-color: #3ecb64;
     border: none;
