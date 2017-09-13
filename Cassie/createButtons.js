@@ -1,0 +1,167 @@
+//Removes the Summon Button
+function removeSummmon() {
+    document.querySelector("center").removeChild(document.getElementsByClassName("buttonSummon")[0]);
+}
+
+//Removes All Buttons from Screen
+function removeButtons() {
+    var center = document.querySelector("center");
+    var buttonTable = document.getElementById("buttonTable");
+    if (buttonTable != null) {
+        center.removeChild(buttonTable);
+    }
+    var finishButton = document.getElementsByClassName("finishButton");
+    if (finishButton.length > 0){
+      center.removeChild(finishButton[0]);
+    }
+}
+
+//Creates the + button
+function createSummonButton() {
+    var center = document.querySelector("center");
+    var button = document.createElement("button");
+    button.setAttribute("onclick", "summonButtonPress()");
+    button.setAttribute("type", "button");
+    button.setAttribute("class", "buttonSummon");
+    button.innerText = "+";
+    center.appendChild(button);
+}
+
+/**
+ * Creates a button for user control
+ * @param {String} number - which finishButtonPress to use
+ * @return {Object} button - a button object created
+*/
+function createFinishButton(number) {
+  var button = document.createElement("button");
+
+  button.setAttribute("onClick", "finishButtonPress" + number + "()");
+  button.setAttribute("class", "finishButton");
+  button.setAttribute("type", "button");
+  button.innerText = "Finish"
+
+  return button;
+}
+
+/**
+ * Creates a button for user control
+ * @param {String} funct - function that button should call
+ * @param {String} text - innerText of Button
+ * @return {Object} button - a button object created
+*/
+function createOptionsButton(funct, text) {
+  var button = document.createElement("button");
+
+  button.setAttribute("onClick", funct);
+  button.setAttribute("class", "optionButton");
+  button.setAttribute("type", "button");
+  button.innerText = text;
+
+  return button;
+}
+
+function createButtonTable(buttonFuncts, buttonText) {
+    var table = document.createElement("table");
+    var body = document.querySelector("center");
+
+    for (i = 0; i < buttonFuncts.length; i++) {
+        var row = document.createElement("tr");
+        for (j = 0; j < buttonFuncts[i].length; j++) {
+            var cell = document.createElement("td");
+            cell.appendChild(createOptionsButton(buttonFuncts[i][j], buttonText[i][j]));
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+    table.setAttribute("id", "buttonTable");
+    body.appendChild(table);
+}
+
+//Create Add Buttons
+function createAddButtons() {
+    var bF = [["modelButtonPress1()", "shapeButtonPress1()"]];
+    var bT = [["Models", "Shapes"]];
+    createButtonTable(bF, bT);
+}
+
+//Adds Model Buttons
+function createModelButtons() {
+    var bF = [["modelButtonPress(0)", "addNewModelButtonPress()"]];
+    var bT = [["Pokeball", "Add New Model"]];
+    createButtonTable(bF, bT);
+}
+
+//Adds Shape Buttons
+function createShapeButtons() {
+    var bF = [["shapeButtonPress(0)", "shapeButtonPress(1)", "shapeButtonPress(2)"],
+            ["shapeButtonPress(3)", "shapeButtonPress(4)", "shapeButtonPress(5)"],
+            ["shapeButtonPress(6)", "shapeButtonPress(7)", "shapeButtonPress(8)"]];
+    var bT = [["Box", "Sphere", "Circle"], ["Cone", "Plane", "Ring"], ["Torus", "Torus Knot", "Triangle"]];
+    createButtonTable(bF, bT);
+}
+
+//Add Edit, Undo, Delete, Finish
+function createOptions() {
+    var bF = [["editButtonPress()", "undoButtonPress()", "deleteButtonPress()"]];
+    var bT = [["Edit", "Undo", "Delete"]];
+    createButtonTable(bF, bT);
+
+    //Finish Button
+    var body = document.querySelector("center");
+    body.appendChild(createFinishButton(1));
+}
+
+
+//Creates Buttons to edit current object: location, rotation, size, color
+function createEditButtons() {
+    var bF = [["moveButtonPress()", "rotateButtonPress()"], ["sizeButtonPress()", "colorButtonPress()"]];
+    var bT = [["Move", "Rotate"], ["Resize", "Color"]];
+    createButtonTable(bF, bT);
+
+    //Finish Button
+    var body = document.querySelector("center");
+    body.appendChild(createFinishButton(2));
+}
+
+/**
+ * Creates the editing tools such as x, y, z buttons for user interface
+*/
+function createMoveButtons() {
+    var bF = [["moveSphere('x', 'up', false)", "moveSphere('y', 'up', false)", "moveSphere('z', 'up', false)"], 
+            ["moveSphere('x', 'down', false)", "moveSphere('y', 'down', false)", "moveSphere('z', 'down', false)"]];
+    var bT = [["+X", "+Y", "+Z"], ["-X", "-Y", "-Z"]];
+    createButtonTable(bF, bT);
+
+    //Finish Button
+    var body = document.querySelector("center");
+    body.appendChild(createFinishButton(3));
+}
+
+
+function createRotateButtons() {
+    var bF = [["rotateSphere(-5, false)", "rotateSphere(5, false)"]];
+    var bT = [["<-", "->"]];
+    createButtonTable(bF, bT);
+
+    //Finish Button
+    var body = document.querySelector("center");
+    body.appendChild(createFinishButton(4));
+}
+
+function createColorButtons() {
+
+    //Finish Button
+    var body = document.querySelector("center");
+    body.appendChild(createFinishButton(5));   
+}
+
+
+function createSizeButtons() {
+    var bF = [["resizeSphere(0.1)", "resizeSphere(-0.1)"]];
+    var bT = [["+", "-"]];
+    createButtonTable(bF, bT);
+    
+    //Finish Button
+    var body = document.querySelector("center");
+    body.appendChild(createFinishButton(6));
+}
