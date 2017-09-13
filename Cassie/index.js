@@ -2,8 +2,9 @@ var buttonExists = true;
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"];
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"];
 var itemNum = 0;
-var models = ["obj: #pokemon-obj"];
+var models = ["obj: #pokemon-obj", "obj: #cup-obj"];
 var changes = [];
+var items = [];
 
 function init() {
     document.querySelector("a-scene").removeChild(document.getElementsByClassName("a-enter-vr")[0]);
@@ -18,7 +19,7 @@ function displayModel(i) {
   model.setAttribute("class", "model");
   model.setAttribute("obj-model", models[i]);
   model.setAttribute('position', '0 1.25 -5');
-  model.setAttribute("rotation", "-90 0 0");
+  model.setAttribute("rotation", "0 0 0");
   model.setAttribute("scale", "1 1 1");
   model.setAttribute("material", "color: #0000FF");
   scene.appendChild(model);
@@ -288,4 +289,44 @@ function setRotation(theta) {
   var _x = item.getAttribute("rotation").x;
   var _z = item.getAttribute("rotation").z;
   item.setAttribute("rotation", {x: _x, y: theta, z: _z});
+}
+
+function createNewModel(text) {
+  var assets = document.querySelector("a-assets");
+  var asset = document.createElement("a-asset-item");
+  asset.setAttribute("id", "new-obj");
+  asset.setAttribute("src", text);
+  assets.appendChild(asset);
+
+  var scene = document.querySelector("a-scene");
+  //creates model
+  var model = document.createElement("a-entity");
+  model.setAttribute("id", "item");
+  model.setAttribute("class", "model");
+  model.setAttribute("obj-model", "obj: #new-obj");
+  model.setAttribute('position', '0 1.25 -5');
+  model.setAttribute("rotation", "0 0 0");
+  model.setAttribute("scale", "1 1 1");
+  model.setAttribute("material", "color: #0000FF");
+  scene.appendChild(model);
+}
+function removeItem(i) {
+  var scene = document.querySelector("a-scene");
+  scene.removeChild(document.getElementById(i));
+  var index = items.indexOf(i);
+  var str = '';
+  for (var i = 0; i < items.length; i++) {
+    str = str + items[i] + " ";
+  }
+  console.log(str);
+  console.log(index);
+  items.splice(index, 1);
+  var str = '';
+  for (var i = 0; i < items.length; i++) {
+    str = str + items[i] + " ";
+  }
+  console.log(str);
+  removeButtons();
+  createSummonButton();
+  createRemoveButton();
 }

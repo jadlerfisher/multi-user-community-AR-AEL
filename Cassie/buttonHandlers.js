@@ -1,6 +1,7 @@
 //1) Remove: +, Add: Model, Shape
 function summonButtonPress() {
     removeSummmon();
+    removeButtons();
     createAddButtons();
     if (buttonExists) {
       init();
@@ -34,15 +35,18 @@ function modelButtonPress(i) {
 function finishButtonPress1() {
     removeButtons();
     var item = document.getElementById("item");
-    item.setAttribute("id", itemNum);
     itemNum++;
+    item.setAttribute("id", itemNum);
+    items.push(itemNum);
     createSummonButton();
+    createRemoveButton();
 }
 
 //3) Add: +, Remove: Edit, Undo, Delete, Finish, Also: Delete Sphere
 function deleteButtonPress() {
     removeButtons();
     createSummonButton();
+    createRemoveButton();
     disappear();
 }
 
@@ -71,7 +75,8 @@ function undoButtonPress() {
 }
 
 function addNewModelButtonPress() {
-    console.log("Not implemented yet");
+    removeButtons();
+    createNewModelInput();
 }
 
 //5) Add: Move, Rotate, Size, Color, Finish, Remove: Edit, Delete, Undo, Finish
@@ -136,4 +141,22 @@ function sizeButtonPress() {
 function finishButtonPress6() {
   removeButtons();
   createEditButtons();
+}
+
+function submitFilepathButtonPress() {
+    var text = document.getElementById("fileInputField").value;
+    console.log(text);
+    createNewModel(text);
+    removeButtons();
+    createOptions();
+}
+function removeButtonPress() {
+    removeButtons();
+    addRemoveButtons();
+}
+
+function backButtonPress() {
+    removeButtons();
+    createSummonButton();
+    createRemoveButton();
 }

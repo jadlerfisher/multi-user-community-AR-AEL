@@ -169,6 +169,7 @@ function createColorButtons() {
     }
     picker.fromString(origColor);
     input.setAttribute("id", "buttonTable");
+    input.setAttribute("class", "colorPicker");
     body.appendChild(input);
     //Finish Button
     var body = document.querySelector("center");
@@ -199,4 +200,73 @@ function createSizeButtons() {
     //Finish Button
     var body = document.querySelector("center");
     body.appendChild(createFinishButton(6));
+}
+
+function createNewModelInput() {
+    var body = document.querySelector("center");
+    var table = document.createElement("table");
+    var row = document.createElement("tr");
+    var row2 = document.createElement("tr");
+
+    var cell = document.createElement("td");
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("name", "filePath");
+    input.setAttribute("value", "");
+    input.setAttribute("id", "fileInputField");
+    cell.appendChild(input);
+    row.appendChild(cell);
+
+    var cell = document.createElement("td");
+    var button = document.createElement("button");
+    button.setAttribute("id", "optionButton");
+    button.setAttribute("onClick", "submitFilepathButtonPress()");
+    button.innerText = "Submit";
+    cell.appendChild(button);
+    row.appendChild(cell);
+    table.appendChild(row);
+    table.setAttribute("id", "buttonTable");
+    body.appendChild(table);
+}
+
+function createRemoveButton() {
+    bF = [["removeButtonPress()"]];
+    bT = [["Remove Object"]];
+    createButtonTable(bF, bT);
+}
+
+function addRemoveButtons() {
+    console.log("remove");
+    var bF = [];
+    var bT = [];
+    j = 0;
+    var currF = [];
+    var currT = [];
+    for(var i = items.length - 1; i >= 0; i--) {
+        console.log(itemNum);
+        currF.push("removeItem(" + items[i] + ")");
+        currT.push("Item " + items[i]);
+        j++;
+        if (j == 3) {
+            j = 0;
+            bF.push(currF);
+            bT.push(currT);
+            currF = [];
+            currT = [];
+        }
+    }
+    if (j != 0) {
+        bF.push(currF);
+        bT.push(currT);
+    }
+    createButtonTable(bF,bT);
+    var button = document.createElement("button");
+
+    button.setAttribute("onClick", "backButtonPress()");
+    button.setAttribute("class", "finishButton");
+    button.setAttribute("type", "button");
+    button.innerText = "Back";
+
+    var body = document.querySelector("center");
+    body.appendChild(button); 
 }
