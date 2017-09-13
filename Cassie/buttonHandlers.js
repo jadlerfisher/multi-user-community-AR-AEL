@@ -64,6 +64,10 @@ function undoButtonPress() {
   }
 }
 
+function addNewModelButtonPress() {
+    console.log("Not implemented yet");
+}
+
 //5) Add: Move, Rotate, Size, Color, Finish, Remove: Edit, Delete, Undo, Finish
 function editButtonPress() {
     removeButtons();
