@@ -1,5 +1,7 @@
 # multi-user-community-AR-AEL
 
+Heroku URL: https://multi-user-community-ael.herokuapp.com/
+
 ## How to run the Node.js server locally
 
 1. Install Node.js - https://nodejs.org/en/download/
