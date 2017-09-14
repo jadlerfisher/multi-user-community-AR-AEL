@@ -6,6 +6,11 @@
   <body onload="init()">
     <center>
        <button onclick="summonButtonPress()" type="button" class="buttonSummon">+</button>
+       <table id="buttonTable">
+          <tr>
+            <td><button onclick="removeButtonPress()" type="button" class="optionsButton">Remove</button></td>
+          </tr>
+       </table>
     </center>
     <a-scene>
       <a-assets>
@@ -19,10 +24,14 @@
         </a-asset-item>
 
       </a-assets>
-      <a-sky src="#sky"></a-sky>
+      <!-- <a-sky src="#sky"></a-sky> -->
+      <a-sky src="assets/images/sky.png"></a-sky>
     </a-scene>
 
     <script src="js/index.js"></script>
+    <script src="js/buttonHandlers.js"></script>
+    <script src="js/createButtons.js"></script>
+    <script src="library/jscolor.min.js"></script>
 
   </body>
   </html>

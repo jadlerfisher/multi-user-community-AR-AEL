@@ -1,277 +1,69 @@
+var buttonExists = true;
+var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"];
+var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"];
+var itemNum = 0;
+var models = ["obj: #pokemon-obj", "obj: #cup-obj"];
+var changes = [];
+var items = [];
+
 function init() {
     document.querySelector("a-scene").removeChild(document.getElementsByClassName("a-enter-vr")[0]);
+    buttonExists = false;
 }
 
-//1) Remove: +, Add: Edit, Undo, Delete, Finish, Also: Display Sphere
-//Handles Summon Button Press
-function summonButtonPress() {
-    removeSummmon();
-    createOptions();
-    display();
-    init();
-}
-
-//Removes the Summon Button
-function removeSummmon() {
-    document.querySelector("center").removeChild(document.getElementsByClassName("buttonSummon")[0]);
-}
-
-//Add Edit, Undo, Delete, Finish
-function createOptions() {
-    //Options
-    var table = document.createElement("table");
-    var row = document.createElement("tr");
-    var body = document.querySelector("center");
-
-    //Finish Button
-    var button = document.createElement("button");
-    button.setAttribute("onclick", "finishButtonPress1()");
-    button.setAttribute("type", "button");
-    button.setAttribute("class", "finishButton");
-    button.innerText = "Finish";
-    body.appendChild(button);
-
-    //Edit Button
-    var button = document.createElement("button");
-    button.setAttribute("onclick", "editButtonPress()");
-    button.setAttribute("type", "button");
-    button.setAttribute("class", "optionButton editButton");
-    button.innerText = "Edit";
-    var cell = document.createElement("td");
-    cell.appendChild(button);
-    row.appendChild(cell);
-
-    //Undo Button
-    var button = document.createElement("button");
-    button.setAttribute("onclick", "undoButtonPress()");
-    button.setAttribute("type", "button");
-    button.setAttribute("class", "optionButton undoButton");
-    button.innerText = "Undo";
-    var cell = document.createElement("td");
-    cell.appendChild(button);
-    row.appendChild(cell);
-
-    //Delete Button
-    var button = document.createElement("button");
-    button.setAttribute("onclick", "deleteButtonPress()");
-    button.setAttribute("type", "button");
-    button.setAttribute("class", "optionButton deleteButton");
-    button.innerText = "Delete";
-    var cell = document.createElement("td");
-    cell.appendChild(button);
-    row.appendChild(cell);
-
-    table.appendChild(row);
-    table.setAttribute("id", "buttonTable");
-    body.appendChild(table);
+function displayModel(i) {
+  var scene = document.querySelector("a-scene");
+  //creates model
+  var model = document.createElement("a-entity");
+  model.setAttribute("id", "item");
+  model.setAttribute("class", "model");
+  model.setAttribute("obj-model", models[i]);
+  model.setAttribute('position', '0 1.25 -5');
+  model.setAttribute("rotation", "0 0 0");
+  model.setAttribute("scale", "1 1 1");
+  model.setAttribute("material", "color: #0000FF");
+  scene.appendChild(model);
 }
 
 /**
  * Displays the object on the screen
 */
-function display() {
+function display(i) {
     var scene = document.querySelector("a-scene");
     var body = document.querySelector("center");
 
-    var sphere = document.createElement("a-sphere");
-    sphere.id = "sphere";
-    sphere.class = "sphere";
-    sphere.setAttribute('position', "0 1.25 -5");
-    sphere.setAttribute('radius', 1);
-    sphere.setAttribute('color', "#0000FF");
-    scene.appendChild(sphere);
-    //creates model
-    /*var model = document.createElement("a-entity");
-    scene.appendChild(model);
-    model.id = 'sphere';
-    model.setAttribute("obj-model", "obj: #pokemon-obj; mtl: #pokemon-mtl");
-    model.setAttribute('position', '0 1.25 -5');
-    model.setAttribute("rotation", "-90 0 0");*/
-}
-
-//2)Remove Edit, Undo, Delete, Finish
-function finishButtonPress1() {
-    removeButtons();
-}
-
-function removeButtons() {
-    var center = document.querySelector("center");
-    var buttonTable = document.getElementById("buttonTable");
-    if (buttonTable != null) {
-        center.removeChild(buttonTable);
-    }
-    center.removeChild(document.getElementsByClassName("finishButton")[0]);
-}
-
-//3) Add: +, Remove: Edit, Undo, Delete, Finish, Also: Delete Sphere
-function deleteButtonPress() {
-    removeButtons();
-    createSummonButton();
-    disappear();
-}
-
-//Creates the + button
-function createSummonButton() {
-    var center = document.querySelector("center");
-    var button = document.createElement("button");
-    button.setAttribute("onclick", "summonButtonPress()");
-    button.setAttribute("type", "button");
-    button.setAttribute("class", "buttonSummon");
-    button.innerText = "+";
-    center.appendChild(button);
+    var item = document.createElement(shapes[i]);
+    item.setAttribute('id', "item");
+    item.setAttribute('class', shapeNames[i]);
+    item.setAttribute('position', "0 1.25 -5");
+    item.setAttribute('height', 1);
+    item.setAttribute('width', 1);
+    item.setAttribute('depth', 1);
+    item.setAttribute('radius', 1);
+    item.setAttribute('radiusTop', 1);
+    item.setAttribute('radiusBottom', 2);
+    item.setAttribute('radiusInner', 1);
+    item.setAttribute('radiusOuter', 2);
+    item.setAttribute('radiusTubular', 0.5);
+    item.setAttribute('VertexA', "0 0 -5");
+    item.setAttribute('VertexB', "1 1 -6");
+    item.setAttribute('VertexC', "-1 2 -5.5")
+    item.setAttribute('color', "#0000FF");
+    scene.appendChild(item);
 }
 
 //Delete object
 function disappear() {
-  document.querySelector("a-scene").removeChild(document.getElementById("sphere"));
+  document.querySelector("a-scene").removeChild(document.getElementById("item"));
 }
 
-//4)Undo
-//Undo most recent edit
-function undo() {
-  console.log("Undo!");
-}
-
-//5) Add: Move, Rotate, Size, Color, Finish, Remove: Edit, Delete, Undo, Finish
-function editButtonPress() {
-    removeButtons();
-    createEditButtons();
-}
-
-//Creates Buttons to edit current object: location, rotation, size, color
-function createEditButtons() {
-  var table = document.createElement("table");
-  var row = document.createElement("tr");
-  var row2 = document.createElement("tr");
-  var body = document.querySelector("center");
-
-  //Finish Button
-  var button = document.createElement("button");
-  button.setAttribute("onclick", "finishButtonPress2()");
-  button.setAttribute("type", "button");
-  button.setAttribute("class", "finishButton");
-  button.innerText = "Finish";
-  body.appendChild(button);
-
-  var button = document.createElement("button");
-  button.setAttribute("onclick", "moveButtonPress()");
-  button.setAttribute("type", "button");
-  button.setAttribute("id", "moveButton");
-  button.innerText = "Move";
-  var cell = document.createElement("td");
-  cell.appendChild(button);
-  row.appendChild(cell);
-
-  var button = document.createElement("button");
-  button.setAttribute("onclick", "rotateButtonPress()");
-  button.setAttribute("type", "button");
-  button.setAttribute("id", "rotateButton");
-  button.innerText = "Rotate";
-  var cell = document.createElement("td");
-  cell.appendChild(button);
-  row.appendChild(cell);
-  table.appendChild(row);
-
-  var button = document.createElement("button");
-  button.setAttribute("onclick", "sizeButtonPress()");
-  button.setAttribute("type", "button");
-  button.setAttribute("id", "sizeButton");
-  button.innerText = "Size";
-  var cell = document.createElement("td");
-  cell.appendChild(button);
-  row2.appendChild(cell);
-
-  var button = document.createElement("button");
-  button.setAttribute("onclick", "colorButtonPress()");
-  button.setAttribute("type", "button");
-  button.setAttribute("id", "colorButton");
-  button.innerText = "Color";
-  var cell = document.createElement("td");
-  cell.appendChild(button);
-  row2.appendChild(cell);
-
-  table.appendChild(row2);
-
-  table.setAttribute("id", "buttonTable");
-  body.appendChild(table);
-}
-
-//6)Add: Edit, Undo, Delete, Finish, Remove: Move, Rotate, Size, Color, Finish
-function finishButtonPress2() {
-    removeButtons();
-    createOptions();
-}
-
-//7) Add +/- X, Y, Z, and Finish, Remove: Move, Rotate, Size, Color, Finish
-function moveButtonPress() {
-    removeButtons();
-    createMoveButtons();
-}
-
-/**
- * Creates a button for user control
- * @param {String} axis - 'x' or 'y'
- * @param {String} direction - 'up' or 'down'
- * @return {Object} button - a button object created
-*/
-function createButton(axis, direction) {
-  var button = document.createElement("button");
-
-  button.setAttribute("onClick", "moveSphere('" + axis + "', '" + direction + "')");
-  button.setAttribute("class", "button");
-  button.innerText = direction == 'up' ? axis.toUpperCase() + "+" : axis.toUpperCase() + "-";
-
-  return button;
-}
-
-/**
- * Creates the editing tools such as x, y, z buttons for user interface
-*/
-function createMoveButtons() {
-  var table = document.createElement("table");
-  var row = document.createElement("tr");
-  var row2 = document.createElement("tr");
-  var body = document.querySelector("center");
-  var axis = ["x", "y", "z"];
-
-  //Finish Button
-  var button = document.createElement("button");
-  button.setAttribute("onclick", "finishButtonPress3()");
-  button.setAttribute("type", "button");
-  button.setAttribute("class", "finishButton");
-  button.innerText = "Finish";
-  body.appendChild(button);
-
-  // Create "up" buttons in the first row
-  for (var i in axis) {
-    var button = createButton(axis[i], "up");
-    var cell = document.createElement("td");
-    cell.appendChild(button);
-    row.appendChild(cell);
-  }
-
-  // Create "down" buttons in the second row
-  for (var i in axis) {
-    var button = createButton(axis[i], "down");
-    var cell = document.createElement("td");
-    cell.appendChild(button);
-    row2.appendChild(cell);
-  }
-
-  // Append the first, second rows to the table
-  table.appendChild(row);
-  table.appendChild(row2);
-
-  table.setAttribute("id", "buttonTable");
-  body.appendChild(table);
-}
 /**
  * moves the position of the entity in the direction if input 'direction'
  * @param {String} axis - 'x' or 'y'
  * @param {String} direction - 'up' or 'down'
 */
-function moveSphere(axis, direction) {
-  var s = document.getElementById("sphere");
+function moveSphere(axis, direction, undoing) {
+  var s = document.getElementById("item");
   var scene = document.querySelector("a-scene");
 
   //create variables of current coordinate position of the sphere
@@ -281,69 +73,23 @@ function moveSphere(axis, direction) {
   // change the coordinate position of the sphere based on input 'axis' in the direction of input 'direction'
   switch (axis) {
     case "x":
-      s.setAttribute('position', { x: direction === 'up' ? _x + 1 : _x - 1, y: _y, z: _z });
+      s.setAttribute('position', { x: direction === 'up' ? _x + 0.2 : _x - 0.2, y: _y, z: _z });
       break;
     case "y":
-      s.setAttribute('position', { x: _x, y: direction === 'up' ? _y + 1 : _y - 1, z: _z });
+      s.setAttribute('position', { x: _x, y: direction === 'up' ? _y + 0.2 : _y - 0.2, z: _z });
       break;
     case "z":
-      s.setAttribute('position', { x: _x, y: _y, z: direction === 'up' ? _z + 1 : _z - 1 });
+      s.setAttribute('position', { x: _x, y: _y, z: direction === 'up' ? _z + 0.2 : _z - 0.2 });
       break;
   }
-}
-
-//8)Remove +/- X, Y, Z, Finish, Add: Move, Rotate, Size, Color, Finish
-function finishButtonPress3() {
-    removeButtons();
-    createEditButtons();
-}
-
-//9) Add Rotate CounterClockwise, Clockwise, Finish, Remove: Move, Rotate, Size, Color, Finish
-function rotateButtonPress() {
-    removeButtons();
-    createRotateButtons();
-}
-
-function createRotateButtons() {
-    var table = document.createElement("table");
-    var row = document.createElement("tr");
-    var body = document.querySelector("center");
-
-    //Finish Button
-    var button = document.createElement("button");
-    button.setAttribute("onclick", "finishButtonPress4()");
-    button.setAttribute("type", "button");
-    button.setAttribute("class", "finishButton");
-    button.innerText = "Finish";
-    body.appendChild(button);
-
-    var button = document.createElement("button");
-    button.setAttribute("onClick", "rotateSphere(-5)");
-    button.setAttribute("class", "button");
-    button.innerText = "<-";
-    var cell = document.createElement("td");
-    cell.appendChild(button);
-    row.appendChild(cell);
-
-    var button = document.createElement("button");
-    button.setAttribute("onClick", "rotateSphere(5)");
-    button.setAttribute("class", "button");
-    button.innerText = "->";
-    var cell = document.createElement("td");
-    cell.appendChild(button);
-    row.appendChild(cell);
-    table.appendChild(row);
-
-    table.setAttribute("id", "buttonTable");
-    body.appendChild(table);
 }
 
 /**
  * rotates the entity
  * @param {int} degrees turned
 */
-function rotateSphere(degrees) {
-    var s = document.getElementById("sphere");
+function rotateSphere(degrees, undoing) {
+    var s = document.getElementById("item");
     var scene = document.querySelector("a-scene");
 
     //create variables of current coordinate position of the sphere
@@ -353,115 +99,234 @@ function rotateSphere(degrees) {
     s.setAttribute('rotation', { x: _x, y: _y + degrees, z: _z });
 }
 
-//10)Add Move, Rotate, Size, Color, Finish, Remove: <-, ->, Finish
-function finishButtonPress4() {
-    removeButtons();
-    createEditButtons();
-}
-
-//11)Add Color Picker, Finish, Remove: Move, Rotate, Size, Color, Finish
-function colorButtonPress() {
-    removeButtons();
-    createColorButtons();
-}
-
-function createColorButtons() {
-    var body = document.querySelector("center");
-
-    //Finish Button
-    var button = document.createElement("button");
-    button.setAttribute("onclick", "finishButtonPress5()");
-    button.setAttribute("type", "button");
-    button.setAttribute("class", "finishButton");
-    button.innerText = "Finish";
-    body.appendChild(button);
-}
-
-//12) Remove COlor Picker, FInish, Add: Move, Rotate, Size, Color, Finish
-function finishButtonPress5() {
-    removeButtons();
-    createEditButtons();
-}
-
-//13) Remove: Move, Rotate, Size, COlor, Finish, Add: +, -, Finish
-function sizeButtonPress() {
-    removeButtons();
-    createSizeButtons();
-}
-
-function createSizeButtons() {
-    var table = document.createElement("table");
-    var row = document.createElement("tr");
-    var body = document.querySelector("center");
-
-    //Finish Button
-    var button = document.createElement("button");
-    button.setAttribute("onclick", "finishButtonPress6()");
-    button.setAttribute("type", "button");
-    button.setAttribute("class", "finishButton");
-    button.innerText = "Finish";
-    body.appendChild(button);
-
-    var button = document.createElement("button");
-    button.setAttribute("onClick", "resizeSphere(0.1)");
-    button.setAttribute("class", "button");
-    button.innerText = "+";
-    var cell = document.createElement("td");
-    cell.appendChild(button);
-    row.appendChild(cell);
-
-    var button = document.createElement("button");
-    button.setAttribute("onClick", "resizeSphere(-0.1)");
-    button.setAttribute("class", "button");
-    button.innerText = "-";
-    var cell = document.createElement("td");
-    cell.appendChild(button);
-    row.appendChild(cell);
-    table.appendChild(row);
-
-    table.setAttribute("id", "buttonTable");
-    body.appendChild(table);
-}
-
-function finishButtonPress6() {
-    removeButtons();
-    createEditButtons();
-}
-
 /**
  * resizes the entity
  * @param {int} amount changed
  */
-function resizeSphere(change) {
-    var s = document.getElementById("sphere");
+function resizeSphere(change, undoing) {
+    var s = document.getElementById("item");
     var scene = document.querySelector("a-scene");
-    var type = s.getAttribute("id");
-
-    if (type == "box") {
-        s.setAttribute('width', parseFloat(s.getAttribute('width')) + change);
-        s.setAttribute('height', parseFloat(s.getAttribute('height')) + change);
-        s.setAttribute('depth', parseFloat(s.getAttribute('depth')) + change);
-    } else if (type == "circle"  || type == "dodecahedron"  || type == "octahedron" || type == "sphere" || type == "tetrahedron") {
-        s.setAttribute('radius', parseFloat(s.getAttribute('radius')) + change);
-    } else if (type == "cone") {
-        s.setAttribute('radiusBottom', parseFloat(s.getAttribute('radiusBottom')) + change);
-        s.setAttribute('radiusTop', parseFloat(s.getAttribute('radiusTop')) + change);
-        s.setAttribute('height', parseFloat(s.getAttribute('height')) + change);
-    } else if (type == "cylinder") {
-        s.setAttribute('radius', parseFloat(s.getAttribute('radius')) + change);
-        s.setAttribute('height', parseFloat(s.getAttribute('height')) + change);
-    } else if (type == "plane") {
-        s.setAttribute('width', parseFloat(s.getAttribute('width')) + change);
-        s.setAttribute('height', parseFloat(s.getAttribute('height')) + change);
-    } else if (type == "ring") {
-        s.setAttribute('raidusInner', parseFloat(s.getAttribute('radiusInner')) + change);
-        s.setAttribute('radiusOuter', parseFloat(s.getAttribute('radiusOuter')) + change);
-    } else if (type == "torus" || type == "torusKnot") {
-        s.setAttribute('radius', parseFloat(s.getAttribute('radius')) + change);
-        s.setAttribute('radiusTubular', parseFloat(s.getAttribute('radiusTubular')) + change);
-    } else if (type == "triangle") {
-        s.setAttribute('VertexA', {x: s.getAttribute('VertexA').x * (change * 2), y: s.getAttribute('VertexA').y * (change * 2), z: s.getAttribute('VertexA').z});
-        s.setAttribute('VertexB', {x: s.getAttribute('VertexB').x * (change * 2), y: s.getAttribute('VertexB').y * (change * 2), z: s.getAttribute('VertexB').z});
-        s.setAttribute('VertexC', {x: s.getAttribute('VertexC').x * (change * 2), y: s.getAttribute('VertexC').y * (change * 2), z: s.getAttribute('VertexC').z});
+    var type = s.getAttribute("class");
+    if (type === "box") {
+      var w = parseFloat(s.getAttribute('width'));
+      var w_change = w + change;
+      var h = parseFloat(s.getAttribute("height"));
+      var h_change = h + change;
+      var d = parseFloat(s.getAttribute('depth'));
+      var d_change = d + change;
+      if (!(w_change <= 0) && !(h_change <= 0) && !(d_change <= 0)) {
+        s.setAttribute('width', w_change);
+        s.setAttribute('height', h_change);
+        s.setAttribute('depth', d_change);
+      }
+    } else if (type === "circle"  || type === "dodecahedron"  || type === "octahedron" || type === "sphere" || type === "tetrahedron") {
+      var r = parseFloat(s.getAttribute('radius'));
+      var r_change = r + change;
+      if (!(r_change <= 0)) {
+        s.setAttribute('radius', r_change);
+      }
+    } else if (type === "cone") {
+      var rB_change = parseFloat(s.getAttribute('radiusBottom')) + change;
+      var rT_change = parseFloat(s.getAttribute('radiusTop')) + change;
+      var h_change = parseFloat(s.getAttribute('height')) + change;
+      if (!(rB_change <= 0) && !(rT_change <= 0) && !(h_change <= 0)) {
+        s.setAttribute('radiusBottom', rB_change);
+        s.setAttribute('radiusTop', rT_change);
+        s.setAttribute('height', h_change);
+      }
+    } else if (type === "cylinder") {
+      var r = parseFloat(s.getAttribute('radius'));
+      var r_change = r + change;
+      var h = parseFloat(s.getAttribute('height'));
+      var h_change = h + change;
+      if (!(r_change <= 0) && !(h_change)) {
+        s.setAttribute('radius', r_change);
+        s.setAttribute('height', h_change);
+      }
+    } else if (type === "plane") {
+      var w = parseFloat(s.getAttribute('width'));
+      var w_change = w + change;
+      var h = parseFloat(s.getAttribute('height'));
+      var h_change = h + change;
+      if (!(w_change <= 0) && !(h_change <= 0)) {
+        s.setAttribute('width', w_change);
+        s.setAttribute('height', h_change);
+      }
+    } else if (type === "ring") {
+      var rI = parseFloat(s.getAttribute('radiusInner'));
+      var rI_change = rI + change;
+      var rO = parseFloat(s.getAttribute('radiusOuter'));
+      var rO_change = rO + change;
+      if (!(rI_change <= 0) && !(rO_change <= 0)) {
+        s.setAttribute('raidusInner', rI_change);
+        s.setAttribute('radiusOuter', rO_change);
+      }
+    } else if (type === "torus" || type === "torusKnot") {
+      var r = parseFloat(s.getAttribute('radius'));
+      var r_change = r + change;
+      var rT = parseFloat(s.getAttribute('radiusTubular'));
+      var rT_change = rT + change;
+      if (!(r_change <= 0) && !(rT_change <= 0)) {
+        s.setAttribute('radius', r_change);
+        s.setAttribute('radiusTubular', rT_change);
+      }
+    } else if (type === "triangle") {
+      var _x = parseFloat(s.getAttribute('VertexA').x);
+      var _y = parseFloat(s.getAttribute("VertexA").y);
+      var _z = parseFloat(s.getAttribute("VertexA").z);
+      if (change > 0) {
+        _x = _x * 1.1;
+        _y = _y * 1.1;
+        _z = _z * 1.1;
+      } else {
+        _x = _x / 1.1;
+        _y = _y / 1.1;
+        _z = _z / 1.1;
+      }
+      s.setAttribute('VertexA', {x:_x, y: _y, z: _z});
+      _x = parseFloat(s.getAttribute('VertexB').x);
+      _y = parseFloat(s.getAttribute("VertexB").y);
+      _z = parseFloat(s.getAttribute("VertexB").z);
+      if (change > 0) {
+        _x = _x * 1.1;
+        _y = _y * 1.1;
+        _z = _z * 1.1;
+      } else {
+        _x = _x / 1.1;
+        _y = _y / 1.1;
+        _z = _z / 1.1;
+      }
+      s.setAttribute('VertexB', {x:_x, y: _y, z: _z});
+      _x = parseFloat(s.getAttribute('VertexC').x);
+      _y = parseFloat(s.getAttribute("VertexC").y);
+      _z = parseFloat(s.getAttribute("VertexC").z);
+      if (change > 0) {
+        _x = _x * 1.1;
+        _y = _y * 1.1;
+        _z = _z * 1.1;
+      } else {
+        _x = _x / 1.1;
+        _y = _y / 1.1;
+        _z = _z / 1.1;
+      }
+      s.setAttribute('VertexC', {x:_x, y: _y, z: _z});
+    } else if (type === "model") {
+      var sX = parseFloat(s.getAttribute("scale").x);
+      var sY = parseFloat(s.getAttribute("scale").y);
+      var sZ = parseFloat(s.getAttribute("scale").z);
+      var sX_change = sX + change;
+      var sY_change = sY + change;
+      var sZ_change = sZ + change;
+      if (!(sX_change <= 0) && !(sY_change <= 0) && !(sZ_change <= 0)) {
+        s.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
+      }
     }
+}
+
+function update(jscolor) {
+    // 'jscolor' instance can be used as a string
+    var item = document.getElementById("item");
+    if (item.getAttribute('class') === 'model') {
+      //var objModel = item.getAttribute("obj-model").obj;
+      //item.setAttribute("obj-model", "obj: objModel");
+      item.setAttribute("material", "color: #" + jscolor);
+    } else {
+      item.setAttribute("color", '#' + jscolor);
+    }
+}
+function setColor(col) {
+    // 'jscolor' instance can be used as a string
+    var item = document.getElementById("item");
+    if (item.getAttribute("class") === "model") {
+      item.setAttribute("material", "color: " + col);
+    } else {
+      item.setAttribute("color", col);
+    }
+}
+function setPosition(_x,_y,_z) {
+  var item = document.getElementById("item");
+  item.setAttribute("position", {x: _x, y: _y, z: _z});
+}
+function setSize(sizeInfo) {
+  var s = document.getElementById("item");
+  var type = s.getAttribute("class");
+  if (type === "model") {
+    var sX = sizeInfo[0][0];
+    var sY = sizeInfo[0][1];
+    var sZ = sizeInfo[0][2];
+    s.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
+  } else {
+    var w_change = sizeInfo[0];
+    var h_change = sizeInfo[1];
+    var d_change = sizeInfo[2];
+    console.log(w_change + " " + h_change + " " + d_change);
+    // var r_change = sizeInfo[3];
+    // var rB_change = sizeInfo[4];
+    // var rT_change = sizeInfo[5];
+    // var rI_change = sizeInfo[6];
+    // var rO_change = sizeInfo[7];
+    // var rT_change = sizeInfo[8];
+    // var vertexA_change = sizeInfo[9];
+    // var VertexB_change = sizeInfo[10];
+    // var VertexC_change = sizeInfo[11];
+    s.setAttribute('width', w_change);
+    s.setAttribute('height', h_change);
+    s.setAttribute('depth', d_change);
+    // s.setAttribute('radius', r_change);
+    // s.setAttribute('radiusBottom', rB_change);
+    // s.setAttribute('radiusTop', rT_change);
+    // s.setAttribute('raidusInner', rI_change);
+    // s.setAttribute('radiusOuter', rO_change);
+    // s.setAttribute('radiusTubular', rT_change);
+    // s.setAttribute('VertexA', vertexA_change);
+    // s.setAttribute('VertexB', VertexB_change);
+    // s.setAttribute('VertexC', VertexC_change);
+  }
+}
+function setRotation(theta) {
+  console.log("Set Rotation " + theta);
+  var item = document.getElementById("item");
+  var _x = item.getAttribute("rotation").x;
+  var _z = item.getAttribute("rotation").z;
+  item.setAttribute("rotation", {x: _x, y: theta, z: _z});
+}
+
+function createNewModel(text) {
+  var assets = document.querySelector("a-assets");
+  var asset = document.createElement("a-asset-item");
+  asset.setAttribute("id", "new-obj");
+  asset.setAttribute("src", text);
+  assets.appendChild(asset);
+
+  var scene = document.querySelector("a-scene");
+  //creates model
+  var model = document.createElement("a-entity");
+  model.setAttribute("id", "item");
+  model.setAttribute("class", "model");
+  model.setAttribute("obj-model", "obj: #new-obj");
+  model.setAttribute('position', '0 1.25 -5');
+  model.setAttribute("rotation", "0 0 0");
+  model.setAttribute("scale", "1 1 1");
+  model.setAttribute("material", "color: #0000FF");
+  scene.appendChild(model);
+}
+function removeItem(i) {
+  var scene = document.querySelector("a-scene");
+  scene.removeChild(document.getElementById(i));
+  var index = items.indexOf(i);
+  var str = '';
+  for (var i = 0; i < items.length; i++) {
+    str = str + items[i] + " ";
+  }
+  console.log(str);
+  console.log(index);
+  items.splice(index, 1);
+  var str = '';
+  for (var i = 0; i < items.length; i++) {
+    str = str + items[i] + " ";
+  }
+  console.log(str);
+  removeButtons();
+  createSummonButton();
+  createRemoveButton();
 }
