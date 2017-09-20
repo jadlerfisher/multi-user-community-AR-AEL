@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Location Select</title>
+    <style>
+	#map {
+        height: 100%;
+      }
+	  html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+	  #header {
+		text-align: center;
+	  }
+	  #map, #pano{
+		width: 600px; 
+		height: 600px;
+		float:left;
+		postition: relative;
+		left: -50%;
+	  }
+	  #submit {
+		margin:auto;
+		display:block;
+	  }
+	  #main-container {
+	    float: left;
+		position: relative;
+		left: 50%;
+	  }
+	   .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+		margin-top: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      #title {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+      }
+      #target {
+        width: 345px;
+      }
+    </style>
+	
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c&libraries=places&callback=initMap">
+    </script>
+	
+  </head>
+  <body>
+  
+	<h1 id="header"> Please enter a location <h1>
+	<div id="main-container">
+		<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+		<div id="map"></div>
+		<div id="pano"></div>
+	</div>
+	<div style="position: absolute; bottom: 5px; width: 100%;">
+		<button type="button" id="submit"> Submit </button>
+	</div>	
+     <script>
+      /*
+       * Click the map to set a new location for the Street View camera.
+       */
+
+      var map;
+      var panorama;
+
+      function initMap() {
+        var gaTech = {lat: 33.7756, lng: -84.3963};
+        var sv = new google.maps.StreetViewService();
+
+        panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'));
+
+        // Set up the map.
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: gaTech,
+          zoom: 16,
+          streetViewControl: false
+        });
+		
+		// Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+        // Set the initial Street View camera to the center of the map
+        sv.getPanorama({location: gaTech, radius: 50}, processSVData);
+
+        // Look for a nearby Street View panorama when the map is clicked.
+        // getPanoramaByLocation will return the nearest pano when the
+        // given radius is 50 meters or less.
+        map.addListener('click', function(event) {
+          sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
+        });
+		
+		var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      } //init
+		
+      
+
+      function processSVData(data, status) {
+        if (status === 'OK') {
+          var marker = new google.maps.Marker({
+            position: data.location.latLng,
+            map: map,
+            title: data.location.description
+          });
+
+          panorama.setPano(data.location.pano);
+          panorama.setPov({
+            heading: 270,
+            pitch: 0
+          });
+          panorama.setVisible(true);
+
+          marker.addListener('click', function() {
+            var markerPanoID = data.location.pano;
+            // Set the Pano to use the passed panoID.
+            panorama.setPano(markerPanoID);
+            panorama.setPov({
+              heading: 270,
+              pitch: 0
+            });
+            panorama.setVisible(true);
+			
+          });
+        } else {
+          console.error('Street View data not found for this location.');
+        }
+      } //process
+    </script>
+  </body>
+</html>
