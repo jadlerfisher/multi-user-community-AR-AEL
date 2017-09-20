@@ -1,0 +1,43 @@
+.login_button {
+  display: inline-block;
+  padding: 10px 12px;
+  font-size: 22px;
+  cursor: pointer;
+  text-align: right;
+  text-decoration: none;
+  outline: none;
+  color: #000;
+  background-color: #F9DC84;
+  border-radius: 15px;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  margin-right:1vw;
+}
+
+.login_button:hover {background-color: #454750}
+
+
+.register_button {
+  display: inline-block;
+  padding: 10px 12px;
+  font-size: 22px;
+  cursor: pointer;
+  right: 0;
+  text-decoration: none;
+  outline: none;
+  color: #000;
+  background-color: #F9DC84;
+  border-radius: 15px;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.register_button:hover {background-color: #454750}
+
+img {
+    width: 100%;
+}
+
+p {
+    font-style: 48;
+}
