@@ -84,6 +84,37 @@
       #target {
         width: 345px;
       }
+	/* The alert message box */
+	.alert {
+		padding: 15px;
+		background-color: #f44336; /* Red */
+		color: white;
+		margin-bottom: 10px;
+		text-align: center;
+		font-size: 18px;
+		display: none;
+		
+		}
+
+	/* The close button */
+		.closebtn {
+		margin-left: 15px;
+		color: white;
+		font-weight: bold;
+		float: right;
+		font-size: 22px;
+		line-height: 20px;
+		cursor: pointer;
+		transition: 0.3s;
+	}
+
+	/* When moving the mouse over the close button */
+	.closebtn:hover {
+		color: black;
+	}
+	h1{
+		text-align: center;
+	}
     </style>
 	
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c&libraries=places&callback=initMap">
@@ -92,7 +123,10 @@
   </head>
   <body>
   
-	<h1 id="header"> Please enter a location <h1>
+	<h1> Please enter a location <h1>
+	<div class="alert" id="notFound"> 
+		Street view data not found near this location
+	</div>
 	<div id="main-container">
 		<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 		<div id="map"></div>
@@ -101,7 +135,8 @@
 	<div style="position: absolute; bottom: 5px; width: 100%;">
 		<button type="button" id="submit"> Submit </button>
 	</div>	
-     <script>
+	
+    <script>
       /*
        * Click the map to set a new location for the Street View camera.
        */
@@ -189,11 +224,16 @@
           });
           map.fitBounds(bounds);
         });
+		
       } //init
 		
       
 
       function processSVData(data, status) {
+		//Show alert box when nearest pano is not found
+		var alert = document.getElementById('notFound');
+		alert.style.display = 'none';
+		
         if (status === 'OK') {
           var marker = new google.maps.Marker({
             position: data.location.latLng,
@@ -217,10 +257,12 @@
               pitch: 0
             });
             panorama.setVisible(true);
+			alert.style.display = 'none';
 			
           });
         } else {
-          console.error('Street View data not found for this location.');
+			alert.style.display = 'block';
+			
         }
       } //process
     </script>
