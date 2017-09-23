@@ -2,10 +2,89 @@
 <head>
   <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
   <link rel="stylesheet" href="css/index.css">
+
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
+  <meta charset="UTF-8">
+  <title>Sample FirebaseUI App</title>
+  <!--   Initialization   -->
+  <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC4qXiPBa87X524p_t3QJpsQJ7goHfJEqg",
+    authDomain: "gt-ael.firebaseapp.com",
+    databaseURL: "https://gt-ael.firebaseio.com",
+    projectId: "gt-ael",
+    storageBucket: "gt-ael.appspot.com",
+    messagingSenderId: "1058241759354"
+  };
+  firebase.initializeApp(config);
+  </script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
+  <script type="text/javascript">
+    // FirebaseUI config.
+    var uiConfig = {
+      callbacks: {
+        signInSuccess: function(currentUser, credential, redirectUrl) {
+          // Do something.
+          // Return type determines whether we continue the redirect automatically
+          // or whether we leave that to developer to handle.
+          return true;
+        },
+        uiShown: function() {
+          // The widget is rendered.
+          // Hide the loader.
+          document.getElementById('loader').style.display = 'none';
+        }
+      },
+      credentialHelper: firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM,
+      // Query parameter name for mode.
+      queryParameterForWidgetMode: 'mode',
+      // Query parameter name for sign in success url.
+      queryParameterForSignInSuccessUrl: 'signInSuccessUrl',
+      // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+      signInFlow: 'popup',
+      signInSuccessUrl: '<url-to-redirect-to-on-success>',
+      signInOptions: [
+        // Leave the lines as is for the providers you want to offer your users.
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        {
+          provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          // Whether the display name should be displayed in the Sign Up page.
+          requireDisplayName: true
+        },
+        {
+          provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+          // Invisible reCAPTCHA with image challenge and bottom left badge.
+          recaptchaParameters: {
+            type: 'image',
+            size: 'invisible',
+            badge: 'bottomleft'
+          }
+        }
+      ],
+      // Terms of service url.
+      tosUrl: '<your-tos-url>'
+    };
+
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+  </script>
 </head>
   <body onload="init()">
     <center>
        <button onclick="summonButtonPress()" type="button" class="buttonSummon">+</button>
+       <table id="buttonTable">
+          <tr>
+            <td><button onclick="removeButtonPress()" type="button" class="optionsButton">Remove</button></td>
+          </tr>
+       </table>
     </center>
     <a-scene>
       <a-assets>
@@ -19,10 +98,14 @@
         </a-asset-item>
 
       </a-assets>
-      <a-sky src="#sky"></a-sky>
+      <!-- <a-sky src="#sky"></a-sky> -->
+      <a-sky src="assets/images/sky.png"></a-sky>
     </a-scene>
 
     <script src="js/index.js"></script>
+    <script src="js/buttonHandlers.js"></script>
+    <script src="js/createButtons.js"></script>
+    <script src="library/jscolor.min.js"></script>
 
   </body>
   </html>
