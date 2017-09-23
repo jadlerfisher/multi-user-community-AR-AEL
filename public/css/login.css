@@ -1,0 +1,85 @@
+body, html {
+  background-color: #5B778A !important;
+}
+
+.login-container {
+  margin-top: 150px;
+}
+
+.form-box {
+  margin-bottom:25px;
+  padding-left: 15px;
+  background:#f7f7f7;
+  border:3px solid #F4F4F4;
+}
+
+button.signup-btn {
+  margin-bottom: 25px;
+}
+
+.input-title {
+  color:rgba(164, 164, 164, 0.9);
+  padding-left:3px;
+  margin-bottom: 2px;
+}
+
+hr {
+  width:100%;
+}
+
+.login-title {
+  margin: 0;
+  padding: 15px 0 0px;
+  font-style: normal;
+  font-weight: 400;
+  color:rgba(164, 164, 164, 0.44);
+}
+
+.card-container.card {
+  min-width: 430px;
+}
+
+.card {
+  background-color: #FFFFFF;
+  /* just in case there no content*/
+  padding: 1px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 15%x;
+  /* shadows and rounded borders */
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.form-signin .form-box {
+  direction: ltr;
+  height: 44px;
+  font-size: 16px;
+}
+
+.btn[type=submit] {
+  cursor: pointer;
+}
+
+.form-signin input[type=email],
+.form-signin input[type=password],
+.form-signin input[type=text],
+.form-signin button {
+  width: 100%;
+  display: block;
+  z-index: 1;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+  border-color: rgb(104, 145, 162);
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+}

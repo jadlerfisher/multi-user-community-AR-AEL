@@ -1,0 +1,40 @@
+<html>
+<head>
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<div class="container login-container">
+  <div class="row">
+    <div class="card card-container">
+      <h2 class='login-title text-center'>Register</h2>
+      <hr>
+
+      <form class="form-signin">
+        <p class="input-title">Email</p>
+        <input type="text" id="inputEmail" class="form-box" placeholder="" required autofocus>
+        <p class="input-title">Password</p>
+        <input type="password" id="inputPassword" class="form-box" placeholder="" required>
+        <p class="input-title">Confirm Password</p>
+        <input type="password" id="inputConfirmPassword" class="form-box" placeholder="" required>
+        <button class="btn btn-lg btn-primary signup-btn" type="submit">Sign up</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="js/validations.js"></script>
+<script type="text/javascript">
+  document.getElementsByClassName('signup-btn')[0].addEventListener('click', function(ev) {
+    ev.preventDefault();
+
+    var email = document.getElementById('inputEmail').value;
+    var password = document.getElementById('inputPassword').value;
+    var confirmPassword = document.getElementById('inputConfirmPassword').value;
+    var hasValidated = validateRegister(email, password, confirmPassword);
+
+    if (hasValidated) {
+      // Submit user credentials to the server
+    }
+  });
+</script>
+</html>
