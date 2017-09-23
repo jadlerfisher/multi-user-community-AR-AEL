@@ -1,41 +1,59 @@
 <html>
 <head>
-  <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-  <link rel="stylesheet" href="css/index.css">
-  <meta charset="UTF-8">
-  <title>The Table</title>
-  <!-- Bootstrap -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
-  <body onload="init()">
-    <center>
-       <button onclick="summonButtonPress()" type="button" class="buttonSummon">+</button>
-       <table id="buttonTable">
-          <tr>
-            <td><button onclick="removeButtonPress()" type="button" class="optionsButton">Remove</button></td>
-          </tr>
-       </table>
-    </center>
-    <a-scene>
-      <a-assets>
-        <img id="sky" src="assets/images/sky.png">
-        <a-asset-item id="pokemon-mtl"
-                      src="https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.mtl">
-        </a-asset-item>
-
-        <a-asset-item id="pokemon-obj"
-                      src="https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj">
-        </a-asset-item>
-
-      </a-assets>
-      <!-- <a-sky src="#sky"></a-sky> -->
-      <a-sky src="assets/images/sky.png"></a-sky>
-    </a-scene>
-
-    <script src="js/index.js"></script>
-    <script src="js/buttonHandlers.js"></script>
-    <script src="js/createButtons.js"></script>
-    <script src="library/jscolor.min.js"></script>
-
+  <body style="background-color:#565861">
+    <div class="mainDiv container-fluid" id="main-div">
+      <div class="row" style="background-color:#5B778A">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-7">
+              <div class="page-header" style="margin-top:5vh; margin-bottom: 5vh">
+                <h1>
+                  [THE TABLE] <small>An Augmented Reality Experience</small>
+                </h1>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <a href="/login" class="btn btn-default login-btn">Login</a>
+              <a href="/register" class="btn btn-default register-btn">Register</a>
+            </div>
+            <div class="col-md-1">
+            </div>
+          </div>
+          <div class="row" style="background-color:#FBC72C">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10" style="margin-bottom: 5vh">
+              <h2 class="text-center" style="margin-top:5vh; margin-bottom: 5vh">
+                Welcome to [The Table]!
+              </h2>
+              <div class="row">
+                <div class="col-md-6">
+                  <h2> <small>
+                    [The Table] is an augmented reality experience created by Georgia Tech's Augmented Reality lab. Add shapes and models to the world around you to create your own unique works of art. Collaborate with others to join the conversation! The mobile experience allows you to look through your phone and edit a location on site, while this desktop version enables you to choose your own location and edit it from anywhere.
+                    </small>
+                  </h2>
+                </div>
+                <div class="col-md-6">
+                  <center>
+                    <img alt="Bootstrap Image Preview" src="assets/images/image.jpg" />
+                  </center>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/home.js"></script>
+    <script src="library/jquery.slim.min.js"></script>
+    <script src="library/bootstrap.min.js"></script>
+    <script src="tether.min.js"></script>
   </body>
-  </html>
+</html>
