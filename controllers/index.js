@@ -17,4 +17,8 @@ router.get('/register', function(req, res) {
   res.render('register');
 });
 
+router.get('/maps', function(req, res) {
+  res.render('maps');
+});
+
 module.exports = router;
