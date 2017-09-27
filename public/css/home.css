@@ -1,3 +1,26 @@
+body{
+  background-color: #565861;
+  font-family: 'Roboto', sans-serif;
+}
+.headerRow{
+  background-color: #5B778A;
+}
+.buttonDiv{
+  margin-bottom: 5vh;
+}
+.mainRow{
+  background-color: #FBC72C;
+}
+.mainRow2{
+  background-color: #F9DC84;
+}
+.mainCol{
+  margin-bottom: 5vh;
+}
+.mainContent{
+  padding-left:8%;
+  padding-right:8%;
+}
 .login-btn, .register-btn {
   display: inline-block;
   padding: 10px 12px;
@@ -11,7 +34,12 @@
   background-color: #F9DC84;
   border-radius: 15px;
   margin-top: 5vh;
-  margin-right:1vw;
+  margin-right:1vh;
+}
+.page-header{
+  margin-left:10%;
+  margin-top:5vh;
+  margin-bottom: 5vh;
 }
 
 .register-btn {
@@ -20,10 +48,55 @@
 
 .login-btn:hover, .register-btn:hover {background-color: #454750}
 
-img {
-    width: 100%;
+.img1 {
+    width: 30%;
+    float: right;
+    margin-left: 5%;
+}
+.img2 {
+    width: 30%;
+    float: left;
+    margin-bottom: 60px;
+    margin-right: 5%;
+}
+.img3 {
+    width: 30%;
+    float: right;
+    margin-left: 5%;
+}
+.img4 {
+    width: 30%;
+    float: left;
+    margin-bottom: 60px;
+    margin-right: 5%;
+}
+.paragraph1{
+
+}
+h2{
+  font-family: 'Roboto', sans-serif;
 }
 
+.paragraph2{
+  margin-top: 60px;
+
+}
+.paragraph3{
+
+}
+
+.paragraph4{
+margin-top: 60px;
+line-height: 36px;
+}
 p {
     font-style: 48;
 }
+.subMainRow{
+  margin-bottom: 10vh;
+}
+.subTitle{
+  margin-top: 5vh; 
+  margin-bottom: 5vh;
+}
+

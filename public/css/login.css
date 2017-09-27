@@ -1,5 +1,7 @@
 body, html {
-  background-color: #5B778A !important;
+  background-color: #565861 !important;
+  color:#000;
+  font-family: 'Roboto', sans-serif;
 }
 
 .login-container {
@@ -18,7 +20,6 @@ button.signup-btn {
 }
 
 .input-title {
-  color:rgba(164, 164, 164, 0.9);
   padding-left:3px;
   margin-bottom: 2px;
 }
@@ -32,15 +33,14 @@ hr {
   padding: 15px 0 0px;
   font-style: normal;
   font-weight: 400;
-  color:rgba(164, 164, 164, 0.44);
 }
 
 .card-container.card {
   width: 430px;
+  background-color: #F9DC84;
 }
 
 .card {
-  background-color: #FFFFFF;
   /* just in case there no content*/
   padding: 1px 25px 30px;
   margin: 0 auto 25px;
@@ -62,6 +62,13 @@ hr {
 
 .btn[type=submit] {
   cursor: pointer;
+  background-color: #4e7996;
+  border-color: #4e7996;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #5B778A;
+    border-color: #5B778A;
 }
 
 .form-signin input[type=email],
