@@ -119,7 +119,7 @@
   </head>
   <body>
   
-	<h1> Find and select a panorama <h1>
+	<h1> Use StreetView Pegman to Select a Panorama <h1>
 	<div class="alert" id="notFound"> 
 		Street view data not found near this location
 	</div>
@@ -128,7 +128,7 @@
 		<div id="map"></div>
 		<div id="pano"></div>
 	</div>
-	<div style="position: absolute; bottom: 150px; width: 100%;">
+	<div style="position: absolute; bottom: 0px; width: 100%;">
 		<button type="button" id="submit"> Submit </button>
 	</div>	
 	
@@ -139,6 +139,7 @@
 
       var map;
       var panorama;
+	  var APIkey= "AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c";
 
       function initMap() {
         var gaTech = {lat: 33.7756, lng: -84.3963};
@@ -150,7 +151,6 @@
         map = new google.maps.Map(document.getElementById('map'), {
           center: gaTech,
           zoom: 16,
-          streetViewControl: false
         });
 		
 		// Create the search box and link it to the UI element.
@@ -162,15 +162,17 @@
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
-        // Set the initial Street View camera to the center of the map
-        sv.getPanorama({location: gaTech, radius: 50}, processSVData);
-
-        // Look for a nearby Street View panorama when the map is clicked.
-        // getPanoramaByLocation will return the nearest pano when the
-        // given radius is 50 meters or less.
-        map.addListener('click', function(event) {
-          sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
-        });
+		
+		var agbar = new google.maps.LatLng(33.7756, -84.3963);
+		panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('pano'), {
+            position: agbar,
+            pov: {
+            heading: 34,
+            pitch: 10
+            }
+		});
+			map.setStreetView(panorama);
 		
 		var markers = [];
         // Listen for the event fired when the user selects a prediction and retrieve
@@ -223,8 +225,13 @@
 		
       } //init
 		
-      
-
+       function getPanoURL() {
+			console.log("doing things");
+			document.getElementById("resulting").innerHTML = "https://maps.googleapis.com/maps/api/streetview?size=640x640" +"&pano=" + panorama.getPano() + "&heading=" + panorama.getPov().heading + "&pitch=" + panorama.getPov().pitch + "&fov="+ (180/ (Math.pow(2, panorama.getZoom()?panorama.getZoom():1)))+ "&key=" + APIkey;
+			//use the next line to open in a new tab the resulting image at max size (640x640)
+			window.open("https://maps.googleapis.com/maps/api/streetview?size=640x640" + "&pano=" + panorama.getPano() + "&heading=" + panorama.getPov().heading + "&pitch=" + panorama.getPov().pitch + "&fov="+ (180/ (Math.pow(2, panorama.getZoom())))+ "&key=" +APIkey)
+		}
+<!--
       function processSVData(data, status) {
 		//Show alert box when nearest pano is not found
 		var alert = document.getElementById('notFound');
@@ -246,6 +253,8 @@
 
           marker.addListener('click', function() {
             var markerPanoID = data.location.pano;
+			panoId = data.location.pano;
+			
             // Set the Pano to use the passed panoID.
             panorama.setPano(markerPanoID);
             panorama.setPov({
@@ -254,13 +263,15 @@
             });
             panorama.setVisible(true);
 			alert.style.display = 'none';
+			console.log(panoID);
 			
           });
         } else {
 			alert.style.display = 'block';
 			
         }
-      } //process
+      } //process 
+-->
     </script>
   </body>
 </html>
