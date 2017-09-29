@@ -1,21 +1,5 @@
 <html>
 <head>
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase-auth.js"></script>
-
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyC4qXiPBa87X524p_t3QJpsQJ7goHfJEqg",
-      authDomain: "gt-ael.firebaseapp.com",
-      databaseURL: "https://gt-ael.firebaseio.com",
-      projectId: "gt-ael",
-      storageBucket: "gt-ael.appspot.com",
-      messagingSenderId: "1058241759354"
-    };
-    firebase.initializeApp(config);
-  </script>
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
@@ -25,7 +9,7 @@
       <h2 class='login-title text-center'>Login</h2>
       <hr>
 
-      <form class="form-signin">
+      <form action="/login" class="form-signin">
         <p class="input-title">Email</p>
         <input type="text" id="inputEmail" class="form-box" placeholder="" required autofocus>
         <p class="input-title">Password</p>
@@ -44,20 +28,31 @@
       var email = document.getElementById('inputEmail').value;
       var password = document.getElementById('inputPassword').value;
       var hasValidated = validateUserCredentials(email, password);
+      var form = document.querySelector('.form-signin');
+      var params = 'email=' + email + '&password=' + password;
+      var xhr = new XMLHttpRequest();
 
       if (hasValidated) {
-        // Submit user credentials to the server
-        firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
-          // Redirect to map page if successfully logged in
-          window.location.replace(window.location.origin + '/maps');
-        }).catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          var form = document.getElementsByClassName('card-container')[0];
+        xhr.open('POST', form.action, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-          displayAlerts([errorMessage], form);
-        });
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+              // Redirect to map page if successfully registered
+              window.location.replace(window.location.origin + '/maps');
+            } else {
+              // Display errors messages
+              var errorMessage = xhr.responseText;
+              var form = document.getElementsByClassName('card-container')[0];
+
+              displayAlerts([errorMessage], form);
+            }
+          }
+        }
+        xhr.send(params);
       }
+
     });
   </script>
 </html>

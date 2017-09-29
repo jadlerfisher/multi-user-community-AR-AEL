@@ -1,6 +1,13 @@
 var express = require('express');
 var engines = require('consolidate');
 var app = express();
+var bodyParser = require('body-parser');
+
+// to support URL-encoded bodies
+// bodyParser must go before the routes/controllers
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'));
