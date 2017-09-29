@@ -1,7 +1,8 @@
 module.exports = {
 	register: register,
-  isLoggedIn: isLoggedIn,
+  hasLoggedIn: hasLoggedIn,
 	login: login,
+  logout: logout,
   getUser: getUser,
 }
 
@@ -15,7 +16,7 @@ var app = firebase.initializeApp({
   messagingSenderId: "1058241759354"
 });
 
-function isLoggedIn() {
+function hasLoggedIn() {
   return getUser() !== null;
 }
 
@@ -37,4 +38,13 @@ function login(email, password, callback) {
   }).catch(function(error) {
     callback(error);
   })
+}
+
+function logout(callback) {
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    callback(null);
+  }, function(error) {
+    callback(error);
+  });
 }

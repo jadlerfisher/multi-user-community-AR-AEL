@@ -21,7 +21,7 @@ body{
   padding-left:8%;
   padding-right:8%;
 }
-.login-btn, .register-btn {
+.login-btn, .logout-btn, .register-btn {
   display: inline-block;
   padding: 10px 12px;
   font-size: 22px;
@@ -96,7 +96,6 @@ p {
   margin-bottom: 10vh;
 }
 .subTitle{
-  margin-top: 5vh; 
+  margin-top: 5vh;
   margin-bottom: 5vh;
 }
-

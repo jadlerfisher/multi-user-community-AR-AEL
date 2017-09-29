@@ -14,7 +14,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(require('./controllers'));
 
 app.set('views', __dirname + '/views');
-app.engine('html', engines.mustache);
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.listen(app.get('port'), function() {

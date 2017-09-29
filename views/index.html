@@ -3,22 +3,6 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/home.css">
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase-auth.js"></script>
-
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyC4qXiPBa87X524p_t3QJpsQJ7goHfJEqg",
-      authDomain: "gt-ael.firebaseapp.com",
-      databaseURL: "https://gt-ael.firebaseio.com",
-      projectId: "gt-ael",
-      storageBucket: "gt-ael.appspot.com",
-      messagingSenderId: "1058241759354"
-    };
-    firebase.initializeApp(config);
-  </script>
 </head>
   <body>
     <div class="mainDiv container-fluid" id="main-div">
@@ -35,8 +19,12 @@
               </div>
             </div>
             <div class="col-md-3 buttonDiv">
-              <a href="/login" class="btn btn-default login-btn">Login</a>
-              <a href="/register" class="btn btn-default register-btn">Register</a>
+              <% if (hasLoggedIn) { %>
+                <a href="/logout" class="btn btn-default logout-btn">Logout</a>
+              <% } else { %>
+                <a href="/login" class="btn btn-default login-btn">Login</a>
+                <a href="/register" class="btn btn-default register-btn">Register</a>
+              <% } %>
             </div>
           </div>
           <div class="row whiteBack">
@@ -82,7 +70,7 @@
                         <li>Sean McNeil - <i>3rd Year Electrical Engineering Undergrad</i></li>
                         <li>Cassie Mullins - <i>3rd Year Computational Media Undergrad</i></li>
                         <li>Jessica Pan - <i>2nd Year Computer Science Undergrad</i></li>
-                        <li>Joshua Wang - <i>2nd Year Computer Science Undergrad</i></li>
+                        <li>Joshua Wang - <i>3rd Year Computer Science Undergrad</i></li>
                         <li>Konrad Wang - <i>2nd Year Computer Science Undergrad</i></li>
                         <li>Mark Woodson - <i>3rd Year Computer Engineering Undergrad</i></li>
                       </ul>
@@ -99,5 +87,23 @@
     <script src="library/jquery.slim.min.js"></script>
     <script src="library/bootstrap.min.js"></script>
     <script src="tether.min.js"></script>
+
+    <script type="text/javascript">
+      document.getElementsByClassName('logout-btn')[0].addEventListener('click', function(ev) {
+        ev.preventDefault();
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '/logout', true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            window.location.replace(window.location.origin + '/');
+          }
+        }
+        xhr.send();
+
+      });
+    </script>
+
   </body>
 </html>
