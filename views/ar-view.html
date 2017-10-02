@@ -1,7 +1,8 @@
 <html>
 <head>
   <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-  <link rel="stylesheet" href="css/index.css">
+  <script src="https://cdn.rawgit.com/ngokevin/aframe-physics-components/master/dist/aframe-physics-components.min.js"></script>
+  <link rel="stylesheet" href="css/arview.css">
   <meta charset="UTF-8">
   <title>The Table</title>
   <!-- Bootstrap -->
@@ -16,7 +17,7 @@
           </tr>
        </table>
     </center>
-    <a-scene>
+    <a-scene physics-world="gravity: 0 -9.81 0">
       <a-assets>
         <img id="sky" src="assets/images/sky.png">
         <a-asset-item id="pokemon-mtl"

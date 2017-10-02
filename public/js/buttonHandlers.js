@@ -73,6 +73,9 @@ function undoButtonPress() {
     }
   }
 }
+function gravityButtonPress() {
+  toggleGravity();
+}
 
 function addNewModelButtonPress() {
     removeButtons();

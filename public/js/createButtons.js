@@ -102,8 +102,8 @@ function createShapeButtons() {
 
 //Add Edit, Undo, Delete, Finish
 function createOptions() {
-    var bF = [["editButtonPress()", "undoButtonPress()", "deleteButtonPress()"]];
-    var bT = [["Edit", "Undo", "Delete"]];
+    var bF = [["editButtonPress()", "undoButtonPress()"],["gravityButtonPress()", "deleteButtonPress()"]];
+    var bT = [["Edit", "Undo"],["Gravity", "Delete"]];
     createButtonTable(bF, bT);
 
     //Finish Button
@@ -171,6 +171,7 @@ function createColorButtons() {
     input.setAttribute("id", "buttonTable");
     input.setAttribute("class", "colorPicker");
     body.appendChild(input);
+    console.log(input);
     //Finish Button
     var body = document.querySelector("center");
     body.appendChild(createFinishButton(5));

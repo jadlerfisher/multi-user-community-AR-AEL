@@ -22,7 +22,21 @@ function displayModel(i) {
   model.setAttribute("rotation", "0 0 0");
   model.setAttribute("scale", "1 1 1");
   model.setAttribute("material", "color: #0000FF");
+  model.setAttribute("physics-body","boundingBox: 1 1 1; mass: 0");
   scene.appendChild(model);
+}
+
+function toggleGravity() {
+  var s = document.getElementById("item");
+  var scene = document.querySelector("a-scene");
+  var m = s.getAttribute("physics-body").mass;
+  var b = s.getAttribute("physics-body").boundingBox;
+  console.log(m);
+  if (m == "0") {
+    s.setAttribute("physics-body", {mass: 5, boundingBox: b});
+  } else {
+    s.setAttribute("physics-body", {mass: 0, boundingBox: b});
+  }
 }
 
 /**
@@ -49,6 +63,7 @@ function display(i) {
     item.setAttribute('VertexB', "1 1 -6");
     item.setAttribute('VertexC', "-1 2 -5.5")
     item.setAttribute('color', "#0000FF");
+    item.setAttribute("physics-body","boundingBox: 1 1 1; mass: 5");
     scene.appendChild(item);
 }
 
@@ -230,8 +245,10 @@ function update(jscolor) {
       //var objModel = item.getAttribute("obj-model").obj;
       //item.setAttribute("obj-model", "obj: objModel");
       item.setAttribute("material", "color: #" + jscolor);
+      console.log(jsColor);
     } else {
       item.setAttribute("color", '#' + jscolor);
+      console.log(jsColor);
     }
 }
 function setColor(col) {
