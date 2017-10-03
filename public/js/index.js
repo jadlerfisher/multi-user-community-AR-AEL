@@ -1,16 +1,19 @@
-var buttonExists = true;
-var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"];
-var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"];
-var itemNum = 0;
-var models = ["obj: #pokemon-obj", "obj: #cup-obj"];
-var changes = [];
-var items = [];
+var buttonExists = true; //The VR button exists
+var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
+var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
+var itemNum = 0; //The id of the most recently created object
+var models = ["obj: #pokemon-obj", "obj: #cup-obj"]; //The various object models
+var changes = []; //Changes that have been made in editing an object
+var items = []; //List of all the ids of objects in the scene
 
+//Removes the VR button
 function init() {
     document.querySelector("a-scene").removeChild(document.getElementsByClassName("a-enter-vr")[0]);
     buttonExists = false;
 }
 
+
+//Displays a Model
 function displayModel(i) {
   var scene = document.querySelector("a-scene");
   //creates model
@@ -22,21 +25,7 @@ function displayModel(i) {
   model.setAttribute("rotation", "0 0 0");
   model.setAttribute("scale", "1 1 1");
   model.setAttribute("material", "color: #0000FF");
-  model.setAttribute("physics-body","boundingBox: 1 1 1; mass: 0");
   scene.appendChild(model);
-}
-
-function toggleGravity() {
-  var s = document.getElementById("item");
-  var scene = document.querySelector("a-scene");
-  var m = s.getAttribute("physics-body").mass;
-  var b = s.getAttribute("physics-body").boundingBox;
-  console.log(m);
-  if (m == "0") {
-    s.setAttribute("physics-body", {mass: 5, boundingBox: b});
-  } else {
-    s.setAttribute("physics-body", {mass: 0, boundingBox: b});
-  }
 }
 
 /**
@@ -63,7 +52,6 @@ function display(i) {
     item.setAttribute('VertexB', "1 1 -6");
     item.setAttribute('VertexC', "-1 2 -5.5")
     item.setAttribute('color', "#0000FF");
-    item.setAttribute("physics-body","boundingBox: 1 1 1; mass: 5");
     scene.appendChild(item);
 }
 
@@ -238,6 +226,7 @@ function resizeSphere(change, undoing) {
     }
 }
 
+//Changes the shape's color
 function update(jscolor) {
     // 'jscolor' instance can be used as a string
     var item = document.getElementById("item");
@@ -251,6 +240,8 @@ function update(jscolor) {
       console.log(jsColor);
     }
 }
+
+//Set shape color when undo is called
 function setColor(col) {
     // 'jscolor' instance can be used as a string
     var item = document.getElementById("item");
@@ -260,10 +251,14 @@ function setColor(col) {
       item.setAttribute("color", col);
     }
 }
+
+//Set shape position when undo is called
 function setPosition(_x,_y,_z) {
   var item = document.getElementById("item");
   item.setAttribute("position", {x: _x, y: _y, z: _z});
 }
+
+//Set shape size when undo is called
 function setSize(sizeInfo) {
   var s = document.getElementById("item");
   var type = s.getAttribute("class");
@@ -300,6 +295,8 @@ function setSize(sizeInfo) {
     // s.setAttribute('VertexC', VertexC_change);
   }
 }
+
+//Set shape Rotation when undo is called
 function setRotation(theta) {
   console.log("Set Rotation " + theta);
   var item = document.getElementById("item");
@@ -308,6 +305,7 @@ function setRotation(theta) {
   item.setAttribute("rotation", {x: _x, y: theta, z: _z});
 }
 
+//Creates a new model based on inputed URL from user
 function createNewModel(text) {
   var assets = document.querySelector("a-assets");
   var asset = document.createElement("a-asset-item");
@@ -327,22 +325,11 @@ function createNewModel(text) {
   model.setAttribute("material", "color: #0000FF");
   scene.appendChild(model);
 }
+
+//Removes item based on its id #
 function removeItem(i) {
   var scene = document.querySelector("a-scene");
   scene.removeChild(document.getElementById(i));
-  var index = items.indexOf(i);
-  var str = '';
-  for (var i = 0; i < items.length; i++) {
-    str = str + items[i] + " ";
-  }
-  console.log(str);
-  console.log(index);
-  items.splice(index, 1);
-  var str = '';
-  for (var i = 0; i < items.length; i++) {
-    str = str + items[i] + " ";
-  }
-  console.log(str);
   removeButtons();
   createSummonButton();
   createRemoveButton();

@@ -16,7 +16,7 @@ function removeButtons() {
     }
 }
 
-//Creates the + button
+//Creates the + (Add Object) button
 function createSummonButton() {
     var center = document.querySelector("center");
     var button = document.createElement("button");
@@ -60,6 +60,12 @@ function createOptionsButton(funct, text) {
   return button;
 }
 
+
+//Takes in an array of Button Functions and Button Text
+//Array Should be formated as such:
+// [["funct1,"funct2"],["funct3", "funct4"]]
+// [["1", "2"], ["3", "4"]]
+//This will create 2 rows of buttons, each row with 2 buttons each
 function createButtonTable(buttonFuncts, buttonText) {
     var table = document.createElement("table");
     var body = document.querySelector("center");
@@ -77,21 +83,21 @@ function createButtonTable(buttonFuncts, buttonText) {
     body.appendChild(table);
 }
 
-//Create Add Buttons
+//Create Add Buttons, Buttons that ask whether you want a shape or model
 function createAddButtons() {
     var bF = [["modelButtonPress1()", "shapeButtonPress1()"]];
     var bT = [["Models", "Shapes"]];
     createButtonTable(bF, bT);
 }
 
-//Adds Model Buttons
+//Adds Model Buttons, Button that asks which model you want
 function createModelButtons() {
     var bF = [["modelButtonPress(0)", "addNewModelButtonPress()"]];
     var bT = [["Pokeball", "Add New Model"]];
     createButtonTable(bF, bT);
 }
 
-//Adds Shape Buttons
+//Adds Shape Buttons, Button that asks which shape you want
 function createShapeButtons() {
     var bF = [["shapeButtonPress(0)", "shapeButtonPress(1)", "shapeButtonPress(2)"],
             ["shapeButtonPress(3)", "shapeButtonPress(4)", "shapeButtonPress(5)"],
@@ -100,7 +106,7 @@ function createShapeButtons() {
     createButtonTable(bF, bT);
 }
 
-//Add Edit, Undo, Delete, Finish
+//Add Edit, Undo, Delete, Finish, and Gravity
 function createOptions() {
     var bF = [["editButtonPress()", "undoButtonPress()"],["gravityButtonPress()", "deleteButtonPress()"]];
     var bT = [["Edit", "Undo"],["Gravity", "Delete"]];
@@ -141,7 +147,7 @@ function createMoveButtons() {
     body.appendChild(createFinishButton(3));
 }
 
-
+//Creates Buttons <- and -> for rotation
 function createRotateButtons() {
     var bF = [["rotateSphere(-5, false)", "rotateSphere(5, false)"]];
     var bT = [["<-", "->"]];
@@ -155,10 +161,16 @@ function createRotateButtons() {
     body.appendChild(createFinishButton(4));
 }
 
+
+//Creates JsColor color Picker
 function createColorButtons() {
     var body = document.querySelector("center");
+
+    //Creates JsColor field
     var input = document.createElement('INPUT')
     var picker = new jscolor(input)
+
+    //Changes object color as user changes color field
     if (!(document.getElementById("item").getAttribute('class') === "model")) {
         var origColor = document.getElementById("item").getAttribute('color');
         changes.push(["color", origColor]);
@@ -167,23 +179,27 @@ function createColorButtons() {
         console.log(origColor);
         changes.push(["color", origColor]);
     }
+
+    //Changes text in field input to appropriate string
     picker.fromString(origColor);
     input.setAttribute("id", "buttonTable");
     input.setAttribute("class", "colorPicker");
     body.appendChild(input);
-    console.log(input);
+
     //Finish Button
     var body = document.querySelector("center");
     body.appendChild(createFinishButton(5));
 }
 
-
+//Creates + and - buttons for size changing
 function createSizeButtons() {
     var bF = [["resizeSphere(0.1)", "resizeSphere(-0.1)"]];
     var bT = [["+", "-"]];
     createButtonTable(bF, bT);
     var item = document.getElementById("item");
     var type = item.getAttribute("class");
+
+    //Grabs current size information from shape
     if (type === "model") {
         var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
     } else {
@@ -196,13 +212,13 @@ function createSizeButtons() {
     for (var i = 0; i < sizeInfo.length - 3; i++) {
         str = str + changes[changes.length - 1][1][i] + " ";
     }
-    console.log(str);
 
     //Finish Button
     var body = document.querySelector("center");
     body.appendChild(createFinishButton(6));
 }
 
+//Allows user to add their own model using a url
 function createNewModelInput() {
     var body = document.querySelector("center");
     var table = document.createElement("table");
@@ -230,12 +246,14 @@ function createNewModelInput() {
     body.appendChild(table);
 }
 
+
 function createRemoveButton() {
     bF = [["removeButtonPress()"]];
     bT = [["Remove Object"]];
     createButtonTable(bF, bT);
 }
 
+//Goes through the items[] array and adds a button for each item id
 function addRemoveButtons() {
     console.log("remove");
     var bF = [];
