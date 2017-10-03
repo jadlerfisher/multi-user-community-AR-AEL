@@ -35,7 +35,9 @@ router.post('/logout', function(req, res) {
     function(error) {
     	if (error) {
     		return res.status(500).send(error.message);
-    	}
+    	} else {
+            return res.status(200).send();
+        }
     }
   );
 
