@@ -85,25 +85,27 @@
     </div>
     <script src="js/home.js"></script>
     <script src="library/jquery.slim.min.js"></script>
+    <script src="library/tether.min.js"></script>
     <script src="library/bootstrap.min.js"></script>
-    <script src="tether.min.js"></script>
 
-    <script type="text/javascript">
-      document.getElementsByClassName('logout-btn')[0].addEventListener('click', function(ev) {
-        ev.preventDefault();
+    <% if (hasLoggedIn) { %>
+      <script type="text/javascript">
+        document.getElementsByClassName('logout-btn')[0].addEventListener('click', function(ev) {
+          ev.preventDefault();
 
-        var xhr = new XMLHttpRequest();
+          var xhr = new XMLHttpRequest();
 
-        xhr.open('POST', '/logout', true);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            window.location.replace(window.location.origin + '/');
+          xhr.open('POST', '/logout', true);
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              window.location.replace(window.location.origin + '/');
+            }
           }
-        }
-        xhr.send();
+          xhr.send();
 
-      });
-    </script>
+        });
+      </script>
+    <% } %>
 
   </body>
 </html>
