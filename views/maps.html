@@ -9,6 +9,7 @@
     </script>
 	
 	<script type="text/javascript" src="../public/js/maps.js"></script>
+	<script type="text/javascript" src="../public/js/GSVPano.js"></script>
 	<link href="../public/css/maps.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -22,7 +23,7 @@
 			<div id="pano"></div>
 		</div>
 	</div>
-		<button type="button" id="submit"> Submit </button>
-
+		<button type="submit" id="myLocationButton">Use my location</button>
+		<button type="button" id="submit" onclick="loadPanorama(location)"> Submit </button>
   </body>
 </html>
