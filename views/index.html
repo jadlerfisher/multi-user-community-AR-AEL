@@ -1,111 +1,336 @@
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/home.css">
-</head>
-  <body>
-    <div class="mainDiv container-fluid" id="main-div">
-      <div class="row headerRow">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-9">
-              <div class="page-header">
-                <center>
-                  <h1>
-                    Invisible Cities: <small>Multi-user AR Public Monuments</small>
-                  </h1>
-                </center>
-              </div>
-            </div>
-            <div class="col-md-3 buttonDiv">
-              <% if (hasLoggedIn) { %>
-                <a href="/logout" class="btn btn-default logout-btn">Logout</a>
-              <% } else { %>
-                <a href="/login" class="btn btn-default login-btn">Login</a>
-                <a href="/register" class="btn btn-default register-btn">Register</a>
-              <% } %>
-            </div>
-          </div>
-          <div class="row whiteBack">
-            <div class="col-md-12 mainCol mainRow">
-              <h2 class="text-center subTitle">
-                Welcome to Invisible Cities!
-              </h2>
-              <div class="row subMainRow mainRow">
-                  <div class="col-md-12 mainContent">
-                    <h2 class="paragraph1"> <small>
-                    <img alt="Bootstrap Image Preview" class="img1" src="assets/images/gvu.jpg"/>
-                      Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App.
-                      </small>
-                    </h2>
-                  </div>
-                </div>
-                <div class="row subMainRow mainRow2">
-                  <div class="col-md-12 mainContent" background-color="#F9DC84">
-                    <h2 class="paragraph2"> <small>
-                    <img alt="Bootstrap Image Preview" class="img2" src="assets/images/gvu.jpg"/>
-                      Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App.
-                      </small>
-                    </h2>
-                  </div>
-                </div>
-                <div class="row subMainRow mainRow">
-                  <div class="col-md-12 mainContent">
-                    <h2 class="paragraph3"> <small>
-                    <img alt="Bootstrap Image Preview" class="img3" src="assets/images/gvu.jpg"/>
-                      Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App.
-                      </small>
-                    </h2>
-                  </div>
-                </div>
-                <div class="row subMainRow mainRow2">
-                  <div class="col-md-12 mainContent">
-                    <h2 class="paragraph4"> <small>
-                      <img alt="Bootstrap Image Preview" class="img4" src="assets/images/gvu.jpg"/>
-                      Created By:
-                      <ul>
-                        <li>Josh Fisher - <i>Ph.D. ?????</i></li>
-                        <li>John Ho - <i>3rd Year Computer Science Undergrad</i></li>
-                        <li>Sean McNeil - <i>3rd Year Electrical Engineering Undergrad</i></li>
-                        <li>Cassie Mullins - <i>3rd Year Computational Media Undergrad</i></li>
-                        <li>Jessica Pan - <i>2nd Year Computer Science Undergrad</i></li>
-                        <li>Joshua Wang - <i>3rd Year Computer Science Undergrad</i></li>
-                        <li>Konrad Wang - <i>2nd Year Computer Science Undergrad</i></li>
-                        <li>Mark Woodson - <i>3rd Year Computer Engineering Undergrad</i></li>
-                      </ul>
-                    </small>
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
-    <script src="js/home.js"></script>
-    <script src="library/jquery.slim.min.js"></script>
-    <script src="library/tether.min.js"></script>
-    <script src="library/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <style>
+    .text {
+        font-family: "Montserrat";
+        color: #fff;
+    }
+    .heading {
+      font-size: 58.5px;
+    }
+    .subheading {
+        font-size: 25px;
+        padding-top: 10px;
+    }
+    .sectionTitle {
+        font-family: "Montserrat";
+        font-weight: bold;
+        font-size: 48px;
+        text-transform: uppercase;
+        padding: 40px;
+        font-color: #666666;
+    }
+    .main {
+      background-image: url(assets/images/gvu.jpg);
+      background-size: cover;
+      height: 100vh;
+    }
+    .main-margin {
+      position: relative;
+      top: 43%;
+      transform: translateY(-50%);
+      width: 100%;
+      text-align: center;
+      height: 40%;
+    }
+    .main::before {
+      background: rgba(0, 0, 0, 0.54);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      content: "";
+    }
+    .container {
+      height: 100%;
+    }
 
-    <% if (hasLoggedIn) { %>
-      <script type="text/javascript">
-        document.getElementsByClassName('logout-btn')[0].addEventListener('click', function(ev) {
-          ev.preventDefault();
 
-          var xhr = new XMLHttpRequest();
 
-          xhr.open('POST', '/logout', true);
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-              window.location.replace(window.location.origin + '/');
+
+    #main-nav {
+      //position: absolute;
+      margin-bottom: 0;
+      border-radius: 0;
+      width: 100%;
+
+      ul.navbar-right {
+        padding-right: 15px;
+      }
+    }
+
+    #login-signup-modal {
+      padding: 0;
+
+      button.close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 30px;
+        z-index: 1;
+      }
+
+      .modal-dialog {
+        top: 80px;
+      }
+
+      .modal-content {
+        margin: auto;
+        max-width: 500px;
+      }
+
+      .signup-login-wrapper {
+        padding: 20px 20px 10px;
+        text-align: center;
+        @include MEDIA-XS {
+          padding-top: 40px;
+        }
+
+        .other-option {
+          padding-top: 20px;
+          overflow: hidden;
+          span {
+            float: left;
+          }
+          a {
+            float: right;
+            color: #f07654;
+            text-decoration: none;
+            &:hover { color: #f38654; }
+          }
+        }
+
+        .sn-btn {
+          a {
+            padding: 12px 16px;
+            background-color: #3B5998;
+            color: #fff;
+            width: 100%;
+            font-size: 16px;
+            &:hover { background-color: #146eb4; }
+
+            i.fa {
+              padding-right: 12px;
+              font-size: 22px;
             }
           }
-          xhr.send();
+        }
 
-        });
-      </script>
-    <% } %>
+        .text-line {
+          position: relative;
+          margin: 12px;
+          text-align: center;
 
-  </body>
+          &:before {
+            content: "";
+            display: block;
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            border-bottom: 1px solid #ddd;
+          }
+          span.or {
+            position: relative;
+            padding: 0 10px;
+            background: #fff;
+          }
+        }
+
+        .error {
+          span {
+            color: #ff4c4c;
+            font-size: 12px;
+          }
+          input {
+            border-color: #ff4c4c;
+          }
+        }
+
+        .submit {
+          text-align: left;
+
+          p {
+            margin: 0;
+            padding-top: 6px;
+            font-size: 11px;
+          }
+
+          input[type=submit] {
+            border-radius: 3px;
+            background-color: #f07654;
+            width: 100%;
+            color: #fff;
+            &:hover { background-color: #f38654; }
+          }
+        }
+
+        label.checkbox {
+          text-align: right;
+          span {
+            padding-right: 20px;
+            font-weight: 400;
+          }
+          input[type=checkbox] {
+            top: 3.5px;
+            right: 0;
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .navb-left {
+      margin-left: 476px;
+    }
+
+    .navb-position {
+      margin-top: 3px;
+    }
+    .navb-pad {
+        padding-top: 14px;
+    }
+    .home {
+        border: solid white;
+        padding: 9px;
+    }
+
+
+
+
+    .nav {
+      list-style: none;
+      float: right !important;
+      margin-right: 30px;
+      margin-top: 3px;
+      padding-right: 15px;
+    }
+    .navbar-element {
+    font-weight: 700;
+    border: none;
+    width: auto;
+    padding-top: 20px;
+    }
+    .element {
+      color: white;
+      margin: 15px;
+      font-family: "Montserrat";
+      font-size: 18px;
+      width: auto;
+      text-transform: uppercase;
+    }
+    .section-Tabs {
+        font-size: 15px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="main">
+    <nav id="main-nav" class="navbar navbar-default navbar-fixed-top navbar-element">
+      <ul class="navb-pad">
+        <li style="display: inline;">
+          <a href="" class="element home">HOME</a>
+          <a href="" class="element section-Tabs">Sect Descr. 1</a>
+          <a href="" class="element section-Tabs">Sect Descr. 2</a>
+          <a href="" class="element section-Tabs">Meet the Creators
+        </li>
+        <ul class="nav">
+          <% if (hasLoggedIn) { %>
+            <li>
+              <a href="/logout" class="element" data-modal-type="signup">LOGOUT</a>
+            </li>
+          <% } else { %>
+            <li>
+              <a href="/register" class="element" data-modal-type="signup">SIGN UP</a>
+            </li>
+            <li>
+              <a href="/login" class="element" data-modal-type="login">LOGIN</a>
+            </li>
+          <% } %>
+        </ul>
+      </ul>
+    </nav>
+    <header>
+      <div class="container">
+        <div class="main-margin">
+          <h1 class="text heading">INVISIBLE CITIES</h1>
+          <h6 class="text subheading">Multi-user Augmented Reality Public Monuments</h6>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <section class="courses" id="courses">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="sectionTitle">Sect Descr. 1</h2>
+      </div>
+    </div>
+  </section>
+
+
+
+  <div class="row subMainRow mainRow2">
+    <div class="col-md-12 mainContent" background-color="#F9DC84">
+      <h2 class="paragraph2"> <small>
+      <img alt="Bootstrap Image Preview" class="img2" src="assets/images/gvu.jpg"/>
+        Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App.
+        </small>
+      </h2>
+    </div>
+  </div>
+  <div class="row subMainRow mainRow">
+    <div class="col-md-12 mainContent">
+      <h2 class="paragraph3"> <small>
+      <img alt="Bootstrap Image Preview" class="img3" src="assets/images/gvu.jpg"/>
+        Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App.
+        </small>
+      </h2>
+    </div>
+  </div>
+  <div class="row subMainRow mainRow2">
+    <div class="col-md-12 mainContent">
+      <h2 class="paragraph4"> <small>
+        <img alt="Bootstrap Image Preview" class="img4" src="assets/images/gvu.jpg"/>
+        Created By:
+        <ul>
+          <li>Josh Fisher - <i>Ph.D. ?????</i></li>
+          <li>John Ho - <i>3rd Year Computer Science Undergrad</i></li>
+          <li>Sean McNeil - <i>3rd Year Electrical Engineering Undergrad</i></li>
+          <li>Cassie Mullins - <i>3rd Year Computational Media Undergrad</i></li>
+          <li>Jessica Pan - <i>2nd Year Computer Science Undergrad</i></li>
+          <li>Joshua Wang - <i>3rd Year Computer Science Undergrad</i></li>
+          <li>Konrad Wang - <i>2nd Year Computer Science Undergrad</i></li>
+          <li>Mark Woodson - <i>3rd Year Computer Engineering Undergrad</i></li>
+        </ul>
+      </small>
+      </h2>
+    </div>
+  </div>
+  <script src="js/home.js"></script>
+  <script src="library/jquery.slim.min.js"></script>
+  <script src="library/tether.min.js"></script>
+  <script src="library/bootstrap.min.js"></script>
+
+  <% if (hasLoggedIn) { %>
+    <script type="text/javascript">
+      document.getElementsByClassName('logout-btn')[0].addEventListener('click', function(ev) {
+        ev.preventDefault();
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/logout', true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            window.location.replace(window.location.origin + '/');
+          }
+        }
+        xhr.send();
+      });
+    </script>
+  <% } %>
+
+</body>
 </html>
