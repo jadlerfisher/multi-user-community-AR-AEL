@@ -174,11 +174,6 @@ GSVPANO.PanoLoader = function (parameters) {
 						img.crossOrigin = '';
 						img.src = url;
 						
-						var elem = document.createElement("img");
-						elem.setAttribute("src", img.src);
-						elem.setAttribute("height", "768");
-						elem.setAttribute("width", "1024");
-						document.getElementById("pano2").appendChild(img);
 					}
 				} )( x, y );
 			}
