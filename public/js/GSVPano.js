@@ -42,7 +42,7 @@ GSVPANO.PanoLoader = function (parameters) {
 
 	if( gl ) {
 		var maxTexSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
-		console.log( 'MAX_TEXTURE_SIZE ' + maxTexSize );
+		//console.log( 'MAX_TEXTURE_SIZE ' + maxTexSize );
 		maxW = maxH = maxTexSize;
 	}
 
@@ -85,7 +85,7 @@ GSVPANO.PanoLoader = function (parameters) {
 				var c = document.createElement('canvas');
 				if( x < ( _wc - 1 ) ) c.width = maxW; else c.width = w - ( maxW * x );
 				if( y < ( _hc - 1 ) ) c.height = maxH; else c.height = h - ( maxH * y );
-				console.log( 'New canvas of ' + c.width + 'x' + c.height );
+				//console.log( 'New canvas of ' + c.width + 'x' + c.height );
 				c.GSVPANO = { x: x, y: y };
 				_canvas.push( c );
 				_ctx.push( c.getContext('2d') );
@@ -227,7 +227,7 @@ GSVPANO.PanoLoader = function (parameters) {
 	
 	this.setZoom = function( z ) {
 		_zoom = z;
-		console.log( z );
+		//console.log( z );
 		this.adaptTextureToZoom();
 	};
 
