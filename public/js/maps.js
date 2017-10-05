@@ -6,15 +6,10 @@
   //My api key if needed for links
   var APIkey= "AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c";
 
-  //THREE.js stuff
-  var mesh; 
-	var fov = 80;
-  var scene;
-  var camera;
 
 	 //Initalize the map and streetview
   function initMap() {
-     	var agbar = new google.maps.LatLng(33.7756, -84.3963);
+     	var agbar = new google.maps.LatLng(33.775441, -84.4025796);
 
       // Set up the map.
       map = new google.maps.Map(document.getElementById('map'), {
@@ -23,18 +18,18 @@
       });
 
   		panorama = new google.maps.StreetViewPanorama(
-          document.getElementById('pano'), {
-              position: agbar,
-              pov: {
-              heading: 34,
-              pitch: 10
-              }
+        document.getElementById('pano'), {
+            position: agbar,
+            pov: {
+            heading: 36,
+            pitch: 10
+            }
     		});
     		myLocation = agbar;
     		map.setStreetView(panorama);
 
 
-		// Create the search box and link it to the UI element.
+		 // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -93,7 +88,6 @@
           map.fitBounds(bounds);
         });
 
-
         //eventlistener whenever the user clicks the map, finds nearest pano within radius 50
         var sv = new google.maps.StreetViewService();
         map.addListener('click', function(event) {
@@ -103,8 +97,8 @@
 
         //eventlistener to update our location when the pano changes
         google.maps.event.addListener(panorama, 'position_changed', function() {
-         myLocation = panorama.getPosition(),
-         console.log(panorama.getPosition());
+         myLocation = panorama.getPosition();
+         //console.log(panorama.getPosition());
         });
 		
      } //initMap
@@ -114,7 +108,7 @@
   window.onload = function(){
 
 				var el = document.getElementById( 'myLocationButton' );
-						el.addEventListener( 'click', function( event ) {
+					el.addEventListener( 'click', function( event ) {
 						event.preventDefault();
 						navigator.geolocation.getCurrentPosition(geoSuccess);
 					}, false );
@@ -129,6 +123,15 @@
 		var currentLocation = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
 		map.panTo( currentLocation );
     myLocation = currentLocation;
+    panorama = new google.maps.StreetViewPanorama(
+      document.getElementById('pano'), {
+          position: currentLocation,
+          pov: {
+          heading: 34,
+          pitch: 10
+          }
+    });
+    map.setStreetView(panorama);
 
 		// Look for a nearby Street View panorama when the map is clicked.
     // getPanoramaByLocation will return the nearest pano when the
@@ -159,32 +162,21 @@
 	}//processSVData
 
 
-	//Experimenting with Collin's GSVPano.js
+	//Experimenting with Collin's GSVPano.js to print equirectangular
   function loadPanorama( location ) {
             
           loader = new GSVPANO.PanoLoader( {
               useWebGL: false,
               zoom: 3
           } );
-          
-					scene = new THREE.Scene();
-							
-					camera = new THREE.PerspectiveCamera( fov, window.innerWidth / window.innerHeight, 1, 1100 );
-					scene.add( camera );
-							
-					// create sphere for streetview behind painting surface
-							
-					mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '../public/assets/images/placeholder.jpg' ) } ) );
-					mesh.scale.x = -1;
-					scene.add( mesh );	
+          	
           loader.onPanoramaLoad = function() {
                         
-                 window.location.hash = location.lat() + ',' + location.lng();
-                    
-                 var source = this.canvas[ 0 ];
-                 mesh.material.map = new THREE.Texture( source ); 
-                 mesh.material.map.needsUpdate = true;   
-                document.getElementById("pano2").appendChild(source);     
+            window.location.hash = location.lat() + ',' + location.lng();
+            
+            //this is the resulting equirectangular image!!
+            var source = this.canvas[ 0 ];   
+            document.getElementById("pano2").appendChild(source);     
           };
 
           loader.load(location);
