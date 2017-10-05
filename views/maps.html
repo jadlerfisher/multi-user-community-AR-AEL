@@ -4,14 +4,8 @@
     <meta charset="utf-8">
     <title>Background Select</title>
     
-	//my api key
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c&libraries=places&callback=initMap">
     </script>
-	
-	//added Collin's js files for testing
-	<script type="text/javascript" src="../public/js/maps.js"></script>
-	<script type="text/javascript" src="../public/js/GSVPano.js"></script>
-	<script type="text/javascript" src="../public/js/three.colin.min.js"></script>
 
 	<link href="../public/css/maps.css" rel="stylesheet" type="text/css">
 
@@ -25,9 +19,15 @@
 			<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 			<div id="map"></div>
 			<div id="pano"></div>
+			<div id="pano2"></div>
 		</div>
 	</div>
 		<button type="submit" id="myLocationButton">Use my location</button>
 		<button type="button" id="submit" onclick="loadPanorama(myLocation)"> Submit </button>
+
+	<script type="text/javascript" src="../public/js/maps.js"></script>
+	<script type="text/javascript" src="../public/js/GSVPano.js"></script>
+	<script type="text/javascript" src="../public/js/three.colin.min.js"></script>
+
   </body>
 </html>

@@ -1,40 +1,38 @@
-	 //Google Map variables 
-     var map;
-     var panorama;
-     var myLocation;
+	//Google Map variables 
+  var map;
+  var panorama;
+  var myLocation;
 
-     //My api key if needed for links
-     var APIkey= "AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c";
+  //My api key if needed for links
+  var APIkey= "AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c";
 
-     //THREE.js stuff
-     var mesh; 
-	 var fov = 80;
-     var scene;
-     var camera;
+  //THREE.js stuff
+  var mesh; 
+	var fov = 80;
+  var scene;
+  var camera;
 
 	 //Initalize the map and streetview
-     function initMap() {
+  function initMap() {
      	var agbar = new google.maps.LatLng(33.7756, -84.3963);
 
-        panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'));
-
-        // Set up the map.
-        map = new google.maps.Map(document.getElementById('map'), {
+      // Set up the map.
+      map = new google.maps.Map(document.getElementById('map'), {
           center: agbar,
           zoom: 16,
-        });
+      });
 
-		//Pegman
-		panorama = new google.maps.StreetViewPanorama(
-        document.getElementById('pano'), {
-            position: agbar,
-            pov: {
-            heading: 34,
-            pitch: 10
-            }
-		});
-		myLocation = agbar;
-		map.setStreetView(panorama);
+  		panorama = new google.maps.StreetViewPanorama(
+          document.getElementById('pano'), {
+              position: agbar,
+              pov: {
+              heading: 34,
+              pitch: 10
+              }
+    		});
+    		myLocation = agbar;
+    		map.setStreetView(panorama);
+
 
 		// Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
@@ -46,7 +44,7 @@
           searchBox.setBounds(map.getBounds());
         });
 	
-		var markers = [];
+		    var markers = [];
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function() {
@@ -100,13 +98,20 @@
         var sv = new google.maps.StreetViewService();
         map.addListener('click', function(event) {
           sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
+          myLocation=event.latLng;
+        });
+
+        //eventlistener to update our location when the pano changes
+        google.maps.event.addListener(panorama, 'position_changed', function() {
+         myLocation = panorama.getPosition(),
+         console.log(panorama.getPosition());
         });
 		
      } //initMap
 	
 
-    //Use my location button requests user's current place
-    window.onload = function(){
+  //Use my location button requests user's current place
+  window.onload = function(){
 
 				var el = document.getElementById( 'myLocationButton' );
 						el.addEventListener( 'click', function( event ) {
@@ -123,14 +128,18 @@
 		
 		var currentLocation = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
 		map.panTo( currentLocation );
+    myLocation = currentLocation;
+
 		// Look for a nearby Street View panorama when the map is clicked.
-        // getPanoramaByLocation will return the nearest pano when the
-        // given radius is 50 meters or less.
-        var sv = new google.maps.StreetViewService();
-        map.addListener('click', function(event) {
-          sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
-        });
-		myLocation = currentLocation;     	
+    // getPanoramaByLocation will return the nearest pano when the
+    // given radius is 50 meters or less.
+    var sv = new google.maps.StreetViewService();
+    map.addListener('click', function(event) {
+      sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
+      myLocation = event.latLng;
+
+    });
+		     	
 	} //geoSuccess
 
 
@@ -151,13 +160,13 @@
 
 
 	//Experimenting with Collin's GSVPano.js
-  	function loadPanorama( location ) {
+  function loadPanorama( location ) {
             
-
-                    loader = new GSVPANO.PanoLoader( {
-                        useWebGL: false,
-                        zoom: 3
-                    } );
+          loader = new GSVPANO.PanoLoader( {
+              useWebGL: false,
+              zoom: 3
+          } );
+          
 					scene = new THREE.Scene();
 							
 					camera = new THREE.PerspectiveCamera( fov, window.innerWidth / window.innerHeight, 1, 1100 );
@@ -168,18 +177,18 @@
 					mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '../public/assets/images/placeholder.jpg' ) } ) );
 					mesh.scale.x = -1;
 					scene.add( mesh );	
-                    loader.onPanoramaLoad = function() {
+          loader.onPanoramaLoad = function() {
                         
-                        window.location.hash = location.lat() + ',' + location.lng();
+                 window.location.hash = location.lat() + ',' + location.lng();
                     
-                        var source = this.canvas[ 0 ];
-                        mesh.material.map = new THREE.Texture( source ); 
-                        mesh.material.map.needsUpdate = true;
-                        
-                    };
+                 var source = this.canvas[ 0 ];
+                 mesh.material.map = new THREE.Texture( source ); 
+                 mesh.material.map.needsUpdate = true;   
+                document.getElementById("pano2").appendChild(source);     
+          };
 
-                    loader.load( location );
-                
-    } //loadpanorama
+          loader.load(location);
+               
+   } //loadpanorama
 
 	
