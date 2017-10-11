@@ -11,7 +11,7 @@ npm install
 ```
 3. Run localhost server
 ```
-node app.js
+npm start
 ```
 4. Open localhost:5000 in browser
 

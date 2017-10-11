@@ -79,4 +79,8 @@ router.get('/ar-view', function(req, res) {
   }
 });
 
+router.get('/test', function(req, res) {
+  res.render('test');
+});
+
 module.exports = router;
