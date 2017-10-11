@@ -12,6 +12,7 @@
     "ejs": "^2.5.7",
     "express": "^4.15.4",
     "firebase": "^4.4.0",
-    "mustache": "^2.3.0"
+    "mustache": "^2.3.0",
+    "networked-aframe": "^0.3.0"
   }
 }
