@@ -1,26 +1,35 @@
+	//Google Map variables 
+  var map;
+  var panorama;
+  var myLocation;
 
-     /*
-      * Click the map to set a new location for the Street View camera.
-      */
-     var map;
-     var panorama;
-	 var APIkey= "AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c";
+  //My api key if needed for links
+  var APIkey= "AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c";
 
 
+	 //Initalize the map and streetview
+  function initMap() {
+     	var agbar = new google.maps.LatLng(33.775441, -84.4025796);
 
-     function initMap() {
-        var gaTech = {lat: 33.7756, lng: -84.3963};
-        var sv = new google.maps.StreetViewService();
-
-        panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'));
-
-        // Set up the map.
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: gaTech,
+      // Set up the map.
+      map = new google.maps.Map(document.getElementById('map'), {
+          center: agbar,
           zoom: 16,
-        });
-		
-		// Create the search box and link it to the UI element.
+      });
+
+  		panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('pano'), {
+            position: agbar,
+            pov: {
+            heading: 36,
+            pitch: 10
+            }
+    		});
+    		myLocation = agbar;
+    		map.setStreetView(panorama);
+
+
+		 // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -29,20 +38,8 @@
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
-		
-		//Pegman
-		var agbar = new google.maps.LatLng(33.7756, -84.3963);
-		panorama = new google.maps.StreetViewPanorama(
-        document.getElementById('pano'), {
-            position: agbar,
-            pov: {
-            heading: 34,
-            pitch: 10
-            }
-		});
-			map.setStreetView(panorama);
-		
-		var markers = [];
+	
+		    var markers = [];
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function() {
@@ -90,146 +87,100 @@
           });
           map.fitBounds(bounds);
         });
+
+        //eventlistener whenever the user clicks the map, finds nearest pano within radius 50
+        var sv = new google.maps.StreetViewService();
+        map.addListener('click', function(event) {
+          sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
+          myLocation=event.latLng;
+        });
+
+        //eventlistener to update our location when the pano changes
+        google.maps.event.addListener(panorama, 'position_changed', function() {
+         myLocation = panorama.getPosition();
+         //console.log(panorama.getPosition());
+        });
 		
      } //initMap
-		
-		
-		
-		
-		
-//experimenting collin's code
-		var mapElement = document.createElement('div');
-		var subviewElements = [document.createElement('div'), document.createElement('div')];
-		mapElement.style.pointerEvents = 'auto';
-		// mapElement.style.visibility = 'hidden';
-		mapElement.style.width = '100%';
-		mapElement.style.height = '50%';
-		mapElement.style.bottom = '0px';
-		mapElement.id = 'map';
-		subviewElements[0].style.pointerEvents = 'auto';
-		subviewElements[0].style.width = '100%';
-		subviewElements[0].style.height = '100%';
-		subviewElements[1].style.width = '100%';
-		subviewElements[1].style.height = '100%';
+	
 
-		var MapToggleControl = (function () {
-			function MapToggleControl() {
-				var _this = this;
-				this.element = document.createElement('div');
-				this._showing = false;
-				// Set CSS for the control border.
-				var controlUI = document.createElement('div');
-				controlUI.style.backgroundColor = '#222';
-				controlUI.style.opacity = '0.8';
-				controlUI.style.borderRadius = '3px';
-				controlUI.style.cursor = 'pointer';
-				controlUI.style.marginRight = '10px';
-				controlUI.style.marginTop = '10px';
-				controlUI.style.textAlign = 'center';
-				controlUI.title = 'Click to toggle the map';
-				this.element.appendChild(controlUI);
-				// Set CSS for the control interior.
-				var controlText = this.controlText = document.createElement('div');
-				controlText.style.color = '#fff';
-				controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-				controlText.style.fontSize = '12px';
-				controlText.style.lineHeight = '38px';
-				controlText.style.paddingLeft = '10px';
-				controlText.style.paddingRight = '10px';
-				controlText.innerHTML = 'Show Map';
-				controlUI.appendChild(controlText);
-				// Setup the click event listeners: simply set the map to Chicago.
-				controlUI.addEventListener('click', function () {
-					_this.showing = !_this.showing;
-				});
-			}
-			Object.defineProperty(MapToggleControl.prototype, "showing", {
-				get: function () {
-					return this._showing;
-				},
-				set: function (value) {
-					this._showing = value;
-					if (value) {
-						this.controlText.innerHTML = 'Hide Map';
-					}
-					else {
-						this.controlText.innerHTML = 'Show Map';
-					}
-				},
-				enumerable: true,
-				configurable: true
-			});
-			return MapToggleControl;
-		}());
-		// google street view is our "renderer" here, so we don't need three.js
-		var map;
-		var streetviews;
-		var currentPanoData;
-		var mapToggleControl = new MapToggleControl();
-		// The photosphere is a much nicer viewer, though it breaks if we 
-		// programmatically modify the POV while it is transitioning between panorams.
-		// For this reason, we will (later) restrict navigation to a manual panning mode.
-		google.maps.streetViewViewer = 'photosphere';
-		window.addEventListener('load', function () {
-			map = new google.maps.Map(mapElement);
-			streetviews = [
-				new google.maps.StreetViewPanorama(subviewElements[0]),
-				new google.maps.StreetViewPanorama(subviewElements[1])
-			];
-			map.setStreetView(streetviews[0]);
-			// Enable the pan control so we can customize to trigger device orientation based pose
-			streetviews[0].setOptions({ panControl: true, zoomControl: false });
-			streetviews[0].controls[google.maps.ControlPosition.TOP_RIGHT].push(mapToggleControl.element);
-			// update the pano entity with the appropriate pose
-			var elevationService = new google.maps.ElevationService();
-			var elevation = 0;
-			google.maps.event.addListener(streetviews[0], 'position_changed', function () {
-				var position = streetviews[0].getPosition();
-				// update the position with previous elevation
-				
-		   
-				// update the position with correct elevation as long as we haven't moved
-				elevationService.getElevationForLocations({ locations: [position] }, function (results, status) {
-					if (status = google.maps.ElevationStatus.OK) {
-						if (google.maps.geometry.spherical.computeDistanceBetween(results[0].location, position) < 10) {
-							elevation = results[0].elevation;
-						   
-						}
-					}
-				});
-			});
+  //Use my location button requests user's current place
+  window.onload = function(){
 
-			var streetViewService = new google.maps.StreetViewService();
-			navigator.geolocation.getCurrentPosition(function (position) {
-				var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-				streetViewService.getPanorama({
-					location: coords,
-					radius: 1500,
-					preference: google.maps.StreetViewPreference.NEAREST,
-				}, function (data, status) {
-					if (status === google.maps.StreetViewStatus.OK) {
-						currentPanoData = data;
-						map.setCenter(data.location.latLng);
-						map.setZoom(18);
-						map.setOptions({ streetViewControl: true });
-						elevation = position.coords.altitude || 0;
-						streetviews[0].setPano(data.location.pano);
-						// streetviews[1].setPano(data.location.pano);
-						// Position the eye as a child of the pano entity
-					}
-					else if (status === google.maps.StreetViewStatus.ZERO_RESULTS) {
-						// unable to find nearby panorama (what should we do?)
-						alert('Unable to locate nearby streetview imagery.');
-					}
-					else {
-						alert('Error retrieving panorama from streetview service');
-					}
-				});
-			}, function (e) {
-				alert(e.message);
-			}, {
-				enableHighAccuracy: true
-			});
-		});
+				var el = document.getElementById( 'myLocationButton' );
+					el.addEventListener( 'click', function( event ) {
+						event.preventDefault();
+						navigator.geolocation.getCurrentPosition(geoSuccess);
+					}, false );
+				navigator.pointer = navigator.pointer || navigator.webkitPointer;
+					
+	} //onLoad
+
+
+	//If user clicks use my location button and clicks a place on the map, returns closest pano within raidus 50
+	function geoSuccess( position ) {
 		
-//end collins code
+		var currentLocation = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
+		map.panTo( currentLocation );
+    myLocation = currentLocation;
+    panorama = new google.maps.StreetViewPanorama(
+      document.getElementById('pano'), {
+          position: currentLocation,
+          pov: {
+          heading: 34,
+          pitch: 10
+          }
+    });
+    map.setStreetView(panorama);
+
+		// Look for a nearby Street View panorama when the map is clicked.
+    // getPanoramaByLocation will return the nearest pano when the
+    // given radius is 50 meters or less.
+    var sv = new google.maps.StreetViewService();
+    map.addListener('click', function(event) {
+      sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
+      myLocation = event.latLng;
+
+    });
+		     	
+	} //geoSuccess
+
+
+	//Updates streetview pano, if no location found nearby, logs it
+	function processSVData(data, status) {
+	        if (status === 'OK') {
+	          panorama.setPano(data.location.pano);
+	          panorama.setPov({
+	            heading: 270,
+	            pitch: 0
+	          });
+	          panorama.setVisible(true);
+
+	        } else {
+	          console.log('Street View data not found for this location.');
+	        }
+	}//processSVData
+
+
+	//Experimenting with Collin's GSVPano.js to print equirectangular
+  function loadPanorama( location ) {
+            
+          loader = new GSVPANO.PanoLoader( {
+              useWebGL: false,
+              zoom: 3
+          } );
+          	
+          loader.onPanoramaLoad = function() {
+                        
+            window.location.hash = location.lat() + ',' + location.lng();
+            
+            //this is the resulting equirectangular image!!
+            var source = this.canvas[ 0 ];   
+            document.getElementById("pano2").appendChild(source);     
+          };
+
+          loader.load(location);
+               
+   } //loadpanorama
+
+	

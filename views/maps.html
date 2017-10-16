@@ -3,16 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>Background Select</title>
-    
-	
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c&libraries=places&callback=initMap">
     </script>
-	
-	<script type="text/javascript" src="../public/js/maps.js"></script>
-	<link href="../public/css/maps.css" rel="stylesheet" type="text/css">
+
+	<link href="css/maps.css" rel="stylesheet" type="text/css">
+
   </head>
   <body>
-  
+
 	<h1> Use StreetView pegman to select a panorama <h1>
 
 	<div id ="submitDiv">
@@ -20,9 +19,15 @@
 			<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 			<div id="map"></div>
 			<div id="pano"></div>
+			<div id="pano2"></div>
 		</div>
 	</div>
-		<button type="button" id="submit"> Submit </button>
+		<button type="submit" id="myLocationButton">Use my location</button>
+		<button type="button" id="submit" onclick="loadPanorama(myLocation)"> Submit </button>
+
+	<script type="text/javascript" src="js/maps.js"></script>
+	<script type="text/javascript" src="js/GSVPano.js"></script>
+	<script type="text/javascript" src="js/three.colin.min.js"></script>
 
   </body>
 </html>
