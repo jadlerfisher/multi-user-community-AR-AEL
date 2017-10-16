@@ -1,5 +1,4 @@
 body{
-  background-color: #565861;
   font-family: 'Roboto', sans-serif;
 }
 .headerRow{
@@ -12,7 +11,7 @@ body{
   background-color: #FBC72C;
 }
 .mainRow2{
-  background-color: #F9DC84;
+  margin-bottom: 50px;
 }
 .mainCol{
   margin-bottom: 5vh;
@@ -20,6 +19,7 @@ body{
 .mainContent{
   padding-left:8%;
   padding-right:8%;
+  background: white;
 }
 .login-btn, .logout-btn, .register-btn {
   display: inline-block;
@@ -56,12 +56,13 @@ body{
 .img2 {
     width: 30%;
     float: left;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     margin-right: 5%;
 }
 .img3 {
     width: 30%;
     float: right;
+    margin-bottom: 50px;
     margin-left: 5%;
 }
 .img4 {
@@ -70,19 +71,14 @@ body{
     margin-bottom: 60px;
     margin-right: 5%;
 }
-.paragraph1{
-
-}
 h2{
   font-family: 'Roboto', sans-serif;
 }
-
-.paragraph2{
-  margin-top: 60px;
-
-}
-.paragraph3{
-
+.paragraph{
+  margin-top: 10px;
+  line-height: 1.8;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 26px;
 }
 
 .paragraph4{

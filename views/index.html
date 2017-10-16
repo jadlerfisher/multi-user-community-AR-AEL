@@ -2,8 +2,21 @@
 <head>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/home.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
   <style>
+    a:focus, a:hover {
+      text-decoration: underline;
+      color: white;
+    }
+    .font {
+      font-weight: 600;
+    }
+    .line {
+      width: 90%;
+      margin: 30px;
+      border: 1px solid #ebebeb;
+    }
     .text {
         font-family: "Montserrat";
         color: #fff;
@@ -12,16 +25,17 @@
       font-size: 58.5px;
     }
     .subheading {
-        font-size: 25px;
-        padding-top: 10px;
+      font-size: 25px;
+      padding-top: 10px;
     }
     .sectionTitle {
-        font-family: "Montserrat";
-        font-weight: bold;
-        font-size: 48px;
-        text-transform: uppercase;
-        padding: 40px;
-        font-color: #666666;
+      font-family: "Montserrat";
+      font-weight: bold;
+      font-size: 48px;
+      padding: 40px;
+      background-color: white;
+      margin: 0px;
+      padding-top: 56px;
     }
     .main {
       background-image: url(assets/images/gvu.jpg);
@@ -44,6 +58,7 @@
       left: 0;
       right: 0;
       content: "";
+      height: inherit;
     }
     .container {
       height: 100%;
@@ -196,6 +211,7 @@
     .home {
         border: solid white;
         padding: 9px;
+        text-decoration: none;
     }
 
 
@@ -233,10 +249,10 @@
     <nav id="main-nav" class="navbar navbar-default navbar-fixed-top navbar-element">
       <ul class="navb-pad">
         <li style="display: inline;">
-          <a href="" class="element home">HOME</a>
-          <a href="" class="element section-Tabs">Sect Descr. 1</a>
-          <a href="" class="element section-Tabs">Sect Descr. 2</a>
-          <a href="" class="element section-Tabs">Meet the Creators
+          <a href="" class="element home page-scroll ">HOME</a>
+          <a href="#section1" class="element section-Tabs page-scroll">Sect Descr. 1</a>
+          <a href="#section2" class="element section-Tabs page-scroll">Sect Descr. 2</a>
+          <a href="#section3" class="element section-Tabs page-scroll">Meet the Creators</a>
         </li>
         <ul class="nav">
           <% if (hasLoggedIn) { %>
@@ -264,58 +280,89 @@
     </header>
   </div>
 
-  <section class="courses" id="courses">
+  <section class="" id="section1">
     <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2 class="sectionTitle">Sect Descr. 1</h2>
+      <div class="col-lg-12">
+        <h2 class="sectionTitle text-center">Section Title 1</h2>
+        <div class="row mainRow2">
+          <div class="col-md-12 mainContent" background-color="#F9DC84">
+            <h2 class="paragraph"><small class="font">
+            <img alt="Bootstrap Image Preview" class="img2" src="assets/images/gvu.jpg"/>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a auctor enim. Vivamus eu leo odio. Aenean quis erat lacinia, condimentum mauris a, aliquam felis. Vivamus sed finibus lacus. Pellentesque vel luctus massa, a vestibulum nisi. Vivamus a dolor a mauris efficitur dapibus eu non urna. Vestibulum vulputate vitae nunc et eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a auctor enim. Vivamus eu leo odio. Aenean quis erat lacinia, condimentum mauris a, aliquam felis. Vivamus sed finibus lacus.
+              </small>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="line">
+  <section class="" id="section2">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="sectionTitle text-center">Section Title 2</h2>
+        <div class="row mainRow2">
+          <div class="col-md-12 mainContent" background-color="#F9DC84">
+            <h2 class="paragraph"><small class="font">
+            <img alt="Bootstrap Image Preview" class="img3" src="assets/images/gvu.jpg"/>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a auctor enim. Vivamus eu leo odio. Aenean quis erat lacinia, condimentum mauris a, aliquam felis. Vivamus sed finibus lacus. Pellentesque vel luctus massa, a vestibulum nisi. Vivamus a dolor a mauris efficitur dapibus eu non urna. Vestibulum vulputate vitae nunc et eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a auctor enim. Vivamus eu leo odio. Aenean quis erat lacinia, condimentum mauris a, aliquam felis. Vivamus sed finibus lacus.
+              </small>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="line">
+  <section class="" id="section3">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="sectionTitle text-center">Section Title 3</h2>
+        <div class="row mainRow2">
+          <div class="col-md-12 mainContent" background-color="#F9DC84">
+            <h2 class="paragraph"><small class="font">
+            <img alt="Bootstrap Image Preview" class="img2" src="assets/images/gvu.jpg"/>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a auctor enim. Vivamus eu leo odio. Aenean quis erat lacinia, condimentum mauris a, aliquam felis. Vivamus sed finibus lacus. Pellentesque vel luctus massa, a vestibulum nisi. Vivamus a dolor a mauris efficitur dapibus eu non urna. Vestibulum vulputate vitae nunc et eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a auctor enim. Vivamus eu leo odio. Aenean quis erat lacinia, condimentum mauris a, aliquam felis. Vivamus sed finibus lacus.
+              </small>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="line">
+  <section class="" id="section3">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="sectionTitle text-center">Meet the Creators</h2>
+        <div class="row mainRow2">
+          <div class="col-md-12 mainContent" background-color="#F9DC84">
+            <h2 class="paragraph"><small class="font">
+            <img alt="Bootstrap Image Preview" class="img2" src="assets/images/gvu.jpg"/>
+            <ul style="list-style: none;">
+              <li>Josh Fisher - <i>Ph.D. ???</i></li>
+              <li>John Ho - <i>3rd Year Computer Science Undergrad</i></li>
+              <li>Sean McNeil - <i>3rd Year Electrical Engineering Undergrad</i></li>
+              <li>Cassie Mullins - <i>3rd Year Computational Media Undergrad</i></li>
+              <li>Jessica Pan - <i>2nd Year Computer Science Undergrad</i></li>
+              <li>Joshua Wang - <i>3rd Year Computer Science Undergrad</i></li>
+              <li>Konrad Wang - <i>2nd Year Computer Science Undergrad</i></li>
+              <li>Mark Woodson - <i>3rd Year Computer Engineering Undergrad</i></li>
+            </ul>
+              </small>
+            </h2>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
 
 
-  <div class="row subMainRow mainRow2">
-    <div class="col-md-12 mainContent" background-color="#F9DC84">
-      <h2 class="paragraph2"> <small>
-      <img alt="Bootstrap Image Preview" class="img2" src="assets/images/gvu.jpg"/>
-        Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App.
-        </small>
-      </h2>
-    </div>
-  </div>
-  <div class="row subMainRow mainRow">
-    <div class="col-md-12 mainContent">
-      <h2 class="paragraph3"> <small>
-      <img alt="Bootstrap Image Preview" class="img3" src="assets/images/gvu.jpg"/>
-        Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App. Text about the App.
-        </small>
-      </h2>
-    </div>
-  </div>
-  <div class="row subMainRow mainRow2">
-    <div class="col-md-12 mainContent">
-      <h2 class="paragraph4"> <small>
-        <img alt="Bootstrap Image Preview" class="img4" src="assets/images/gvu.jpg"/>
-        Created By:
-        <ul>
-          <li>Josh Fisher - <i>Ph.D. ?????</i></li>
-          <li>John Ho - <i>3rd Year Computer Science Undergrad</i></li>
-          <li>Sean McNeil - <i>3rd Year Electrical Engineering Undergrad</i></li>
-          <li>Cassie Mullins - <i>3rd Year Computational Media Undergrad</i></li>
-          <li>Jessica Pan - <i>2nd Year Computer Science Undergrad</i></li>
-          <li>Joshua Wang - <i>3rd Year Computer Science Undergrad</i></li>
-          <li>Konrad Wang - <i>2nd Year Computer Science Undergrad</i></li>
-          <li>Mark Woodson - <i>3rd Year Computer Engineering Undergrad</i></li>
-        </ul>
-      </small>
-      </h2>
-    </div>
-  </div>
   <script src="js/home.js"></script>
   <script src="library/jquery.slim.min.js"></script>
   <script src="library/tether.min.js"></script>
   <script src="library/bootstrap.min.js"></script>
-
   <% if (hasLoggedIn) { %>
     <script type="text/javascript">
       document.getElementsByClassName('logout-btn')[0].addEventListener('click', function(ev) {
@@ -331,6 +378,5 @@
       });
     </script>
   <% } %>
-
 </body>
 </html>
