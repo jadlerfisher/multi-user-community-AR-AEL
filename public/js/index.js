@@ -330,6 +330,8 @@ function createNewModel(text) {
 function removeItem(i) {
   var scene = document.querySelector("a-scene");
   scene.removeChild(document.getElementById(i));
+  var index = items.indexOf(i); 
+  items.splice(index, 1);
   removeButtons();
   createSummonButton();
   createRemoveButton();
