@@ -83,13 +83,13 @@
       <a-assets>
         <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
         <img id="sky" src="assets/images/sky.png">
-          <!--EquiRect background load
+
           <script>
-            var dataImage = localStorage.getItem('imgData');
-            equiRect = document.getElementById('sky');
-            equiRect.src = "data:image/png;base64," + dataImage;
+            var dataImage = localStorage.getItem('imageData');
+            var background = document.getElementById('sky');
+            background.src = dataImage;
           </script>
-        -->
+
         <img id="buzzpin" src="assets/images/buzz-pin.png">
 
         <a-asset-item id="pokemon-mtl"
