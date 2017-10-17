@@ -164,49 +164,30 @@
 
 	//Experimenting with Collin's GSVPano.js to print equirectangular
   function loadPanorama( location ) {
-            
           loader = new GSVPANO.PanoLoader( {
               useWebGL: false,
               zoom: 3
           } );
-          	
-          loader.onPanoramaLoad = function() {
-                        
+            
+          loader.onPanoramaLoad = function() {                        
             window.location.hash = location.lat() + ',' + location.lng();
             
             //this is the resulting equirectangular image!!
             var source = this.canvas[ 0 ];
-            convert(source); 
+            console.log(this.canvas[0]);
+            saveBase64Local(source); 
 
             window.location.href = '/ar-view';
-
           };
 
           loader.load(location);
                
    } //loadpanorama
 
- function convert(canvas){
-
+ function saveBase64Local(canvas){
     var img = new Image();
     img.src = canvas.toDataURL("image/png");
     document.getElementById('equiRect').src = img.src;
-    
-    userimage = document.getElementById('equiRect');
-    imageData = getBase64Image(userimage);
-    localStorage.setItem("imageData", imageData);
-
-}
-
-function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    var dataURL = canvas.toDataURL("image/png");
-
-   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    base64 = document.getElementById('equiRect').src;
+    localStorage.setItem("imageData", base64);
 }

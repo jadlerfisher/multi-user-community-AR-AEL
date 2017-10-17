@@ -8,7 +8,7 @@ var items = []; //List of all the ids of objects in the scene
 
 //Removes the VR button
 function init() {
-    document.querySelector("a-scene").removeChild(document.getElementsByClassName("a-enter-vr")[0]);
+    //document.querySelector("ar-scene").removeChild(document.getElementsByClassName("a-enter-vr")[0]);
     buttonExists = false;
 }
 

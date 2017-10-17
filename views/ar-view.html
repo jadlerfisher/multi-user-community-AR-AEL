@@ -19,6 +19,7 @@
   <script src="library/aframe-look-at-component.js"></script>
 
 
+
   <link rel="stylesheet" href="css/arview.css">
   <meta charset="UTF-8">
   <title>The Table</title>
@@ -84,13 +85,15 @@
         <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
         <img id="sky" src="assets/images/sky.png">
 
-        <!--Update background from map selection
+        <!--Update background from map selection-->
           <script>
+            debugger
             var dataImage = localStorage.getItem('imageData');
+
             var background = document.getElementById('sky');
             background.src = dataImage;
           </script>
-        -->
+        
         
         <img id="buzzpin" src="assets/images/buzz-pin.png">
 
