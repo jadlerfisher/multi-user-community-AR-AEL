@@ -27,6 +27,7 @@ function displayModel(i) {
   model.setAttribute("rotation", "0 0 0");
   model.setAttribute("scale", "1 1 1");
   model.setAttribute("material", "color: " + userColor);
+  model.setAttribute("dynamic-body");
   scene.appendChild(model);
 }
 
@@ -54,6 +55,7 @@ function display(i) {
     item.setAttribute('VertexB', "1 1 -6");
     item.setAttribute('VertexC', "-1 2 -5.5")
     item.setAttribute('color', userColor);
+    item.setAttribute('dynanmic-body');
     scene.appendChild(item);
 }
 
