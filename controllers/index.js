@@ -71,6 +71,8 @@ router.get('/maps', function(req, res) {
   }
 });
 
+
+
 router.get('/ar-view', function(req, res) {
   if (authController.hasLoggedIn()) {
     res.render('ar-view');

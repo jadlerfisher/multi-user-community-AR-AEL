@@ -175,12 +175,38 @@
             window.location.hash = location.lat() + ',' + location.lng();
             
             //this is the resulting equirectangular image!!
-            var source = this.canvas[ 0 ];   
-            document.getElementById("pano2").appendChild(source);     
+            var source = this.canvas[ 0 ];
+            convert(source); 
+
+            window.location.href = '/ar-view';
+
           };
 
           loader.load(location);
                
    } //loadpanorama
 
-	
+ function convert(canvas){
+
+    var img = new Image();
+    img.src = canvas.toDataURL("image/png");
+    document.getElementById('equiRect').src = img.src;
+    
+    userimage = document.getElementById('equiRect');
+    imageData = getBase64Image(userimage);
+    localStorage.setItem("imageData", imageData);
+
+}
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/png");
+
+   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
