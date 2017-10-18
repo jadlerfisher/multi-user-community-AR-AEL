@@ -12,6 +12,9 @@
   <script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
   <script src="easyrtc/easyrtc.js"></script>
 
+  <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
+
   <!-- Argon -->
   <!-- <script src="library/argon/argon.js"></script>
   <script src="library/argon/argon-aframe.js"></script>
@@ -26,6 +29,22 @@
   <title>The Table</title>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <script type="text/javascript">
+    // Define custom schema for syncing avatar color, set by random-color
+    NAF.schemas.add({
+      template: '#avatar-template',
+      components: [
+        'position',
+        'rotation',
+        {
+          selector: '.head',
+          component: 'material',
+          property: 'color'
+        }
+      ]
+    });
+  </script>
 </head>
   <body onload="init()">
     <!-- <script>
@@ -103,8 +122,8 @@
         <script id="avatar-template" type="text/html">
           <a-entity class="avatar">
             <a-sphere class="head"
-              color="#5985ff"
               scale="0.45 0.5 0.4"
+              random-color
             ></a-sphere>
             <a-entity class="face"
               position="0 0.05 0"
