@@ -197,7 +197,7 @@
  function fetchBase64(canvas){
     var img = new Image();
     img.src = canvas.toDataURL("image/png");
-    document.getElementById('equiRect').src = img.src;
-    base64 = document.getElementById('equiRect').src;
+    //document.getElementById('equiRect').src = img.src;
+    base64 = img.src;
     return base64;
 }
