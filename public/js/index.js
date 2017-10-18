@@ -5,7 +5,7 @@ var itemNum = 0; //The id of the most recently created object
 var models = ["obj: #pokemon-obj", "obj: #cup-obj"]; //The various object models
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
-var userColor = rgb;
+var userColor;
 
 //Removes the VR button
 function init() {
@@ -334,7 +334,7 @@ function createNewModel(text) {
 function removeItem(i) {
   var scene = document.querySelector("a-scene");
   scene.removeChild(document.getElementById(i));
-  var index = items.indexOf(i); 
+  var index = items.indexOf(i);
   items.splice(index, 1);
   removeButtons();
   createSummonButton();
