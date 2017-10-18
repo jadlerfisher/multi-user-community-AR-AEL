@@ -180,7 +180,18 @@
     <script src="js/createButtons.js"></script>
     <script src="library/jscolor.min.js"></script>
     <script type="text/javascript">
+      function randomNumString() {
+        var max = 3;
+        var min = 0;
+        return (Math.random() * (max - min) + min).toString();
+      }
+
       document.getElementById('sky').src = "<%= base64 %>";
+      window.onload = (function() {
+        var randomPosition = randomNumString() + ' 0 ' + randomNumString();
+        console.log(randomPosition);
+        document.getElementById('player').setAttribute('position', randomPosition);
+      })();
     </script>
 
   </body>
