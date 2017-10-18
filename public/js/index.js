@@ -5,9 +5,11 @@ var itemNum = 0; //The id of the most recently created object
 var models = ["obj: #pokemon-obj", "obj: #cup-obj"]; //The various object models
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
+var userColor = rgb;
 
 //Removes the VR button
 function init() {
+    userColor = randomColor();
     //document.querySelector("ar-scene").removeChild(document.getElementsByClassName("a-enter-vr")[0]);
     buttonExists = false;
 }
@@ -24,7 +26,8 @@ function displayModel(i) {
   model.setAttribute('position', '0 1.25 -5');
   model.setAttribute("rotation", "0 0 0");
   model.setAttribute("scale", "1 1 1");
-  model.setAttribute("material", "color: #0000FF");
+  model.setAttribute("material", "color: " + userColor);
+  model.setAttribute("dynamic-body");
   scene.appendChild(model);
 }
 
@@ -51,7 +54,8 @@ function display(i) {
     item.setAttribute('VertexA', "0 0 -5");
     item.setAttribute('VertexB', "1 1 -6");
     item.setAttribute('VertexC', "-1 2 -5.5")
-    item.setAttribute('color', "#0000FF");
+    item.setAttribute('color', userColor);
+    item.setAttribute('dynanmic-body');
     scene.appendChild(item);
 }
 
@@ -330,7 +334,17 @@ function createNewModel(text) {
 function removeItem(i) {
   var scene = document.querySelector("a-scene");
   scene.removeChild(document.getElementById(i));
+  var index = items.indexOf(i); 
+  items.splice(index, 1);
   removeButtons();
   createSummonButton();
   createRemoveButton();
+}
+//Change color for each user
+function randomColor() {
+ var r = Math.floor(Math.random() * 256);
+ var g = Math.floor(Math.random() * 256);
+ var b = Math.floor(Math.random() * 256);
+ var newCol = "rgb(" + r + ", " + g + ", " + b + ")";
+ return newCol;
 }
