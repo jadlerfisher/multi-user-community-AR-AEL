@@ -1,3 +1,6 @@
+.a-enter-vr-button {
+  display: none;
+}
 button {
   background: #F9DC84;
   border: solid #5B778A 5px;
