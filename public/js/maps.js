@@ -1,4 +1,4 @@
-	//Google Map variables 
+	//Google Map variables
   var map;
   var panorama;
   var myLocation;
@@ -38,7 +38,7 @@
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
-	
+
 		    var markers = [];
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
@@ -100,9 +100,9 @@
          myLocation = panorama.getPosition();
          //console.log(panorama.getPosition());
         });
-		
+
      } //initMap
-	
+
 
   //Use my location button requests user's current place
   window.onload = function(){
@@ -113,13 +113,13 @@
 						navigator.geolocation.getCurrentPosition(geoSuccess);
 					}, false );
 				navigator.pointer = navigator.pointer || navigator.webkitPointer;
-					
+
 	} //onLoad
 
 
 	//If user clicks use my location button and clicks a place on the map, returns closest pano within raidus 50
 	function geoSuccess( position ) {
-		
+
 		var currentLocation = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
 		map.panTo( currentLocation );
     myLocation = currentLocation;
@@ -142,7 +142,7 @@
       myLocation = event.latLng;
 
     });
-		     	
+
 	} //geoSuccess
 
 
@@ -168,26 +168,36 @@
               useWebGL: false,
               zoom: 3
           } );
-            
-          loader.onPanoramaLoad = function() {                        
-            window.location.hash = location.lat() + ',' + location.lng();
-            
-            //this is the resulting equirectangular image!!
-            var source = this.canvas[ 0 ];
-            console.log(this.canvas[0]);
-            saveBase64Local(source); 
 
-            window.location.href = '/ar-view';
+          loader.onPanoramaLoad = function() {
+            window.location.hash = location.lat() + ',' + location.lng();
+
+            //this is the resulting equirectangular image!!
+            var source = this.canvas[0];
+
+            // Save base64 in server-side
+            $.ajax({
+              url: '/save-base64',
+              method: 'POST',
+              data: {
+                base64: fetchBase64(source)
+              },
+              dataType: 'json',
+              success: function(resp) {
+                window.location.href = '/ar-view';
+              }
+            })
+
           };
 
           loader.load(location);
-               
+
    } //loadpanorama
 
- function saveBase64Local(canvas){
+ function fetchBase64(canvas){
     var img = new Image();
     img.src = canvas.toDataURL("image/png");
     document.getElementById('equiRect').src = img.src;
     base64 = document.getElementById('equiRect').src;
-    localStorage.setItem("imageData", base64);
+    return base64;
 }

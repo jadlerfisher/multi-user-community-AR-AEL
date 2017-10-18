@@ -71,11 +71,18 @@ router.get('/maps', function(req, res) {
   }
 });
 
+router.post('/save-base64', function(req, res) {
+  // Store base64 in session
+  req.session.base64 = req.body.base64;
+  return res.status(200).send({message: 'Successfully stored base64'});
+})
 
 
 router.get('/ar-view', function(req, res) {
   if (authController.hasLoggedIn()) {
-    res.render('ar-view');
+    res.render('ar-view', {
+      base64: req.session.base64
+    });
   } else {
     res.render('login');
   }
