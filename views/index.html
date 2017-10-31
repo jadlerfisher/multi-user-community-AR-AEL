@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="css/home.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Karla:700" rel="stylesheet">
   <style>
     .texts {
       font-size: 88%;
@@ -253,26 +254,16 @@
     .element {
       color: white;
       margin: 15px 11px;
-<<<<<<< HEAD
-      font-family: "Montserrat";
-<<<<<<< HEAD
-      font-size: 19px;
-=======
-<<<<<<< HEAD
-      font-size: 19px;
-=======
-      font-size: 18px;
->>>>>>> 5437822e8b015f671c1e00ccc1934afbcf00aa4d
-=======
-      font-family: "Montserrat";
-      font-size: 18px;
->>>>>>> 052e93cd17b83d5bc774ea707fc18a9514e903fd
->>>>>>> d0264e1cb92f9a2c3614b7191ff57a9ec3ca74e8
+      font-family: 'Karla', sans-serif;
+      font-size: 17px;
       width: auto;
       text-transform: uppercase;
     }
     .section-Tabs {
-        font-size: 15px;
+      font-size: 16px;
+      margin: 15px 11px;
+      font-family: 'Karla', sans-serif;
+      width: auto;
     }
 
   </style>
@@ -291,14 +282,14 @@
         <ul class="nav">
           <% if (hasLoggedIn) { %>
             <li>
-              <a href="/logout" class="element" data-modal-type="signup">LOGOUT</a>
+              <a href="/" class="element" id="logout-btn">LOGOUT</a>
             </li>
           <% } else { %>
             <li>
-              <a href="/register" class="element" data-modal-type="signup">SIGN UP</a>
+              <a href="/register" class="element">SIGN UP</a>
             </li>
             <li>
-              <a href="/login" class="element" data-modal-type="login">LOGIN</a>
+              <a href="/login" class="element">LOGIN</a>
             </li>
           <% } %>
         </ul>
@@ -402,7 +393,6 @@
             <img alt="Bootstrap Image Preview" class="ivan-allen" src="assets/images/IvanAllen.jpg"/>
             <img alt="Bootstrap Image Preview" class="aegt" src="assets/images/aegt.jpg"/>
             <ul style="list-style: none;">
-
             </ul>
               </small>
             </h2>
@@ -411,29 +401,26 @@
       </div>
     </div>
   </section>
-
-
-
-
   <script src="js/home.js"></script>
   <script src="library/jquery.slim.min.js"></script>
   <script src="library/tether.min.js"></script>
   <script src="library/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <% if (hasLoggedIn) { %>
     <script type="text/javascript">
-      document.getElementsByClassName('logout-btn')[0].addEventListener('click', function(ev) {
-        ev.preventDefault();
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/logout', true);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
+      $('#logout-btn').click(function() {
+        $.ajax({
+          type: 'POST',
+          url: '/logout',
+          success: function(resp) {
             window.location.replace(window.location.origin + '/');
+          },
+          error: function(resp) {
+            // handle exception if a logout request throws an error
           }
-        }
-        xhr.send();
+        });
       });
     </script>
   <% } %>
 </body>
-
 </html>

@@ -3,14 +3,36 @@
   <head>
     <meta charset="utf-8">
     <title>Background Select</title>
-
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c&libraries=places&callback=initMap">
-    </script>
-
-	<link href="css/maps.css" rel="stylesheet" type="text/css">
-
+    <link href="css/maps.css" rel="stylesheet" type="text/css">
   </head>
   <body>
+  <div class="main">
+    <nav id="main-nav" class="navbar navbar-default navbar-fixed-top navbar-element">
+      <ul class="navb-pad">
+        <li style="display: inline;">
+          <a href="" class="element home page-scroll ">HOME</a>
+          <a href="#section1" class="element section-Tabs page-scroll">The Initiative</a>
+          <a href="#section2" class="element section-Tabs page-scroll">Multi-user Augmented Reality</a>
+          <a href="#section3" class="element section-Tabs page-scroll">Future Work</a>
+          <a href="#section4" class="element section-Tabs page-scroll">Meet the Creators</a>
+        </li>
+        <ul class="nav">
+          <% if (hasLoggedIn) { %>
+            <li>
+              <a href="/" class="element" id="logout-btn">LOGOUT</a>
+            </li>
+          <% } else { %>
+            <li>
+              <a href="/register" class="element">SIGN UP</a>
+            </li>
+            <li>
+              <a href="/login" class="element">LOGIN</a>
+            </li>
+          <% } %>
+        </ul>
+      </ul>
+    </nav>
+  </div>
 
 	<h1> Use StreetView pegman to select a panorama <h1>
 
@@ -19,9 +41,7 @@
 			<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 			<div id="map"></div>
 			<div id="pano"></div>
-			<img src="" id="equiRect"></img>
-
-
+			<!--<img src="" id="equiRect"></img>-->
 		</div>
 	</div>
 		<button type="submit" id="myLocationButton">Use my location</button>
@@ -29,7 +49,25 @@
 
 	<script type="text/javascript" src="js/maps.js"></script>
 	<script type="text/javascript" src="js/GSVPano.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADipq2TSw57kMS8I6tnnNadLWz2mjvN5c&libraries=places&callback=initMap">
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+  <% if (hasLoggedIn) { %>
+    <script type="text/javascript">
+      $('#logout-btn').click(function() {
+        $.ajax({
+          type: 'POST',
+          url: '/logout',
+          success: function(resp) {
+            window.location.replace(window.location.origin + '/');
+          },
+          error: function(resp) {
+            // handle exception if a logout request throws an error
+          }
+        });
+      });
+    </script>
+  <% } %>
   </body>
 </html>
