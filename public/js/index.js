@@ -348,3 +348,40 @@ function randomColor() {
  var newCol = "rgb(" + r + ", " + g + ", " + b + ")";
  return newCol;
 }
+
+function removeItems(i) {
+  var scene = document.querySelector("a-scene");
+  scene.removeChild(document.getElementById(i));
+  var index = items.indexOf(i);
+  items.splice(index, 1);
+ }
+
+function removeAll() {
+  var scene = document.querySelector("a-scene");
+  console.log('length is', items.length);
+
+
+  var numOfItems = items.length;
+
+  // for (var i = 0; i < items.length; i++) {
+    for (var i = 0; i < numOfItems; i++) {
+    console.log('removed item', items[i]);
+    console.log('removed number', i);
+    // removeItems(items[i]);
+    removeItems(i);
+  }
+  items = [];
+  itemNum = 0; // reset item numbering
+}
+
+function gravityAll() {
+  var scene = document.querySelector("a-scene");
+  for (var i = 0; i < items.length; i++) {
+    var item = document.getElementById(items[i])
+    item.setAttribute("dynamic-body", "mass: 5");
+    console.log('gravity number', i);
+  }
+
+  setTimeout(removeAll, 5000);
+
+}
