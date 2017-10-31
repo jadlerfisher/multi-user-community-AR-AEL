@@ -234,10 +234,6 @@
         padding: 9px;
         text-decoration: none;
     }
-
-
-
-
     .nav {
       list-style: none;
       float: right !important;
@@ -281,6 +277,9 @@
         </li>
         <ul class="nav">
           <% if (hasLoggedIn) { %>
+            <li>
+              <a href="/maps" class="element">STREETVIEW</a>
+            </li>
             <li>
               <a href="/" class="element" id="logout-btn">LOGOUT</a>
             </li>

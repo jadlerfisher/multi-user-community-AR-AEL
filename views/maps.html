@@ -1,20 +1,266 @@
 <!DOCTYPE html>
-<html>
+<html class="backgrd">
   <head>
     <meta charset="utf-8">
     <title>Background Select</title>
     <link href="css/maps.css" rel="stylesheet" type="text/css">
+    <style>
+      .backgrd {
+        background: #f8f8f8;
+      }
+      .body-pad {
+        margin: 0px;
+      }
+      .texts {
+        font-size: 88%;
+      }
+      .ivan-allen {
+        height: 50px;
+        margin-right: 10px;
+      }
+      .vip-logo {
+        height: 55px;
+        margin-right: 14px;
+        margin-left: -17px;
+      }
+      .aegt {
+        height: 75px;
+        margin-right: 10px;
+      }
+      .coc {
+        height: 50px;
+        margin-right: 10px;
+      }
+      a:focus, a:hover {
+        text-decoration: underline;
+        color: white;
+      }
+      .font {
+        font-weight: 600;
+      }
+      .line {
+        width: 90%;
+        margin: 30px;
+        border: 1px solid #ebebeb;
+      }
+      .text {
+          font-family: "Montserrat";
+          color: #fff;
+      }
+      .heading {
+        font-size: 58.5px;
+      }
+      .subheading {
+        font-size: 25px;
+        padding-top: 10px;
+      }
+      .sectionTitle {
+        font-family: "Montserrat";
+        font-weight: bold;
+        font-size: 48px;
+        padding: 40px;
+        background-color: white;
+        margin: 0px;
+        padding-top: 56px;
+      }
+      .container {
+        height: 100%;
+      }
+
+
+
+
+      #main-nav {
+        //position: absolute;
+        margin-bottom: 0;
+        border-radius: 0;
+        width: 100%;
+
+        ul.navbar-right {
+          padding-right: 15px;
+        }
+      }
+
+      #login-signup-modal {
+        padding: 0;
+
+        button.close {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: 30px;
+          z-index: 1;
+        }
+
+        .modal-dialog {
+          top: 80px;
+        }
+
+        .modal-content {
+          margin: auto;
+          max-width: 500px;
+        }
+
+        .signup-login-wrapper {
+          padding: 20px 20px 10px;
+          text-align: center;
+          @include MEDIA-XS {
+            padding-top: 40px;
+          }
+
+          .other-option {
+            padding-top: 20px;
+            overflow: hidden;
+            span {
+              float: left;
+            }
+            a {
+              float: right;
+              color: #f07654;
+              text-decoration: none;
+              &:hover { color: #f38654; }
+            }
+          }
+
+          .sn-btn {
+            a {
+              padding: 12px 16px;
+              background-color: #3B5998;
+              color: #fff;
+              width: 100%;
+              font-size: 16px;
+              &:hover { background-color: #146eb4; }
+
+              i.fa {
+                padding-right: 12px;
+                font-size: 22px;
+              }
+            }
+          }
+
+          .text-line {
+            position: relative;
+            margin: 12px;
+            text-align: center;
+
+            &:before {
+              content: "";
+              display: block;
+              width: 100%;
+              position: absolute;
+              top: 50%;
+              border-bottom: 1px solid #ddd;
+            }
+            span.or {
+              position: relative;
+              padding: 0 10px;
+              background: #fff;
+            }
+          }
+
+          .error {
+            span {
+              color: #ff4c4c;
+              font-size: 12px;
+            }
+            input {
+              border-color: #ff4c4c;
+            }
+          }
+
+          .submit {
+            text-align: left;
+
+            p {
+              margin: 0;
+              padding-top: 6px;
+              font-size: 11px;
+            }
+
+            input[type=submit] {
+              border-radius: 3px;
+              background-color: #f07654;
+              width: 100%;
+              color: #fff;
+              &:hover { background-color: #f38654; }
+            }
+          }
+
+          label.checkbox {
+            text-align: right;
+            span {
+              padding-right: 20px;
+              font-weight: 400;
+            }
+            input[type=checkbox] {
+              top: 3.5px;
+              right: 0;
+              margin: 0;
+            }
+          }
+        }
+      }
+
+      .navb-left {
+        margin-left: 476px;
+      }
+
+      .navb-position {
+        margin-top: 3px;
+      }
+      .navb-pad {
+        background: #335170;
+        padding: 24px;
+        margin: 0px
+      }
+      .home {
+        border: solid white;
+        padding: 9px;
+        text-decoration: none;
+      }
+
+
+
+
+      .nav {
+        list-style: none;
+        float: right !important;
+        margin-right: 30px;
+        margin-top: 3px;
+        padding-right: 15px;
+      }
+      .navbar-element {
+        font-weight: 700;
+        border: none;
+        width: auto;
+      }
+      .element {
+        color: white;
+        margin: 15px 11px;
+        font-family: 'Karla', sans-serif;
+        font-size: 17px;
+        width: auto;
+        text-transform: uppercase;
+      }
+      .section-Tabs {
+        font-size: 16px;
+        margin: 15px 11px;
+        font-family: 'Karla', sans-serif;
+        width: auto;
+      }
+
+    </style>
   </head>
-  <body>
+  <body class="body-pad">
   <div class="main">
     <nav id="main-nav" class="navbar navbar-default navbar-fixed-top navbar-element">
       <ul class="navb-pad">
         <li style="display: inline;">
-          <a href="" class="element home page-scroll ">HOME</a>
-          <a href="#section1" class="element section-Tabs page-scroll">The Initiative</a>
-          <a href="#section2" class="element section-Tabs page-scroll">Multi-user Augmented Reality</a>
-          <a href="#section3" class="element section-Tabs page-scroll">Future Work</a>
-          <a href="#section4" class="element section-Tabs page-scroll">Meet the Creators</a>
+          <a href="/" class="element home page-scroll ">HOME</a>
+          <a href="#/section1" class="element section-Tabs page-scroll">The Initiative</a>
+          <a href="/#section2" class="element section-Tabs page-scroll">Multi-user Augmented Reality</a>
+          <a href="/#section3" class="element section-Tabs page-scroll">Future Work</a>
+          <a href="/#section4" class="element section-Tabs page-scroll">Meet the Creators</a>
         </li>
         <ul class="nav">
           <% if (hasLoggedIn) { %>
