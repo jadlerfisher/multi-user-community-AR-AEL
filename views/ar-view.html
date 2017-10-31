@@ -6,7 +6,7 @@
 
   <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
   <!-- <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.1.0/dist/aframe-physics-system.min.js"></script> -->
-  <script src="https://cdn.rawgit.com/ngokevin/aframe-physics-components/master/dist/aframe-physics-components.min.js"></script>
+  <script src="js/aframe-physics-system.js"></script>
   <!-- Multiuser connection -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
   <script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
@@ -95,8 +95,9 @@
             <td><button onclick="removeButtonPress()" type="button" class="optionsButton">Remove</button></td>
           </tr>
        </table>
+      <button onclick="gravityOnButtonPress()" type = "button" class = "buttonGravity">Gravity</button>
     </center>
-    <a-scene physics-world="gravity: 0 -9.81 0" networked-scene="
+    <a-scene physics="debug: true" networked-scene="
       app: myApp;
       room: room1;
       debug: true;
