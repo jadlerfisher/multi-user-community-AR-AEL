@@ -1,5 +1,6 @@
 var express = require("express");           // web framework external module
 var bodyParser = require('body-parser');
+var session = require('express-session');
 // Load required modules
 var http    = require("http");              // http server core module
 // var serveStatic = require('serve-static');  // serve static files
@@ -7,13 +8,26 @@ var socketIo = require("socket.io");        // web socket external module
 var easyrtc = require("easyrtc");               // EasyRTC external module
 var app = express();
 
+app.use(session({
+  secret: '1197b6035161f39a89f0bc90e9d9c452d83d801d945a3e1ee23410223e2cf121219dbfe3891c344053f5bf24d973b7e5',
+  resave: false,
+  saveUninitialized: true,
+  // Cookie Options
+  duration: 24 * 60 * 60 * 1000,// 24 hours
+}));
+
 // Set process name
 process.title = "node-easyrtc";
 
 // to support URL-encoded bodies
 // bodyParser must go before the routes/controllers
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended: false,
+  limit: '50mb'
+}));
+
+app.use(bodyParser.json({
+  limit: '50mb'
 }));
 
 // Get port or default to 5000
