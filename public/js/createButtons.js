@@ -289,3 +289,31 @@ function addRemoveButtons() {
     var body = document.querySelector("center");
     body.appendChild(button);
 }
+
+
+function createGravity() {
+  var center = document.querySelector("center");
+  var button = document.createElement("button");
+  button.setAttribute("onclick", "gravityOffButtonPress()");
+  button.setAttribute("type", "button" );
+  button.setAttribute("class", "buttonGravity");
+  button.innerText = "Gravity";
+  center.appendChild(button);
+
+}
+
+function removeGravityButtons() {
+  document.querySelector("center").removeChild(document.getElementsByName("buttonGravity"));
+}
+
+function onGravity() {
+  var center = document.querySelector("center");
+  var button = document.createElement("button");
+  button.setAttribute("onclick", "gravityOnButtonPress()");
+  button.setAttribute("type", "button" );
+  button.setAttribute("class", "buttonGravity");
+  button.setAttribute("style", "background-color: red");
+  button.innerText = "Gravity";
+  center.appendChild(button);
+
+}
