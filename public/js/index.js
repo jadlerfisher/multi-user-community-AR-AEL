@@ -2,7 +2,7 @@ var buttonExists = true; //The VR button exists
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
 var itemNum = 0; //The id of the most recently created object
-var models = ["obj: #pokemon-obj", "obj: #cup-obj"]; //The various object models
+var modelTemplates = ["#pokemon-model", "#cup-model"]; //The various object models
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
 var userColor;
@@ -16,19 +16,35 @@ function init() {
 
 
 //Displays a Model
-function displayModel(i) {
-  var scene = document.querySelector("a-scene");
+function createModel(i) {
+  var id = "item-" + Math.random().toString(36).substring(2, 9);
   //creates model
-  var model = document.createElement("a-entity");
-  model.setAttribute("id", "item");
-  model.setAttribute("class", "model");
-  model.setAttribute("obj-model", models[i]);
-  model.setAttribute('position', '0 1.25 -5');
-  model.setAttribute("rotation", "0 0 0");
-  model.setAttribute("scale", "1 1 1");
-  model.setAttribute("material", "color: " + userColor);
-  model.setAttribute("dynamic-body");
-  scene.appendChild(model);
+  // var model = document.createElement("a-entity");
+  // Randomize Id for multiple object creation
+  // model.setAttribute("id", id);
+  // model.setAttribute("class", "model");
+  // model.setAttribute("obj-model", "obj: #pokemon-obj");
+  // model.setAttribute('position', '0 1.25 -5');
+  // model.setAttribute("rotation", "0 0 0");
+  // model.setAttribute("scale", "1 1 1");
+  // model.setAttribute("material", "color: " + '#ff0000');
+  // model.setAttribute("dynamic-body");
+
+  var entityData = {
+    networkId: id,
+    template: modelTemplates[i],
+    components: {
+      position: { x: 0, y: 1.25, z: -5 },
+      rotation: { x: 0, y: 0, z: 0 },
+      scale: { x: 1, y: 1, z: 1 },
+      material: {
+        color: '#ff0000'
+      }
+    },
+    owner: NAF.clientId
+  };
+
+  NAF.entities.createRemoteEntity(entityData);
 }
 
 /**
