@@ -179,3 +179,15 @@ function backButtonPress() {
     createSummonButton();
     createRemoveButton();
 }
+
+//Resets the gravity button upon press
+function gravityOffButtonPress() {
+  onGravity();
+}
+
+//Resets the gravity button upon press
+function gravityOnButtonPress() {
+  var scene = document.querySelector("a-scene");
+  createGravity();
+  gravityAll();
+}
