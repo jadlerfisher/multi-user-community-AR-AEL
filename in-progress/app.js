@@ -2,7 +2,18 @@
 var galleryList = [["gallery sphere shapes", "myFunct()", "sphere.png", "sphere"],
                 ["gallery cube shapes", "myFunct()", "cube.png", "cube"],
                 ["gallery torus shapes", "myFunct()", "torus.png", "torus"],
-                ["gallery pokeball gaming", "myFunct()", "pokeball.png", "pokeball"]];
+                ["gallery pokeball gaming", "myFunct()", "pokeball.png", "pokeball"],
+                ["gallery cat animals", "myFunct()", "cat.png", "pokeball"],
+                ["gallery dog animals", "myFunct()", "dog.png", "pokeball"],
+                ["gallery hamburger food", "myFunct()", "hamburger.png", "pokeball"],
+                ["gallery ice_cream food", "myFunct()", "ice cream.png", "pokeball"],
+                ["gallery lemon food", "myFunct()", "lemon.jpg", "pokeball"],
+                ["gallery space_invader gaming", "myFunct()", "space invader.png", "pokeball"],
+                ["gallery squirrel animals", "myFunct()", "squirrel.jpg", "pokeball"],
+                ["gallery whale animals", "myFunct()", "whale.png", "pokeball"],
+                ["gallery mario gaming", "myFunct()", "mario.png", "pokeball"]];
+
+var currentFilter = "gallery";
 
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
@@ -26,13 +37,14 @@ function searchButtonPress() {
 
 function search(searchTerm) {
     if (!(search === "")) {
-        var items = document.getElementsByClassName("gallery");
+        var items = document.getElementsByClassName(currentFilter);
         for (i = 0; i < items.length; i++) {
             var currentItem = items[i];
             var className = currentItem.getAttribute("class");
             var classList = className.split(' ');
-            for (j = 0; j< classList.length; j++) {
-                if (classList[j] === searchTerm) {
+            for (j = 1; j< classList.length; j++) {
+                var value = classList[j].indexOf(searchTerm);
+                if (value !== -1) {
                     console.log("MATCH");
                     currentItem.setAttribute("style","display: inline");
                     j = classList.length;
@@ -45,13 +57,18 @@ function search(searchTerm) {
 }
 
 function filter(category) {
+    var button = document.getElementsByClassName("dropbtn")[0];
+    button.innerText = category;
+    category = category.toLowerCase();
     if (category === "all") {
         var items = document.getElementsByClassName("gallery");
+        currentFilter = "gallery";
         for (i = 0; i < items.length; i++) {
             var currentItem = items[i];
             currentItem.setAttribute("style","display: inline");
         }
     } else {
+        currentFilter = category;
         var items = document.getElementsByClassName("gallery");
         for (i = 0; i < items.length; i++) {
             var currentItem = items[i];

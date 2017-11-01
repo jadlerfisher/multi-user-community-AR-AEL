@@ -188,3 +188,6 @@ div.gallery img {
     width: 100%;
     height: auto;
 }
+a {
+  cursor: pointer;
+}
