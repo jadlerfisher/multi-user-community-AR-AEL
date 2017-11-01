@@ -134,6 +134,7 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    margin-right: 5px;
 }
 
 .dropdown-content {
@@ -190,4 +191,37 @@ div.gallery img {
 }
 a {
   cursor: pointer;
+}
+
+.cancelButton {
+    background-color: #778899;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 12pt;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 50px;
+    min-width: 160px;
+    margin: 5px;
+    outline: none;
+}
+.uploadButton {
+    background-color: #778899;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 12pt;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 50px;
+    min-width: 160px;
+    margin:5px;
+    outline: none;
+}
+.cancelButton:hover{
+    background-color: #4f5b66;
+}
+.uploadButton:hover{
+    background-color: #4f5b66;
 }

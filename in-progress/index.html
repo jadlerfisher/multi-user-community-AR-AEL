@@ -11,9 +11,11 @@
   <title>The Table</title>
 
 </head>
-  <body onload="displayAllItems()">
+  <body>
+  <button id="addButton" onclick="addButtonPress()">Add</button>
    <!--  <table class="addItemBox"> -->
-   <center>
+<!--    <center>
+    <div class="boxAndButtons">
      <div class="objectAddBox">
        <center>
           <div class="searchbar">
@@ -27,19 +29,20 @@
                 <a onclick="filter('Food')">Food</a>
               </div>
             </div>
-              <div class="box">
-                <div class="container-4">
-                  <input onkeypress="checkKey(event)" type="search" class="search" id="search" placeholder="Search..." />
-                  <button onclick="searchButtonPress()" class="icon"><i class="fa fa-search"></i></button>
-                </div>
+            <div class="box">
+              <div class="container-4">
+                <input onkeypress="checkKey(event)" type="search" class="search" id="search" placeholder="Search..." />
+                <button onclick="searchButtonPress()" class="icon"><i class="fa fa-search"></i></button>
               </div>
             </div>
-            <div class="objects">
-
-            </div>
-          </center>
+          </div>
+          <div class="objects"></div>
+        </center>
+      </div>
+        <button class="uploadButton">Upload</button>
+        <button class="cancelButton">Cancel</button>
         </div>
-      </center>
+      </center> -->
     <script src="app.js"></script>
 
   </body>
