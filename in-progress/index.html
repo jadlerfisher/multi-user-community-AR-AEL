@@ -11,7 +11,7 @@
   <title>The Table</title>
 
 </head>
-  <body>
+  <body onload="displayAllItems()">
    <!--  <table class="addItemBox"> -->
    <center>
      <div class="objectAddBox">
@@ -20,39 +20,19 @@
             <div class="dropdown">
               <button class="dropbtn">All</button>
               <div id="myDropdown" class="dropdown-content">
-                <a href="#" onclick="myFunct()">All</a>
-                <a href="#" onclick="myFunct()">Shapes</a>
-                <a href="#" onclick="myFunct()">Gaming</a>
+                <a href="#" onclick="filter('all')">All</a>
+                <a href="#" onclick="filter('shapes')">Shapes</a>
+                <a href="#" onclick="filter('gaming')">Gaming</a>
               </div>
             </div>
               <div class="box">
                 <div class="container-4">
-                  <input type="search" class="search" id="search" placeholder="Search..." />
-                  <button class="icon"><i class="fa fa-search"></i></button>
+                  <input onkeypress="checkKey(event)" type="search" class="search" id="search" placeholder="Search..." />
+                  <button onclick="searchButtonPress()" class="icon"><i class="fa fa-search"></i></button>
                 </div>
               </div>
             </div>
             <div class="objects">
-                <div class="gallery" onclick="myFunct()">
-                  <a target="_blank">
-                    <img src="sphere.png" alt="sphere" width="280" height="280">
-                  </a>
-                </div>
-                <div class="gallery" onclick="myFunct()">
-                  <a target="_blank">
-                    <img src="cube.png" alt="cube" width="280" height="280">
-                  </a>
-                </div>
-                <div class="gallery" onclick="myFunct()">
-                  <a target="_blank">
-                    <img src="torus.png" alt="torus" width="280" height="280">
-                  </a>
-                </div>
-                <div class="gallery">
-                  <a target="_blank" onclick="myFunct()">
-                    <img src="pokeball.png" alt="pokeball" width="280" height="280">
-                  </a>
-                </div>
 
             </div>
           </center>
