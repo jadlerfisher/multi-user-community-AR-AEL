@@ -164,6 +164,14 @@
 
 	//Experimenting with Collin's GSVPano.js to print equirectangular
   function loadPanorama( location ) {
+
+          //loading spinner
+          var x = document.getElementById("loading");
+          if (x.style.display === "none") {
+              x.style.display = "inline";
+          } else {
+              x.style.display = "none";
+          }
           loader = new GSVPANO.PanoLoader( {
               useWebGL: false,
               zoom: 3
@@ -191,6 +199,8 @@
           };
 
           loader.load(location);
+
+
 
    } //loadpanorama
 
