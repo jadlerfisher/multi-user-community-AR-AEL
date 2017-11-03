@@ -33,7 +33,7 @@ function shapeButtonPress1() {
 function modelButtonPress(i) {
   removeButtons();
   createOptions();
-  displayModel(i);
+  createModel(i);
 }
 
 //2)Remove Edit, Undo, Delete, Finish

@@ -2,7 +2,7 @@ var buttonExists = true; //The VR button exists
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
 var itemNum = 0; //The id of the most recently created object
-var models = ["obj: #pokemon-obj", "obj: #cup-obj"]; //The various object models
+var modelTemplates = ["#pokemon-model", "#cup-model"]; //The various object models
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
 var userColor;
@@ -16,19 +16,51 @@ function init() {
 
 
 //Displays a Model
-function displayModel(i) {
-  var scene = document.querySelector("a-scene");
-  //creates model
-  var model = document.createElement("a-entity");
-  model.setAttribute("id", "item");
-  model.setAttribute("class", "model");
-  model.setAttribute("obj-model", models[i]);
-  model.setAttribute('position', '0 1.25 -5');
-  model.setAttribute("rotation", "0 0 0");
-  model.setAttribute("scale", "1 1 1");
-  model.setAttribute("material", "color: " + userColor);
-  model.setAttribute("dynamic-body");
-  scene.appendChild(model);
+function createModel(i) {
+  var pos = {
+    x: 0, y: 0, z: 0
+  }
+
+  // Create network entity
+  var networkId = NAF.entities.createEntityId();
+  NAF.log.write('Created network entity', networkId);
+  var entityData = {
+    networkId: networkId,
+    owner: NAF.clientId,
+    template: modelTemplates[i],
+    components: {
+      position: '0 0 0',
+      rotation: '0 0 0',
+      scale: '1 1 1',
+      material: "color: #fff"
+    }
+  };
+
+  // Create local entity
+  var entity = document.createElement('a-entity');
+  entity.setAttribute('id', 'naf-' + entityData.networkId);
+  if (NAF.options.useLerp) {
+    entity.setAttribute('lerp', '');
+  }
+
+  var template = entityData.template;
+  NAF.entities.setTemplate(entity, template);
+
+  var components = NAF.entities.getComponents(template);
+  NAF.entities.initPosition(entity, entityData.components);
+
+  entity.setAttribute('position', entityData.components.position);
+  entity.setAttribute('rotation', entityData.components.rotation);
+  entity.setAttribute('scale', entityData.components.scale);
+  entity.setAttribute('material', entityData.components.material);
+
+  NAF.entities.setNetworkData(entity, entityData, components);
+
+  entity.initNafData = entityData;
+
+  var scene = document.querySelector('a-scene');
+  scene.appendChild(entity);
+  NAF.entities.entities[entityData.networkId] = entity;
 }
 
 /**
