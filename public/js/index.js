@@ -17,7 +17,7 @@ function init() {
 
 //Displays a Model
 function createModel(i) {
-  var id = "item-" + Math.random().toString(36).substring(2, 9);
+  var id = Math.random().toString(36).substring(2, 9);
   //creates model
   // var model = document.createElement("a-entity");
   // Randomize Id for multiple object creation
@@ -29,22 +29,69 @@ function createModel(i) {
   // model.setAttribute("scale", "1 1 1");
   // model.setAttribute("material", "color: " + '#ff0000');
   // model.setAttribute("dynamic-body");
+  //
+  //
+  // var entityData = {
+  //   networkId: id,
+  //   template: modelTemplates[i],
+  //   components: {
+  //     position: { x: 0, y: 1.25, z: -5 },
+  //     rotation: '0 0 0',
+  //     scale: '1 1 1',
+  //     material: "color: #fff"
+  //   },
+  //   owner: NAF.clientId
+  // };
+  //
+  // console.log(entityData);
+  //
+  // // var entity = NAF.entities.createRemoteEntity(entityData);
+  // // NAF.entities.addEntityToSceneRoot(entity);
+  // NAF.entities.createNetworkEntity('#pokemon-model', pos, '0 0 0');
+  var pos = {
+    x: 0, y: 0, z: 0
+  }
 
+  // Create network entity
+  var networkId = NAF.entities.createEntityId();
+  NAF.log.write('Created network entity', networkId);
   var entityData = {
-    networkId: id,
+    networkId: networkId,
+    owner: NAF.clientId,
     template: modelTemplates[i],
     components: {
-      position: { x: 0, y: 1.25, z: -5 },
-      rotation: { x: 0, y: 0, z: 0 },
-      scale: { x: 1, y: 1, z: 1 },
-      material: {
-        color: '#ff0000'
-      }
-    },
-    owner: NAF.clientId
+      position: '0 0 0',
+      rotation: '0 0 0',
+      scale: '1 1 1',
+      material: "color: #fff"
+    }
   };
 
-  NAF.entities.createRemoteEntity(entityData);
+  // Create local entity
+  var entity = document.createElement('a-entity');
+  entity.setAttribute('id', 'naf-' + entityData.networkId);
+  if (NAF.options.useLerp) {
+    entity.setAttribute('lerp', '');
+  }
+
+  var template = entityData.template;
+  NAF.entities.setTemplate(entity, template);
+
+  var components = NAF.entities.getComponents(template);
+  NAF.entities.initPosition(entity, entityData.components);
+
+  entity.setAttribute('position', entityData.components.position);
+  entity.setAttribute('rotation', entityData.components.rotation);
+  entity.setAttribute('scale', entityData.components.scale);
+  entity.setAttribute('material', entityData.components.material);
+
+  NAF.entities.setNetworkData(entity, entityData, components);
+
+  entity.initNafData = entityData;
+
+  var scene = document.querySelector('a-scene');
+  scene.appendChild(entity);
+  NAF.entities.entities[entityData.networkId] = entity;
 }
 
 /**
