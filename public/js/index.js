@@ -6,6 +6,7 @@ var models = ["obj: #pokemon-obj", "obj: #cup-obj"]; //The various object models
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
 var userColor;
+var selectedItem; // current item that is selected
 
 //Removes the VR button
 function init() {
@@ -56,6 +57,21 @@ function display(i) {
     item.setAttribute('VertexC', "-1 2 -5.5")
     item.setAttribute('color', userColor);
     item.setAttribute('dynanmic-body');
+
+    item.addEventListener('mouseenter', function(evt){
+      this.setAttribute('material','opacity','0.85');
+      console.log('Mouse entered: ' + this.getAttribute('id'));
+      revealButtons(document.getElementsByClassName('optionButton'));
+      selectedItem = this;
+    });
+
+    item.addEventListener('mouseleave', function(evt){
+      this.setAttribute('material','opacity','1.0');
+      console.log('Mouse left: ' + this.getAttribute('id'));
+      hideButtons(document.getElementsByClassName('optionButton'));
+      selectedItem = [];
+    });
+
     scene.appendChild(item);
 }
 
@@ -348,3 +364,21 @@ function randomColor() {
  var newCol = "rgb(" + r + ", " + g + ", " + b + ")";
  return newCol;
 }
+
+function hideCursor(){
+  var camera = document.getElementById('player');
+  camera.removeChild(document.getElementById('cursor'));
+}
+
+function revealCursor(){
+  var camera = document.getElementById('player');
+  var cursor = document.createElement('a-entity');
+  cursor.setAttribute('cursor','true')
+  cursor.setAttribute('id', "cursor");
+  cursor.setAttribute('geometry','primitive: ring; radiusInner: 0.01; radiusOuter: 0.016');
+  cursor.setAttribute('material', "color: #EEE");
+  cursor.setAttribute('position', "0 0 -1");
+
+  camera.appendChild(cursor);
+}
+

@@ -169,8 +169,9 @@ function submitFilepathButtonPress() {
 
 //User has chosen to remove an object from the scene
 function removeButtonPress() {
-    removeButtons();
-    addRemoveButtons();
+    //removeButtons();
+    document.querySelector("a-scene").removeChild(selectedItem);
+    //addRemoveButtons();
 }
 
 //User has chosen to now not remove an object from the scene
@@ -179,3 +180,5 @@ function backButtonPress() {
     createSummonButton();
     createRemoveButton();
 }
+
+
