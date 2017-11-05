@@ -30,7 +30,22 @@ function displayModel(i) {
   model.setAttribute("material", "color: " + userColor);
   model.setAttribute("dynamic-body");
   scene.appendChild(model);
-}
+
+    item.addEventListener('mouseenter', function(evt){
+      this.setAttribute('material','opacity','0.85');
+      console.log('Mouse entered: ' + this.getAttribute('id'));
+      revealButtons(document.getElementsByClassName('optionButton'));
+      selectedItem = this;
+    });
+
+    item.addEventListener('mouseleave', function(evt){
+      this.setAttribute('material','opacity','1.0');
+      console.log('Mouse left: ' + this.getAttribute('id'));
+      hideButtons(document.getElementsByClassName('optionButton'));
+      selectedItem = [];
+    });
+
+  }
 
 /**
  * Displays the object on the screen
@@ -56,21 +71,9 @@ function display(i) {
     item.setAttribute('VertexB', "1 1 -6");
     item.setAttribute('VertexC', "-1 2 -5.5")
     item.setAttribute('color', userColor);
-    item.setAttribute('dynanmic-body');
+    item.setAttribute('dynamic-body');
 
-    item.addEventListener('mouseenter', function(evt){
-      this.setAttribute('material','opacity','0.85');
-      console.log('Mouse entered: ' + this.getAttribute('id'));
-      revealButtons(document.getElementsByClassName('optionButton'));
-      selectedItem = this;
-    });
 
-    item.addEventListener('mouseleave', function(evt){
-      this.setAttribute('material','opacity','1.0');
-      console.log('Mouse left: ' + this.getAttribute('id'));
-      hideButtons(document.getElementsByClassName('optionButton'));
-      selectedItem = [];
-    });
 
     scene.appendChild(item);
 }
