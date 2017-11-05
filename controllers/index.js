@@ -63,11 +63,18 @@ router.post('/register', function(req, res) {
   );
 });
 
+//Redirect to landing page when log out
 router.get('/maps', function(req, res) {
   if (authController.hasLoggedIn()) {
-    res.render('maps');
+    res.render('maps', {
+      hasLoggedIn: authController.hasLoggedIn(),
+      email: authController.getUser() ? authController.getUser().email : null,
+    });
   } else {
-    res.render('login');
+    res.render('index', {
+      hasLoggedIn: authController.hasLoggedIn(),
+      email: authController.getUser() ? authController.getUser().email : null,
+    });
   }
 });
 
@@ -76,7 +83,6 @@ router.post('/save-base64', function(req, res) {
   req.session.base64 = req.body.base64;
   return res.status(200).send({message: 'Successfully stored base64'});
 })
-
 
 router.get('/ar-view', function(req, res) {
   if (authController.hasLoggedIn()) {

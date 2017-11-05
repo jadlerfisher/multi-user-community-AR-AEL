@@ -30,7 +30,11 @@
   <meta charset="UTF-8">
   <title>The Table</title>
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+  <!-- Bootstrap -->
 
   <script type="text/javascript">
     // Define custom schema for syncing avatar color, set by random-color
@@ -91,12 +95,29 @@
     </div> -->
 
     <center>
-       <button onclick="summonButtonPress()" type="button" class="buttonSummon">+</button>
-       <table id="buttonTable">
-          <tr>
-            <td><button onclick="removeButtonPress()" type="button" class="optionButton hide-button">Remove</button></td>
-          </tr>
-       </table>
+      <table id="buttonTable" class="button-display">
+        <tr>
+          <td id="bTable" class="col-1">
+            <button id="addButton" onclick="addButtonPress();" class="buttonSummon mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+              <i class="material-icons">add</i>
+            </button>
+            <button id="modelButton" onclick="" data-state="initial" class="buttons modelButton buttonSummon mdl-button mdl-js-button mdl-button--fab mdl-button--colored"></button>
+            <button id="cubeButton" onclick="" data-state="initial" class="buttons modelButton buttonSummon mdl-button mdl-js-button mdl-button--fab mdl-button--colored"></button>
+            <!-- <button id="modelButton" onclick="" class="buttonSummon mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-image: url(assets/images/model-icon.png) !important;">
+              <i class="material-icons"></i>
+            </button> -->
+
+            <!-- <button onclick="addButtonPress()" class="buttonSummon mdl-button mdl-js-button mdl-button--fab mdl-button--colored add-button-align" style="background-image: url(assets/images/model-icon.png);">
+              <i class="material-icons"><img alt="Models" src="assets/images/model-icon.png"/></i>
+            </button> -->
+
+            <!-- <button onclick="addButtonPress()" class="buttonSummon mdl-button mdl-js-button mdl-button--fab mdl-button--colored add-button-align">
+              <i class="material-icons"><img alt="Models" src="assets/images/model-icon.png"/></i>
+            </button> -->
+            <!-- <td><button onclick="removeButtonPress()" type="button">Remove</button></td> -->
+          </td>
+        </tr>
+      </table>
     </center>
     <a-scene physics-world="gravity: 0 -9.81 0" networked-scene="
       app: myApp;
@@ -220,6 +241,5 @@
         document.getElementById('player').setAttribute('position', randomPosition);
       })();
     </script>
-
   </body>
   </html>

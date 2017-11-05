@@ -1,8 +1,13 @@
-//Removes the Summon Button
-function removeSummmon() {
+//Removes add Button
+function removeAdd() {
     hideCursor();
-    document.querySelector("center").removeChild(document.getElementsByClassName("buttonSummon")[0]);
+    document.querySelector("#bTable").removeChild(document.getElementsByClassName("buttonSummon")[0]);
 }
+
+// function removeAdd() {
+//     var nList = document.querySelector(".add-button-align");
+//     nList[0].parentNode.removeChild(nList[0]);
+// }
 
 //Removes All Buttons from Screen
 function removeButtons() {
@@ -22,7 +27,7 @@ function createSummonButton() {
     revealCursor();
     var center = document.querySelector("center");
     var button = document.createElement("button");
-    button.setAttribute("onclick", "summonButtonPress()");
+    button.setAttribute("onclick", "addButtonPress()");
     button.setAttribute("type", "button");
     button.setAttribute("class", "buttonSummon");
     button.innerText = "+";
@@ -80,9 +85,37 @@ function createButtonTable(buttonFuncts, buttonText) {
         }
         table.appendChild(row);
     }
+
     table.setAttribute("id", "buttonTable");
     body.appendChild(table);
 }
+
+//make model button visible, have functionality, move up
+function createModelButton(funct) {
+  var modelButton = document.querySelector("#modelButton");
+  modelButton.setAttribute("onclick", "addButtonPress()");
+  modelButton.setAttribute('data-state', 'final');
+}
+
+// function createModelButton(funct) {
+//   var table = document.querySelector("#bTable");
+//   var button = document.createElement("button");
+//   button.setAttribute("onclick", "addButtonPress()");
+//   button.setAttribute("style", "background-image: url(assets/images/model-icon.png) !important;");
+//   button.setAttribute('data-state', 'initial');
+//   button.setAttribute("class", "add-button-align buttonSummon mdl-button mdl-js-button mdl-button--fab mdl-button--colored modelButton");
+//   button.setAttribute('id', 'modelButton');
+//   table.appendChild(button);
+//   createModalInitialComplete = true;
+// }
+
+// function moveModelButton() {
+//   if (createModalInitialComplete) {
+//     document.querySelector("#modelButton").setAttribute('data-state', 'final');
+//   } else {
+//     setTimeout(moveModelButton(), 10000);
+//   }
+// }
 
 //Create Add Buttons, Buttons that ask whether you want a shape or model
 function createAddButtons() {
