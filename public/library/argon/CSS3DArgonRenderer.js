@@ -50,13 +50,10 @@ THREE.CSS3DArgonRenderer = function () {
 
 	var _cameras = [];
 
-	var _width = 0, _height = 0;	
-	var _viewWidth = [1, 1];
-	var _viewHeight = [1, 1];
-	var _viewX = [0, 0];
-	var _viewY = [0, 0];
-    var _visible = [false, false];
-	
+	var _width, _height;	
+	var _viewWidth = [];
+	var _viewHeight = [];
+
 	var tempMatrix = new THREE.Matrix4();
     var tempMatrix2 = new THREE.Matrix4();
 
@@ -70,8 +67,6 @@ THREE.CSS3DArgonRenderer = function () {
 	var domElement = document.createElement( 'div' );
 	this.domElement = domElement;
 	domElement.style.pointerEvents = 'none';
-	domElement.style.width = '0px';
-	domElement.style.height = '0px';
 
 	//
 	
@@ -82,11 +77,6 @@ THREE.CSS3DArgonRenderer = function () {
 	domElements[0].style.display = 'none'; // was 'inline-block';
 	domElements[0].style.overflow = 'hidden';
 	domElements[0].style.position = 'absolute';
-	domElements[0].style.pointerEvents = 'none';
-	domElements[0].style.bottom = '0px';
-	domElements[0].style.left = '0px';
-	domElements[0].style.width = '1px';
-	domElements[0].style.height = '1px';
 
 	domElements[0].style.WebkitTransformStyle = 'preserve-3d';
 	domElements[0].style.MozTransformStyle = 'preserve-3d';
@@ -110,11 +100,6 @@ THREE.CSS3DArgonRenderer = function () {
 	domElements[1].style.display = 'none'; // was 'inline-block';
 	domElements[1].style.overflow = 'hidden';
 	domElements[1].style.position = 'absolute';
-	domElements[1].style.pointerEvents = 'none';
-	domElements[1].style.bottom = '0px';
-	domElements[1].style.left = '0px';
-	domElements[1].style.width = '1px';
-	domElements[1].style.height = '1px';
 
 	domElements[1].style.WebkitTransformStyle = 'preserve-3d';
 	domElements[1].style.MozTransformStyle = 'preserve-3d';
@@ -136,73 +121,57 @@ THREE.CSS3DArgonRenderer = function () {
 	};
 
     this.setViewport = function ( x, y, width, height, side ) {
-		if (_viewX[side] != x) {
-			domElements[side].style.left = x + 'px';
-			_viewX[side] = x;
-		}
-		if (_viewY[side] != y) {
-			domElements[side].style.bottom = y + 'px';
-			_viewY[side] = y;
-		}
-		if (_viewWidth[side] != width) {
-			domElements[side].style.width = width + 'px';
-			cameraElements[side].style.width = width + 'px';
-			_viewWidth[side] = width;
-		}
-		if (_viewHeight[side] != height) {
-			domElements[side].style.height = height + 'px';
-			cameraElements[side].style.height = height + 'px';
-			_viewHeight[side] = height;
-		}
+		domElements[side].style.display = 'inline-block';
+		domElements[side].style.top = y + 'px';
+		domElements[side].style.left = x + 'px';
+		domElements[side].style.width = width + 'px';
+		domElements[side].style.height = height + 'px';
+
+		cameraElements[side].style.width = width + 'px';
+		cameraElements[side].style.height = height + 'px';
+		
+		_viewWidth[side] = width;
+		_viewHeight[side] = height;
 	}
 		
 	this.showViewport = function (side) {
-		if (!_visible[side]) {
-			domElements[side].style.display = 'inline-block';
-			_visible[side] = true;
-		}
+		domElements[side].style.display = 'inline-block';
 	}
 	
 	this.hideViewport = function (side) {
-		if (_visible[side]) {
-			domElements[side].style.display = 'none';
-			_visible[side] = false;
-		}
+		domElements[side].style.display = 'none';
 	}
 
 	this.setSize = function ( width, height ) {
 		// size of overall DOM
-		if (_width != width) {
-			domElement.style.width = width + 'px';
-			_width = width;
-		}
-		if (_height != height) {
-			domElement.style.height = height + 'px';
-			_height = height;
-		}
+		domElement.style.width = width + 'px';
+		domElement.style.height = height + 'px';
+
+		_width = width / 2;
+		_height = height;
 
 		/*
 		 * do not reset the subviews.  
 		 */ 		
 
 		// hide them after setSize
-		// domElements[0].style.display = 'none';
-		// domElements[0].style.top = 0 + 'px';
-		// domElements[0].style.left = 0 + 'px';
-		// domElements[0].style.width = _width/2 + 'px';
-		// domElements[0].style.height = _height + 'px';
+		domElements[0].style.display = 'none';
+		domElements[0].style.top = 0 + 'px';
+		domElements[0].style.left = 0 + 'px';
+		domElements[0].style.width = _width + 'px';
+		domElements[0].style.height = _height + 'px';
 
-		//cameraElements[0].style.width = _width/2 + 'px';
-		//cameraElements[0].style.height = _height + 'px';
+		cameraElements[0].style.width = _width + 'px';
+		cameraElements[0].style.height = _height + 'px';
 
-		//domElements[1].style.display = 'none';
-		// domElements[1].style.top = 0 + 'px';
-		// domElements[1].style.left = _width/2 + 'px';
-		// domElements[1].style.width = _width/2 + 'px';
-		// domElements[1].style.height = _height + 'px';
+		domElements[1].style.display = 'none';
+		domElements[1].style.top = 0 + 'px';
+		domElements[1].style.left = _width + 'px';
+		domElements[1].style.width = _width + 'px';
+		domElements[1].style.height = _height + 'px';
 
-		//cameraElements[1].style.width = _width/2 + 'px';
-		//cameraElements[1].style.height = _height + 'px';
+		cameraElements[1].style.width = _width + 'px';
+		cameraElements[1].style.height = _height + 'px';
 		/* */
 	};
 
@@ -240,9 +209,9 @@ THREE.CSS3DArgonRenderer = function () {
 			epsilon( - elements[ 9 ] ) + ',' +
 			epsilon( elements[ 10 ] ) + ',' +
 			epsilon( elements[ 11 ] ) + ',' +
-			epsilon( elements[ 12 ] * 100 ) + ',' +
-			epsilon( - elements[ 13 ] * 100 ) + ',' +
-			epsilon( elements[ 14 ] * 100 ) + ',' +
+			epsilon( elements[ 12 ] ) + ',' +
+			epsilon( - elements[ 13 ] ) + ',' +
+			epsilon( elements[ 14 ] ) + ',' +
 			epsilon( elements[ 15 ] ) +
 		')';
 
@@ -360,16 +329,7 @@ THREE.CSS3DArgonRenderer = function () {
 			cache.camera.fov[side] = fov;
 		}
 
-		if (!_visible[side]) {
-			domElements[side].style.display = 'inline-block';
-			_visible[side] = true;
-		}
-
-		// the only way I can think to actually hide the 
-		// second eye when not in stereo mode
-		if (side == 0 && _width == _viewWidth[0]) {
-			this.hideViewport(1);
-		}
+		domElements[side].style.display = 'inline-block'; 
 
 		camera.matrixWorldInverse.getInverse( camera.matrixWorld );
 
