@@ -1,5 +1,6 @@
 //Removes the Summon Button
 function removeSummmon() {
+    hideCursor();
     document.querySelector("center").removeChild(document.getElementsByClassName("buttonSummon")[0]);
 }
 
@@ -18,6 +19,7 @@ function removeButtons() {
 
 //Creates the + (Add Object) button
 function createSummonButton() {
+    revealCursor();
     var center = document.querySelector("center");
     var button = document.createElement("button");
     button.setAttribute("onclick", "summonButtonPress()");
@@ -51,7 +53,6 @@ function createFinishButton(number) {
 */
 function createOptionsButton(funct, text) {
   var button = document.createElement("button");
-
   button.setAttribute("onClick", funct);
   button.setAttribute("class", "optionButton");
   button.setAttribute("type", "button");
@@ -251,6 +252,9 @@ function createRemoveButton() {
     bF = [["removeButtonPress()"]];
     bT = [["Remove Object"]];
     createButtonTable(bF, bT);
+
+    // initially hide remove button until user selects it with cursor
+    hideButtons(document.getElementsByClassName('optionButton'));
 }
 
 //Goes through the items[] array and adds a button for each item id
@@ -288,4 +292,18 @@ function addRemoveButtons() {
 
     var body = document.querySelector("center");
     body.appendChild(button);
+}
+
+// Hide buttons
+function hideButtons(btnList){
+  for(var i = 0; i < btnList.length; i++){
+        btnList[i].classList.add("hide-button");
+  }
+}
+
+// Reveal Buttons
+function revealButtons(btnList){
+  for(var i = 0; i < btnList.length; i++){
+        btnList[i].classList.remove("hide-button");
+  }
 }

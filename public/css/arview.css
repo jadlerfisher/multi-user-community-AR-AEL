@@ -14,6 +14,7 @@ button {
   opacity:0.8;
   margin: 4px 5%;
 }
+
 .optionButton{
   background: #F9DC84;
   border: solid #5B778A 5px;
@@ -26,6 +27,15 @@ button {
   width:100%;
   border-radius: 9px;
 }
+
+button.hide-button{
+  display: none;
+}
+
+.hide-element{
+  display: none;
+}
+
 table {
   margin: 4px 5%;
   width: 90%;
@@ -40,6 +50,11 @@ td, th {
   text-align: center;
   width: 33%;
 }
+
+table.hide-table{
+  display: none;
+}
+
 .finishButton{
     background-color: #FBC72C;
     border: none;
