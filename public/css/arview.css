@@ -1,8 +1,72 @@
+@media screen and (max-width: 450px) {
+  button#addButton {
+    margin: 0 73px 0 auto !important;
+  }
+  .buttons {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+  button#modelButton {
+    background: none;
+    background-image: url(/assets/images/model-icon.png) !important;
+  }
+  .modelButton[data-state=initial] {
+    margin: 0 73px 0 auto !important;
+    visibility: hidden;
+  }
+  .modelButton[data-state=final] {
+    margin: -70 74px 0 auto !important;
+    transition: all 0.3s ease;
+  }
+
+  button#cubeButton {
+    background: none;
+    background-image: url(assets/images/cube.png) !important;
+  }
+  .cubeButton[data-state=initial] {
+    margin: 0 73px 0 auto !important;
+    visibility: hidden;
+  }
+  .cubeButton[data-state=final] {
+    margin: -170 74px 0 auto !important;
+    transition: all 0.3s ease;
+  }
+  /*.modelButton[data-state=final] {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    margin: -70 74px 0 auto !important;
+    transition: all 0.3s ease;
+  }
+  .modelButton[data-state=initial] {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    margin: 0 73px 0 auto !important;
+    visibility: hidden;
+  }*/
+  /*button#modelButton {
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 0 0 auto;
+  }*/
+}
+button#addButton {
+  margin: 0 0 0 auto;
+}
+.buttonSummon {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.button-display {
+  margin: 0px 0 68px 93px;
+}
 .a-enter-vr-button {
   display: none;
 }
 button {
-  background: #F9DC84;
+  /*background: #F9DC84;*/
   border: solid #5B778A 5px;
   color: #5B778A;
   padding: 15px 32px;
@@ -80,22 +144,6 @@ table.hide-table{
   width: 90%;
   padding: 15px 32px;
   margin: 4px 5%;
-}
-.buttonSummon {
-    background-color: #FBC72C;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 4px 5%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    width:90%;
 }
 #fileInputField {
   background: rgb(255,255,255);
