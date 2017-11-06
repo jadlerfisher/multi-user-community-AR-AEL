@@ -1,6 +1,7 @@
 @media screen and (max-width: 450px) {
   button#addButton {
     margin: 0 73px 0 auto !important;
+    visibility: visible;
   }
   td button.buttons {
     position: absolute;
@@ -18,10 +19,6 @@
     background-image: url(/assets/images/more.png) !important;
     background-size: 47px 47px;
   }
-  .moreButton[data-state=initial] {
-    margin: 0 73px 0 auto !important;
-    visibility: hidden;
-  }
   .moreButton[data-state=final] {
     margin: -63 74px 0 auto !important;
     transition: all 0.3s ease;
@@ -33,10 +30,6 @@
     background-color: rgba(255, 255, 255, 0);
     background-image: url(/assets/images/cube.png) !important;
     background-size: 52px 52px;
-  }
-  .cubeButton[data-state=initial] {
-    margin: 0 73px 0 auto !important;
-    visibility: hidden;
   }
   .cubeButton[data-state=final] {
     margin: -117 74px 0 auto !important;
@@ -50,10 +43,6 @@
     background-image: url(/assets/images/pyramid.png) !important;
     background-size: 56px 63px;
   }
-  .pyramidButton[data-state=initial] {
-    margin: 0 73px 0 auto !important;
-    visibility: hidden;
-  }
   .pyramidButton[data-state=final] {
     margin: -173 74px 0 auto !important;
     transition: all 0.3s ease;
@@ -65,10 +54,6 @@
     background-color: rgba(255, 255, 255, 0);
     background-image: url(/assets/images/model-icon.png) !important;
     background-size: 47px 47px;
-  }
-  .modelButton[data-state=initial] {
-    margin: 0 73px 0 auto !important;
-    visibility: hidden;
   }
   .modelButton[data-state=final] {
     margin: -235px 74px 0 auto !important;
@@ -92,8 +77,28 @@
     margin: 0 0 0 auto;
   }*/
 }
-button#addButton {
-  margin: 0 0 0 auto;
+
+@media screen and (min-width: 451px) {
+  button#addButton {
+    margin: 0 0 0 auto;
+    visibility: hidden;
+  }
+}
+.moreButton[data-state=initial] {
+  margin: 0 73px 0 auto !important;
+  visibility: hidden;
+}
+.cubeButton[data-state=initial] {
+  margin: 0 73px 0 auto !important;
+  visibility: hidden;
+}
+.pyramidButton[data-state=initial] {
+  margin: 0 73px 0 auto !important;
+  visibility: hidden;
+}
+.modelButton[data-state=initial] {
+  margin: 0 73px 0 auto !important;
+  visibility: hidden;
 }
 .button-display {
   margin: 0px 0 68px 93px;
