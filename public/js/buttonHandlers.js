@@ -1,13 +1,13 @@
 //1) Remove: +, Add: Model, Shape
 // Press + button, allows users to choose model or shape to add
 function addButtonPress() {
-    //removeAdd();
-    //removeButtons();
-    //createAddButtons();
-    createModelButton();
-    // if (buttonExists) {
-    //   init();
-    // }
+  //removeAdd();
+  //removeButtons();
+  //createAddButtons();
+  createAddButtonMenu();
+  // if (buttonExists) {
+  //   init();
+  // }
 }
 
 //Remove: Shape Buttons Add: Finish, Edit, Undo, Delete
@@ -181,5 +181,3 @@ function backButtonPress() {
     createSummonButton();
     createRemoveButton();
 }
-
-

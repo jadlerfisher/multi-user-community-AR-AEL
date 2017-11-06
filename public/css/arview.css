@@ -2,33 +2,76 @@
   button#addButton {
     margin: 0 73px 0 auto !important;
   }
-  .buttons {
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
+  td button.buttons {
+    position: absolute;
+    box-shadow: none !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
   }
-  button#modelButton {
-    background: none;
-    background-image: url(/assets/images/model-icon.png) !important;
+
+  button#moreButton {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url(/assets/images/more.png) !important;
+    background-size: 47px 47px;
   }
-  .modelButton[data-state=initial] {
+  .moreButton[data-state=initial] {
     margin: 0 73px 0 auto !important;
     visibility: hidden;
   }
-  .modelButton[data-state=final] {
-    margin: -70 74px 0 auto !important;
+  .moreButton[data-state=final] {
+    margin: -63 74px 0 auto !important;
     transition: all 0.3s ease;
   }
 
   button#cubeButton {
-    background: none;
-    background-image: url(assets/images/cube.png) !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url(/assets/images/cube.png) !important;
+    background-size: 52px 52px;
   }
   .cubeButton[data-state=initial] {
     margin: 0 73px 0 auto !important;
     visibility: hidden;
   }
   .cubeButton[data-state=final] {
-    margin: -170 74px 0 auto !important;
+    margin: -117 74px 0 auto !important;
+    transition: all 0.3s ease;
+  }
+
+  button#pyramidButton {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url(/assets/images/pyramid.png) !important;
+    background-size: 56px 63px;
+  }
+  .pyramidButton[data-state=initial] {
+    margin: 0 73px 0 auto !important;
+    visibility: hidden;
+  }
+  .pyramidButton[data-state=final] {
+    margin: -173 74px 0 auto !important;
+    transition: all 0.3s ease;
+  }
+
+  button#modelButton {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url(/assets/images/model-icon.png) !important;
+    background-size: 47px 47px;
+  }
+  .modelButton[data-state=initial] {
+    margin: 0 73px 0 auto !important;
+    visibility: hidden;
+  }
+  .modelButton[data-state=final] {
+    margin: -235px 74px 0 auto !important;
     transition: all 0.3s ease;
   }
   /*.modelButton[data-state=final] {
@@ -51,13 +94,6 @@
 }
 button#addButton {
   margin: 0 0 0 auto;
-}
-.buttonSummon {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
 }
 .button-display {
   margin: 0px 0 68px 93px;
