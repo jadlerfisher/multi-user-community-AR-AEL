@@ -90,11 +90,18 @@ function createButtonTable(buttonFuncts, buttonText) {
     body.appendChild(table);
 }
 
-//make model button visible, have functionality, move up
-function createModelButton(funct) {
+//make buttons visible, have functionality, and transition up
+function createAddButtonMenu() {
   var modelButton = document.querySelector("#modelButton");
-  modelButton.setAttribute("onclick", "addButtonPress()");
+  var cubeButton = document.querySelector("#cubeButton");
+  var pyramidButton = document.querySelector("#pyramidButton");
+  var moreButton = document.querySelector("#moreButton");
   modelButton.setAttribute('data-state', 'final');
+  cubeButton.setAttribute('data-state', 'final');
+  pyramidButton.setAttribute('data-state', 'final');
+  moreButton.setAttribute('data-state', 'final');
+  //modelButton.setAttribute("onclick", "addButtonPress()");
+  //cubeButton.setAttribute("onclick", "addButtonPress()");
 }
 
 // function createModelButton(funct) {
