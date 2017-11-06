@@ -14,6 +14,8 @@
     "express-session": "^1.15.6",
     "firebase": "^4.4.0",
     "mustache": "^2.3.0",
-    "networked-aframe": "^0.3.0"
+    "networked-aframe": "^0.3.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   }
 }

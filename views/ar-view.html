@@ -14,6 +14,8 @@
 
   <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
+     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <script src="https://use.fontawesome.com/00712d7803.js"></script>
 
   <!-- Argon -->
   <!-- <script src="library/argon/argon.js"></script>
@@ -90,13 +92,15 @@
       <div id="sydneypin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
     </div> -->
 
-    <center>
+    <center id="ui">
        <button onclick="summonButtonPress()" type="button" class="buttonSummon">+</button>
        <table id="buttonTable">
           <tr>
             <td><button onclick="removeButtonPress()" type="button" class="optionButton hide-button">Remove</button></td>
           </tr>
        </table>
+       <center class="editBoxCenter">
+        </center>
     </center>
     <a-scene physics-world="gravity: 0 -9.81 0" networked-scene="
       app: myApp;
@@ -206,6 +210,7 @@
     <script src="js/buttonHandlers.js"></script>
     <script src="js/createButtons.js"></script>
     <script src="library/jscolor.min.js"></script>
+    <script src="js/addItem.js"></script>
     <script type="text/javascript">
       function randomNumString() {
         var max = 3;
