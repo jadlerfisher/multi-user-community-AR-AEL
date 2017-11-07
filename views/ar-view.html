@@ -16,6 +16,8 @@
 
   <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
   <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <script src="https://use.fontawesome.com/00712d7803.js"></script>
 
   <!-- Argon -->
   <!-- <script src="library/argon/argon.js"></script>
@@ -24,6 +26,9 @@
   <script src="library/argon/CSS3DArgonHUD.js"></script>
   <script src="library/aframe-look-at-component.js"></script> -->
 
+  <!-- A-Frame component to register event listeners that set properties -->
+  <!-- useful for cursor events -->
+  <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
 
   <link rel="stylesheet" href="css/arview.css">
   <meta charset="UTF-8">
@@ -75,14 +80,16 @@
       <div id="sydneypin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
     </div> -->
 
-    <center>
+    <center id="ui">
        <button onclick="summonButtonPress()" type="button" class="buttonSummon">+</button>
        <table id="buttonTable">
           <tr>
-            <td><button onclick="removeButtonPress()" type="button" class="optionsButton">Remove</button></td>
+            <td><button onclick="removeButtonPress()" type="button" class="optionButton hide-button">Remove</button></td>
           </tr>
        </table>
       <button onclick="gravityOnButtonPress()" type = "button" class = "buttonGravity">Gravity</button>
+      <center class="editBoxCenter">
+      </center>
     </center>
     <a-scene physics-world="gravity: 0 -9.81 0" network-scene="
       app: myApp;
@@ -156,7 +163,6 @@
       </a-assets>
       <!-- <a-sky src="#sky"></a-sky> -->
 
-
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
 
       <!-- <ar-geopose id="GT" lla="-84.394539 33.772501" userotation="false">
@@ -192,6 +198,7 @@
     <script src="js/buttonHandlers.js"></script>
     <script src="js/createButtons.js"></script>
     <script src="library/jscolor.min.js"></script>
+    <script src="js/addItem.js"></script>
     <script type="text/javascript">
       // function randomNumString() {
       //   var max = 3;
