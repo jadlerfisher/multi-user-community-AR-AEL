@@ -23,7 +23,7 @@ router.post('/login', function(req, res) {
     	if (error) {
     		return res.status(500).send(error.message);
     	} else {
-    		return res.status(200).send({uid : uid});
+    		return res.status(200).send({redirect_url: req.session.redirect_url});
       }
     }
   );
@@ -71,10 +71,8 @@ router.get('/maps', function(req, res) {
       email: authController.getUser() ? authController.getUser().email : null,
     });
   } else {
-    res.render('index', {
-      hasLoggedIn: authController.hasLoggedIn(),
-      email: authController.getUser() ? authController.getUser().email : null,
-    });
+    req.session.redirect_url = 'maps';
+    res.render('login');
   }
 });
 
@@ -90,6 +88,7 @@ router.get('/ar-view', function(req, res) {
       base64: req.session.base64
     });
   } else {
+    req.session.redirect_url = 'ar-view';
     res.render('login');
   }
 });
