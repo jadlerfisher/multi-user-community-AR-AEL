@@ -160,13 +160,15 @@ function colorButtonPress() {
   div.appendChild(input);
 }
 
+function cancelEditingAttribute() {
+  stateChange('stateC');
+  undoButtonPress();
+}
 
-// //12) Remove COlor Picker, FInish, Add: Move, Rotate, Size, Color, Finish
-// //User is done changing shape color
-// function finishButtonPress5() {
-//     removeButtons();
-//     createEditButtons();
-// }
+function deleteButtonPress() {
+    stateChange('stateA');
+    disappear();
+}
 
 function sizeButtonPress() {
   stateChange('stateC3');

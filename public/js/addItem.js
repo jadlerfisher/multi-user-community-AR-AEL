@@ -212,26 +212,26 @@ function displayModel(i) {
     // revealCenter(document.getElementById('editBoxCenter'));
 }
 
-function moveButtonPress() {
-    // removeEditingOptionsBox();
-    hideCenter(document.getElementById('editOptionsBox'));
-    createEditBox("move");
-}
+// function moveButtonPress() {
+//     // removeEditingOptionsBox();
+//     hideCenter(document.getElementById('editOptionsBox'));
+//     createEditBox("move");
+// }
 
-function rotateButtonPress() {
-    removeEditingOptionsBox();
-    createEditBox("rotate");
-}
+// function rotateButtonPress() {
+//     removeEditingOptionsBox();
+//     createEditBox("rotate");
+// }
 
-function resizeButtonPress() {
-    removeEditingOptionsBox();
-    createEditBox("resize");
-}
+// function resizeButtonPress() {
+//     removeEditingOptionsBox();
+//     createEditBox("resize");
+// }
 
-function colorButtonPress() {
-    removeEditingOptionsBox();
-    createEditBox("color");
-}
+// function colorButtonPress() {
+//     removeEditingOptionsBox();
+//     createEditBox("color");
+// }
 
 function finishButtonPress() {
     // createSummonButton();
@@ -269,16 +269,8 @@ function undoButtonPress() {
   }
 }
 
-function deleteButtonPress() {
-    createSummonButton();
-    removeEditingOptionsBox();
-    createRemoveButton();
-    disappear();
-    createRemoveButton();
-}
-
 //Create one of the smaller edit boxes
-// function createEditBox(type) {
+function createEditBox(type) {
 //     var center = document.getElementsByClassName("editBoxCenter")[0];
 //     if (type === "move") {
 //         var item = document.getElementById("item");
@@ -317,19 +309,19 @@ function deleteButtonPress() {
 
 //         center.appendChild(div1);
 //     }
+}
+
+
+// function finishEditingAttribute() {
+//     removeEditingOptionsBox();
+//     createEditingOptionBox();
 // }
 
-
-function finishEditingAttribute() {
-    removeEditingOptionsBox();
-    createEditingOptionBox();
-}
-
-function cancelEditingAttribute() {
-        removeEditingOptionsBox();
-        createEditingOptionBox();
-        undoButtonPress();
-}
+// function cancelEditingAttribute() {
+//         removeEditingOptionsBox();
+//         createEditingOptionBox();
+//         undoButtonPress();
+// }
 
 // function move(axis, direction) {
 //     console.log("MOVE: " + axis + " " + direction);
