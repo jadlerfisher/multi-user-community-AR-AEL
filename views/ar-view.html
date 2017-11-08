@@ -155,15 +155,114 @@
       </div>
 
       <div id="stateC1" class="hide-state">
+        <center id = "editBoxCenter" class="editBoxCenter">
+          <div class="editingBox">
+            <div class="editOptionsBox">
+              <button class="moveButtons" onclick="move('x', 'down', false)">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="move('up', 'up', false)">
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="move('z', 'up', false)">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="move('x', 'up', false)">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="move('y', 'down', false)">
+                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="move('z', 'down', false)">
+                <i class="fa fa-minus" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="finalOptionsButtonBox">
+              <button class="completeButton" onclick="finishEditingAttribute()">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+              <button class="cancelEditButton" onclick="cancelEditingAttribute()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </center>
       </div>
 
       <div id="stateC2" class="hide-state">
+      <center id = "editBoxCenter" class="editBoxCenter">
+          <div class="editingBox">
+            <div class="editOptionsBox">
+              <button class="moveButtons" onclick="rotate('y', -5, false)">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="rotate('x', -5, false)">
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="rotate('z', -5, false)">
+                <i class="fa fa-arrow-rotate-left" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="rotate('y', 5, false)">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="rotate('x', 5, false)">
+                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+              </button>
+              <button class="moveButtons" onclick="rotate('z', 5, false)">
+                <i class="fa fa-arrow-rotate-right" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="finalOptionsButtonBox">
+              <button class="completeButton" onclick="finishEditingAttribute()">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+              <button class="cancelEditButton" onclick="cancelEditingAttribute()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </center>
       </div>
 
       <div id="stateC3" class="hide-state">
+        <center id = "editBoxCenter" class="editBoxCenter">
+          <div class="editingBox">
+            <div class="editOptionsBox">
+              <button class="resizeButton" onclick="resize(0.1)">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+              <button class="resizeButton" onclick="resize(-0.1)">
+                <i class="fa fa-minu" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="finalOptionsButtonBox">
+              <button class="completeButton" onclick="finishEditingAttribute()">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+              <button class="cancelEditButton" onclick="cancelEditingAttribute()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </center>
       </div>
 
       <div id="stateC4" class="hide-state">
+        <center id = "editBoxCenter" class="editBoxCenter">
+            <div class="editingBox">
+              <div class="editOptionsBox">
+                <input class="jscolor {onFineChange:'update(this)'}" value="cc66ff"> <!-- Color requires js-->
+              </div>
+              <div class="finalOptionsButtonBox">
+                <button class="completeButton" onclick="finishEditingAttribute()">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+                <button class="cancelEditButton" onclick="cancelEditingAttribute()">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </center>
       </div>
 
 
