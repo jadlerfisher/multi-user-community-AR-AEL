@@ -62,12 +62,11 @@ function createGalleryItem(classString, thisFunction, imageSource, name) {
 
 //Cancels adding an item
 function cancelAddButtonPress() {
-
+    stateChange('stateA');
     // removeAddItemsBox();
     hideCenter(document.getElementById('uiElem'));
     revealButtons(document.getElementsByClassName('buttonSummon'));
     revealCursor();
-    revealTable(document.getElementById('buttonTable'));
     // createSummonButton();
 }
 
@@ -204,16 +203,18 @@ function filter(category) {
 
 function displayModel(i) {
     // removeAddItemsBox();
-    document.getElementById('uiElem').classList.add('hide-center');
-    console.log(i);
+    // document.getElementById('uiElem').classList.add('hide-center');
+    // console.log(i);
+    stateChange('stateC');
     createModel(i);
 
     // reveal editing options for model
-    revealCenter(document.getElementById('editBoxCenter'));
+    // revealCenter(document.getElementById('editBoxCenter'));
 }
 
 function moveButtonPress() {
-    removeEditingOptionsBox();
+    // removeEditingOptionsBox();
+    hideCenter(document.getElementById('editOptionsBox'));
     createEditBox("move");
 }
 
@@ -268,8 +269,224 @@ function undoButtonPress() {
   }
 }
 
+function deleteButtonPress() {
+    createSummonButton();
+    removeEditingOptionsBox();
+    createRemoveButton();
+    disappear();
+    createRemoveButton();
+}
 
+//Create one of the smaller edit boxes
+function createEditBox(type) {
+    var center = document.getElementsByClassName("editBoxCenter")[0];
 
+        var div1 = document.createElement("div");
+        div1.setAttribute("class", "editingBox");
+
+            var div2 = document.createElement("div");
+            div2.setAttribute("class", "editOptionsBox");
+
+            if (type === "move") {
+
+                var button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "move('x', 'down', false)");
+                     var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-arrow-left");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "move('y', 'up', false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-arrow-up");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "move('z', 'up', false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-plus");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "move('x', 'up', false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-arrow-right");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "move('y', 'down', false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-arrow-down");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "move('z', 'down', false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-minus");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                var item = document.getElementById("item");
+                var position = [item.getAttribute("position").x, item.getAttribute("position").y, item.getAttribute("position").z];
+                changes.push(["move", position]);
+
+            } else if (type === "rotate") {
+                var button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "rotate('y', -5, false)");
+                     var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-arrow-left");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "rotate('x', -5, false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-arrow-up");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "rotate('z', -5, false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-rotate-left");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "rotate('y', 5, false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-arrow-right");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "rotate('x', 5, false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-arrow-down");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "moveButtons");
+                button.setAttribute("onclick", "rotate('z', 5, false)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-rotate-right");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+                var origRotate = document.getElementById("item").getAttribute("rotation").y;
+                console.log(origRotate);
+                changes.push(["rotate", origRotate]);
+
+            } else if (type === "resize") {
+                button = document.createElement("button");
+                button.setAttribute("class", "resizeButton");
+                button.setAttribute("onclick", "resize(0.1)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-plus");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "resizeButton");
+                button.setAttribute("onclick", "resize(-0.1)");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-minus");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+                var item = document.getElementById("item");
+                var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
+                changes.push(["size", sizeInfo]);
+
+            } else if (type === "color") {
+                if (colorMode === "color") {
+                        //Creates JsColor field
+                        var input = document.createElement('INPUT')
+                        var picker = new jscolor(input)
+
+                        //Changes object color as user changes color field
+                        if (!(document.getElementById("item").getAttribute('class') === "model")) {
+                        var origColor = document.getElementById("item").getAttribute('color');
+                        changes.push(["color", origColor]);
+                        } else {
+                        var origColor = document.getElementById("item").getAttribute("material").color;
+                        changes.push(["color", origColor]);
+                        }
+
+                        //Changes text in field input to appropriate string
+                        picker.fromString(origColor);
+                        input.setAttribute("class", "colorPicker");
+                        div2.appendChild(input);
+                        button = document.createElement("button");
+                        button.setAttribute("class", "resizeButton");
+                        button.setAttribute("onclick", "chooseMaterial()");
+                        button.innerText = "Material";
+                        div2.appendChild(button);
+                } else {
+                        button = document.createElement("button");
+                        button.setAttribute("class", "resizeButton");
+                        button.setAttribute("onclick", "chooseColor()");
+                        button.innerText = "Color";
+                        div2.appendChild(button);
+                }
+            }
+
+            div1.appendChild(div2);
+
+            div2 = document.createElement("div");
+            div2.setAttribute("class", "finalOptionsButtonBox");
+
+                button = document.createElement("button");
+                button.setAttribute("class", "completeButton");
+                button.setAttribute("onclick", "finishEditingAttribute()");
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-check");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+                button = document.createElement("button");
+                button.setAttribute("class", "cancelEditButton");
+                button.setAttribute("onclick", "cancelEditingAttribute()");
+                    icon = document.createElement("i");
+                    icon.setAttribute("class", "fa fa-times");
+                    icon.setAttribute("aria-hidden", "true");
+                    button.appendChild(icon);
+                div2.appendChild(button);
+
+        div1.appendChild(div2);
+
+    center.appendChild(div1);
+}
 
 
 function finishEditingAttribute() {

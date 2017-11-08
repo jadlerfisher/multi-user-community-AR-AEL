@@ -81,71 +81,90 @@
     </div> -->
 
     <center id="ui">
-       <button onclick="addEntity()" type="button" class="buttonSummon">+</button>
+
+      <div id="stateA">
+       <button onclick="stateChange('stateB')" type="button" class="buttonSummon">+</button>
        <table id="buttonTable">
           <tr>
             <td><button onclick="removeButtonPress()" type="button" class="optionButton hide-button">Remove</button></td>
           </tr>
        </table>
+      </div>
 
-       <!-- When addEntity() is pressed, uiElem is shown -->
-      <center id="uiElem" class="hide-center">
-        <div class="boxAndButtons">
-          <div class="objectAddBox">
-            <center>
-              <div class="searchbar"> 
-                <div class="dropdown">
-                  <button class="dropbtn">All</button>
-                  <div id="myDropdown" class="dropdown-content">
+      <div id="stateB" class="hide-state">
+         <!-- When addEntity() is pressed, uiElem is shown -->
+        <center id="uiElem">
+          <div class="boxAndButtons">
+            <div class="objectAddBox">
+              <center>
+                <div class="searchbar"> 
+                  <div class="dropdown">
+                    <button class="dropbtn">All</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    </div>
                   </div>
-                </div>
-                <div class="box">
-                  <div class="container-4">
-                    <input onkeypress="checkKey(event)" type="search" class="search" id="search" placeholder="Search...">
-                    <button onclick="searchButtonPress()" class="icon"><i class="fa fa-search"></i></button>
+                  <div class="box">
+                    <div class="container-4">
+                      <input onkeypress="checkKey(event)" type="search" class="search" id="search" placeholder="Search...">
+                      <button onclick="searchButtonPress()" class="icon"><i class="fa fa-search"></i></button>
+                    </div>
                   </div>
+
                 </div>
-              </div>
 
-              <div class="objects">
-              </div>
+                <div class="objects">
+                </div>
 
-            </center>
+              </center>
+            </div>
+
+            <button class="uploadButton" onclick="uploadItemButtonPress()">Upload</button>
+            <button class="cancelButton" onclick="stateChange('stateA')">Cancel</button>
           </div>
-
-          <button class="uploadButton" onclick="uploadItemButtonPress()">Upload</button>
-          <button class="cancelButton" onclick="cancelAddButtonPress()">Cancel</button>
-        </div>
-      </center>
-
+        </center>
+      </div>
       <!-- End uiELem -->
 
 
       <!-- <button onclick="gravityOnButtonPress()" type = "button" class = "buttonGravity">Gravity</button> -->
-      <center id = "editBoxCenter" class="editBoxCenter hide-center">
-        <div class="editingBox"> 
-          <div class="editOptionsBox">
-            <button class="editOptionsButton" onclick="moveButtonPress()">Move</button>
-            <button class="editOptionsButton" onclick="rotateButtonPress()">Rotate</button>
-            <button class="editOptionsButton" onclick="resizeButtonPress()">Resize</button>
-            <button class="editOptionsButton" onclick="colorButtonPress()">Color</button>
+      <div id="stateC" class="hide-state">
+        <center id = "editBoxCenter" class="editBoxCenter">
+          <div class="editingBox"> 
+            <div id = "editOptionsBox" class="editOptionsBox">
+              <button class="editOptionsButton" onclick="moveButtonPress()">Move</button>
+              <button class="editOptionsButton" onclick="rotateButtonPress()">Rotate</button>
+              <button class="editOptionsButton" onclick="resizeButtonPress()">Resize</button>
+              <button class="editOptionsButton" onclick="colorButtonPress()">Color</button>
+            </div>
+
+            <div class="finalOptionsButtonBox">
+              <button class="finalOptionsButton" onclick="undoButtonPress()">
+                <i class="fa fa-undo" aria-hidden="true"></i>
+              </button>
+
+              <button class="finalOptionsButton" onclick="deleteButtonPress()">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+
+              <button class="finishButton" onclick="stateChange('stateA')">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+            </div>
           </div>
+        </center>
+      </div>
 
-          <div class="finalOptionsButtonBox">
-            <button class="finalOptionsButton" onclick="undoButtonPress()">
-              <i class="fa fa-undo" aria-hidden="true"></i>
-            </button>
+      <div id="stateC1" class="hide-state">
+      </div>
 
-            <button class="finalOptionsButton" onclick="deleteButtonPress()">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
+      <div id="stateC2" class="hide-state">
+      </div>
 
-            <button class="finishButton" onclick="finishButtonPress()">
-              <i class="fa fa-check" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-      </center>
+      <div id="stateC3" class="hide-state">
+      </div>
+
+      <div id="stateC4" class="hide-state">
+      </div>
 
 
     </center>
@@ -259,6 +278,7 @@
     </a-scene>
 
     <script src="js/index.js"></script>
+    <script src="js/stateHandler.js"></script>
     <script src="js/buttonHandlers.js"></script>
     <script src="js/createButtons.js"></script>
     <script src="library/jscolor.min.js"></script>
