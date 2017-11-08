@@ -20,8 +20,7 @@ function init() {
     // fill in the gallery for adding models / entities
     
     var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"]];
-    var categories = ['All', 'Shapes', 'Gaming', 'Animals', 'Food'];
-    
+    var categories = ['All', 'Shapes', 'Gaming', 'Animals', 'Food', 'New Category'];
     fillDropDown(categories);
     for (i = 0; i < galleryList.length; i++) {
         galleryDetails = galleryList[i];
