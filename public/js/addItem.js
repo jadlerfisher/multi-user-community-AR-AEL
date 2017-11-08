@@ -67,6 +67,7 @@ function cancelAddButtonPress() {
     hideCenter(document.getElementById('uiElem'));
     revealButtons(document.getElementsByClassName('buttonSummon'));
     revealCursor();
+    revealTable(document.getElementById('buttonTable'));
     // createSummonButton();
 }
 
