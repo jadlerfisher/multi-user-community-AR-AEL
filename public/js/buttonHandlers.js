@@ -1,12 +1,13 @@
 //1) Remove: +, Add: Model, Shape
 // Press + button, allows users to choose model or shape to add
 function plus() {
+    hideCursor();
     console.log('Something is happening');
     var btns = document.getElementsByClassName("buttonSummon");
     hideButtons(btns);
     var buttonTable = document.getElementById("buttonTable");
     hideTable(buttonTable);
-    
+
     // removeSummmon();
     // removeButtons();
     // createAddButtons();

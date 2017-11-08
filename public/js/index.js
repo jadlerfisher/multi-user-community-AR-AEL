@@ -86,19 +86,19 @@ function createModel(i) {
   scene.appendChild(entity);
   NAF.entities.entities[entityData.networkId] = entity;
 
-  // item.addEventListener('mouseenter', function(evt){
-  //   this.setAttribute('material','opacity','0.85');
-  //   console.log('Mouse entered: ' + this.getAttribute('id'));
-  //   revealButtons(document.getElementsByClassName('optionButton'));
-  //   selectedItem = this;
-  // });
+  entity.addEventListener('mouseenter', function(evt){
+    this.setAttribute('material','opacity','0.85');
+    console.log('Mouse entered: ' + this.getAttribute('id'));
+    revealButtons(document.getElementsByClassName('optionButton'));
+    selectedItem = this;
+  });
 
-  // item.addEventListener('mouseleave', function(evt){
-  //   this.setAttribute('material','opacity','1.0');
-  //   console.log('Mouse left: ' + this.getAttribute('id'));
-  //   hideButtons(document.getElementsByClassName('optionButton'));
-  //   selectedItem = [];
-  // });
+  entity.addEventListener('mouseleave', function(evt){
+    this.setAttribute('material','opacity','1.0');
+    console.log('Mouse left: ' + this.getAttribute('id'));
+    hideButtons(document.getElementsByClassName('optionButton'));
+    selectedItem = [];
+  });
 
 }
 
@@ -336,12 +336,12 @@ function gravityAll() {
 }
 
 function hideCursor(){
-  var camera = document.getElementById('sky');
+  var camera = document.getElementById('player');
   camera.removeChild(document.getElementById('cursor'));
 }
 
 function revealCursor(){
-  var camera = document.getElementById('sky');
+  var camera = document.getElementById('player');
   var cursor = document.createElement('a-entity');
   cursor.setAttribute('cursor','true')
   cursor.setAttribute('id', "cursor");

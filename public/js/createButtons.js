@@ -1,6 +1,6 @@
 //Removes the Summon Button
 function removeSummmon() {
-    //hideCursor();
+    // hideCursor();
     document.querySelector("center").removeChild(document.getElementsByClassName("buttonSummon")[0]);
 }
 
@@ -295,31 +295,6 @@ function createRemoveButton() {
 //     body.appendChild(button);
 // }
 
-// Hide buttons
-function hideButtons(btnList){
-  for(var i = 0; i < btnList.length; i++){
-        btnList[i].classList.add("hide-button");
-  }
-}
-
-// Reveal Buttons
-function revealButtons(btnList){
-  for(var i = 0; i < btnList.length; i++){
-        btnList[i].classList.remove("hide-button");
-  }
-}
-
-function hideElements(eList){
-  for(var i = 0; i < eList.length; i++){
-        eList[i].classList.add("hide-element");
-  }
-}
-
-function revealElements(eList){
-  for(var i = 0; i < eList.length; i++){
-        eList[i].classList.remove("hide-element");
-  }
-}
 
 
 function createGravity() {

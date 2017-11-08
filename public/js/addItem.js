@@ -400,10 +400,10 @@ function colorButtonPress() {
 function finishButtonPress() {
     createSummonButton();
     removeEditingOptionsBox();
-    var item = document.getElementById("item");
-    itemNum++;
-    item.setAttribute("id", itemNum);
-    items.push(itemNum);
+    // var item = document.getElementById("item");
+    // itemNum++;
+    // item.setAttribute("id", itemNum);
+    // items.push(itemNum);
     createRemoveButton();
 }
 
