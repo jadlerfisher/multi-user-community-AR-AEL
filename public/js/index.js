@@ -1,7 +1,7 @@
 var buttonExists = true; //The VR button exists
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
-var itemNum = 0; //The id of the most recently created object
+// var itemNum = 0; //The id of the most recently created object
 var models = ["#pokemon-model"]; //The various object models
 var materials = ["mtl: #pokemon-mtl"];
 var changes = []; //Changes that have been made in editing an object
@@ -100,6 +100,8 @@ function createModel(i) {
     selectedItem = [];
   });
 
+  items.push(entity.getAttribute('id'));
+  console.log('Make sure entity id leaves "items" array when removing');
 }
 
 //Delete object
