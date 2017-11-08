@@ -28,6 +28,10 @@
   border-radius: 9px;
 }
 
+div.hide-state{
+  display: none;
+}
+
 button.hide-button{
   display: none;
 }

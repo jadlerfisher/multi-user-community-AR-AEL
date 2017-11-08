@@ -1,5 +1,5 @@
 //list of lists with class String, function, imagesource, and name for each item
-var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"]];
+// var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"]];
 
 /*["gallery sphere shapes", "displayModel(0)", "assets/images/sphere.png", "sphere"],
                 ["gallery cube shapes", "displayModel(1)", "assets/images/cube.png", "cube"],
@@ -14,126 +14,31 @@ var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images
                 ["gallery mario gaming", "displayModel(12)", "assets/images/mario.png", "pokeball"]*/
 
 //What the current section is (default or All is "gallery")
-var currentFilter = "gallery";
+// var currentFilter = "gallery";
 //What sections there are and what order they show up in the dropdown menu
-var categories = ['All', 'Shapes', 'Gaming', 'Animals', 'Food'];
+// var categories = ['All', 'Shapes', 'Gaming', 'Animals', 'Food'];
 
-function addButtonPress() {
-    currentFilter = "gallery";
-    createAddItemsBox();
-
-    // var body = document.getElementById("ui");
-    // body.removeChild(document.getElementById("addButton"));
-}
-
-//Creates the Add Item Box
-function createAddItemsBox() {
-//     var body = document.getElementById("ui");
-//     // interpretList(itemSearchBoxStructure);
-//         var center1 = document.createElement("center");
-//         center1.setAttribute("id", "uiElem");
-
-//         var div1 = document.createElement("div");
-//         div1.setAttribute("class", "boxAndButtons");
-
-//             var div2 = document.createElement("div");
-//             div2.setAttribute("class", "objectAddBox");
-
-//                 var center = document.createElement("center");
-
-//                     var div3 = document.createElement("div");
-//                     div3.setAttribute("class", "searchbar");
-
-//                         var div4 = document.createElement("div");
-//                         div4.setAttribute("class", "dropdown");
-
-//                             var button = document.createElement("button");
-//                             button.setAttribute("class", "dropbtn");
-//                             button.innerText = "All";
-
-//                             var div5 = document.createElement("div");
-//                             div5.setAttribute("id", "myDropdown");
-//                             div5.setAttribute("class", "dropdown-content");
-                                var dd = document.getElementById('myDropdown');
-                                for (i = 0; i < categories.length; i++) {
-                                    currentCategory = categories[i];
-                                    var a = document.createElement("a");
-                                    a.setAttribute("onclick", "filter('" + currentCategory + "')");
-                                    a.innerText = currentCategory;
-                                    dd.appendChild(a);
-                                }
-//                         div4.appendChild(button);
-//                         div4.appendChild(div5);
-
-//                         var div6 = document.createElement("div");
-//                         div6.setAttribute("class", "box");
-
-//                             var div7 = document.createElement("div");
-//                             div7.setAttribute("class", "container-4");
-
-//                                 var input = document.createElement("input");
-//                                 input.setAttribute("onkeypress", "checkKey(event)");
-//                                 input.setAttribute("type", "search");
-//                                 input.setAttribute("class", "search");
-//                                 input.setAttribute("id", "search");
-//                                 input.setAttribute("placeholder", "Search...");
-
-//                                 var button2 = document.createElement("button");
-//                                 button2.setAttribute("onclick", "searchButtonPress()");
-//                                 button2.setAttribute("class", "icon");
-
-//                                     var icon = document.createElement("i");
-//                                     icon.setAttribute("class", "fa fa-search");
-
-//                                 button2.appendChild(icon);
-
-//                             div7.appendChild(input);
-//                             div7.appendChild(button2);
-
-//                         div6.appendChild(div7);
-
-//                     div3.appendChild(div4);
-//                     div3.appendChild(div6);
-
-
-//                     var div8 = document.createElement("div");
-//                     div8.setAttribute("class", "objects");
-
-//                 center.appendChild(div3);
-//                 center.appendChild(div8);
-
-
-//             div2.appendChild(center);
-
-//             var button3 = document.createElement("button");
-//             button3.setAttribute("class", "uploadButton");
-//             button3.setAttribute("onclick", "uploadItemButtonPress()");
-//             button3.innerText = "Upload";
-
-//             var button4 = document.createElement("button");
-//             button4.setAttribute("class", "cancelButton");
-//             button4.setAttribute("onclick", "cancelAddButtonPress()");
-//             button4.innerText = "Cancel";
-
-//         div1.appendChild(div2);
-//         div1.appendChild(button3);
-//         div1.appendChild(button4);
-
-//     center1.appendChild(div1);
-//     body.appendChild(center1);
+function addButtonPress(currentFilter) {
+    // reveal the UI for element selecting
     document.getElementById('uiElem').classList.remove('hide-center');
-    displayAllItems();
 }
 
-//Removes the add item box
-function removeAddItemsBox() {
-    document.getElementById("ui").removeChild(document.getElementById("uiElem"));
+function fillDropDown(categories){
+    var dd = document.getElementById('myDropdown');
+    for (i = 0; i < categories.length; i++) {
+        currentCategory = categories[i];
+        var a = document.createElement("a");
+        a.setAttribute("onclick", "filter('" + currentCategory + "')");
+        a.innerText = currentCategory;
+        dd.appendChild(a);
+    }
 }
+
 
 //Displays a single item in Add item box
 function createGalleryItem(classString, thisFunction, imageSource, name) {
 
-    var scene = document.getElementsByClassName("objects")[0];
+    var objs = document.getElementsByClassName("objects")[0];
 
     var div1 = document.createElement("div");
     div1.setAttribute("class", classString);
@@ -151,25 +56,22 @@ function createGalleryItem(classString, thisFunction, imageSource, name) {
 
     a.appendChild(image);
     div1.appendChild(a);
-    scene.appendChild(div1);
+    objs.appendChild(div1);
 }
 
-//Displays all the items in the add item box
-function displayAllItems() {
-    for (i = 0; i < galleryList.length; i++) {
-        galleryDetails = galleryList[i];
-        createGalleryItem(galleryDetails[0], galleryDetails[1], galleryDetails[2], galleryDetails[3]);
-    }
-}
 
 //Cancels adding an item
 function cancelAddButtonPress() {
-    removeAddItemsBox();
-    createSummonButton();
+    stateChange('stateA');
+    // removeAddItemsBox();
+    hideCenter(document.getElementById('uiElem'));
+    revealButtons(document.getElementsByClassName('buttonSummon'));
+    revealCursor();
+    // createSummonButton();
 }
 
 //Uploads custom model
-function uploadItemButonPress() {
+function uploadItemButtonPress() {
     console.log("UPLOAD");
 }
 
@@ -300,85 +202,19 @@ function filter(category) {
 //Editing Box Stuff
 
 function displayModel(i) {
-    removeAddItemsBox();
-    console.log(i);
+    // removeAddItemsBox();
+    // document.getElementById('uiElem').classList.add('hide-center');
+    // console.log(i);
+    stateChange('stateC');
     createModel(i);
-    createEditingOptionBox();
-}
 
-//Create the main editing box
-function createEditingOptionBox() {
-    var center = document.getElementsByClassName("editBoxCenter")[0];
-
-    var div1 = document.createElement("div");
-    div1.setAttribute("class", "editingBox");
-
-    var div2 = document.createElement("div");
-    div2.setAttribute("class", "editOptionsBox");
-
-    var button = document.createElement("button");
-    button.setAttribute("class", "editOptionsButton");
-    button.setAttribute("onclick", "moveButtonPress()");
-    button.innerText = "Move";
-    div2.appendChild(button);
-
-    button = document.createElement("button");
-    button.setAttribute("class", "editOptionsButton");
-    button.setAttribute("onclick", "rotateButtonPress()");
-    button.innerText = "Rotate";
-    div2.appendChild(button);
-
-    button = document.createElement("button");
-    button.setAttribute("class", "editOptionsButton");
-    button.setAttribute("onclick", "resizeButtonPress()");
-    button.innerText = "Resize"
-    div2.appendChild(button);
-
-    button = document.createElement("button");
-    button.setAttribute("class", "editOptionsButton");
-    button.setAttribute("onclick", "colorButtonPress()");
-    button.innerText = "Color"
-    div2.appendChild(button);
-
-    div1.appendChild(div2);
-
-    div2 = document.createElement("div");
-    div2.setAttribute("class", "finalOptionsButtonBox");
-
-    button = document.createElement("button");
-    button.setAttribute("class", "finalOptionsButton");
-    button.setAttribute("onclick", "undoButtonPress()");
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-undo");
-    icon.setAttribute("aria-hidden", "true");
-    button.appendChild(icon);
-    div2.appendChild(button);
-
-    button = document.createElement("button");
-    button.setAttribute("class", "finalOptionsButton");
-    button.setAttribute("onclick", "deleteButtonPress()");
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-trash");
-    icon.setAttribute("aria-hidden", "true");
-    button.appendChild(icon);
-    div2.appendChild(button);
-
-    button = document.createElement("button");
-    button.setAttribute("class", "finishButton");
-    button.setAttribute("onclick", "finishButtonPress()");
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-check");
-    icon.setAttribute("aria-hidden", "true");
-    button.appendChild(icon);
-    div2.appendChild(button);
-
-    div1.appendChild(div2);
-
-    center.appendChild(div1);
+    // reveal editing options for model
+    // revealCenter(document.getElementById('editBoxCenter'));
 }
 
 function moveButtonPress() {
-    removeEditingOptionsBox();
+    // removeEditingOptionsBox();
+    hideCenter(document.getElementById('editOptionsBox'));
     createEditBox("move");
 }
 
@@ -398,13 +234,17 @@ function colorButtonPress() {
 }
 
 function finishButtonPress() {
-    createSummonButton();
-    removeEditingOptionsBox();
+    // createSummonButton();
+    revealButtons(document.getElementsByClassName('buttonSummon'));
+    revealTable(document.getElementById("buttonTable"));
+    hideCenter(document.getElementById('editBoxCenter'));
+    revealCursor();
+    // removeEditingOptionsBox();
     // var item = document.getElementById("item");
     // itemNum++;
     // item.setAttribute("id", itemNum);
     // items.push(itemNum);
-    createRemoveButton();
+    // createRemoveButton();
 }
 
 function undoButtonPress() {
@@ -645,11 +485,6 @@ function createEditBox(type) {
         div1.appendChild(div2);
 
     center.appendChild(div1);
-}
-
-//Remove an editing box
-function removeEditingOptionsBox() {
-    document.getElementsByClassName("editBoxCenter")[0].removeChild(document.getElementsByClassName("editingBox")[0]);
 }
 
 

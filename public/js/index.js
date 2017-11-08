@@ -16,6 +16,17 @@ function init() {
     userColor = randomColor();
     //document.querySelector("ar-scene").removeChild(document.getElementsByClassName("a-enter-vr")[0]);
     buttonExists = false;
+    
+    // fill in the gallery for adding models / entities
+    
+    var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"]];
+    var categories = ['All', 'Shapes', 'Gaming', 'Animals', 'Food', 'New Category'];
+    fillDropDown(categories);
+    for (i = 0; i < galleryList.length; i++) {
+        galleryDetails = galleryList[i];
+        createGalleryItem(galleryDetails[0], galleryDetails[1], galleryDetails[2], galleryDetails[3]);
+    }
+
 }
 
 function chooseMaterial() {
@@ -388,3 +399,12 @@ function hideTable(table){
 function revealTable(table){
   table.classList.remove("hide-table");
 }
+
+function hideCenter(center){
+  center.classList.add("hide-center");
+}
+
+function revealCenter(center){
+  center.classList.remove("hide-center");
+}
+
