@@ -1,17 +1,23 @@
 //1) Remove: +, Add: Model, Shape
 // Press + button, allows users to choose model or shape to add
-function plus() {
+function addEntity() {
     hideCursor();
     console.log('Something is happening');
+
+    // Hide addEntity button
     var btns = document.getElementsByClassName("buttonSummon");
     hideButtons(btns);
+
+    // Hide table (with remove button in it)
     var buttonTable = document.getElementById("buttonTable");
     hideTable(buttonTable);
 
     // removeSummmon();
     // removeButtons();
     // createAddButtons();
-    addButtonPress();
+
+    // Reveal the uiElem
+    addButtonPress("gallery");
 
 }
 

@@ -81,13 +81,14 @@
     </div> -->
 
     <center id="ui">
-       <button onclick="plus()" type="button" class="buttonSummon">+</button>
+       <button onclick="addEntity()" type="button" class="buttonSummon">+</button>
        <table id="buttonTable">
           <tr>
             <td><button onclick="removeButtonPress()" type="button" class="optionButton hide-button">Remove</button></td>
           </tr>
        </table>
 
+       <!-- When addEntity() is pressed, uiElem is shown -->
       <center id="uiElem" class="hide-center">
         <div class="boxAndButtons">
           <div class="objectAddBox">
@@ -117,9 +118,36 @@
         </div>
       </center>
 
+      <!-- End uiELem -->
+
+
       <!-- <button onclick="gravityOnButtonPress()" type = "button" class = "buttonGravity">Gravity</button> -->
-      <center class="editBoxCenter">
+      <center id = "editBoxCenter" class="editBoxCenter hide-center">
+        <div class="editingBox"> 
+          <div class="editOptionsBox">
+            <button class="editOptionsButton" onclick="moveButtonPress()">Move</button>
+            <button class="editOptionsButton" onclick="rotateButtonPress()">Rotate</button>
+            <button class="editOptionsButton" onclick="resizeButtonPress()">Resize</button>
+            <button class="editOptionsButton" onclick="colorButtonPress()">Color</button>
+          </div>
+
+          <div class="finalOptionsButtonBox">
+            <button class="finalOptionsButton" onclick="undoButtonPress()">
+              <i class="fa fa-undo" aria-hidden="true"></i>
+            </button>
+
+            <button class="finalOptionsButton" onclick="deleteButtonPress()">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+
+            <button class="finishButton" onclick="finishButtonPress()">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
       </center>
+
+
     </center>
     <a-scene physics-world="gravity: 0 -9.81 0" network-scene="
       app: myApp;
@@ -198,7 +226,7 @@
                   material="color: #EEE"
                   position="0 0 -1"></a-entity>
       </a-entity>
-      
+
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
 
       <!-- <ar-geopose id="GT" lla="-84.394539 33.772501" userotation="false">
