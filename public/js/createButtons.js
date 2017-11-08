@@ -8,6 +8,7 @@ function removeSummmon() {
 function removeButtons() {
     var center = document.querySelector("center");
     var buttonTable = document.getElementById("buttonTable");
+    buttonTable.classList.add('hide');
     if (buttonTable != null) {
         center.removeChild(buttonTable);
     }
@@ -305,6 +306,18 @@ function hideButtons(btnList){
 function revealButtons(btnList){
   for(var i = 0; i < btnList.length; i++){
         btnList[i].classList.remove("hide-button");
+  }
+}
+
+function hideElements(eList){
+  for(var i = 0; i < eList.length; i++){
+        eList[i].classList.add("hide-element");
+  }
+}
+
+function revealElements(eList){
+  for(var i = 0; i < eList.length; i++){
+        eList[i].classList.remove("hide-element");
   }
 }
 

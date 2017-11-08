@@ -351,3 +351,38 @@ function revealCursor(){
 
   camera.appendChild(cursor);
 }
+
+
+// Hide buttons
+function hideButtons(btnList){
+  for(var i = 0; i < btnList.length; i++){
+        btnList[i].classList.add("hide-button");
+  }
+}
+
+// Reveal Buttons
+function revealButtons(btnList){
+  for(var i = 0; i < btnList.length; i++){
+        btnList[i].classList.remove("hide-button");
+  }
+}
+
+function hideElements(eList){
+  for(var i = 0; i < eList.length; i++){
+        eList[i].classList.add("hide-element");
+  }
+}
+
+function revealElements(eList){
+  for(var i = 0; i < eList.length; i++){
+        eList[i].classList.remove("hide-element");
+  }
+}
+
+function hideTable(table){
+ table.classList.add("hide-table");
+}
+
+function revealTable(table){
+  table.classList.remove("hide-table");
+}

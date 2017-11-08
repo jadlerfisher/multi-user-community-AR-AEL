@@ -36,6 +36,10 @@ button.hide-button{
   display: none;
 }
 
+center.hide-center{
+  display: none;
+}
+
 table {
   margin: 4px 5%;
   width: 90%;

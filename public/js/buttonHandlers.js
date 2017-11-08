@@ -1,13 +1,17 @@
 //1) Remove: +, Add: Model, Shape
 // Press + button, allows users to choose model or shape to add
-function summonButtonPress() {
-    removeSummmon();
-    removeButtons();
+function plus() {
+    console.log('Something is happening');
+    var btns = document.getElementsByClassName("buttonSummon");
+    hideButtons(btns);
+    var buttonTable = document.getElementById("buttonTable");
+    hideTable(buttonTable);
+    
+    // removeSummmon();
+    // removeButtons();
     // createAddButtons();
     addButtonPress();
-    if (buttonExists) {
-      init();
-    }
+
 }
 
 // //Remove: Shape Buttons Add: Finish, Edit, Undo, Delete

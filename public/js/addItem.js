@@ -21,106 +21,107 @@ var categories = ['All', 'Shapes', 'Gaming', 'Animals', 'Food'];
 function addButtonPress() {
     currentFilter = "gallery";
     createAddItemsBox();
+
     // var body = document.getElementById("ui");
     // body.removeChild(document.getElementById("addButton"));
 }
 
 //Creates the Add Item Box
 function createAddItemsBox() {
-    var body = document.getElementById("ui");
-    // interpretList(itemSearchBoxStructure);
-        var center1 = document.createElement("center");
-        center1.setAttribute("id", "uiElem");
+//     var body = document.getElementById("ui");
+//     // interpretList(itemSearchBoxStructure);
+//         var center1 = document.createElement("center");
+//         center1.setAttribute("id", "uiElem");
 
-        var div1 = document.createElement("div");
-        div1.setAttribute("class", "boxAndButtons");
+//         var div1 = document.createElement("div");
+//         div1.setAttribute("class", "boxAndButtons");
 
-            var div2 = document.createElement("div");
-            div2.setAttribute("class", "objectAddBox");
+//             var div2 = document.createElement("div");
+//             div2.setAttribute("class", "objectAddBox");
 
-                var center = document.createElement("center");
+//                 var center = document.createElement("center");
 
-                    var div3 = document.createElement("div");
-                    div3.setAttribute("class", "searchbar");
+//                     var div3 = document.createElement("div");
+//                     div3.setAttribute("class", "searchbar");
 
-                        var div4 = document.createElement("div");
-                        div4.setAttribute("class", "dropdown");
+//                         var div4 = document.createElement("div");
+//                         div4.setAttribute("class", "dropdown");
 
-                            var button = document.createElement("button");
-                            button.setAttribute("class", "dropbtn");
-                            button.innerText = "All";
+//                             var button = document.createElement("button");
+//                             button.setAttribute("class", "dropbtn");
+//                             button.innerText = "All";
 
-                            var div5 = document.createElement("div");
-                            div5.setAttribute("id", "myDropdown");
-                            div5.setAttribute("class", "dropdown-content");
-
+//                             var div5 = document.createElement("div");
+//                             div5.setAttribute("id", "myDropdown");
+//                             div5.setAttribute("class", "dropdown-content");
+                                var dd = document.getElementById('myDropdown');
                                 for (i = 0; i < categories.length; i++) {
                                     currentCategory = categories[i];
                                     var a = document.createElement("a");
                                     a.setAttribute("onclick", "filter('" + currentCategory + "')");
                                     a.innerText = currentCategory;
-                                    div5.appendChild(a);
+                                    dd.appendChild(a);
                                 }
-                        div4.appendChild(button);
-                        div4.appendChild(div5);
+//                         div4.appendChild(button);
+//                         div4.appendChild(div5);
 
-                        var div6 = document.createElement("div");
-                        div6.setAttribute("class", "box");
+//                         var div6 = document.createElement("div");
+//                         div6.setAttribute("class", "box");
 
-                            var div7 = document.createElement("div");
-                            div7.setAttribute("class", "container-4");
+//                             var div7 = document.createElement("div");
+//                             div7.setAttribute("class", "container-4");
 
-                                var input = document.createElement("input");
-                                input.setAttribute("onkeypress", "checkKey(event)");
-                                input.setAttribute("type", "search");
-                                input.setAttribute("class", "search");
-                                input.setAttribute("id", "search");
-                                input.setAttribute("placeholder", "Search...");
+//                                 var input = document.createElement("input");
+//                                 input.setAttribute("onkeypress", "checkKey(event)");
+//                                 input.setAttribute("type", "search");
+//                                 input.setAttribute("class", "search");
+//                                 input.setAttribute("id", "search");
+//                                 input.setAttribute("placeholder", "Search...");
 
-                                var button2 = document.createElement("button");
-                                button2.setAttribute("onclick", "searchButtonPress()");
-                                button2.setAttribute("class", "icon");
+//                                 var button2 = document.createElement("button");
+//                                 button2.setAttribute("onclick", "searchButtonPress()");
+//                                 button2.setAttribute("class", "icon");
 
-                                    var icon = document.createElement("i");
-                                    icon.setAttribute("class", "fa fa-search");
+//                                     var icon = document.createElement("i");
+//                                     icon.setAttribute("class", "fa fa-search");
 
-                                button2.appendChild(icon);
+//                                 button2.appendChild(icon);
 
-                            div7.appendChild(input);
-                            div7.appendChild(button2);
+//                             div7.appendChild(input);
+//                             div7.appendChild(button2);
 
-                        div6.appendChild(div7);
+//                         div6.appendChild(div7);
 
-                    div3.appendChild(div4);
-                    div3.appendChild(div6);
-
-
-                    var div8 = document.createElement("div");
-                    div8.setAttribute("class", "objects");
-
-                center.appendChild(div3);
-                center.appendChild(div8);
+//                     div3.appendChild(div4);
+//                     div3.appendChild(div6);
 
 
-            div2.appendChild(center);
+//                     var div8 = document.createElement("div");
+//                     div8.setAttribute("class", "objects");
 
-            var button3 = document.createElement("button");
-            button3.setAttribute("class", "uploadButton");
-            button3.setAttribute("onclick", "uploadItemButtonPress()");
-            button3.innerText = "Upload";
+//                 center.appendChild(div3);
+//                 center.appendChild(div8);
 
-            var button4 = document.createElement("button");
-            button4.setAttribute("class", "cancelButton");
-            button4.setAttribute("onclick", "cancelAddButtonPress()");
-            button4.innerText = "Cancel";
 
-        div1.appendChild(div2);
-        div1.appendChild(button3);
-        div1.appendChild(button4);
+//             div2.appendChild(center);
 
-    center1.appendChild(div1);
-    body.appendChild(center1);
+//             var button3 = document.createElement("button");
+//             button3.setAttribute("class", "uploadButton");
+//             button3.setAttribute("onclick", "uploadItemButtonPress()");
+//             button3.innerText = "Upload";
 
+//             var button4 = document.createElement("button");
+//             button4.setAttribute("class", "cancelButton");
+//             button4.setAttribute("onclick", "cancelAddButtonPress()");
+//             button4.innerText = "Cancel";
+
+//         div1.appendChild(div2);
+//         div1.appendChild(button3);
+//         div1.appendChild(button4);
+
+//     center1.appendChild(div1);
+//     body.appendChild(center1);
+    document.getElementById('uiElem').classList.remove('hide-center');
     displayAllItems();
 }
 
@@ -131,7 +132,8 @@ function removeAddItemsBox() {
 
 //Displays a single item in Add item box
 function createGalleryItem(classString, thisFunction, imageSource, name) {
-    var scene = document.getElementsByClassName("Objects")[0];
+
+    var scene = document.getElementsByClassName("objects")[0];
 
     var div1 = document.createElement("div");
     div1.setAttribute("class", classString);
