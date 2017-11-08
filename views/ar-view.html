@@ -131,10 +131,10 @@
         <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox"> 
             <div id = "editOptionsBox" class="editOptionsBox">
-              <button class="editOptionsButton" onclick="stateChange('stateC1')">Move</button>
-              <button class="editOptionsButton" onclick="stateChange('stateC2')">Rotate</button>
-              <button class="editOptionsButton" onclick="stateChange('stateC3')">Resize</button>
-              <button class="editOptionsButton" onclick="stateChange('stateC4')">Color</button>
+              <button class="editOptionsButton" onclick="moveButtonPress()">Move</button>
+              <button class="editOptionsButton" onclick="rotateButtonPress()">Rotate</button>
+              <button class="editOptionsButton" onclick="sizeButtonPress()">Resize</button>
+              <button class="editOptionsButton" onclick="colorButtonPress()">Color</button>
             </div>
 
             <div class="finalOptionsButtonBox">
@@ -251,7 +251,7 @@
         <center id = "editBoxCenter" class="editBoxCenter">
             <div class="editingBox">
               <div class="editOptionsBox">
-                <input class="jscolor {onFineChange:'update(this)'}" value="cc66ff"> <!-- Color requires js-->
+                <!-- <input class="jscolor {onFineChange:'update(this)'}" value="cc66ff">  Color requires js-->
               </div>
               <div class="finalOptionsButtonBox">
                 <button class="completeButton" onclick="finishEditingAttribute()">

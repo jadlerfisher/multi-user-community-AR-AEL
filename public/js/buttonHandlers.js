@@ -113,12 +113,12 @@ function addEntity() {
 //     createOptions();
 // }
 
-// //7) Add +/- X, Y, Z, and Finish, Remove: Move, Rotate, Size, Color, Finish
-// //User has chosen to move their shape
-// function moveButtonPress() {
-//     removeButtons();
-//     createMoveButtons();
-// }
+function moveButtonPress() {
+  stateChange('stateC1');
+  var item = document.getElementById("item");
+  var position = [item.getAttribute("position").x, item.getAttribute("position").y, item.getAttribute("position").z];
+  changes.push(["move", position]);
+}
 
 
 // //8)Remove +/- X, Y, Z, Finish, Add: Move, Rotate, Size, Color, Finish
@@ -128,12 +128,12 @@ function addEntity() {
 //     createEditButtons();
 // }
 
-// //9) Add Rotate CounterClockwise, Clockwise, Finish, Remove: Move, Rotate, Size, Color, Finish
-// //User has chosen to rotate shape
-// function rotateButtonPress() {
-//     removeButtons();
-//     createRotateButtons();
-// }
+function rotateButtonPress() {
+  stateChange('stateC2');
+  var origRotate = document.getElementById("item").getAttribute("rotation").y;
+  console.log(origRotate);
+  changes.push(["rotate", origRotate]);
+}
 
 
 // //10)Add Move, Rotate, Size, Color, Finish, Remove: <-, ->, Finish
@@ -143,12 +143,22 @@ function addEntity() {
 //     createEditButtons();
 // }
 
-// //11)Add Color Picker, Finish, Remove: Move, Rotate, Size, Color, Finish
-// //User has chosen to change the shape color
-// function colorButtonPress() {
-//     removeButtons();
-//     createColorButtons();
-// }
+function colorButtonPress() {
+  stateChange('stateC4');
+  var div = document.getElementsByClassName("editOptionsBox")[4];
+  //Creates JsColor field
+  var input = document.createElement('INPUT')
+  var picker = new jscolor(input)
+
+  //Gets item's color
+  var origColor = document.getElementById("item").getAttribute("material").color;
+  changes.push(["color", origColor]);
+
+  //Changes text in field input to appropriate string
+  picker.fromString(origColor);
+  input.setAttribute("class", "colorPicker");
+  div.appendChild(input);
+}
 
 
 // //12) Remove COlor Picker, FInish, Add: Move, Rotate, Size, Color, Finish
@@ -158,11 +168,12 @@ function addEntity() {
 //     createEditButtons();
 // }
 
-// //User has chosen to change shape size
-// function sizeButtonPress() {
-//     removeButtons();
-//     createSizeButtons();
-// }
+function sizeButtonPress() {
+  stateChange('stateC3');
+  var item = document.getElementById("item");
+  var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
+  changes.push(["size", sizeInfo]);
+}
 
 
 // //User is done changing size
