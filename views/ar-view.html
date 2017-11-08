@@ -192,7 +192,12 @@
 
       </a-assets>
       <!-- <a-sky src="#sky"></a-sky> -->
-
+      <a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" camera position="0 1.3 0" wasd-controls look-controls>
+                <a-entity cursor id="cursor"
+                  geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.016"
+                  material="color: #EEE"
+                  position="0 0 -1"></a-entity>
+      </a-entity>
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
 
       <!-- <ar-geopose id="GT" lla="-84.394539 33.772501" userotation="false">
