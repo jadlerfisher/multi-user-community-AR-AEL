@@ -11,7 +11,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
   <!-- <script src="https://unpkg.com/networked-aframe@0.3.2/dist/networked-aframe.js"></script> -->
   <!-- <script src="easyrtc/easyrtc.js"></script> -->
-  <script src="https://cdn.rawgit.com/haydenjameslee/networked-aframe/v0.1.0/dist/networked-aframe.js"></script>
+  <!-- <script src="https://cdn.rawgit.com/haydenjameslee/networked-aframe/v0.1.0/dist/networked-aframe.js"></script> -->
+  <script src="library/networked-aframe.js"></script>
   <script src="https://cdn.rawgit.com/priologic/easyrtc/v1.1.0/api/easyrtc.js"></script>
 
   <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
@@ -81,7 +82,7 @@
     </div> -->
 
     <center id="ui">
-       <button onclick="plus()" type="button" class="buttonSummon">+</button>
+       <button onclick="summonButtonPress()" type="button" class="buttonSummon">+</button>
        <table id="buttonTable">
           <tr>
             <td><button onclick="removeButtonPress()" type="button" class="optionButton hide-button">Remove</button></td>
@@ -92,7 +93,7 @@
         <div class="boxAndButtons">
           <div class="objectAddBox">
             <center>
-              <div class="searchbar"> 
+              <div class="searchbar">
                 <div class="dropdown">
                   <button class="dropbtn">All</button>
                   <div id="myDropdown" class="dropdown-content">
@@ -198,7 +199,7 @@
                   material="color: #EEE"
                   position="0 0 -1"></a-entity>
       </a-entity>
-      
+
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
 
       <!-- <ar-geopose id="GT" lla="-84.394539 33.772501" userotation="false">

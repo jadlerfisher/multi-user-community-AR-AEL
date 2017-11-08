@@ -236,12 +236,12 @@ function filter(category) {
             var currentItem = items2[i];
             currentItem.setAttribute("style","display: inline");
         }
-    } 
+    }
 }
-// var itemSearchBoxStructure = ["center", ["id", "uiElem"], 
+// var itemSearchBoxStructure = ["center", ["id", "uiElem"],
 //                                 ["child", ["div", ["class", "boxAndButtons"],
-//                                     ["child", ["div", ["class", "objectAddBox"], 
-//                                         ["child", ["center", 
+//                                     ["child", ["div", ["class", "objectAddBox"],
+//                                         ["child", ["center",
 //                                             ["child", ["div", ["class", "searchbar"],
 //                                                 ["child", ["div", ["class", "dropdown"],
 //                                                     ["child", ["button", ["class", "dropbtn"], ["innerText", "All"]]],
@@ -253,10 +253,10 @@ function filter(category) {
 //                                                         ["child", ["a", ["onclick", "filter(Food)"], ["innerText", "Food"]]],
 //                                                     ]]
 //                                                 ]],
-//                                                 ["child", ["div", ["class", "box"], 
+//                                                 ["child", ["div", ["class", "box"],
 //                                                     ["child", ["div", ["class", "container-4"],
 //                                                         ["child", ["input", ["onkeypress", "checkKey(event)"], ["type", "search"], ["class", "search"], ["id", "search"], ["placeholder", "Search..."]]],
-//                                                         ["child", ["button", ["class", "icon"], ["onclick", "searchButtonPress()"], 
+//                                                         ["child", ["button", ["class", "icon"], ["onclick", "searchButtonPress()"],
 //                                                             ["child", ["i", ["class", "fa fa-search"]]]
 //                                                         ]]
 //                                                     ]]
@@ -451,7 +451,7 @@ function createEditBox(type) {
 
                 var button = document.createElement("button");
                 button.setAttribute("class", "moveButtons");
-                button.setAttribute("onclick", "move('x', 'down', false)");
+                button.setAttribute("onclick", "move('x', '-1')");
                      var icon = document.createElement("i");
                     icon.setAttribute("class", "fa fa-arrow-left");
                     icon.setAttribute("aria-hidden", "true");
@@ -460,7 +460,7 @@ function createEditBox(type) {
 
                 button = document.createElement("button");
                 button.setAttribute("class", "moveButtons");
-                button.setAttribute("onclick", "move('y', 'up', false)");
+                button.setAttribute("onclick", "move('y', '+1')");
                     var icon = document.createElement("i");
                     icon.setAttribute("class", "fa fa-arrow-up");
                     icon.setAttribute("aria-hidden", "true");
@@ -469,7 +469,7 @@ function createEditBox(type) {
 
                 button = document.createElement("button");
                 button.setAttribute("class", "moveButtons");
-                button.setAttribute("onclick", "move('z', 'up', false)");
+                button.setAttribute("onclick", "move('z', '+1')");
                     var icon = document.createElement("i");
                     icon.setAttribute("class", "fa fa-plus");
                     icon.setAttribute("aria-hidden", "true");
@@ -478,7 +478,7 @@ function createEditBox(type) {
 
                 button = document.createElement("button");
                 button.setAttribute("class", "moveButtons");
-                button.setAttribute("onclick", "move('x', 'up', false)");
+                button.setAttribute("onclick", "move('x', '+1')");
                     var icon = document.createElement("i");
                     icon.setAttribute("class", "fa fa-arrow-right");
                     icon.setAttribute("aria-hidden", "true");
@@ -487,7 +487,7 @@ function createEditBox(type) {
 
                 button = document.createElement("button");
                 button.setAttribute("class", "moveButtons");
-                button.setAttribute("onclick", "move('y', 'down', false)");
+                button.setAttribute("onclick", "move('y', '-1')");
                     var icon = document.createElement("i");
                     icon.setAttribute("class", "fa fa-arrow-down");
                     icon.setAttribute("aria-hidden", "true");
@@ -496,16 +496,15 @@ function createEditBox(type) {
 
                 button = document.createElement("button");
                 button.setAttribute("class", "moveButtons");
-                button.setAttribute("onclick", "move('z', 'down', false)");
+                button.setAttribute("onclick", "move('z', '-1')");
                     var icon = document.createElement("i");
                     icon.setAttribute("class", "fa fa-minus");
                     icon.setAttribute("aria-hidden", "true");
                     button.appendChild(icon);
                 div2.appendChild(button);
 
-                var item = document.getElementById("item");
-                var position = [item.getAttribute("position").x, item.getAttribute("position").y, item.getAttribute("position").z];
-                changes.push(["move", position]);
+                // var position = [object.getAttribute("position").x, object.getAttribute("position").y, object.getAttribute("position").z];
+                // changes.push(["move", object.getAttribute('position')]);
 
             } else if (type === "rotate") {
                 var button = document.createElement("button");
@@ -665,9 +664,28 @@ function cancelEditingAttribute() {
         undoButtonPress();
 }
 
-// function move(axis, direction) {
-//     console.log("MOVE: " + axis + " " + direction);
-// }
+/*
+  Moves an object and synchronizes network
+  @params axis: 'x', 'y', 'z' and value: '+1', '-1'
+*/
+function move(axis, value) {
+  // Get the first object's id for now.
+  // TODO: need to pick an object from user selection
+  var itemId = Object.keys(NAF.entities.entities)[2];
+  var object = NAF.entities.getEntity(itemId);
+  var val = parseInt(value);
+
+  // Update position
+  object.getAttribute('position')[axis] += val;
+
+  var entityData = {
+    networkId: itemId,
+    owner: NAF.clientId,
+    template: "#pokemon-model",
+    components: { position: object.getAttribute('position') }
+  };
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
+}
 
 // function rotate(axis, direction) {
 //     console.log("Rotate: " + axis + " " + direction);
