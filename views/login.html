@@ -40,9 +40,10 @@
           if (xhr.readyState == 4) {
             if (xhr.status == 200) {
               // Redirect to map page if successfully registered
-              if (xhr.response) {
-                var redirect_url = JSON.parse(xhr.response).redirect_url;
-                window.location.replace(window.location.origin + '/' + redirect_url);
+              var response = JSON.parse(xhr.response);
+
+              if (Object.keys(response).length) {
+                window.location.replace(window.location.origin + '/' + response.redirect_url);
               } else {
                 window.location.replace(window.location.origin + '/maps');
               }

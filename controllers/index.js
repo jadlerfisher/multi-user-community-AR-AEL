@@ -23,7 +23,10 @@ router.post('/login', function(req, res) {
     	if (error) {
     		return res.status(500).send(error.message);
     	} else {
-    		return res.status(200).send({redirect_url: req.session.redirect_url});
+        var redirect_url = req.session.redirect_url;
+        req.session.redirect_url = '';
+
+    		return res.status(200).send({redirect_url: redirect_url});
       }
     }
   );
