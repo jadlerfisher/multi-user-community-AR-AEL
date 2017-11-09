@@ -83,15 +83,19 @@
 
     <center id="ui">
 
+      <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
        <button onclick="stateChange('stateB')" type="button" class="buttonSummon">+</button>
        <table id="buttonTable">
           <tr>
             <td><button onclick="removeButtonPress()" type="button" class="optionButton hide-button">Remove</button></td>
+            <!--<td><button onclick="gravityOnButtonPress()" type = "button" class = "buttonGravity">Gravity</button></td> -->
           </tr>
        </table>
       </div>
+      <!-- END STATE A -->
 
+      <!-- STATE B: UI for adding a shape / model -->
       <div id="stateB" class="hide-state">
 
          <!-- When addEntity() is pressed, uiElem is shown -->
@@ -125,10 +129,9 @@
           </div>
         </center>
       </div>
-      <!-- End uiELem -->
+      <!-- END STATE B -->
 
-
-      <!-- <button onclick="gravityOnButtonPress()" type = "button" class = "buttonGravity">Gravity</button> -->
+      <!-- STATE C: Editing portion to move/rotate/resize/recolor entities -->
       <div id="stateC" class="hide-state">
         <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
@@ -155,7 +158,9 @@
           </div>
         </center>
       </div>
+      <!-- END STATE C -->
 
+      <!-- STATE C1: MOVE an entity -->
       <div id="stateC1" class="hide-state">
         <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
@@ -190,7 +195,9 @@
           </div>
         </center>
       </div>
+      <!-- END STATE C1 -->
 
+      <!-- STATE C2: ROTATE an entity -->
       <div id="stateC2" class="hide-state">
       <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
@@ -225,7 +232,9 @@
           </div>
         </center>
       </div>
+      <!-- END STATE C2 -->
 
+      <!-- STATE C3: RESIZE an entity -->
       <div id="stateC3" class="hide-state">
         <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
@@ -248,7 +257,9 @@
           </div>
         </center>
       </div>
+      <!-- END STATE C3 -->
 
+      <!-- STATE C4: RECOLOR an entity -->
       <div id="stateC4" class="hide-state">
         <center id = "editBoxCenter" class="editBoxCenter">
             <div class="editingBox">
@@ -266,7 +277,7 @@
             </div>
           </center>
       </div>
-
+      <!-- END STATE C4 -->
 
     </center>
     <a-scene physics-world="gravity: 0 -9.81 0" network-scene="
