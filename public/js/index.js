@@ -16,9 +16,9 @@ function init() {
     userColor = randomColor();
     //document.querySelector("ar-scene").removeChild(document.getElementsByClassName("a-enter-vr")[0]);
     buttonExists = false;
-    
+
     // fill in the gallery for adding models / entities
-    
+
     var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"]];
     var categories = ['All', 'Shapes', 'Gaming', 'Animals', 'Food', 'New Category'];
     fillDropDown(categories);
@@ -30,9 +30,9 @@ function init() {
 }
 
 function chooseMaterial() {
-  var item = document.getElementById("item");
-  var obj = models[currentObj] + "; " + materials[currentObj];
-  item.setAttribute("obj-model", obj);
+  // var item = document.getElementById("item");
+  // var obj = models[currentObj] + "; " + materials[currentObj];
+  // item.setAttribute("obj-model", obj);
 
   colorMode = "material";
   removeEditingOptionsBox();
@@ -67,7 +67,6 @@ function createModel(i) {
       position: '0 0 0',
       rotation: '0 0 0',
       scale: '1 1 1',
-      material: "color: #fff"
     }
   };
 
@@ -120,91 +119,98 @@ function disappear() {
   document.querySelector("a-scene").removeChild(document.getElementById("item"));
 }
 
-/**
- * moves the position of the entity in the direction if input 'direction'
- * @param {String} axis - 'x' or 'y'
- * @param {String} direction - 'up' or 'down'
-*/
-function move(axis, direction, undoing) {
-  var s = document.getElementById("item");
-  var scene = document.querySelector("a-scene");
+// Get the first object's id for now.
+// TODO: need to pick an object from user selection
+function getObjectId() {
+  var objectId = Object.keys(NAF.entities.entities)[2];
+  return objectId;
+}
 
-  //create variables of current coordinate position of the sphere
-  var _x = s.getAttribute('position').x;
-  var _y = s.getAttribute('position').y;
-  var _z = s.getAttribute('position').z;
-  // change the coordinate position of the sphere based on input 'axis' in the direction of input 'direction'
-  switch (axis) {
-    case "x":
-      s.setAttribute('position', { x: direction === 'up' ? _x + 0.2 : _x - 0.2, y: _y, z: _z });
-      break;
-    case "y":
-      s.setAttribute('position', { x: _x, y: direction === 'up' ? _y + 0.2 : _y - 0.2, z: _z });
-      break;
-    case "z":
-      s.setAttribute('position', { x: _x, y: _y, z: direction === 'up' ? _z + 0.2 : _z - 0.2 });
-      break;
-  }
+/**
+ * moves the position of the entity in the direction
+ * @param {String} axis - 'x' or 'y'
+ * @param {String} value - +1 or -1
+*/
+function move(axis, value, undoing) {
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+
+  // Update position
+  object.getAttribute('position')[axis] += value;
+
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: "#pokemon-model",
+    components: { position: object.getAttribute('position') }
+  };
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
 /**
  * rotates the entity
+ * @param {String} axis - 'x' or 'y'
  * @param {int} degrees turned
 */
 function rotate(axis, degrees, undoing) {
-   var s = document.getElementById("item");
-  var scene = document.querySelector("a-scene");
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
 
-  //create variables of current coordinate position of the sphere
-  var _x = s.getAttribute('rotation').x;
-  var _y = s.getAttribute('rotation').y;
-  var _z = s.getAttribute('rotation').z;
-  // change the coordinate position of the sphere based on input 'axis' in the direction of input 'direction'
-  switch (axis) {
-    case "x":
-      s.setAttribute('rotation', { x: _x  + degrees, y: _y, z: _z });
-      break;
-    case "y":
-      s.setAttribute('rotation', { x: _x, y: _y + degrees, z: _z });
-      break;
-    case "z":
-      s.setAttribute('rotation', { x: _x, y: _y, z: _z + degrees});
-      break;
-  }
+  // Update rotation
+  object.getAttribute('rotation')[axis] += degrees;
+
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: "#pokemon-model",
+    components: { rotation: object.getAttribute('rotation') }
+  };
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
 /**
  * resizes the entity
- * @param {int} amount changed
+ * @param {int} value changed
  */
-function resize(change, undoing) {
-    var s = document.getElementById("item");
-    var scene = document.querySelector("a-scene");
-    var sX = parseFloat(s.getAttribute("scale").x);
-    var sY = parseFloat(s.getAttribute("scale").y);
-    var sZ = parseFloat(s.getAttribute("scale").z);
-    var sX_change = sX + change;
-    var sY_change = sY + change;
-    var sZ_change = sZ + change;
-    if (!(sX_change <= 0) && !(sY_change <= 0) && !(sZ_change <= 0)) {
-      s.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
+function resize(value, undoing) {
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+
+    // Update scale
+    object.getAttribute('scale').x += value;
+    object.getAttribute('scale').y += value;
+    object.getAttribute('scale').z += value;
+
+    var entityData = {
+      networkId: objectId,
+      owner: NAF.clientId,
+      template: "#pokemon-model",
+      components: { scale: object.getAttribute('scale') }
+    };
+
+    if (object.getAttribute('scale').x > 0) {
+      NAF.entities.updateEntity(NAF.clientId, null, entityData);
   }
 }
 
-//Changes the shape's color
+/**
+ * Changes the shape's color
+ * This function gets called every time a user picks a color from color palette
+ * @param {String} jscolor an object of jscolor
+ */
 function update(jscolor) {
-    // 'jscolor' instance can be used as a string
-    console.log(jscolor);
-    var item = document.getElementById("item");
-    if (item.getAttribute('class') === 'model') {
-      //var objModel = item.getAttribute("obj-model").obj;
-      //item.setAttribute("obj-model", "obj: objModel");
-      item.setAttribute("material", "color: #" + jscolor);
-      console.log(jsColor);
-    } else {
-      item.setAttribute("color", '#' + jscolor);
-      console.log(jsColor);
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: "#pokemon-model",
+    components: {
+      material: 'color: ' + jscolor.toHEXString(),
     }
+  };
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
 //Set shape color when undo is called
@@ -407,4 +413,3 @@ function hideCenter(center){
 function revealCenter(center){
   center.classList.remove("hide-center");
 }
-

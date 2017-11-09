@@ -2982,7 +2982,12 @@
 							childEl.setAttribute(schema.component, data);
 						}
 	        } else {
-	          this.el.setAttribute(key, data);
+						// Material contents need to be updated in child element.
+						if (key === "material" && (typeof data === 'string') && data.indexOf("color") != -1 && this.el.firstChild) {
+							this.el.firstChild.setAttribute(key, data);
+						} else {
+							this.el.setAttribute(key, data);
+						}
 	        }
 	      }
 	    }

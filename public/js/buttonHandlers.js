@@ -1,168 +1,63 @@
-//1) Remove: +, Add: Model, Shape
-// Press + button, allows users to choose model or shape to add
-function addEntity() {
-    hideCursor();
-    stateChange('stateB');
-    console.log('Something is happening');
+function moveButtonPress() {
+  stateChange('stateC1');
+  // TODO: Need to pick an object that user selected and keep the changes
+  // var item = document.getElementById("item");
+  // var position = [item.getAttribute("position").x, item.getAttribute("position").y, item.getAttribute("position").z];
+  // changes.push(["move", position]);
+  console.log('Entity is being moved.');
+}
 
-    // // Hide addEntity button
-    // var btns = document.getElementsByClassName("buttonSummon");
-    // hideButtons(btns);
+function rotateButtonPress() {
+  stateChange('stateC2');
+  // TODO: Need to pick an object that user selected and keep the changes
+  // var origRotate = document.getElementById("item").getAttribute("rotation").y;
+  // console.log(origRotate);
+  // changes.push(["rotate", origRotate]);
+  console.log('Entity is being rotated.');
+}
 
-    // // Hide table (with remove button in it)
-    // var buttonTable = document.getElementById("buttonTable");
-    // hideTable(buttonTable);
+function colorButtonPress() {
+  stateChange('stateC4');
+  var div = document.getElementsByClassName("editOptionsBox")[4];
+  //Creates JsColor field
+  var input = document.createElement('INPUT')
+  var picker = new jscolor(input)
 
-    // // removeSummmon();
-    // // removeButtons();
-    // // createAddButtons();
+  // TODO: Need to pick an object that user selected
+  //Gets item's color
+  // var origColor = document.getElementById("item").getAttribute("material").color;
+  // changes.push(["color", origColor]);
+  //Changes text in field input to appropriate string
+  // picker.fromString(origColor);
 
-    // // Reveal the uiElem
-    // addButtonPress("gallery");
+  picker.fromString('#fff');
+  input.setAttribute("class", "colorPicker");
+  div.appendChild(input);
+
+  console.log('Entity is being recolored.');
+}
+
+function cancelEditingAttribute() {
+  stateChange('stateC');
+  undoButtonPress();
+  console.log('Canceled editing.');
+}
+
+function deleteButtonPress() {
+    stateChange('stateA');
+    disappear();
+    console.log('Entity is being deleted.');
 
 }
 
-// //Remove: Shape Buttons Add: Finish, Edit, Undo, Delete
-// //Creates a shape based on which button in pressed
-// function shapeButtonPress(i) {
-//   removeButtons();
-//   createOptions();
-//   display(i);
-// }
-
-// //User chose to add a model, will display model options
-// function modelButtonPress1() {
-//   removeButtons();
-//   createModelButtons();
-// }
-
-// //User chose to add a shape, will display shape options
-// function shapeButtonPress1() {
-//   removeButtons();
-//   createShapeButtons();
-// }
-
-// //Creates a model based on which button is pressed
-// function modelButtonPress(i) {
-//   removeButtons();
-//   createOptions();
-//   displayModel(i);
-// }
-
-// //2)Remove Edit, Undo, Delete, Finish
-// //Final finish, user is done with shape
-// function finishButtonPress1() {
-//     removeButtons();
-//     var item = document.getElementById("item");
-//     itemNum++;
-//     item.setAttribute("id", itemNum);
-//     items.push(itemNum);
-//     createSummonButton();
-//     createRemoveButton();
-// }
-
-//3) Add: +, Remove: Edit, Undo, Delete, Finish, Also: Delete Sphere
-// function deleteButtonPress() {
-//     removeButtons();
-//     createSummonButton();
-//     createRemoveButton();
-//     disappear();
-// }
-
-// //4)Undo
-// //Undo most recent edit
-// function undoButtonPress() {
-//   console.log("Undo!");
-//   if (changes.length > 0) {
-//     var lastMove = changes.pop(changes.length - 1);
-//     console.log(lastMove[0]);
-//     if (lastMove[0] === "move") {
-//       setPosition(lastMove[1][0], lastMove[1][1], lastMove[1][2]);
-//     } else if (lastMove[0] === "rotate") {
-//       setRotation(lastMove[1]);
-//     } else if (lastMove[0] === "size") {
-//         var str = "";
-//         for (var i = 0; i < lastMove[1].length - 3; i++) {
-//             str = str + lastMove[1][i] + " ";
-//         }
-//         console.log(str);
-//       setSize(lastMove[1]);
-//     } else if (lastMove[0] === "color") {
-//         setColor(lastMove[1]);
-//     }
-//   }
-// }
-
-//User has chosen to add their own model
-// function addNewModelButtonPress() {
-//     removeButtons();
-//     createNewModelInput();
-// }
-
-// //5) Add: Move, Rotate, Size, Color, Finish, Remove: Edit, Delete, Undo, Finish
-// //User has chosen to edit their shape
-// function editButtonPress() {
-//     removeButtons();
-//     createEditButtons();
-// }
-
-// //6)Add: Edit, Undo, Delete, Finish, Remove: Move, Rotate, Size, Color, Finish
-// //User is done editing their shape
-// function finishButtonPress2() {
-//     removeButtons();
-//     createOptions();
-// }
-
-// //7) Add +/- X, Y, Z, and Finish, Remove: Move, Rotate, Size, Color, Finish
-// //User has chosen to move their shape
-// function moveButtonPress() {
-//     removeButtons();
-//     createMoveButtons();
-// }
-
-
-// //8)Remove +/- X, Y, Z, Finish, Add: Move, Rotate, Size, Color, Finish
-// //User is done moving their shape
-// function finishButtonPress3() {
-//     removeButtons();
-//     createEditButtons();
-// }
-
-// //9) Add Rotate CounterClockwise, Clockwise, Finish, Remove: Move, Rotate, Size, Color, Finish
-// //User has chosen to rotate shape
-// function rotateButtonPress() {
-//     removeButtons();
-//     createRotateButtons();
-// }
-
-
-// //10)Add Move, Rotate, Size, Color, Finish, Remove: <-, ->, Finish
-// //User is done rotating shape
-// function finishButtonPress4() {
-//     removeButtons();
-//     createEditButtons();
-// }
-
-// //11)Add Color Picker, Finish, Remove: Move, Rotate, Size, Color, Finish
-// //User has chosen to change the shape color
-// function colorButtonPress() {
-//     removeButtons();
-//     createColorButtons();
-// }
-
-
-// //12) Remove COlor Picker, FInish, Add: Move, Rotate, Size, Color, Finish
-// //User is done changing shape color
-// function finishButtonPress5() {
-//     removeButtons();
-//     createEditButtons();
-// }
-
-// //User has chosen to change shape size
-// function sizeButtonPress() {
-//     removeButtons();
-//     createSizeButtons();
-// }
+function sizeButtonPress() {
+  stateChange('stateC3');
+  // TODO: Need to pick an object that user selected and keep the changes
+  // var item = document.getElementById("item");
+  // var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
+  // changes.push(["size", sizeInfo]);
+  console.log('Entity is being resized');
+}
 
 
 // //User is done changing size
@@ -182,17 +77,11 @@ function addEntity() {
 
 //User has chosen to remove an object from the scene
 function removeButtonPress() {
-    //removeButtons();
-    document.querySelector("a-scene").removeChild(selectedItem);
-    //addRemoveButtons();
+  // TODO: Need to pick an object that user selected and remove it
+  // document.querySelector("a-scene").removeChild(selectedItem);
+  // console.log(selectedItem.getAttribute('id') + " was removed from scene.");
 }
 
-//User has chosen to now not remove an object from the scene
-// function backButtonPress() {
-//     removeButtons();
-//     createSummonButton();
-//     createRemoveButton();
-// }
 
 //Resets the gravity button upon press
 function gravityOffButtonPress() {

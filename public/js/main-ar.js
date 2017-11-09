@@ -18,11 +18,7 @@ components: [
   'position',
   'rotation',
   'scale',
-  {
-    selector: '.model',
-    component: 'material',
-    property: 'color'
-  }
+  'material'
 ]
 });
 
