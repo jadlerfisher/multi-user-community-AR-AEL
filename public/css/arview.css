@@ -36,13 +36,6 @@ button.hide-button{
   display: none;
 }
 
-.hide-element{
-  display: none;
-}
-
-center.hide-center{
-  display: none;
-}
 
 table {
   margin: 4px 5%;
@@ -57,10 +50,6 @@ table {
 td, th {
   text-align: center;
   width: 33%;
-}
-
-table.hide-table{
-  display: none;
 }
 
 .colorPicker{

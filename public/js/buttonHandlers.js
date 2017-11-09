@@ -3,23 +3,7 @@
 function addEntity() {
     hideCursor();
     stateChange('stateB');
-    console.log('Something is happening');
-
-    // // Hide addEntity button
-    // var btns = document.getElementsByClassName("buttonSummon");
-    // hideButtons(btns);
-
-    // // Hide table (with remove button in it)
-    // var buttonTable = document.getElementById("buttonTable");
-    // hideTable(buttonTable);
-
-    // // removeSummmon();
-    // // removeButtons();
-    // // createAddButtons();
-
-    // // Reveal the uiElem
-    // addButtonPress("gallery");
-
+    console.log('Entity is being added.');
 }
 
 // //Remove: Shape Buttons Add: Finish, Edit, Undo, Delete
@@ -118,6 +102,7 @@ function moveButtonPress() {
   var item = document.getElementById("item");
   var position = [item.getAttribute("position").x, item.getAttribute("position").y, item.getAttribute("position").z];
   changes.push(["move", position]);
+  console.log('Entity is being moved.');
 }
 
 
@@ -133,6 +118,7 @@ function rotateButtonPress() {
   var origRotate = document.getElementById("item").getAttribute("rotation").y;
   console.log(origRotate);
   changes.push(["rotate", origRotate]);
+  console.log('Entity is being rotated.');
 }
 
 
@@ -158,16 +144,21 @@ function colorButtonPress() {
   picker.fromString(origColor);
   input.setAttribute("class", "colorPicker");
   div.appendChild(input);
+
+  console.log('Entity is being recolored.');
 }
 
 function cancelEditingAttribute() {
   stateChange('stateC');
   undoButtonPress();
+  console.log('Canceled editing.');
 }
 
 function deleteButtonPress() {
     stateChange('stateA');
     disappear();
+    console.log('Entity is being deleted.');
+
 }
 
 function sizeButtonPress() {
@@ -175,6 +166,7 @@ function sizeButtonPress() {
   var item = document.getElementById("item");
   var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
   changes.push(["size", sizeInfo]);
+  console.log('Entity is being resized');
 }
 
 
@@ -195,9 +187,8 @@ function sizeButtonPress() {
 
 //User has chosen to remove an object from the scene
 function removeButtonPress() {
-    //removeButtons();
     document.querySelector("a-scene").removeChild(selectedItem);
-    //addRemoveButtons();
+    console.log(selectedItem + " was removed from scene.");
 }
 
 //User has chosen to now not remove an object from the scene

@@ -197,55 +197,11 @@ function filter(category) {
 //     return currentItem;
 // }
 
-
-
-//Editing Box Stuff
-
 function displayModel(i) {
-    // removeAddItemsBox();
-    // document.getElementById('uiElem').classList.add('hide-center');
-    // console.log(i);
     stateChange('stateC');
     createModel(i);
-
-    // reveal editing options for model
-    // revealCenter(document.getElementById('editBoxCenter'));
 }
 
-// function moveButtonPress() {
-//     // removeEditingOptionsBox();
-//     hideCenter(document.getElementById('editOptionsBox'));
-//     createEditBox("move");
-// }
-
-// function rotateButtonPress() {
-//     removeEditingOptionsBox();
-//     createEditBox("rotate");
-// }
-
-// function resizeButtonPress() {
-//     removeEditingOptionsBox();
-//     createEditBox("resize");
-// }
-
-// function colorButtonPress() {
-//     removeEditingOptionsBox();
-//     createEditBox("color");
-// }
-
-function finishButtonPress() {
-    // createSummonButton();
-    revealButtons(document.getElementsByClassName('buttonSummon'));
-    revealTable(document.getElementById("buttonTable"));
-    hideCenter(document.getElementById('editBoxCenter'));
-    revealCursor();
-    // removeEditingOptionsBox();
-    // var item = document.getElementById("item");
-    // itemNum++;
-    // item.setAttribute("id", itemNum);
-    // items.push(itemNum);
-    // createRemoveButton();
-}
 
 function undoButtonPress() {
     console.log("Undo!");
@@ -269,68 +225,3 @@ function undoButtonPress() {
   }
 }
 
-//Create one of the smaller edit boxes
-function createEditBox(type) {
-//     var center = document.getElementsByClassName("editBoxCenter")[0];
-//     if (type === "move") {
-//         var item = document.getElementById("item");
-//         var position = [item.getAttribute("position").x, item.getAttribute("position").y, item.getAttribute("position").z];
-//         changes.push(["move", position]);
-
-//     } else if (type === "rotate") {
-//         var origRotate = document.getElementById("item").getAttribute("rotation").y;
-//         console.log(origRotate);
-//         changes.push(["rotate", origRotate]);
-
-//     } else if (type === "resize") {
-//         var item = document.getElementById("item");
-//         var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
-//         changes.push(["size", sizeInfo]);
-
-//     } else if (type === "color") {
-//         var div1 = document.createElement("div");
-//         div1.setAttribute("class", "editingBox");
-
-//             var div2 = document.createElement("div");
-//             div2.setAttribute("class", "editOptionsBox");
-//                 //Creates JsColor field
-//                 var input = document.createElement('INPUT')
-//                 var picker = new jscolor(input)
-
-//                 //Gets item's color
-//                 var origColor = document.getElementById("item").getAttribute("material").color;
-//                 changes.push(["color", origColor]);
-
-//         //Changes text in field input to appropriate string
-//         picker.fromString(origColor);
-//         input.setAttribute("class", "colorPicker");
-//         div2.appendChild(input);
-//         div1.appendChild(div2);
-
-//         center.appendChild(div1);
-//     }
-}
-
-
-// function finishEditingAttribute() {
-//     removeEditingOptionsBox();
-//     createEditingOptionBox();
-// }
-
-// function cancelEditingAttribute() {
-//         removeEditingOptionsBox();
-//         createEditingOptionBox();
-//         undoButtonPress();
-// }
-
-// function move(axis, direction) {
-//     console.log("MOVE: " + axis + " " + direction);
-// }
-
-// function rotate(axis, direction) {
-//     console.log("Rotate: " + axis + " " + direction);
-// }
-
-// function resize(direction) {
-//     console.log("Resize: " + direction);
-// }
