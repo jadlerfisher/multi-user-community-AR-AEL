@@ -1,102 +1,3 @@
-//1) Remove: +, Add: Model, Shape
-// Press + button, allows users to choose model or shape to add
-function addEntity() {
-    hideCursor();
-    stateChange('stateB');
-    console.log('Entity is being added.');
-}
-
-// //Remove: Shape Buttons Add: Finish, Edit, Undo, Delete
-// //Creates a shape based on which button in pressed
-// function shapeButtonPress(i) {
-//   removeButtons();
-//   createOptions();
-//   display(i);
-// }
-
-// //User chose to add a model, will display model options
-// function modelButtonPress1() {
-//   removeButtons();
-//   createModelButtons();
-// }
-
-// //User chose to add a shape, will display shape options
-// function shapeButtonPress1() {
-//   removeButtons();
-//   createShapeButtons();
-// }
-
-// //Creates a model based on which button is pressed
-// function modelButtonPress(i) {
-//   removeButtons();
-//   createOptions();
-//   displayModel(i);
-// }
-
-// //2)Remove Edit, Undo, Delete, Finish
-// //Final finish, user is done with shape
-// function finishButtonPress1() {
-//     removeButtons();
-//     var item = document.getElementById("item");
-//     itemNum++;
-//     item.setAttribute("id", itemNum);
-//     items.push(itemNum);
-//     createSummonButton();
-//     createRemoveButton();
-// }
-
-//3) Add: +, Remove: Edit, Undo, Delete, Finish, Also: Delete Sphere
-// function deleteButtonPress() {
-//     removeButtons();
-//     createSummonButton();
-//     createRemoveButton();
-//     disappear();
-// }
-
-// //4)Undo
-// //Undo most recent edit
-// function undoButtonPress() {
-//   console.log("Undo!");
-//   if (changes.length > 0) {
-//     var lastMove = changes.pop(changes.length - 1);
-//     console.log(lastMove[0]);
-//     if (lastMove[0] === "move") {
-//       setPosition(lastMove[1][0], lastMove[1][1], lastMove[1][2]);
-//     } else if (lastMove[0] === "rotate") {
-//       setRotation(lastMove[1]);
-//     } else if (lastMove[0] === "size") {
-//         var str = "";
-//         for (var i = 0; i < lastMove[1].length - 3; i++) {
-//             str = str + lastMove[1][i] + " ";
-//         }
-//         console.log(str);
-//       setSize(lastMove[1]);
-//     } else if (lastMove[0] === "color") {
-//         setColor(lastMove[1]);
-//     }
-//   }
-// }
-
-//User has chosen to add their own model
-// function addNewModelButtonPress() {
-//     removeButtons();
-//     createNewModelInput();
-// }
-
-// //5) Add: Move, Rotate, Size, Color, Finish, Remove: Edit, Delete, Undo, Finish
-// //User has chosen to edit their shape
-// function editButtonPress() {
-//     removeButtons();
-//     createEditButtons();
-// }
-
-// //6)Add: Edit, Undo, Delete, Finish, Remove: Move, Rotate, Size, Color, Finish
-// //User is done editing their shape
-// function finishButtonPress2() {
-//     removeButtons();
-//     createOptions();
-// }
-
 function moveButtonPress() {
   stateChange('stateC1');
   var item = document.getElementById("item");
@@ -105,14 +6,6 @@ function moveButtonPress() {
   console.log('Entity is being moved.');
 }
 
-
-// //8)Remove +/- X, Y, Z, Finish, Add: Move, Rotate, Size, Color, Finish
-// //User is done moving their shape
-// function finishButtonPress3() {
-//     removeButtons();
-//     createEditButtons();
-// }
-
 function rotateButtonPress() {
   stateChange('stateC2');
   var origRotate = document.getElementById("item").getAttribute("rotation").y;
@@ -120,14 +13,6 @@ function rotateButtonPress() {
   changes.push(["rotate", origRotate]);
   console.log('Entity is being rotated.');
 }
-
-
-// //10)Add Move, Rotate, Size, Color, Finish, Remove: <-, ->, Finish
-// //User is done rotating shape
-// function finishButtonPress4() {
-//     removeButtons();
-//     createEditButtons();
-// }
 
 function colorButtonPress() {
   stateChange('stateC4');
@@ -188,15 +73,9 @@ function sizeButtonPress() {
 //User has chosen to remove an object from the scene
 function removeButtonPress() {
     document.querySelector("a-scene").removeChild(selectedItem);
-    console.log(selectedItem + " was removed from scene.");
+    console.log(selectedItem.getAttribute('id') + " was removed from scene.");
 }
 
-//User has chosen to now not remove an object from the scene
-// function backButtonPress() {
-//     removeButtons();
-//     createSummonButton();
-//     createRemoveButton();
-// }
 
 //Resets the gravity button upon press
 function gravityOffButtonPress() {

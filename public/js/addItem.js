@@ -13,15 +13,6 @@
                 ["gallery whale animals", "displayModel(11)", "assets/images/whale.png", "pokeball"],
                 ["gallery mario gaming", "displayModel(12)", "assets/images/mario.png", "pokeball"]*/
 
-//What the current section is (default or All is "gallery")
-// var currentFilter = "gallery";
-//What sections there are and what order they show up in the dropdown menu
-// var categories = ['All', 'Shapes', 'Gaming', 'Animals', 'Food'];
-
-function addButtonPress(currentFilter) {
-    // reveal the UI for element selecting
-    document.getElementById('uiElem').classList.remove('hide-center');
-}
 
 function fillDropDown(categories){
     var dd = document.getElementById('myDropdown');
