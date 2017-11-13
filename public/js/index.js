@@ -216,7 +216,8 @@ function update(jscolor) {
 //Set shape color when undo is called
 function setColor(col) {
     // 'jscolor' instance can be used as a string
-    var item = document.getElementById("item");
+    var objectId = getObjectId();
+    var item = NAF.entities.getEntity(objectId);
     if (item.getAttribute("class") === "model") {
       item.setAttribute("material", "color: " + col);
     } else {
@@ -226,55 +227,29 @@ function setColor(col) {
 
 //Set shape position when undo is called
 function setPosition(_x,_y,_z) {
-  var item = document.getElementById("item");
+  var objectId = getObjectId();
+  var item = NAF.entities.getEntity(objectId);
   item.setAttribute("position", {x: _x, y: _y, z: _z});
 }
 
 //Set shape size when undo is called
 function setSize(sizeInfo) {
-  var s = document.getElementById("item");
-  var type = s.getAttribute("class");
-  if (type === "model") {
-    var sX_change = sizeInfo[0][0];
-    var sY_change = sizeInfo[0][1];
-    var sZ_change = sizeInfo[0][2];
-    s.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
-  } else {
-    var w_change = sizeInfo[0];
-    var h_change = sizeInfo[1];
-    var d_change = sizeInfo[2];
-    console.log(w_change + " " + h_change + " " + d_change);
-    // var r_change = sizeInfo[3];
-    // var rB_change = sizeInfo[4];
-    // var rT_change = sizeInfo[5];
-    // var rI_change = sizeInfo[6];
-    // var rO_change = sizeInfo[7];
-    // var rT_change = sizeInfo[8];
-    // var vertexA_change = sizeInfo[9];
-    // var VertexB_change = sizeInfo[10];
-    // var VertexC_change = sizeInfo[11];
-    s.setAttribute('width', w_change);
-    s.setAttribute('height', h_change);
-    s.setAttribute('depth', d_change);
-    // s.setAttribute('radius', r_change);
-    // s.setAttribute('radiusBottom', rB_change);
-    // s.setAttribute('radiusTop', rT_change);
-    // s.setAttribute('raidusInner', rI_change);
-    // s.setAttribute('radiusOuter', rO_change);
-    // s.setAttribute('radiusTubular', rT_change);
-    // s.setAttribute('VertexA', vertexA_change);
-    // s.setAttribute('VertexB', VertexB_change);
-    // s.setAttribute('VertexC', VertexC_change);
-  }
+  var objectId = getObjectId();
+  var item = NAF.entities.getEntity(objectId);
+  var sX_change = sizeInfo[0][0];
+  var sY_change = sizeInfo[0][1];
+  var sZ_change = sizeInfo[0][2];
+  s.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
 }
 
 //Set shape Rotation when undo is called
-function setRotation(theta) {
-  console.log("Set Rotation " + theta);
-  var item = document.getElementById("item");
-  var _x = item.getAttribute("rotation").x;
-  var _z = item.getAttribute("rotation").z;
-  item.setAttribute("rotation", {x: _x, y: theta, z: _z});
+function setRotation(rotationInfo) {
+  var objectId = getObjectId();
+  var item = NAF.entities.getEntity(objectId);
+  var _x = rotationInfo[0];
+  var _z = rotationInfo[2];
+  var _y = rotationInfo[1];
+  item.setAttribute("rotation", {x: _x, y: _y, z: _z});
 }
 
 //Creates a new model based on inputed URL from user

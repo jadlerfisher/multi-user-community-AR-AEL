@@ -1,18 +1,19 @@
 function moveButtonPress() {
   stateChange('stateC1');
-  // TODO: Need to pick an object that user selected and keep the changes
-  // var item = document.getElementById("item");
-  // var position = [item.getAttribute("position").x, item.getAttribute("position").y, item.getAttribute("position").z];
-  // changes.push(["move", position]);
+  var objectId = getObjectId();
+  var item = NAF.entities.getEntity(objectId);
+  var position = [item.getAttribute("position").x, item.getAttribute("position").y, item.getAttribute("position").z];
+  changes.push(["move", position]);
   console.log('Entity is being moved.');
 }
 
 function rotateButtonPress() {
   stateChange('stateC2');
-  // TODO: Need to pick an object that user selected and keep the changes
-  // var origRotate = document.getElementById("item").getAttribute("rotation").y;
+  var objectId = getObjectId();
+  var item = NAF.entities.getEntity(objectId);
+  var origRotate = [item.getAttribute("rotation").x,item.getAttribute("rotation").y,item.getAttribute("rotation").z];
   // console.log(origRotate);
-  // changes.push(["rotate", origRotate]);
+  changes.push(["rotate", origRotate]);
   console.log('Entity is being rotated.');
 }
 
@@ -23,14 +24,14 @@ function colorButtonPress() {
   var input = document.createElement('INPUT')
   var picker = new jscolor(input)
 
-  // TODO: Need to pick an object that user selected
-  //Gets item's color
-  // var origColor = document.getElementById("item").getAttribute("material").color;
+  // var objectId = getObjectId();
+  // var item = NAF.entities.getEntity(objectId);
+  // var origColor = item.getAttribute("material").color;
+  // console.log(origColor);
   // changes.push(["color", origColor]);
   //Changes text in field input to appropriate string
-  // picker.fromString(origColor);
+  picker.fromString("#fff");
 
-  picker.fromString('#fff');
   input.setAttribute("class", "colorPicker");
   div.appendChild(input);
 
@@ -52,10 +53,10 @@ function deleteButtonPress() {
 
 function sizeButtonPress() {
   stateChange('stateC3');
-  // TODO: Need to pick an object that user selected and keep the changes
-  // var item = document.getElementById("item");
-  // var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
-  // changes.push(["size", sizeInfo]);
+  var objectId = getObjectId();
+  var item = NAF.entities.getEntity(objectId);
+  var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
+  changes.push(["size", sizeInfo]);
   console.log('Entity is being resized');
 }
 
