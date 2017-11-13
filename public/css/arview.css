@@ -15,18 +15,6 @@
 .a-enter-vr-button {
   display: none;
 }
-.optionButton{
-  background: #F9DC84;
-  border: solid #5B778A 5px;
-  color: #5B778A;
-  padding: 15px 1px;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  display:inline-block;
-  width:100%;
-  border-radius: 9px;
-}
 
 div.hide-state{
   display: none;
@@ -62,21 +50,20 @@ td, th {
   padding: 15px;
   margin: 5px;
 }
-.buttonSummon {
-  background-color: #FBC72C;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 5%;
+.addRemoveButton{
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  box-shadow: none !important;
+  bottom: 3vh;
+  right: 3vw;
   z-index: 1;
-  width:90%;
+}
+.addButton{
+  display: inline-block;
+  box-shadow: none !important;
+}
+.removeButton{
+  display: inline-block;
+  box-shadow: none !important;
 }
 #fileInputField {
   background: rgb(255,255,255);

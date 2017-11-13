@@ -19,6 +19,9 @@
   <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <script src="https://use.fontawesome.com/00712d7803.js"></script>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <!-- Argon -->
   <!-- <script src="library/argon/argon.js"></script>
@@ -85,13 +88,12 @@
 
       <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
-       <button onclick="stateChange('stateB')" type="button" class="buttonSummon">+</button>
-       <table id="buttonTable">
-          <tr>
-            <td><button onclick="removeButtonPress()" type="button" class="optionButton hide-button">Remove</button></td>
-            <!--<td><button onclick="gravityOnButtonPress()" type = "button" class = "buttonGravity">Gravity</button></td> -->
-          </tr>
-       </table>
+        <div class="addRemoveButton">
+          <button onclick="stateChange('stateB')" class="addButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">add</i>
+          </button>
+          <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">-</button>
+        </div>
       </div>
       <!-- END STATE A -->
 
