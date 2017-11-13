@@ -21,8 +21,6 @@ function colorButtonPress() {
   stateChange('stateC4');
   var div = document.getElementsByClassName("editOptionsBox")[4];
   //Creates JsColor field
-  var input = document.createElement('INPUT')
-  var picker = new jscolor(input)
 
   // var objectId = getObjectId();
   // var item = NAF.entities.getEntity(objectId);
@@ -30,10 +28,6 @@ function colorButtonPress() {
   // console.log(origColor);
   // changes.push(["color", origColor]);
   //Changes text in field input to appropriate string
-  picker.fromString("#fff");
-
-  input.setAttribute("class", "colorPicker");
-  div.appendChild(input);
 
   console.log('Entity is being recolored.');
 }
