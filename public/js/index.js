@@ -137,7 +137,7 @@ function getObjectId() {
  * @param {String} axis - 'x' or 'y'
  * @param {String} value - +1 or -1
 */
-function move(axis, value, undoing) {
+function move(axis, value) {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
 
@@ -159,7 +159,7 @@ function move(axis, value, undoing) {
  * @param {String} axis - 'x' or 'y'
  * @param {int} degrees turned
 */
-function rotate(axis, degrees, undoing) {
+function rotate(axis, degrees) {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
 
@@ -179,24 +179,24 @@ function rotate(axis, degrees, undoing) {
  * resizes the entity
  * @param {int} value changed
  */
-function resize(value, undoing) {
+function resize(value) {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
 
-    // Update scale
-    object.getAttribute('scale').x += value;
-    object.getAttribute('scale').y += value;
-    object.getAttribute('scale').z += value;
+  // Update scale
+  object.getAttribute('scale').x += value;
+  object.getAttribute('scale').y += value;
+  object.getAttribute('scale').z += value;
 
-    var entityData = {
-      networkId: objectId,
-      owner: NAF.clientId,
-      template: "#pokemon-model",
-      components: { scale: object.getAttribute('scale') }
-    };
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: "#pokemon-model",
+    components: { scale: object.getAttribute('scale') }
+  };
 
-    if (object.getAttribute('scale').x > 0) {
-      NAF.entities.updateEntity(NAF.clientId, null, entityData);
+  if (object.getAttribute('scale').x > 0) {
+    NAF.entities.updateEntity(NAF.clientId, null, entityData);
   }
 }
 
@@ -242,30 +242,51 @@ function setColor(col) {
 }
 
 //Set shape position when undo is called
-function setPosition(_x,_y,_z) {
+function setPosition(_x, _y, _z) {
   var objectId = getObjectId();
-  var item = NAF.entities.getEntity(objectId);
-  item.setAttribute("position", {x: _x, y: _y, z: _z});
+  var object = NAF.entities.getEntity(objectId);
+
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: "#pokemon-model",
+    components: { position: {x: _x, y: _y, z: _z} }
+  };
+
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
 //Set shape size when undo is called
 function setSize(sizeInfo) {
   var objectId = getObjectId();
-  var item = NAF.entities.getEntity(objectId);
   var sX_change = sizeInfo[0][0];
   var sY_change = sizeInfo[0][1];
   var sZ_change = sizeInfo[0][2];
-  item.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
+
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: "#pokemon-model",
+    components: { scale: {x: sX_change, y: sY_change, z: sZ_change} }
+  };
+
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
 //Set shape Rotation when undo is called
 function setRotation(rotationInfo) {
   var objectId = getObjectId();
-  var item = NAF.entities.getEntity(objectId);
   var _x = rotationInfo[0];
   var _z = rotationInfo[2];
   var _y = rotationInfo[1];
-  item.setAttribute("rotation", {x: _x, y: _y, z: _z});
+
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: "#pokemon-model",
+    components: { rotation: {x: _x, y: _y, z: _z} }
+  };
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
 //Creates a new model based on inputed URL from user

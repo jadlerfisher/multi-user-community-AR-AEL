@@ -195,7 +195,7 @@ function displayModel(i) {
 
 
 function undoButtonPress() {
-    console.log("Undo!");
+  console.log("Undo!");
   if (changes.length > 0) {
     var lastMove = changes.pop(changes.length - 1);
     console.log(lastMove[0]);
