@@ -90,8 +90,8 @@ function addNewModelButtonPress() {
 //5) Add: Move, Rotate, Size, Color, Finish, Remove: Edit, Delete, Undo, Finish
 //User has chosen to edit their shape
 function editButtonPress() {
-    removeButtons();
-    createEditButtons();
+    //removeButtons();
+    createEditButtonMenu();
 }
 
 //6)Add: Edit, Undo, Delete, Finish, Remove: Move, Rotate, Size, Color, Finish
@@ -113,7 +113,7 @@ function moveButtonPress() {
 //User is done moving their shape
 function finishButtonPress3() {
     removeButtons();
-    createEditButtons();
+    createEditButtonMenu();
 }
 
 //9) Add Rotate CounterClockwise, Clockwise, Finish, Remove: Move, Rotate, Size, Color, Finish
@@ -128,7 +128,7 @@ function rotateButtonPress() {
 //User is done rotating shape
 function finishButtonPress4() {
     removeButtons();
-    createEditButtons();
+    createEditButtonMenu();
 }
 
 //11)Add Color Picker, Finish, Remove: Move, Rotate, Size, Color, Finish
@@ -143,7 +143,7 @@ function colorButtonPress() {
 //User is done changing shape color
 function finishButtonPress5() {
     removeButtons();
-    createEditButtons();
+    createEditButtonMenu();
 }
 
 //User has chosen to change shape size
@@ -156,7 +156,7 @@ function sizeButtonPress() {
 //User is done changing size
 function finishButtonPress6() {
   removeButtons();
-  createEditButtons();
+  createEditButtonMenu();
 }
 
 //User is submitting URL to load new model

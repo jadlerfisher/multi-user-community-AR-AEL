@@ -106,6 +106,35 @@
             <button id="pyramidButton" onclick="" data-state="initial" class="buttons pyramidButton mdl-button mdl-js-button mdl-button--fab mdl-button--colored"></button>
             <button id="moreButton" onclick="" data-state="initial" class="buttons moreButton mdl-button mdl-js-button mdl-button--fab mdl-button--colored"></button>
             <!-- <td><button onclick="removeButtonPress()" type="button">Remove</button></td> -->
+
+            <!-- when have a selected object, make edit button visible and slide up next to add button -->
+            <button id="editButton" onclick="editButtonPress()" data-state="final" class="buttons editButton mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+              <i class="material-icons">mode_edit</i>
+            </button>
+            <button id="deleteButton" onclick="" data-state="initial" class="buttons deleteButton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">delete</i>
+            </button>
+            <button id="resizeButton" onclick="" data-state="initial" class="buttons resizeButton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">delete</i>
+            </button>
+            <button id="colorButton" onclick="" data-state="initial" class="buttons colorButton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">color_lens</i>
+            </button>
+            <button id="rotateButton" onclick="" data-state="initial" class="buttons rotateButton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">refresh</i>
+            </button>
+
+            <!-- <button id="undoButton" onclick="" class="buttons mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">undo</i>
+            </button> -->
+            <!-- <button id="addButton" onclick="" class="buttons mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">keyboard_backspace</i>
+            </button> -->
+
+            <!-- <i class="material-icons">rotate_left</i>
+            <i class="material-icons">rotate_right</i>
+
+            <i class="material-icons">check</i> -->
           </td>
         </tr>
       </table>

@@ -59,6 +59,27 @@
     margin: -235px 74px 0 auto !important;
     transition: all 0.3s ease;
   }
+
+  .editButton[data-state=final] {
+    margin: 0 150px 0 auto !important;
+    transition: all 0.3s ease;
+  }
+  .deleteButton[data-state=final] {
+    margin: 20 150px 0 119 !important;
+    transition: all 0.3s ease;
+  }
+  .resizeButton[data-state=final] {
+    margin: -25px 0px 0 125px !important;
+    transition: all 0.3s ease;
+  }
+  .colorButton[data-state=final] {
+    margin: -47px 0px 0 168px !important;
+    transition: all 0.3s ease;
+  }
+  .rotateButton[data-state=final] {
+    margin: -42px 0px 0 209px !important;
+    transition: all 0.3s ease;
+  }
   /*.modelButton[data-state=final] {
     background-size: contain !important;
     background-repeat: no-repeat !important;
@@ -98,6 +119,26 @@
 }
 .modelButton[data-state=initial] {
   margin: 0 73px 0 auto !important;
+  visibility: hidden;
+}
+.editButton[data-state=initial] {
+  margin: 80px 150px 0 auto !important;
+  /*visibility: hidden;*/
+}
+.deleteButton[data-state=initial] {
+  margin: 8px 157px 0px auto !important;
+  visibility: hidden;
+}
+.resizeButton[data-state=initial] {
+  margin: 8px 157px 0px auto !important;
+  visibility: hidden;
+}
+.colorButton[data-state=initial] {
+  margin: 8px 157px 0px auto !important;
+  visibility: hidden;
+}
+.rotateButton[data-state=initial] {
+  margin: 8px 157px 0px auto !important;
   visibility: hidden;
 }
 .button-display {

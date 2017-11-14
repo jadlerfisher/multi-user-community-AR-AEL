@@ -104,6 +104,18 @@ function createAddButtonMenu() {
   //cubeButton.setAttribute("onclick", "addButtonPress()");
 }
 
+//Creates Buttons to edit current object: location, rotation, size, color
+function createEditButtonMenu() {
+    // var bF = [["moveButtonPress()", "rotateButtonPress()"], ["sizeButtonPress()", "colorButtonPress()"]];
+    // var bT = [["Move", "Rotate"], ["Resize", "Color"]];
+    // createButtonTable(bF, bT);
+    //
+    // //Finish Button
+    // var body = document.querySelector("center");
+    // body.appendChild(createFinishButton(2));
+
+}
+
 // function createModelButton(funct) {
 //   var table = document.querySelector("#bTable");
 //   var button = document.createElement("button");
@@ -158,18 +170,6 @@ function createOptions() {
     body.appendChild(createFinishButton(1));
 }
 
-
-//Creates Buttons to edit current object: location, rotation, size, color
-function createEditButtons() {
-    var bF = [["moveButtonPress()", "rotateButtonPress()"], ["sizeButtonPress()", "colorButtonPress()"]];
-    var bT = [["Move", "Rotate"], ["Resize", "Color"]];
-    createButtonTable(bF, bT);
-
-    //Finish Button
-    var body = document.querySelector("center");
-    body.appendChild(createFinishButton(2));
-}
-
 /**
  * Creates the editing tools such as x, y, z buttons for user interface
 */
@@ -201,7 +201,6 @@ function createRotateButtons() {
     var body = document.querySelector("center");
     body.appendChild(createFinishButton(4));
 }
-
 
 //Creates JsColor color Picker
 function createColorButtons() {
@@ -344,6 +343,6 @@ function hideButtons(btnList){
 // Reveal Buttons
 function revealButtons(btnList){
   for(var i = 0; i < btnList.length; i++){
-        btnList[i].classList.remove("hide-button");
+    btnList[i].classList.remove("hide-button");
   }
 }
