@@ -92,10 +92,6 @@ function createButtonTable(buttonFuncts, buttonText) {
 
 //make buttons visible, have functionality, and transition up
 function createAddButtonMenu() {
-  var modelButton = document.querySelector("#modelButton");
-  var cubeButton = document.querySelector("#cubeButton");
-  var pyramidButton = document.querySelector("#pyramidButton");
-  var moreButton = document.querySelector("#moreButton");
   modelButton.setAttribute('data-state', 'final');
   cubeButton.setAttribute('data-state', 'final');
   pyramidButton.setAttribute('data-state', 'final');
@@ -106,6 +102,10 @@ function createAddButtonMenu() {
 
 //Creates Buttons to edit current object: location, rotation, size, color
 function createEditButtonMenu() {
+  deleteButton.setAttribute('data-state', 'final');
+  resizeButton.setAttribute('data-state', 'final');
+  colorButton.setAttribute('data-state', 'final');
+  rotateButton.setAttribute('data-state', 'final');
     // var bF = [["moveButtonPress()", "rotateButtonPress()"], ["sizeButtonPress()", "colorButtonPress()"]];
     // var bT = [["Move", "Rotate"], ["Resize", "Color"]];
     // createButtonTable(bF, bT);
