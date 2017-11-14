@@ -127,7 +127,8 @@ function disappear() {
 // Get the first object's id for now.
 // TODO: need to pick an object from user selection
 function getObjectId() {
-  var objectId = document.getElementsByClassName('model')[0].parentNode.id.replace('naf-', '');
+  var objectList = document.getElementsByClassName('model');
+  var objectId = objectList[objectList.length-1].parentNode.id.replace('naf-', '');
   return objectId;
 }
 
