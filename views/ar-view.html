@@ -21,7 +21,8 @@
   <script src="https://use.fontawesome.com/00712d7803.js"></script>
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
   <!-- Argon -->
   <!-- <script src="library/argon/argon.js"></script>
@@ -114,7 +115,7 @@
                   <div class="box">
                     <div class="container-4">
                       <input onkeypress="checkKey(event)" type="search" class="search" id="search" placeholder="Search...">
-                      <button onclick="searchButtonPress()" class="icon"><i class="fa fa-search"></i></button>
+                      <button onclick="searchButtonPress()" class="icon"><i class="material-icons">search</i></button>
                     </div>
                   </div>
 
@@ -135,7 +136,30 @@
 
       <!-- STATE C: Editing portion to move/rotate/resize/recolor entities -->
       <div id="stateC" class="hide-state">
-        <center id = "editBoxCenter" class="editBoxCenter">
+        <div class="editTray">
+          <button onclick="moveButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">open_with</i>
+          </button>
+          <button onclick="rotateButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">3d_rotation</i>
+          </button>
+          <button onclick="sizeButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">picture_in_picture</i>
+          </button>
+          <button onclick="stateChange('stateA')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">done</i>
+          </button>
+          <button onclick="colorButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">color_lens</i>
+          </button>
+          <button onclick="undoButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">refresh</i>
+          </button>
+          <button onclick="deleteButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">delete</i>
+          </button>
+        </div>
+        <!-- <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
             <div id = "editOptionsBox" class="editOptionsBox">
               <button class="editOptionsButton" onclick="moveButtonPress()">Move</button>
@@ -158,13 +182,36 @@
               </button>
             </div>
           </div>
-        </center>
+        </center> -->
       </div>
       <!-- END STATE C -->
 
       <!-- STATE C1: MOVE an entity -->
       <div id="stateC1" class="hide-state">
-        <center id = "editBoxCenter" class="editBoxCenter">
+        <div class="editTray">
+          <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+             <i class="material-icons">arrow_back</i>
+          </button>
+          <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">arrow_forward</i>
+          </button>
+          <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">arrow_upward</i>
+          </button>
+          <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">arrow_downward</i>
+          </button>
+          <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">add</i>
+          </button>
+          <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+             <i class="material-icons">remove</i>
+          </button>
+          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">done</i>
+          </button>
+        </div>
+        <!-- <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
             <div class="editOptionsBox">
               <button class="moveButtons" onclick="move('x', -1, false)">
@@ -195,13 +242,36 @@
               </button>
             </div>
           </div>
-        </center>
+        </center> -->
       </div>
       <!-- END STATE C1 -->
 
       <!-- STATE C2: ROTATE an entity -->
       <div id="stateC2" class="hide-state">
-      <center id = "editBoxCenter" class="editBoxCenter">
+        <div class="editTray">
+          <button onclick="rotate('y', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+             <i class="material-icons">arrow_back</i>
+          </button>
+          <button onclick="rotate('y', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">arrow_forward</i>
+          </button>
+          <button onclick="rotate('x', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">arrow_upward</i>
+          </button>
+          <button onclick="rotate('x', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">arrow_downward</i>
+          </button>
+          <button onclick="rotate('z', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">rotate_left</i>
+          </button>
+          <button onclick="rotate('z', 5, false)"class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+             <i class="material-icons">rotate_right</i>
+          </button>
+          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">done</i>
+          </button>
+        </div>
+      <!-- <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
             <div class="editOptionsBox">
               <button class="moveButtons" onclick="rotate('y', -5, false)">
@@ -232,13 +302,24 @@
               </button>
             </div>
           </div>
-        </center>
+        </center> -->
       </div>
       <!-- END STATE C2 -->
 
       <!-- STATE C3: RESIZE an entity -->
       <div id="stateC3" class="hide-state">
-        <center id = "editBoxCenter" class="editBoxCenter">
+        <div class="editTray">
+          <button onclick="resize(0.1)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+             <i class="material-icons">add</i>
+          </button>
+          <button onclick="resize(-0.1)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+              <i class="material-icons">remove</i>
+          </button>
+          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">done</i>
+          </button>
+        </div>
+        <!-- <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
             <div class="editOptionsBox">
               <button class="resizeButton" onclick="resize(0.1)">
@@ -257,13 +338,19 @@
               </button>
             </div>
           </div>
-        </center>
+        </center> -->
       </div>
       <!-- END STATE C3 -->
 
       <!-- STATE C4: RECOLOR an entity -->
       <div id="stateC4" class="hide-state">
-        <center id = "editBoxCenter" class="editBoxCenter">
+        <div class="editTray">
+          <INPUT class="colorPicker jscolor {onFineChange:'setColor(this.toHEXString())'}" value="cc66ff">
+          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">done</i>
+          </button>
+        </div>
+        <!-- <center id = "editBoxCenter" class="editBoxCenter">
             <div class="editingBox">
               <div class="editOptionsBox">
                 <INPUT class="colorPicker jscolor {onFineChange:'setColor(this.toHEXString())'}" value="cc66ff">
@@ -277,7 +364,7 @@
                 </button>
               </div>
             </div>
-          </center>
+          </center> -->
       </div>
       <!-- END STATE C4 -->
 
@@ -306,6 +393,12 @@
 
         <a-asset-item id="pokemon-obj"
                       src="https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj">
+        </a-asset-item>
+        <a-asset-item id="box-obj"
+                      src="assets/objects/box.obj">
+        </a-asset-item>
+        <a-asset-item id="sphere-obj"
+                      src="assets/objects/sphere.obj">
         </a-asset-item>
 
         <script id="avatar-template" type="text/html">
@@ -358,31 +451,6 @@
       </a-entity>
 
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
-
-      <!-- <ar-geopose id="GT" lla="-84.394539 33.772501" userotation="false">
-         <a-entity fixedsize="20" billboard>
-           <a-plane rotation="0 0 0" width="2.9" height="4" src="#buzzpin" transparent="true" ></a-plane>
-           <a-entity css-object="div: #gtdiv" scale="0.02 0.02 0.02" position="0 4 0" showdistance="Tech Tower @ Georgia Tech<br>Atlanta, GA, USA<br>It is "></a-entity>
-        </a-entity>
-      </ar-geopose>
-      <ar-geopose id="London" lla="-0.076057 51.507953" userotation="false">
-         <a-entity fixedsize="20" billboard>
-           <a-entity css-object="div: #londonpin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
-           <a-entity css-object="div: #londondiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="The Tower of London<br>London, England<br>It is "></a-entity>
-        </a-entity>
-      </ar-geopose>
-      <ar-geopose id="Sydney" lla="151.215286 -33.856900" userotation="false">
-         <a-entity fixedsize="20" billboard>
-           <a-entity css-object="div: #sydneypin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
-           <a-entity css-object="div: #sydneydiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Sydney Opera House<br>Sydney, Australia<br>It is "></a-entity>
-        </a-entity>
-      </ar-geopose>
-      <ar-geopose id="Tokyo" lla=" 139.752797 35.685138" userotation="false">
-         <a-entity fixedsize="20" billboard>
-           <a-entity css-object="div: #tokyopin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
-           <a-entity css-object="div: #tokyodiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Imperial Palace<br>Tokyo, Japan<br>It is "></a-entity>
-        </a-entity>
-      </ar-geopose> -->
 
 
     <!-- </ar-scene> -->

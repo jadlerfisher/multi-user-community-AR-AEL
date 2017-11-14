@@ -60,10 +60,32 @@ td, th {
 .addButton{
   display: inline-block;
   box-shadow: none !important;
+  min-width: 60px;
+  min-height: 60px;
+  height: 7vw;
+  width: 7vw;
+}
+.doneButton{
+  height: 8vw;
+  width: 8vw;
+  margin: 1vw;
+  min-width: 80px;
+  min-height: 80px;
+}
+.editButton{
+  margin: 1vw;
+  height: 5vw;
+  width: 5vw;
+  min-height: 50px;
+  min-width: 50px;
 }
 .removeButton{
   display: inline-block;
   box-shadow: none !important;
+  min-width: 60px;
+  min-height: 60px;
+  height: 7vw;
+  width: 7vw;
 }
 #fileInputField {
   background: rgb(255,255,255);
@@ -112,7 +134,7 @@ td, th {
     height: 50px;
     float: left;
     min-width: 160px;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto';
 }
 .dropdown:hover .dropbtn {
     background-color:#3949AB;
@@ -127,7 +149,7 @@ td, th {
     float: left;
     margin-top:50px;
     border-radius: 5px;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto';
     font-size: 12pt;
 }
 .dropdown-content a {
@@ -136,7 +158,7 @@ td, th {
     text-decoration: none;
     display: block;
     border-radius: 5px;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto';
 }
 .dropdown-content a:hover {
   background-color: #f1f1f1;
@@ -156,7 +178,7 @@ td, th {
   border: none;
   outline: none;
   font-size: 12pt;
-  font-family: 'Raleway', sans-serif;
+ font-family: 'Roboto';
   float: left;
   color: #2b303b;
   padding-left: 15px;
@@ -178,7 +200,7 @@ td, th {
   width: 50px;
   color: white;
   font-size: 12pt;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto';
  
   outline: none;
   opacity: 1;
@@ -195,6 +217,13 @@ td, th {
   margin-top: 5px;
   padding: 10px;
   overflow-y: scroll;
+}
+.editTray{
+  position: absolute;
+  z-index: 1;
+  bottom: 5vh;
+  left: 10vh;
+  right: 10vh;
 }
 
 div.gallery {
@@ -229,7 +258,7 @@ a {
     width:40%;
     margin: 5px;
     outline: none;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto';
 }
 .uploadButton {
     background-color: #E91E63;
@@ -244,7 +273,7 @@ a {
     width: 40%;
     margin:5px;
     outline: none;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto';
 }
 .cancelButton:hover{
     background-color: #D81B60;
@@ -287,7 +316,7 @@ a {
   width: 45%;
   margin:5px;
   outline: none;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto';
   line-height: 70%;
   min-width: 160px;
 }
@@ -306,7 +335,7 @@ a {
   width: 42%;
   margin:5px;
   outline: none;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto';
   line-height: 70%
   min-width: 80px;
 }
@@ -326,7 +355,7 @@ a {
   width: 25%;
   margin:5px;
   outline: none;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto';
   min-width: 100px;
 }
 .moveButtons:hover{
@@ -344,7 +373,7 @@ a {
   width: 88%;
   margin:5px;
   outline: none;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto';
   line-height: 70%
   min-width: 80px;
 }
@@ -364,7 +393,7 @@ a {
   width: 45%;
   margin:5px;
   outline: none;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto';
   line-height: 70%
   min-width: 80px;
 }
@@ -384,7 +413,7 @@ a {
   width: 45%;
   margin:5px;
   outline: none;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto';
   line-height: 70%
   min-width: 80px;
 }
@@ -403,7 +432,7 @@ a {
   width: 45%;
   margin:5px;
   outline: none;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto';
   line-height: 70%
   min-width: 80px;
 }
