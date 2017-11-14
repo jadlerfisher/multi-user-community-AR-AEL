@@ -85,11 +85,11 @@ td, th {
   z-index: 1;
 }
 .objectAddBox{
-  background: #343d46;
-  width: 80%;
-  height: 400px;
+  background: #1A237E;
+  width: 80vw;
+  height: 70vh;
   border-radius: 15px;
-  margin-top: 10px;
+  top:5vh;
   padding: 10px;
 }
 .dropdown {
@@ -102,7 +102,7 @@ td, th {
     display: block;
 }
 .dropbtn {
-    background-color: #778899;
+    background-color:#3F51B5;
     color: white;
     border: none;
     padding: 15px;
@@ -115,7 +115,7 @@ td, th {
     font-family: 'Raleway', sans-serif;
 }
 .dropdown:hover .dropbtn {
-    background-color: #4f5b66;
+    background-color:#3949AB;
 }
 .dropdown-content {
     display: none;
@@ -173,10 +173,10 @@ td, th {
   border-bottom-right-radius: 5px;
  
   border: none;
-  background: #778899;
+  background: #3F51B5;
   height: 50px;
   width: 50px;
-  color: #4f5b66;
+  color: white;
   font-size: 12pt;
   font-family: 'Raleway', sans-serif;
  
@@ -185,13 +185,12 @@ td, th {
   margin-left: -50px;
 }
   .container-4:hover button.icon:hover{
-    background: #9fabb7;
+    background: #5C6BC0;
 }
 
 .objects{
-  background: #e4e5ec;
-  width: 97%;
-  height: 317px;
+  background: #fff;
+  height: 59vh;
   border-radius: 10px;
   margin-top: 5px;
   padding: 10px;
@@ -200,14 +199,14 @@ td, th {
 
 div.gallery {
     margin: 5px;
-    border: 5px solid #ccc;
+    border: 5px solid #E91E63;
     float: left;
     min-width: 135px;
     max-width: 200px;
     cursor: pointer;
 }
 div.gallery:hover {
-    border: 5px solid #777;
+    border: 5px solid #EC407A;
 }
 div.gallery img {
     width: 100%;
@@ -218,7 +217,7 @@ a {
 }
 
 .cancelButton {
-    background-color: #778899;
+    background-color: #E91E63;
     color: white;
     border: none;
     padding: 15px;
@@ -233,7 +232,7 @@ a {
     font-family: 'Raleway', sans-serif;
 }
 .uploadButton {
-    background-color: #778899;
+    background-color: #E91E63;
     color: white;
     border: none;
     padding: 15px;
@@ -248,10 +247,10 @@ a {
     font-family: 'Raleway', sans-serif;
 }
 .cancelButton:hover{
-    background-color: #4f5b66;
+    background-color: #D81B60;
 }
 .uploadButton:hover{
-    background-color: #4f5b66;
+    background-color: #D81B60;
 }
 
 

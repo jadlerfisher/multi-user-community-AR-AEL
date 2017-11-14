@@ -89,17 +89,16 @@
       <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
         <div class="addRemoveButton">
-          <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">-</button>
           <button onclick="stateChange('stateB')" class="addButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">add</i>
           </button>
+          <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">-</button>
         </div>
       </div>
       <!-- END STATE A -->
 
       <!-- STATE B: UI for adding a shape / model -->
       <div id="stateB" class="hide-state">
-
          <!-- When addEntity() is pressed, uiElem is shown -->
         <center id="uiElem">
           <div class="boxAndButtons">
@@ -266,7 +265,7 @@
         <center id = "editBoxCenter" class="editBoxCenter">
             <div class="editingBox">
               <div class="editOptionsBox">
-                <INPUT class="colorPicker jscolor {onFineChange:'setColor(this.toHEXString())'}" value="cc66ff">
+                <INPUT class="colorPicker jscolor {onFineChange:'update(this)'}" value="cc66ff">
               </div>
               <div class="finalOptionsButtonBox">
                 <button class="completeButton" onclick="stateChange('stateC')">
