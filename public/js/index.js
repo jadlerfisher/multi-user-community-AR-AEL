@@ -254,7 +254,7 @@ function setSize(sizeInfo) {
   var sX_change = sizeInfo[0][0];
   var sY_change = sizeInfo[0][1];
   var sZ_change = sizeInfo[0][2];
-  s.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
+  item.setAttribute("scale", {x: sX_change, y: sY_change, z: sZ_change});
 }
 
 //Set shape Rotation when undo is called
