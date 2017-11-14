@@ -67,6 +67,7 @@ function createModel(i) {
       position: '0 0 0',
       rotation: '0 0 0',
       scale: '1 1 1',
+      material: 'color: #FFF'
     }
   };
 
@@ -116,7 +117,11 @@ function createModel(i) {
 
 //Delete object
 function disappear() {
-  document.querySelector("a-scene").removeChild(document.getElementById("item"));
+  // document.querySelector("a-scene").removeChild(document.getElementById("item"));
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+  console.log(objectId+ " was removed from scene.");
+  NAF.entities.removeEntity(objectId);
 }
 
 // Get the first object's id for now.
@@ -144,6 +149,7 @@ function move(axis, value, undoing) {
     template: "#pokemon-model",
     components: { position: object.getAttribute('position') }
   };
+
   NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
@@ -198,31 +204,40 @@ function resize(value, undoing) {
  * This function gets called every time a user picks a color from color palette
  * @param {String} jscolor an object of jscolor
  */
-function update(jscolor) {
+// function update(jscolor) {
+//   var objectId = getObjectId();
+//   var object = NAF.entities.getEntity(objectId);
+//   var newColor = jscolor.toHEXString();
+//   object.setAttribute('material','color', newColor);
+
+//   var entityData = {
+//     networkId: objectId,
+//     owner: NAF.clientId,
+//     template: "#pokemon-model",
+//     components: {
+//       material: 'color: ' + object.getAttribute('material').color
+//     }
+//   };
+
+//   NAF.entities.updateEntity(NAF.clientId, null, entityData);
+// }
+
+//Set shape color when undo is called
+function setColor(col) {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
+  object.setAttribute('material','color', col);
 
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
     template: "#pokemon-model",
     components: {
-      material: 'color: ' + jscolor.toHEXString(),
+      material: 'color: ' + object.getAttribute('material').color
     }
   };
-  NAF.entities.updateEntity(NAF.clientId, null, entityData);
-}
 
-//Set shape color when undo is called
-function setColor(col) {
-    // 'jscolor' instance can be used as a string
-    var objectId = getObjectId();
-    var item = NAF.entities.getEntity(objectId);
-    if (item.getAttribute("class") === "model") {
-      item.setAttribute("material", "color: " + col);
-    } else {
-      item.setAttribute("color", col);
-    }
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
 //Set shape position when undo is called

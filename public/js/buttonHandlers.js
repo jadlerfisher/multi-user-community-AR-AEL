@@ -22,11 +22,11 @@ function colorButtonPress() {
   var div = document.getElementsByClassName("editOptionsBox")[4];
   //Creates JsColor field
 
-  // var objectId = getObjectId();
-  // var item = NAF.entities.getEntity(objectId);
-  // var origColor = item.getAttribute("material").color;
-  // console.log(origColor);
-  // changes.push(["color", origColor]);
+  var objectId = getObjectId();
+  var item = NAF.entities.getEntity(objectId);
+  var origColor = item.getAttribute('material').color;
+  console.log(origColor);
+  changes.push(["color", origColor]);
   //Changes text in field input to appropriate string
 
   console.log('Entity is being recolored.');
