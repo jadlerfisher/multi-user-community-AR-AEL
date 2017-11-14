@@ -104,6 +104,10 @@
     margin: 0 0 0 auto;
     visibility: hidden;
   }
+  button#editButton {
+    margin: 0 0 0 auto;
+    visibility: hidden;
+  }
 }
 .moreButton[data-state=initial] {
   margin: 0 73px 0 auto !important;
