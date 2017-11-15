@@ -294,14 +294,15 @@ function resize(value) {
 function setColor(col) {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
-  object.setAttribute('material','color', col);
+  var model = object.getElementsByClassName('model')[0];
+  model.setAttribute('material','color', col);
 
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
     template: object.getAttribute("template").src,
     components: {
-      material: 'color: ' + object.getAttribute('material').color
+      material: 'color: ' + model.getAttribute('material').color
     }
   };
 
