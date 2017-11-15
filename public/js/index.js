@@ -240,8 +240,93 @@ function rotate(axis, degrees) {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
 
-  // Update rotation
-  object.getAttribute('rotation')[axis] += degrees;
+  var _xP = document.getElementById('player').getAttribute('position').x;
+  var _yP = document.getElementById('player').getAttribute('position').y;
+  var _zP = document.getElementById('player').getAttribute('position').z;
+  var _xO = object.getAttribute('position').x;
+  var _yO = object.getAttribute('position').y;
+  var _zO = object.getAttribute('position').z;
+
+  var _xPR = document.getElementById('player').getAttribute('rotation').x;
+  var _yPR = document.getElementById('player').getAttribute('rotation').y;
+  var _zPR = document.getElementById('player').getAttribute('rotation').z;
+  var _xOR = object.getAttribute('rotation').x;
+  var _yOR = object.getAttribute('rotation').y;
+  var _zOR = object.getAttribute('rotation').z;
+  console.log(_xO + " " + _yO + " " + _zO);
+  console.log(axis);
+
+  if (axis === "z") {
+    // _yP = _yO;
+    // var _y = _yO;
+    // var _x = _xO;
+    // var _z = _zO;
+
+    // //Make Axis of Rotation
+    // var v = [_xO - _xP, _yO - _yP, _zO - _zP];
+    // var vMag = Math.sqrt(v[0] * v[0] + v[1]*v[1] + v[2] * v[2]);
+    // if (vMag == 0) {
+    //   vMag = 1;
+    // }
+    // var u = [v[0]/vMag, v[1]/vMag, v[2]/vMag, 1];
+
+    // //Translate to go through origin
+    // var t = [[1,0,0,-1*_xP],
+    //         [0,1,0,-1*_yP],
+    //         [0,0,1,-1*_zP],
+    //         [0,0,0,1]];
+    // var newU = [t[0][0]*u[0] + t[0][3]*u[3], t[1][1]*u[1] + t[1][4]*u[4], t[2][2]*u[2] + t[2][3]*u[3], t[3][3]*u[3]];
+
+    // //Rotate to align with z-axis
+    // //rotate about x-axis to be in xz plane
+    // var a = [u[0], u[1], u[2]];
+    // var magA = Math.sqrt(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]);
+    // var n = [a[0] + 1, a[1], a[2]];
+    // var b = [a[1]*n[2] - n[1]*a[2], a[2]*n[0] - a[0]*n[2], a[0]*n[1] - a[1]*n[0]];
+    // var magB = Math.sqrt(b[0]*b[0] + b[1]*b[1] + b[2]*b[2]);
+    // var c = [a[1]*b[2] - b[1]*a[2], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]];
+    // var r1 = [[a[0], a[1], a[2], 0],
+    //           [b[0], b[1], b[2], 0],
+    //           [c[0], c[1], c[2], 0],
+    //           [0, 0, 0, 1]];
+    // var r2 = [[1, 0, 0, 0],
+    //           [0, Math.cos(degrees), -1 * Math.sin(degrees), 0],
+    //           [0, Math.sin(degrees), Math.cos(degrees), 0],
+    //           [0,0,0,1]];
+    // var r3 = [[a[0], b[0], c[0], 0],
+    //           [a[1], b[1], c[1], 0],
+    //           [a[2], b[2], c[2], 0],
+    //           [0, 0, 0, 1]];
+    // console.log(r1);
+    // console.log(r2);
+    // console.log(r3);
+
+    // var r = multiplyMatrix(multiplyMatrix(r3, r2),r1);
+    // console.log(r);
+    // var p = [_xO, _yO, _zO, 1];
+    // console.log(p);
+    // var newP = [r[0][0]*p[0] + r[0][1]*p[1] + r[0][2]*p[2] + r[0][3]*p[3],
+    //             r[1][0]*p[0] + r[1][1]*p[1] + r[1][2]*p[2] + r[1][3]*p[3],
+    //             r[2][0]*p[0] + r[2][1]*p[1] + r[2][2]*p[2] + r[2][3]*p[3]];
+    // console.log(newP);
+    // var _x = newP[0];
+    // var _y = newP[1];
+    // var _z = newP[2];
+    // console.log(_x + " " + _y + " " + _z);
+    var _y = _yOR;
+    var _x = _xOR;
+    var _z = _zOR + degrees;
+  } else if (axis === "x") {
+    var _y = _yOR;
+    var _x = _xOR + degrees;
+    var _z = _zOR;
+  } else {
+    // Update position
+    var _y = _yOR + degrees;
+    var _x = _xOR;
+    var _z = _zOR;
+  }
+  object.setAttribute('rotation', {x: _x, y: _y, z: _z});
 
   var entityData = {
     networkId: objectId,
@@ -444,7 +529,7 @@ function gravityAll() {
 
 }
 
-function hideCursor(){
+function hideCursor() {
   var camera = document.getElementById('player');
   camera.removeChild(document.getElementById('cursor'));
 }
@@ -508,3 +593,49 @@ function hideCenter(center){
 function revealCenter(center){
   center.classList.remove("hide-center");
 }
+
+
+function multiplyMatrix(a,b) {
+    //Separating Rows of First Matrix
+    var row1A = a[0];
+    var row2A = a[1];
+    var row3A = a[2];
+    var row4A = a[3];
+    
+    //Separating Rows of Second Matrix
+    var row1B = b[0];
+    var row2B = b[1];
+    var row3B = b[2];
+    var row4B = b[3];
+    
+    //Finding first Row of new Matrix
+    var spot1 = (row1A[0]*row1B[0]) + (row1A[1]*row2B[0]) + (row1A[2]*row3B[0]) + (row1A[3]*row4B[0]);
+    var spot2 = (row1A[0]*row1B[1]) + (row1A[1]*row2B[1]) + (row1A[2]*row3B[1]) + (row1A[3]*row4B[1]);
+    var spot3 = (row1A[0]*row1B[2]) + (row1A[1]*row2B[2]) + (row1A[2]*row3B[2]) + (row1A[3]*row4B[2]);
+    var spot4 = (row1A[0]*row1B[3]) + (row1A[1]*row2B[3]) + (row1A[2]*row3B[3]) + (row1A[3]*row4B[3]);
+    var row1C = [spot1, spot2, spot3, spot4];
+    
+    //Finding second Row of new Matrix
+    spot1 = (row2A[0]*row1B[0]) + (row2A[1]*row2B[0]) + (row2A[2]*row3B[0]) + (row2A[3]*row4B[0]);
+    spot2 = (row2A[0]*row1B[1]) + (row2A[1]*row2B[1]) + (row2A[2]*row3B[1]) + (row2A[3]*row4B[1]);
+    spot3 = (row2A[0]*row1B[2]) + (row2A[1]*row2B[2]) + (row2A[2]*row3B[2]) + (row2A[3]*row4B[2]);
+    spot4 = (row2A[0]*row1B[3]) + (row2A[1]*row2B[3]) + (row2A[2]*row3B[3]) + (row2A[3]*row4B[3]);
+    var row2C = [spot1, spot2, spot3, spot4];
+    
+    //Finding third Row of new Matrix
+    spot1 = (row3A[0]*row1B[0]) + (row3A[1]*row2B[0]) + (row3A[2]*row3B[0]) + (row3A[3]*row4B[0]);
+    spot2 = (row3A[0]*row1B[1]) + (row3A[1]*row2B[1]) + (row3A[2]*row3B[1]) + (row3A[3]*row4B[1]);
+    spot3 = (row3A[0]*row1B[2]) + (row3A[1]*row2B[2]) + (row3A[2]*row3B[2]) + (row3A[3]*row4B[2]);
+    spot4 = (row3A[0]*row1B[3]) + (row3A[1]*row2B[3]) + (row3A[2]*row3B[3]) + (row3A[3]*row4B[3]);
+    var row3C = [spot1, spot2, spot3, spot4];
+    
+    //Finding fourth Row of new Matrix
+    spot1 = (row4A[0]*row1B[0]) + (row4A[1]*row2B[0]) + (row4A[2]*row3B[0]) + (row4A[3]*row4B[0]);
+    spot2 = (row4A[0]*row1B[1]) + (row4A[1]*row2B[1]) + (row4A[2]*row3B[1]) + (row4A[3]*row4B[1]);
+    spot3 = (row4A[0]*row1B[2]) + (row4A[1]*row2B[2]) + (row4A[2]*row3B[2]) + (row4A[3]*row4B[2]);
+    spot4 = (row4A[0]*row1B[3]) + (row4A[1]*row2B[3]) + (row4A[2]*row3B[3]) + (row4A[3]*row4B[3]);
+    var row4C = [spot1, spot2, spot3, spot4];
+    
+    
+    return [row1C,row2C,row3C,row4C];
+  }
