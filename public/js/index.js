@@ -2,7 +2,7 @@ var buttonExists = true; //The VR button exists
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
 // var itemNum = 0; //The id of the most recently created object
-var models = ["#pokemon-model", "#box-obj", "#sphere-obj"]; //The various object models
+var models = ["#pokemon-model", "#google-glass-obj", "#sphere-obj"]; //The various object models
 var materials = ["mtl: #pokemon-mtl"];
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
@@ -19,13 +19,35 @@ function init() {
 
     // fill in the gallery for adding models / entities
 
-    var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"]];
-    var categories = ['All', 'Shapes', 'Gaming'];
+    var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"],
+                      ["gallery google_glass technology", "displayModel(1)", "assets/images/google_glass.png", "google_glass"]];
+    var categories = ['All', 'Shapes', 'Gaming', 'Technology'];
+    var modelSources = [["pokemon-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.mtl", "pokemon-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj"],
+                        ["google-glass-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.mtl", "google-glass-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.obj"]];
+    makeModelAssets(modelSources);
     fillDropDown(categories);
     for (i = 0; i < galleryList.length; i++) {
         galleryDetails = galleryList[i];
         createGalleryItem(galleryDetails[0], galleryDetails[1], galleryDetails[2], galleryDetails[3]);
     }
+
+}
+
+function makeModelAssets(modelSources) {
+  var assets = document.querySelector("a-assets");
+
+  for (i = 0; i < modelSources.length; i++) {
+    var currentData = modelSources[i];
+    var assetItem = document.createElement("a-asset-item");
+    assetItem.setAttribute("id", currentData[0]);
+    assetItem.setAttribute("src", currentData[1]);
+    assets.appendChild(assetItem);
+
+    assetItem = document.createElement("a-asset-item");
+    assetItem.setAttribute("id", currentData[2]);
+    assetItem.setAttribute("src", currentData[3]);
+    assets.appendChild(assetItem);
+  }
 
 }
 
