@@ -181,7 +181,36 @@ function move(axis, value) {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
 
-  object.setAttribute('position')[axis] += value;
+  var _xP = document.getElementById('player').getAttribute('position').x;
+  var _yP = document.getElementById('player').getAttribute('position').y;
+  var _zP = document.getElementById('player').getAttribute('position').z;
+  var _xO = object.getAttribute('position').x;
+  var _yO = object.getAttribute('position').y;
+  var _zO = object.getAttribute('position').z;
+
+  if (axis === "z") {
+    value = (value/4) * -1;
+    var _x = _xP + ((_xO - _xP) * (1 + value));
+    var _y = _yP + ((_yO - _yP) * (1 + value));
+    var _z = _zP + ((_zO - _zP) * (1 + value));
+    object.setAttribute('position', {x: _x, y: _y, z: _z});
+  } else if (axis === "x") {
+    var _y = _yO;
+    var _x = _xO;
+    var _z = _zO;
+    //Circle = (_xO - _xP)^2 + (_yO - _yP)^2 = r^2
+    var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
+    var a = Math.acos((_xO - _xP)/r);
+    a += (value/5);
+    _x = _xP + r * Math.cos(a);
+    _z = _zP + r * Math.sin(a);
+  } else {
+    // Update position
+    var _y = _yO + value;
+    var _x = _xO;
+    var _z = _zO;
+  }
+  object.setAttribute('position', {x: _x, y: _y, z: _z});
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
