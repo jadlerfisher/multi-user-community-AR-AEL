@@ -191,7 +191,7 @@ function move(axis, value) {
   if (axis === "z") {
     value = (value/4) * -1;
     var _x = _xP + ((_xO - _xP) * (1 + value));
-    var _y = _yP + ((_yO - _yP) * (1 + value));
+    var _y = _yO;
     var _z = _zP + ((_zO - _zP) * (1 + value));
     object.setAttribute('position', {x: _x, y: _y, z: _z});
   } else if (axis === "x") {
@@ -200,10 +200,10 @@ function move(axis, value) {
     var _z = _zO;
     //Circle = (_xO - _xP)^2 + (_yO - _yP)^2 = r^2
     var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
-    var a = Math.acos((_xO - _xP)/r);
-    a += (value/5);
-    _x = _xP + r * Math.cos(a);
-    _z = _zP + r * Math.sin(a);
+    var a = Math.atan2(_zO - _zP, _xO - _xP);
+    a += (value * Math.PI)/12;
+    _x = (_xP + r * Math.cos(a));
+    _z = (_zP + r * Math.sin(a));
   } else {
     // Update position
     var _y = _yO + value;
