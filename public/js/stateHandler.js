@@ -12,6 +12,8 @@ function stateChange(nextState){
 	
 	if(nextState == "stateA"){
 		revealCursor();
+		var obj = document.getElementsByClassName('selected')[0];
+		if(obj !== undefined){obj.classList.remove('selected');}
 	}
 
 	if(currentState == "stateA"){

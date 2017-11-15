@@ -90,7 +90,15 @@
       <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
         <div class="addRemoveButton">
-          <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">-</button>
+          
+          <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <i class="material-icons">delete</i>
+          </button>
+          
+          <button onclick="editModelPress()" type="button" class="addButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">create</i>
+          </button>
+
           <button onclick="stateChange('stateB')" class="addButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">add</i>
           </button>

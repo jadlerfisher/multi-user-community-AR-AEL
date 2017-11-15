@@ -39,10 +39,10 @@ function cancelEditingAttribute() {
 }
 
 function deleteButtonPress() {
-    stateChange('stateA');
     disappear();
-    console.log('Entity is being deleted.');
 
+    console.log('Entity is being deleted.');
+    stateChange('stateA');
 }
 
 function sizeButtonPress() {
@@ -71,6 +71,14 @@ function sizeButtonPress() {
 // }
 
 //User has chosen to remove an object from the scene
+
+function editModelPress(){
+  var oldObj = selectedItem;
+  selectedItem.classList.add('selected');
+  console.log('You have decided to edit: '+ selectedItem.id);
+  stateChange('stateC');
+}
+
 function removeButtonPress() {
   // TODO: Need to pick an object that user selected and remove it
   // document.querySelector("a-scene").removeChild(selectedItem);

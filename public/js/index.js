@@ -111,8 +111,7 @@ function createModel(i) {
     selectedItem = [];
   });
 
-  items.push(entity.getAttribute('id'));
-  console.log('Make sure entity id leaves "items" array when removing');
+  entity.classList.add('selected');
 }
 
 //Delete object
@@ -126,9 +125,11 @@ function disappear() {
 
 // Get the first object's id for now.
 // TODO: need to pick an object from user selection
+
 function getObjectId() {
-  var objectList = document.getElementsByClassName('model');
-  var objectId = objectList[objectList.length-1].parentNode.id.replace('naf-', '');
+  var object = document.getElementsByClassName('selected')[0];
+  if(object === undefined) {return null}
+  var objectId = object.id.replace('naf-', '');
   return objectId;
 }
 
