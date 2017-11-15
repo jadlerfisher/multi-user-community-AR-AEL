@@ -10,7 +10,6 @@ var userColor;
 var selectedItem; // current item that is selected
 var currentObj = 0;
 var colorMode = "color";
-var templateNum = 0;
 
 //Removes the VR button
 function init() {
@@ -90,7 +89,6 @@ function chooseColor() {
 }
 //Displays a Model
 function createModel(i) {
-  templateNum = i;
   var pos = {
     x: 0, y: 0, z: 0
   }
@@ -183,13 +181,11 @@ function move(axis, value) {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
 
-  // Update position
-  object.getAttribute('position')[axis] += value;
-
+  object.setAttribute('position')[axis] += value;
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: models[templateNum],
+    template: object.getAttribute("template").src,
     components: { position: object.getAttribute('position') }
   };
 
@@ -211,7 +207,7 @@ function rotate(axis, degrees) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: models[templateNum],
+    template: object.getAttribute("template").src,
     components: { rotation: object.getAttribute('rotation') }
   };
   NAF.entities.updateEntity(NAF.clientId, null, entityData);
@@ -233,7 +229,7 @@ function resize(value) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: models[templateNum],
+    template: object.getAttribute("template").src,
     components: { scale: object.getAttribute('scale') }
   };
 
@@ -274,7 +270,7 @@ function setColor(col) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: models[templateNum],
+    template: object.getAttribute("template").src,
     components: {
       material: 'color: ' + object.getAttribute('material').color
     }
@@ -291,7 +287,7 @@ function setPosition(_x, _y, _z) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template:models[templateNum],
+    template:object.getAttribute("template").src,
     components: { position: {x: _x, y: _y, z: _z} }
   };
 
@@ -308,7 +304,7 @@ function setSize(sizeInfo) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: models[templateNum],
+    template: object.getAttribute("template").src,
     components: { scale: {x: sX_change, y: sY_change, z: sZ_change} }
   };
 
@@ -325,7 +321,7 @@ function setRotation(rotationInfo) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: models[templateNum],
+    template: object.getAttribute("template").src,
     components: { rotation: {x: _x, y: _y, z: _z} }
   };
   NAF.entities.updateEntity(NAF.clientId, null, entityData);
