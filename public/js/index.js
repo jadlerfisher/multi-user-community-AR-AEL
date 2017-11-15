@@ -2,7 +2,7 @@ var buttonExists = true; //The VR button exists
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
 // var itemNum = 0; //The id of the most recently created object
-var models = ["#pokemon-model", "#google-glass-obj", "#sphere-obj"]; //The various object models
+var models = ["#pokemon-model", "#box-model", "#sphere-obj"]; //The various object models
 var materials = ["mtl: #pokemon-mtl"];
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
@@ -10,6 +10,7 @@ var userColor;
 var selectedItem; // current item that is selected
 var currentObj = 0;
 var colorMode = "color";
+var templateNum = 0;
 
 //Removes the VR button
 function init() {
@@ -20,11 +21,11 @@ function init() {
     // fill in the gallery for adding models / entities
 
     var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"],
-                      ["gallery google_glass technology", "displayModel(1)", "assets/images/google_glass.png", "google_glass"]];
+                      ["gallery box shapes cube", "displayModel(1)", "assets/images/cube.png", "box"]];
     var categories = ['All', 'Shapes', 'Gaming', 'Technology'];
-    var modelSources = [["pokemon-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.mtl", "pokemon-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj"],
-                        ["google-glass-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.mtl", "google-glass-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.obj"]];
-    makeModelAssets(modelSources);
+    var modelSources = [["pokemon-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.mtl", "pokemon-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj", "pokemon-model"],
+                        ["google-glass-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.mtl", "google-glass-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.obj", "google-glass-model"]];
+    //makeModelAssets(modelSources);
     fillDropDown(categories);
     for (i = 0; i < galleryList.length; i++) {
         galleryDetails = galleryList[i];
@@ -46,6 +47,21 @@ function makeModelAssets(modelSources) {
     assetItem = document.createElement("a-asset-item");
     assetItem.setAttribute("id", currentData[2]);
     assetItem.setAttribute("src", currentData[3]);
+    assets.appendChild(assetItem);
+
+    assetItem = document.createElement("script");
+    assetItem.setAttribute("id", currentData[4]);
+    assetItem.setAttribute("type", "text/html");
+
+    var entity = document.createElement("a-entity");
+    entity.setAttribute("class", "model");
+    entity.setAttribute("obj-model", "obj: #" + currentData[2]);
+    entity.setAttribute("position", "");
+    entity.setAttribute("rotation", "");
+    entity.setAttribute("scale", "");
+    entity.setAttribute("material", "");
+
+    assetItem.appendChild(entity);
     assets.appendChild(assetItem);
   }
 
@@ -74,6 +90,7 @@ function chooseColor() {
 }
 //Displays a Model
 function createModel(i) {
+  templateNum = i;
   var pos = {
     x: 0, y: 0, z: 0
   }
@@ -81,6 +98,8 @@ function createModel(i) {
   // Create network entity
   var networkId = NAF.entities.createEntityId();
   NAF.log.write('Created network entity', networkId);
+  console.log(i);
+  console.log(models[i]);
   var entityData = {
     networkId: networkId,
     owner: NAF.clientId,
@@ -170,7 +189,7 @@ function move(axis, value) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: "#pokemon-model",
+    template: models[templateNum],
     components: { position: object.getAttribute('position') }
   };
 
@@ -192,7 +211,7 @@ function rotate(axis, degrees) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: "#pokemon-model",
+    template: models[templateNum],
     components: { rotation: object.getAttribute('rotation') }
   };
   NAF.entities.updateEntity(NAF.clientId, null, entityData);
@@ -214,7 +233,7 @@ function resize(value) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: "#pokemon-model",
+    template: models[templateNum],
     components: { scale: object.getAttribute('scale') }
   };
 
@@ -255,7 +274,7 @@ function setColor(col) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: "#pokemon-model",
+    template: models[templateNum],
     components: {
       material: 'color: ' + object.getAttribute('material').color
     }
@@ -272,7 +291,7 @@ function setPosition(_x, _y, _z) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: "#pokemon-model",
+    template:models[templateNum],
     components: { position: {x: _x, y: _y, z: _z} }
   };
 
@@ -289,7 +308,7 @@ function setSize(sizeInfo) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: "#pokemon-model",
+    template: models[templateNum],
     components: { scale: {x: sX_change, y: sY_change, z: sZ_change} }
   };
 
@@ -306,7 +325,7 @@ function setRotation(rotationInfo) {
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
-    template: "#pokemon-model",
+    template: models[templateNum],
     components: { rotation: {x: _x, y: _y, z: _z} }
   };
   NAF.entities.updateEntity(NAF.clientId, null, entityData);

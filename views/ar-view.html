@@ -394,6 +394,9 @@
         <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
         <img id="sky" src="assets/images/sky.png">
         <!-- <img id="buzzpin" src="assets/images/buzz-pin.png"> -->
+        <a-asset-item id="pokemon-obj" src="https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj"></a-asset-item>
+        <a-asset-item id="google-glass-obj" src="https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.obj"></a-asset-item>
+        <a-asset-item id="box-obj" src="assets/objects/box.obj"></a-asset-item>
 
         <script id="avatar-template" type="text/html">
           <a-entity class="avatar">
@@ -433,6 +436,12 @@
         <!-- Predefined models -->
         <script id="pokemon-model" type="text/html">
           <a-entity class="model" obj-model="obj: #pokemon-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="google-glass-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #google-glass-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="box-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #box-obj" position="" rotation="" scale="" material=""></a-entity>
         </script>
 
       </a-assets>
