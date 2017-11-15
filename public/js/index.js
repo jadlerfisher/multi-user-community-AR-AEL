@@ -89,8 +89,13 @@ function chooseColor() {
 }
 //Displays a Model
 function createModel(i) {
-  var pos = {
-    x: 0, y: 0, z: 0
+  var player = document.querySelector("#player");
+  var playerPos = new THREE.Vector3().copy(player.getAttribute('position'));
+  var playerDir = new THREE.Vector3().copy(player.object3D.getWorldDirection());
+  var objPos = {
+    x: playerPos.x - playerDir.x,
+    y: playerPos.y - playerDir.y,
+    z: playerPos.z - playerDir.z,
   }
 
   // Create network entity
@@ -103,9 +108,9 @@ function createModel(i) {
     owner: NAF.clientId,
     template: models[i],
     components: {
-      position: '0 0 0',
+      position: objPos,
       rotation: '0 0 0',
-      scale: '1 1 1',
+      scale: '0.1 0.1 0.1',
       material: 'color: #FFF'
     }
   };
