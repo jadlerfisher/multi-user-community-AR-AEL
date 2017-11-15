@@ -137,14 +137,16 @@ function createModel(i) {
   NAF.entities.entities[entityData.networkId] = entity;
 
   entity.addEventListener('mouseenter', function(evt){
-    this.setAttribute('material','opacity','0.85');
+    var model = this.getElementsByClassName('model')[0];
+    model.setAttribute('material','opacity','0.85');
     console.log('Mouse entered: ' + this.getAttribute('id'));
     revealButtons(document.getElementsByClassName('optionButton'));
     selectedItem = this;
   });
 
   entity.addEventListener('mouseleave', function(evt){
-    this.setAttribute('material','opacity','1.0');
+    var model = this.getElementsByClassName('model')[0];
+    model.setAttribute('material','opacity','1');
     console.log('Mouse left: ' + this.getAttribute('id'));
     hideButtons(document.getElementsByClassName('optionButton'));
     selectedItem = [];
