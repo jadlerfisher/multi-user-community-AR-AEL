@@ -11,13 +11,27 @@ function stateChange(nextState){
 	console.log('Changing state from:\t' + currentState + "\nChanging state to:\t\t" + nextState);
 	
 	if(nextState == "stateA"){
-		revealCursor();
+
 		var obj = document.getElementsByClassName('selected')[0];
-		if(obj !== undefined){obj.classList.remove('selected');}
+		if(obj !== undefined){
+			obj.classList.remove('selected');
+		}
+
+		if(selectedItem === null){
+			hideButtons(document.getElementsByClassName('optionButton'));
+		}
+
+		revealCursor();
 	}
 
 	if(currentState == "stateA"){
 		hideCursor();
+
+		if(selectedItem !== null){
+			setOpacity(selectedItem,1);
+			selectedItem = null;
+		}
+		
 	}
 
 	document.getElementById(currentState).classList.add('hide-state');

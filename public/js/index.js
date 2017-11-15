@@ -7,7 +7,7 @@ var materials = ["mtl: #pokemon-mtl"];
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
 var userColor;
-var selectedItem; // current item that is selected
+var selectedItem = null; // current item that is selected
 var currentObj = 0;
 var colorMode = "color";
 
@@ -137,22 +137,25 @@ function createModel(i) {
   NAF.entities.entities[entityData.networkId] = entity;
 
   entity.addEventListener('mouseenter', function(evt){
-    var model = this.getElementsByClassName('model')[0];
-    model.setAttribute('material','opacity','0.85');
+    setOpacity(this, 0.85);
     console.log('Mouse entered: ' + this.getAttribute('id'));
     revealButtons(document.getElementsByClassName('optionButton'));
     selectedItem = this;
   });
 
   entity.addEventListener('mouseleave', function(evt){
-    var model = this.getElementsByClassName('model')[0];
-    model.setAttribute('material','opacity','1');
+    setOpacity(this,1)
     console.log('Mouse left: ' + this.getAttribute('id'));
     hideButtons(document.getElementsByClassName('optionButton'));
-    selectedItem = [];
+    selectedItem = null;
   });
 
   entity.classList.add('selected');
+}
+
+function setOpacity(object, value){
+  var model = object.getElementsByClassName('model')[0];
+  model.setAttribute('material','opacity',value);
 }
 
 //Delete object
@@ -457,14 +460,18 @@ function revealCursor(){
 // Hide buttons
 function hideButtons(btnList){
   for(var i = 0; i < btnList.length; i++){
-        btnList[i].classList.add("hide-button");
+    if(!btnList[i].classList.contains('hide-button')){
+      btnList[i].classList.add("hide-button");
+    }
   }
 }
 
 // Reveal Buttons
 function revealButtons(btnList){
   for(var i = 0; i < btnList.length; i++){
-        btnList[i].classList.remove("hide-button");
+    if(btnList[i].classList.contains('hide-button')){
+      btnList[i].classList.remove("hide-button");
+    }
   }
 }
 
