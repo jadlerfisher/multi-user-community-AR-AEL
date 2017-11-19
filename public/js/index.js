@@ -257,69 +257,27 @@ function rotate(axis, degrees) {
   console.log(axis);
 
   if (axis === "z") {
-    // _yP = _yO;
-    // var _y = _yO;
-    // var _x = _xO;
-    // var _z = _zO;
-
-    // //Make Axis of Rotation
-    // var v = [_xO - _xP, _yO - _yP, _zO - _zP];
-    // var vMag = Math.sqrt(v[0] * v[0] + v[1]*v[1] + v[2] * v[2]);
-    // if (vMag == 0) {
-    //   vMag = 1;
-    // }
-    // var u = [v[0]/vMag, v[1]/vMag, v[2]/vMag, 1];
-
-    // //Translate to go through origin
-    // var t = [[1,0,0,-1*_xP],
-    //         [0,1,0,-1*_yP],
-    //         [0,0,1,-1*_zP],
-    //         [0,0,0,1]];
-    // var newU = [t[0][0]*u[0] + t[0][3]*u[3], t[1][1]*u[1] + t[1][4]*u[4], t[2][2]*u[2] + t[2][3]*u[3], t[3][3]*u[3]];
-
-    // //Rotate to align with z-axis
-    // //rotate about x-axis to be in xz plane
-    // var a = [u[0], u[1], u[2]];
-    // var magA = Math.sqrt(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]);
-    // var n = [a[0] + 1, a[1], a[2]];
-    // var b = [a[1]*n[2] - n[1]*a[2], a[2]*n[0] - a[0]*n[2], a[0]*n[1] - a[1]*n[0]];
-    // var magB = Math.sqrt(b[0]*b[0] + b[1]*b[1] + b[2]*b[2]);
-    // var c = [a[1]*b[2] - b[1]*a[2], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]];
-    // var r1 = [[a[0], a[1], a[2], 0],
-    //           [b[0], b[1], b[2], 0],
-    //           [c[0], c[1], c[2], 0],
-    //           [0, 0, 0, 1]];
-    // var r2 = [[1, 0, 0, 0],
-    //           [0, Math.cos(degrees), -1 * Math.sin(degrees), 0],
-    //           [0, Math.sin(degrees), Math.cos(degrees), 0],
-    //           [0,0,0,1]];
-    // var r3 = [[a[0], b[0], c[0], 0],
-    //           [a[1], b[1], c[1], 0],
-    //           [a[2], b[2], c[2], 0],
-    //           [0, 0, 0, 1]];
-    // console.log(r1);
-    // console.log(r2);
-    // console.log(r3);
-
-    // var r = multiplyMatrix(multiplyMatrix(r3, r2),r1);
-    // console.log(r);
-    // var p = [_xO, _yO, _zO, 1];
-    // console.log(p);
-    // var newP = [r[0][0]*p[0] + r[0][1]*p[1] + r[0][2]*p[2] + r[0][3]*p[3],
-    //             r[1][0]*p[0] + r[1][1]*p[1] + r[1][2]*p[2] + r[1][3]*p[3],
-    //             r[2][0]*p[0] + r[2][1]*p[1] + r[2][2]*p[2] + r[2][3]*p[3]];
-    // console.log(newP);
-    // var _x = newP[0];
-    // var _y = newP[1];
-    // var _z = newP[2];
-    // console.log(_x + " " + _y + " " + _z);
     var _y = _yOR;
     var _x = _xOR;
-    var _z = _zOR + degrees;
-  } else if (axis === "x") {
-    var _y = _yOR;
-    var _x = _xOR + degrees;
     var _z = _zOR;
+
+    var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
+    var a = Math.atan2(_zO - _zP, _xO - _xP);
+    var x_amount = Math.cos(a);
+    var z_amount = Math.sin(a);
+    _x = _x + (degrees*x_amount);
+    _z = _z + (degrees*z_amount);
+  } else if (axis === "x") {
+     var _y = _yOR;
+    var _x = _xOR;
+    var _z = _zOR;
+
+    var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
+    var a = Math.atan2(_zO - _zP, _xO - _xP);
+    var x_amount = Math.sin(a);
+    var z_amount = Math.cos(a);
+    _x = _x + (degrees*x_amount);
+    _z = _z + (degrees*z_amount);
   } else {
     // Update position
     var _y = _yOR + degrees;
@@ -335,31 +293,6 @@ function rotate(axis, degrees) {
     components: { rotation: object.getAttribute('rotation') }
   };
   NAF.entities.updateEntity(NAF.clientId, null, entityData);
-}
-
-/**
- * resizes the entity
- * @param {int} value changed
- */
-function resize(value) {
-  var objectId = getObjectId();
-  var object = NAF.entities.getEntity(objectId);
-
-  // Update scale
-  object.getAttribute('scale').x += value;
-  object.getAttribute('scale').y += value;
-  object.getAttribute('scale').z += value;
-
-  var entityData = {
-    networkId: objectId,
-    owner: NAF.clientId,
-    template: object.getAttribute("template").src,
-    components: { scale: object.getAttribute('scale') }
-  };
-
-  if (object.getAttribute('scale').x > 0) {
-    NAF.entities.updateEntity(NAF.clientId, null, entityData);
-  }
 }
 
 /**
