@@ -2008,7 +2008,7 @@
 
 	      entity.initNafData = entityData;
 
-	      var scene = document.querySelector('a-scene');
+	      var scene = document.querySelector('#scene');
 	      scene.appendChild(entity);
 	      this.entities[entityData.networkId] = entity;
 
