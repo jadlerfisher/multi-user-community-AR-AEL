@@ -96,4 +96,15 @@ router.get('/ar-view', function(req, res) {
   }
 });
 
+router.get('/argon-view', function(req, res) {
+  if (authController.hasLoggedIn()) {
+    res.render('ar-view', {
+      base64: req.session.base64
+    });
+  } else {
+    req.session.redirect_url = 'argon-view';
+    res.render('login');
+  }
+});
+
 module.exports = router;
