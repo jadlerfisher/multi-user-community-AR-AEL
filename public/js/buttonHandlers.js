@@ -81,7 +81,7 @@ function editModelPress(){
 
 function removeButtonPress() {
   // TODO: Need to pick an object that user selected and remove it
-  // document.querySelector("a-scene").removeChild(selectedItem);
+  // document.querySelector("#scene").removeChild(selectedItem);
   console.log(selectedItem.getAttribute('id') + " was removed from scene.");
   NAF.entities.removeEntity(selectedItem.getAttribute('id').substr(4));
 }
@@ -94,7 +94,7 @@ function gravityOffButtonPress() {
 
 //Resets the gravity button upon press
 function gravityOnButtonPress() {
-  var scene = document.querySelector("a-scene");
+  var scene = document.querySelector("#scene");
   createGravity();
   gravityAll();
 }
