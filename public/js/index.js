@@ -474,8 +474,8 @@ function revealCursor(){
   cursor.setAttribute('id', "cursor");
   cursor.setAttribute('geometry','primitive: ring; radiusInner: 0.01; radiusOuter: 0.016');
   cursor.setAttribute('material', "color: #EEE");
-  cursor.setAttribute('position', "0 0 -0.01");
-  cursor.setAttribute('scale', "0.01 0.01 0.01");
+  cursor.setAttribute('position', "0 0 -0.1");
+  cursor.setAttribute('scale', "0.1 0.1 0.1");
 
   camera.appendChild(cursor);
 }
