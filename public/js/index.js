@@ -87,16 +87,26 @@ function chooseColor() {
   removeEditingOptionsBox();
   createEditBox("color");
 }
+
 //Displays a Model
 function createModel(i) {
-  var player = document.querySelector("#player");
-  var playerPos = new THREE.Vector3().copy(player.getAttribute('position'));
-  var playerDir = new THREE.Vector3().copy(player.object3D.getWorldDirection());
+
+  // var player = document.querySelector("#player");
+  // var playerPos = new THREE.Vector3().copy(player.getAttribute('position'));
+  // var playerDir = new THREE.Vector3().copy(player.object3D.getWorldDirection());
+  // var objPos = {
+  //   x: playerPos.x - playerDir.x,
+  //   y: playerPos.y - playerDir.y,
+  //   z: playerPos.z - playerDir.z,
+  // }
+
+  /* CODE FOR ARGON */
+
   var objPos = {
-    x: playerPos.x - playerDir.x,
-    y: playerPos.y - playerDir.y,
-    z: playerPos.z - playerDir.z,
+      x: 10-Math.random()*20, y: 10-Math.random()*20, z: 0
   }
+
+  /* END CODE FOR ARGON */
 
   // Create network entity
   var networkId = NAF.entities.createEntityId();
@@ -110,8 +120,9 @@ function createModel(i) {
     components: {
       position: objPos,
       rotation: '0 0 0',
-      scale: '0.1 0.1 0.1',
+      scale: '1 1 1',
       material: 'color: #FFF'
+      // material: 'color: #FFF'
     }
   };
 

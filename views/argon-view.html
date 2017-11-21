@@ -41,7 +41,7 @@
   <!-- Bootstrap -->
   <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 
-  <!-- <script src="js/main-ar.js"></script> -->
+  <script src="js/main-ar.js"></script>
 </head>
 
   <body onload="init()">
@@ -160,8 +160,9 @@
         </script>
 
       </a-assets>
-      <ar-frame id="frame" position="0 0 0" rotation="0 0 0"
+      <ar-frame position="0 0 0" rotation="0 0 0"
                  trackvisibility="true" visible="false" parent="vuforia.stonesandchips.stones" >
+        <a-entity id="frame" scale="0.01 0.01 0.01">
 
 <!--       <a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" camera position="0 1.3 0" wasd-controls look-controls>
                 <a-entity cursor id="cursor"
@@ -173,7 +174,10 @@
 
 <!--       <a-sky src="#sky" rotation="0 -90 0"></a-sky> -->
       
-      <a-sphere radius="0.01" position="0 0 0"></a-sphere>
+          <a-sphere radius="1" material="color: #111" position="0 0 0"></a-sphere>
+
+        </a-entity>
+
       </ar-frame>
 
       <ar-camera id="player">
@@ -186,7 +190,7 @@
 
       </ar-camera>
 
-      <center id="ui">
+      <center id="ui" class="hide-center">
       <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
         <div class="addRemoveButton">
