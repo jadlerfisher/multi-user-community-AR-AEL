@@ -137,7 +137,7 @@ function createModel(i) {
 
   entity.initNafData = entityData;
 
-  var scene = document.querySelector('#scene');
+  var scene = document.querySelector('#frame');
   scene.appendChild(entity);
   NAF.entities.entities[entityData.networkId] = entity;
 
@@ -165,7 +165,7 @@ function setOpacity(object, value){
 
 //Delete object
 function disappear() {
-  // document.querySelector("#scene").removeChild(document.getElementById("item"));
+  // document.querySelector("#frame").removeChild(document.getElementById("item"));
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
   console.log(objectId+ " was removed from scene.");
@@ -393,7 +393,7 @@ function createNewModel(text) {
   asset.setAttribute("src", text);
   assets.appendChild(asset);
 
-  var scene = document.querySelector("#scene");
+  var scene = document.querySelector("#frame");
   //creates model
   var model = document.createElement("a-entity");
   model.setAttribute("id", "item");
@@ -408,7 +408,7 @@ function createNewModel(text) {
 
 //Removes item based on its id #
 function removeItem(i) {
-  var scene = document.querySelector("#scene");
+  var scene = document.querySelector("#frame");
   scene.removeChild(document.getElementById(i));
   var index = items.indexOf(i);
   items.splice(index, 1);
@@ -426,14 +426,14 @@ function randomColor() {
 }
 
 function removeItems(i) {
-  var scene = document.querySelector("#scene");
+  var scene = document.querySelector("#frame");
   scene.removeChild(document.getElementById(i));
   var index = items.indexOf(i);
   items.splice(index, 1);
  }
 
 function removeAll() {
-  var scene = document.querySelector("#scene");
+  var scene = document.querySelector("#frame");
   console.log('length is', items.length);
 
 
@@ -451,7 +451,7 @@ function removeAll() {
 }
 
 function gravityAll() {
-  var scene = document.querySelector("#scene");
+  var scene = document.querySelector("#frame");
   for (var i = 0; i < items.length; i++) {
     var item = document.getElementById(items[i])
     item.setAttribute("dynamic-body", "mass: 5");
