@@ -31,6 +31,8 @@ function init() {
         createGalleryItem(galleryDetails[0], galleryDetails[1], galleryDetails[2], galleryDetails[3]);
     }
 
+    createSky();
+
 }
 
 function makeModelAssets(modelSources) {
@@ -87,6 +89,60 @@ function chooseColor() {
   removeEditingOptionsBox();
   createEditBox("color");
 }
+
+function createSky(){
+  removeCurrentSky()
+  // Create network for sky
+  var networkId = NAF.entities.createEntityId();
+  NAF.log.write('Created new sky: ', networkId);
+
+  var entityData = {
+    networkId: networkId,
+    owner: NAF.clientId,
+    template: '#sky-model',
+    components: {
+      rotation: '0 -90 0',
+      class: "currentSky"
+    }
+  };
+
+  // Create local entity
+  var entity = document.createElement('a-entity');
+  entity.setAttribute('id', 'naf-' + entityData.networkId);
+  if (NAF.options.useLerp) {
+    entity.setAttribute('lerp', '');
+  }
+
+  var template = entityData.template;
+  NAF.entities.setTemplate(entity, template);
+
+  var components = NAF.entities.getComponents(template);
+  NAF.entities.initPosition(entity, entityData.components);
+
+  
+  entity.setAttribute('rotation', entityData.components.rotation);
+  entity.setAttribute('class',entityData.components.class);
+  NAF.entities.setNetworkData(entity, entityData, components);
+
+  entity.initNafData = entityData;
+
+  var scene = document.querySelector('a-scene');
+  scene.appendChild(entity);
+}
+
+function removeCurrentSky(){
+  var oldSkies = document.getElementsByClassName('currentSky');
+  if(oldSkies.length > 0){
+    var skyID = oldSkies[0].id.replace('naf-','');
+    var sky = NAF.entities.getEntity(skyID);
+    console.log('Sky "' + skyID + '" was removed from scene');
+    NAF.entities.removeEntity(skyID);
+  }
+  else{
+    console.log('No sky was found.');
+  }
+}
+
 //Displays a Model
 function createModel(i) {
   var player = document.querySelector("#player");
