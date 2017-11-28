@@ -386,19 +386,23 @@ function setRotation(rotationInfo) {
 }
 
 //Creates a new model based on inputed URL from user
-function createNewModel(text) {
+function createNewModel(text, name) {
   var assets = document.querySelector("a-assets");
   var asset = document.createElement("a-asset-item");
-  asset.setAttribute("id", "new-obj");
+  asset.setAttribute("id", name);
   asset.setAttribute("src", text);
   assets.appendChild(asset);
+  models.push("obj: #" + name);
+  //bT[0].push(text);
+  //bF[0].push(modelButonPress(1));
+  console.log(models);
 
   var scene = document.querySelector("a-scene");
   //creates model
   var model = document.createElement("a-entity");
   model.setAttribute("id", "item");
   model.setAttribute("class", "model");
-  model.setAttribute("obj-model", "obj: #new-obj");
+  model.setAttribute("obj-model", "obj: "+text);
   model.setAttribute('position', '0 1.25 -5');
   model.setAttribute("rotation", "0 0 0");
   model.setAttribute("scale", "1 1 1");
