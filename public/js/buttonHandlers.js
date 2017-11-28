@@ -69,6 +69,14 @@ function sizeButtonPress() {
 //     removeButtons();
 //     createOptions();
 // }
+function submitFilepathButtonPress() {
+    var filePath = document.getElementById("fileInputField").value;
+    var modelName = document.getElementById("modelNameField").value;
+    //console.log(text);
+    createNewModel(filePath, modelName);
+    removeButtons();
+    createOptions();
+}
 
 //User has chosen to remove an object from the scene
 
