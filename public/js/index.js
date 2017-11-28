@@ -296,6 +296,32 @@ function rotate(axis, degrees) {
 }
 
 /**
+ * rotates the entity
+ * @param {int} amount resized
+*/
+function scale(amount) {
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+
+  var _x = object.getAttribute('scale').x;
+  var _y = object.getAttribute('scale').y;
+  var _z = object.getAttribute('scale').z;
+  if (_x + amount <= 0 || _y + amount <= 0 || _z + amount <= 0) {
+    amount = 0;
+  }
+  object.setAttribute('scale', {x: _x + amount, y: _y + amount, z: _z + amount});
+
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: object.getAttribute("template").src,
+    components: { scale: object.getAttribute('scale') }
+  };
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
+
+}
+
+/**
  * Changes the shape's color
  * This function gets called every time a user picks a color from color palette
  * @param {String} jscolor an object of jscolor
@@ -353,25 +379,26 @@ function setPosition(_x, _y, _z) {
 }
 
 //Set shape size when undo is called
-function setSize(sizeInfo) {
+function setSize(_x,_y,_z) {
+  console.log(_x + " " + _y + " " + _z);
   var objectId = getObjectId();
-  var sX_change = sizeInfo[0][0];
-  var sY_change = sizeInfo[0][1];
-  var sZ_change = sizeInfo[0][2];
+  var object = NAF.entities.getEntity(objectId);
+
+  object.setAttribute('scale', {x: _x, y: _y, z: _z});
 
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
     template: object.getAttribute("template").src,
-    components: { scale: {x: sX_change, y: sY_change, z: sZ_change} }
+    components: { scale: object.getAttribute('scale') }
   };
-
   NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
 //Set shape Rotation when undo is called
 function setRotation(rotationInfo) {
   var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
   var _x = rotationInfo[0];
   var _z = rotationInfo[2];
   var _y = rotationInfo[1];

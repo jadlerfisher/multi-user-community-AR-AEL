@@ -49,7 +49,8 @@ function sizeButtonPress() {
   stateChange('stateC3');
   var objectId = getObjectId();
   var item = NAF.entities.getEntity(objectId);
-  var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
+  var sizeInfo = [item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z];
+  console.log(sizeInfo);
   changes.push(["size", sizeInfo]);
   console.log('Entity is being resized');
 }

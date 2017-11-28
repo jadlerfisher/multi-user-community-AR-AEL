@@ -196,20 +196,21 @@ function displayModel(i) {
 
 function undoButtonPress() {
   console.log("Undo!");
+  console.log(changes);
   if (changes.length > 0) {
+     console.log(changes[0]);
+     console.log(changes[0][1]);
     var lastMove = changes.pop(changes.length - 1);
+    console.log("LAST MOVE!");
     console.log(lastMove[0]);
     if (lastMove[0] === "move") {
       setPosition(lastMove[1][0], lastMove[1][1], lastMove[1][2]);
     } else if (lastMove[0] === "rotate") {
       setRotation(lastMove[1]);
     } else if (lastMove[0] === "size") {
-        var str = "";
-        for (var i = 0; i < lastMove[1].length - 3; i++) {
-            str = str + lastMove[1][i] + " ";
-        }
-        console.log(str);
-      setSize(lastMove[1]);
+        console.log("UNDOING SIZE CHANGE");
+        console.log(lastMove[1]);
+      setSize(lastMove[1][0], lastMove[1][1], lastMove[1][2]);
     } else if (lastMove[0] === "color") {
         setColor(lastMove[1]);
     }

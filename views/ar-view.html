@@ -317,10 +317,10 @@
       <!-- STATE C3: RESIZE an entity -->
       <div id="stateC3" class="hide-state">
         <div class="editTray">
-          <button onclick="resize(0.1)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+          <button onclick="scale(.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
              <i class="material-icons">add</i>
           </button>
-          <button onclick="resize(-0.1)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+          <button onclick="scale(-.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
               <i class="material-icons">remove</i>
           </button>
           <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
