@@ -351,9 +351,12 @@ function randomColor() {
 
 function removeItems(i) {
   var scene = document.querySelector("a-scene");
+    var item = document.getElementById(items[i])
+    item.setAttribute("dynamic-body", "mass: 5");
+  setTimeout(function(){
   scene.removeChild(document.getElementById(i));
   var index = items.indexOf(i);
-  items.splice(index, 1);
+  items.splice(index, 1);}, 5000);
  }
 
 function removeAll() {
