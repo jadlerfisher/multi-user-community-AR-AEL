@@ -96,7 +96,7 @@ function removeButtonPress() {
 }
 
 
-//Resets the gravity button upon press
+//Resets the gravity button fon press
 function gravityOffButtonPress() {
   onGravity();
 }
