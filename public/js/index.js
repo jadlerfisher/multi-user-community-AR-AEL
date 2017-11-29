@@ -1,4 +1,4 @@
-var buttonExists = true; //The VR button exists
+  var buttonExists = true; //The VR button exists
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
 var itemNum = 0; //The id of the most recently created object
@@ -384,4 +384,3 @@ function revealCursor(){
 
   camera.appendChild(cursor);
 }
-
