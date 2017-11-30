@@ -510,7 +510,7 @@
           scale: JSON.parse(savedObjects[objectId]["scale"]),
           material: JSON.parse(savedObjects[objectId]["material"]),
         }
-        createModelWithComponents(creatorUid, objectId, templateId, components);
+        createModelWithComponents(creatorUid, objectId.replace("naf-", ""), templateId, components);
       }
 
       // Save an object after a user creates/edits an object
@@ -534,6 +534,23 @@
 
           }
         });
+      });
+
+      // TODO: Allow only creator to remove an object
+      $(".removeButton").click(function() {
+        $.ajax({
+          url: "/remove-object",
+          method: "POST",
+          data: {
+            objectId: selectedItem.id
+          },
+          success: function(resp) {
+
+          },
+          error: function(resp) {
+
+          }
+        })
       });
 
     </script>

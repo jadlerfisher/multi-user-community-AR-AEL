@@ -89,8 +89,6 @@ function editModelPress(){
 }
 
 function removeButtonPress() {
-  // TODO: Need to pick an object that user selected and remove it
-  // document.querySelector("a-scene").removeChild(selectedItem);
   console.log(selectedItem.getAttribute('id') + " was removed from scene.");
   NAF.entities.removeEntity(selectedItem.getAttribute('id').substr(4));
 }

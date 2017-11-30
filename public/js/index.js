@@ -133,7 +133,6 @@ function createModelWithComponents(uid, objectId, templateId, components) {
   NAF.entities.setTemplate(entity, template);
 
   var components = NAF.entities.getComponents(template);
-  console.log(components);
   NAF.entities.initPosition(entity, entityData.components);
 
   entity.setAttribute('position', entityData.components.position);

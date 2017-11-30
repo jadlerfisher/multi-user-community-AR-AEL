@@ -103,7 +103,7 @@ router.get('/ar-view', function(req, res) {
   }
 });
 
-// Save a customized object to Firebase
+// Save a customized object in Firebase
 router.post('/save-object', function(req, res) {
   if (authController.hasLoggedIn()) {
     var objectController = require('./objectController');
@@ -118,6 +118,24 @@ router.post('/save-object', function(req, res) {
     }
 
   	objectController.saveObject(creatorUid, objectId, templateId, components,
+      function(error) {
+      	if (error) {
+      		return res.status(500).send(error.message);
+      	}
+      }
+    );
+  } else {
+    return res.status(500).send('Login required.');
+  }
+});
+
+// Remove a customized object in Firebase
+router.post('/remove-object', function(req, res) {
+  if (authController.hasLoggedIn()) {
+    var objectController = require('./objectController');
+    var objectId = req.body.objectId;
+
+  	objectController.removeObject(objectId,
       function(error) {
       	if (error) {
       		return res.status(500).send(error.message);

@@ -1,5 +1,6 @@
 module.exports = {
 	saveObject: saveObject,
+	removeObject: removeObject,
 	getObjects: getObjects,
 }
 
@@ -16,6 +17,11 @@ function saveObject(creatorUid, objectId, templateId, components, callback) {
 		scale: components.scale,
 		material: components.material,
   });
+}
+
+function removeObject(objectId, callback) {
+  // Remove object in Firebase
+  firebase.database().ref('objects/' + objectId).set(null);
 }
 
 function getObjects() {
