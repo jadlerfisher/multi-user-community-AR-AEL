@@ -96,23 +96,30 @@ function createModel(i) {
     x: playerPos.x - playerDir.x,
     y: playerPos.y - playerDir.y,
     z: playerPos.z - playerDir.z,
-  }
-
-  // Create network entity
-  var networkId = NAF.entities.createEntityId();
-  NAF.log.write('Created network entity', networkId);
+  };
+  var components = {
+    position: objPos,
+    rotation: '0 0 0',
+    scale: '0.1 0.1 0.1',
+    material: 'color: #FFF'
+  };
+  var currentUid = window.localStorage["uid"];
   console.log(i);
   console.log(models[i]);
+
+  var networkId = NAF.entities.createEntityId();
+
+  createModelWithComponents(currentUid, networkId, models[i], components);
+}
+
+function createModelWithComponents(uid, objectId, templateId, components) {
+  var currentUid = window.localStorage["uid"];
+  // Create network entity
   var entityData = {
-    networkId: networkId,
+    networkId: objectId,
     owner: NAF.clientId,
-    template: models[i],
-    components: {
-      position: objPos,
-      rotation: '0 0 0',
-      scale: '0.1 0.1 0.1',
-      material: 'color: #FFF'
-    }
+    template: templateId,
+    components: components
   };
 
   // Create local entity
@@ -126,6 +133,7 @@ function createModel(i) {
   NAF.entities.setTemplate(entity, template);
 
   var components = NAF.entities.getComponents(template);
+  console.log(components);
   NAF.entities.initPosition(entity, entityData.components);
 
   entity.setAttribute('position', entityData.components.position);
@@ -141,19 +149,25 @@ function createModel(i) {
   scene.appendChild(entity);
   NAF.entities.entities[entityData.networkId] = entity;
 
-  entity.addEventListener('mouseenter', function(evt){
-    setOpacity(this, 0.85);
-    console.log('Mouse entered: ' + this.getAttribute('id'));
-    revealButtons(document.getElementsByClassName('optionButton'));
-    selectedItem = this;
-  });
+  // Allow the creator to edit an object
+  if (currentUid === uid) {
+    entity.addEventListener('mouseenter', function(evt){
+      setOpacity(this, 0.85);
+      console.log('Mouse entered: ' + this.getAttribute('id'));
+      revealButtons(document.getElementsByClassName('optionButton'));
+      selectedItem = this;
+    });
 
-  entity.addEventListener('mouseleave', function(evt){
-    setOpacity(this,1)
-    console.log('Mouse left: ' + this.getAttribute('id'));
-    hideButtons(document.getElementsByClassName('optionButton'));
-    selectedItem = null;
-  });
+    entity.addEventListener('mouseleave', function(evt){
+      setOpacity(this,1)
+      console.log('Mouse left: ' + this.getAttribute('id'));
+      hideButtons(document.getElementsByClassName('optionButton'));
+      selectedItem = null;
+    });
+  }
+
+  // Set the current entity
+  selectedItem = entity;
 
   entity.classList.add('selected');
 }
@@ -534,41 +548,41 @@ function multiplyMatrix(a,b) {
     var row2A = a[1];
     var row3A = a[2];
     var row4A = a[3];
-    
+
     //Separating Rows of Second Matrix
     var row1B = b[0];
     var row2B = b[1];
     var row3B = b[2];
     var row4B = b[3];
-    
+
     //Finding first Row of new Matrix
     var spot1 = (row1A[0]*row1B[0]) + (row1A[1]*row2B[0]) + (row1A[2]*row3B[0]) + (row1A[3]*row4B[0]);
     var spot2 = (row1A[0]*row1B[1]) + (row1A[1]*row2B[1]) + (row1A[2]*row3B[1]) + (row1A[3]*row4B[1]);
     var spot3 = (row1A[0]*row1B[2]) + (row1A[1]*row2B[2]) + (row1A[2]*row3B[2]) + (row1A[3]*row4B[2]);
     var spot4 = (row1A[0]*row1B[3]) + (row1A[1]*row2B[3]) + (row1A[2]*row3B[3]) + (row1A[3]*row4B[3]);
     var row1C = [spot1, spot2, spot3, spot4];
-    
+
     //Finding second Row of new Matrix
     spot1 = (row2A[0]*row1B[0]) + (row2A[1]*row2B[0]) + (row2A[2]*row3B[0]) + (row2A[3]*row4B[0]);
     spot2 = (row2A[0]*row1B[1]) + (row2A[1]*row2B[1]) + (row2A[2]*row3B[1]) + (row2A[3]*row4B[1]);
     spot3 = (row2A[0]*row1B[2]) + (row2A[1]*row2B[2]) + (row2A[2]*row3B[2]) + (row2A[3]*row4B[2]);
     spot4 = (row2A[0]*row1B[3]) + (row2A[1]*row2B[3]) + (row2A[2]*row3B[3]) + (row2A[3]*row4B[3]);
     var row2C = [spot1, spot2, spot3, spot4];
-    
+
     //Finding third Row of new Matrix
     spot1 = (row3A[0]*row1B[0]) + (row3A[1]*row2B[0]) + (row3A[2]*row3B[0]) + (row3A[3]*row4B[0]);
     spot2 = (row3A[0]*row1B[1]) + (row3A[1]*row2B[1]) + (row3A[2]*row3B[1]) + (row3A[3]*row4B[1]);
     spot3 = (row3A[0]*row1B[2]) + (row3A[1]*row2B[2]) + (row3A[2]*row3B[2]) + (row3A[3]*row4B[2]);
     spot4 = (row3A[0]*row1B[3]) + (row3A[1]*row2B[3]) + (row3A[2]*row3B[3]) + (row3A[3]*row4B[3]);
     var row3C = [spot1, spot2, spot3, spot4];
-    
+
     //Finding fourth Row of new Matrix
     spot1 = (row4A[0]*row1B[0]) + (row4A[1]*row2B[0]) + (row4A[2]*row3B[0]) + (row4A[3]*row4B[0]);
     spot2 = (row4A[0]*row1B[1]) + (row4A[1]*row2B[1]) + (row4A[2]*row3B[1]) + (row4A[3]*row4B[1]);
     spot3 = (row4A[0]*row1B[2]) + (row4A[1]*row2B[2]) + (row4A[2]*row3B[2]) + (row4A[3]*row4B[2]);
     spot4 = (row4A[0]*row1B[3]) + (row4A[1]*row2B[3]) + (row4A[2]*row3B[3]) + (row4A[3]*row4B[3]);
     var row4C = [spot1, spot2, spot3, spot4];
-    
-    
+
+
     return [row1C,row2C,row3C,row4C];
   }

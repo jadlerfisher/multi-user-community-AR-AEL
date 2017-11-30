@@ -4,6 +4,7 @@ module.exports = {
 	login: login,
   logout: logout,
   getUser: getUser,
+  getUid: getUid,
 }
 
 var firebase = require('firebase');
@@ -22,6 +23,10 @@ function hasLoggedIn() {
 
 function getUser() {
   return firebase.auth().currentUser;
+}
+
+function getUid() {
+  return getUser().uid;
 }
 
 function register(email, password, callback) {

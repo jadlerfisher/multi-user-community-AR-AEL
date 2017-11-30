@@ -83,16 +83,49 @@ router.post('/save-base64', function(req, res) {
   // Store base64 in session
   req.session.base64 = req.body.base64;
   return res.status(200).send({message: 'Successfully stored base64'});
-})
+});
 
 router.get('/ar-view', function(req, res) {
   if (authController.hasLoggedIn()) {
-    res.render('ar-view', {
-      base64: req.session.base64
+    var objectController = require('./objectController');
+
+    objectController.getObjects().then(function(snapshot) {
+      res.render('ar-view', {
+        uid: authController.getUid(),
+        base64: req.session.base64,
+        savedObjects: snapshot.val(),
+      });
     });
+
   } else {
     req.session.redirect_url = 'ar-view';
     res.render('login');
+  }
+});
+
+// Save a customized object to Firebase
+router.post('/save-object', function(req, res) {
+  if (authController.hasLoggedIn()) {
+    var objectController = require('./objectController');
+    var creatorUid = req.body.creatorUid;
+    var templateId = req.body.templateId;
+    var objectId = req.body.objectId;
+    var components = {
+      position: req.body.position,
+      rotation: req.body.rotation,
+      scale: req.body.scale,
+      material: req.body.material,
+    }
+
+  	objectController.saveObject(creatorUid, objectId, templateId, components,
+      function(error) {
+      	if (error) {
+      		return res.status(500).send(error.message);
+      	}
+      }
+    );
+  } else {
+    return res.status(500).send('Login required.');
   }
 });
 

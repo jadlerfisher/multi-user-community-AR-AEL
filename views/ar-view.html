@@ -44,6 +44,9 @@
   <script src="js/main-ar.js"></script>
 </head>
   <body onload="init()">
+    <script type="text/javascript">
+      window.localStorage["uid"] = "<%= uid %>";
+    </script>
     <!-- <script>
       // Argon obj location detect
       AFRAME.registerComponent('showdistance', {
@@ -90,11 +93,11 @@
       <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
         <div class="addRemoveButton">
-          
+
           <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
             <i class="material-icons">delete</i>
           </button>
-          
+
           <button onclick="editModelPress()" type="button" class="addButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">create</i>
           </button>
@@ -102,7 +105,7 @@
           <button onclick="stateChange('stateB')" class="addButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">add</i>
           </button>
-   
+
         </div>
       </div>
       <!-- END STATE A -->
@@ -323,7 +326,7 @@
           <button onclick="resize(-0.1)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
               <i class="material-icons">remove</i>
           </button>
-          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+          <button onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">done</i>
           </button>
         </div>
@@ -466,19 +469,48 @@
     <script src="js/createButtons.js"></script>
     <script src="library/jscolor.min.js"></script>
     <script src="js/addItem.js"></script>
+    <script src="library/jquery.ajax.js"></script>
     <script type="text/javascript">
-      // function randomNumString() {
-      //   var max = 3;
-      //   var min = 0;
-      //   return (Math.random() * (max - min) + min).toString();
-      // }
+      // Set the sky to the Google map paranoma image
+      document.getElementById("sky").src = "<%= base64 %>";
 
-      document.getElementById('sky').src = "<%= base64 %>";
-      // window.onload = (function() {
-      //   var randomPosition = randomNumString() + ' 0 ' + randomNumString();
-      //   console.log(randomPosition);
-      //   document.getElementById('player').setAttribute('position', randomPosition);
-      // })();
+      // Load saved objects fetched from Firebase
+      var savedObjects = <%- JSON.stringify(savedObjects) %>;
+      for (var objectId in savedObjects) {
+        var templateId = savedObjects[objectId]["templateId"];
+        var creatorUid = savedObjects[objectId]["creatorUid"];
+        var components = {
+          position: JSON.parse(savedObjects[objectId]["position"]),
+          rotation: JSON.parse(savedObjects[objectId]["rotation"]),
+          scale: JSON.parse(savedObjects[objectId]["scale"]),
+          material: JSON.parse(savedObjects[objectId]["material"]),
+        }
+        createModelWithComponents(creatorUid, objectId, templateId, components);
+      }
+
+      // Save an object after a user creates/edits an object
+      $(".doneButton").click(function(ev) {
+        $.ajax({
+          url: "/save-object",
+          method: "POST",
+          data: {
+            creatorUid: window.localStorage["uid"],
+            templateId: selectedItem.getAttribute("template").src,
+            objectId: selectedItem.id,
+            position: JSON.stringify(selectedItem.getAttribute("position")),
+            rotation: JSON.stringify(selectedItem.getAttribute("rotation")),
+            scale: JSON.stringify(selectedItem.getAttribute("scale")),
+            material: JSON.stringify(selectedItem.getAttribute("material")),
+          },
+          success: function(resp) {
+
+          },
+          error: function(resp) {
+
+          }
+        });
+      });
+
     </script>
 
   </body>

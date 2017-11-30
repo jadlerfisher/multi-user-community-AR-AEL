@@ -4,7 +4,7 @@
   "description": "Community Tableau Vivant AR",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
