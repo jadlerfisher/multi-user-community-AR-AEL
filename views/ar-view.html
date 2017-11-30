@@ -126,7 +126,7 @@
                   <div class="box">
                     <div class="container-4">
                       <input onkeypress="checkKey(event)" type="search" class="search" id="search" placeholder="Search...">
-                      <button onclick="searchButtonPress()" class="icon"><i class="material-icons">search</i></button>
+                      <button onclick="searchButtonPress()" class="icon check"><i class="material-icons">search</i></button>
                     </div>
                   </div>
 
@@ -138,8 +138,33 @@
               </center>
             </div>
 
-            <button class="uploadButton" onclick="uploadItemButtonPress()">Upload</button>
+            <button class="uploadButton" onclick="stateChange('stateB2')">Upload</button>
             <button class="cancelButton" onclick="stateChange('stateA')">Cancel</button>
+          </div>
+        </center>
+      </div>
+      <!-- END STATE B -->
+
+       <!-- STATE B2: UI for uploading model -->
+      <div id="stateB2" class="hide-state">
+         <!-- When addEntity() is pressed, uiElem is shown -->
+        <center id="uiElem">
+          <div class="boxAndButtons">
+            <div class="objectUploadBox">
+              <center>
+                <div class="searchbar">
+                  <button onclick="stateChange('stateB')" class="icon back"><i class="material-icons">arrow_back</i></button>
+                  <div class="box">
+                    <div class="container-4">
+                      <input  type="search" class="search" id="fileInputField" placeholder="Enter URL of Model...">
+                      <button onclick="submitFilepathButtonPress()" class="icon check"><i class="material-icons">done</i></button>
+                    </div>
+                  </div>
+
+                </div>
+
+              </center>
+            </div>
           </div>
         </center>
       </div>
@@ -320,10 +345,10 @@
       <!-- STATE C3: RESIZE an entity -->
       <div id="stateC3" class="hide-state">
         <div class="editTray">
-          <button onclick="resize(0.1)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+          <button onclick="scale(.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
              <i class="material-icons">add</i>
           </button>
-          <button onclick="resize(-0.1)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+          <button onclick="scale(-.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
               <i class="material-icons">remove</i>
           </button>
           <button onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">

@@ -49,7 +49,8 @@ function sizeButtonPress() {
   stateChange('stateC3');
   var objectId = getObjectId();
   var item = NAF.entities.getEntity(objectId);
-  var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
+  var sizeInfo = [item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z];
+  console.log(sizeInfo);
   changes.push(["size", sizeInfo]);
   console.log('Entity is being resized');
 }
@@ -69,6 +70,14 @@ function sizeButtonPress() {
 //     removeButtons();
 //     createOptions();
 // }
+function submitFilepathButtonPress() {
+    var filePath = document.getElementById("fileInputField").value;
+    var modelName = document.getElementById("modelNameField").value;
+    //console.log(text);
+    createNewModel(filePath, modelName);
+    removeButtons();
+    createOptions();
+}
 
 //User has chosen to remove an object from the scene
 
@@ -87,7 +96,7 @@ function removeButtonPress() {
 }
 
 
-//Resets the gravity button upon press
+//Resets the gravity button fon press
 function gravityOffButtonPress() {
   onGravity();
 }

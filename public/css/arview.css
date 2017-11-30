@@ -100,6 +100,19 @@ td, th {
   border-radius: 9px;
 }
 
+#modelNameField {
+  background: rgb(255,255,255);
+  border: solid #575757 5px;
+  color: #000000;
+  padding: 15px 1px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  display:inline-block;
+  width:100%;
+  border-radius: 9px;
+}
+
 
 
 /*NEW CSS*/
@@ -110,6 +123,14 @@ td, th {
   background: #1A237E;
   width: 80vw;
   height: 70vh;
+  border-radius: 15px;
+  top:5vh;
+  padding: 10px;
+}
+.objectUploadBox{
+  position: relative;
+  background: #1A237E;
+  width: 80vw;
   border-radius: 15px;
   top:5vh;
   padding: 10px;
@@ -186,13 +207,52 @@ td, th {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-.container-4 button.icon{
+.container-4 input#fileInputField{
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border: none;
+  outline: none;
+  font-size: 12pt;
+ font-family: 'Roboto';
+  float: left;
+  color: #2b303b;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.container-4 button.check{
   -webkit-border-top-right-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
   -moz-border-radius-topright: 5px;
   -moz-border-radius-bottomright: 5px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+ 
+  border: none;
+  background-color: #E91E63;
+  height: 50px;
+  width: 50px;
+  color: white;
+  font-size: 12pt;
+  font-family: 'Roboto';
+ 
+  outline: none;
+  opacity: 1;
+  margin-left: -50px;
+}
+
+.back{
+  position: relative;
+  float: left;
+  margin-right: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
  
   border: none;
   background: #3F51B5;
@@ -204,12 +264,15 @@ td, th {
  
   outline: none;
   opacity: 1;
-  margin-left: -50px;
+  margin-right: -50px;
 }
   .container-4:hover button.icon:hover{
-    background: #5C6BC0;
+    background-color: #D81B60;
 }
 
+.back:hover{
+  background: #5C6BC0;
+}
 .objects{
   background: #fff;
   height: 58vh;
