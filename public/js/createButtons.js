@@ -1,8 +1,19 @@
+
 //Removes the Summon Button
 function removeSummmon() {
     // hideCursor();
     document.querySelector("center").removeChild(document.getElementsByClassName("buttonSummon")[0]);
 }
+//Removes add Button
+function removeAdd() {
+    hideCursor();
+    document.querySelector("#bTable").removeChild(document.getElementsByClassName("buttonSummon")[0]);
+}
+
+// function removeAdd() {
+//     var nList = document.querySelector(".add-button-align");
+//     nList[0].parentNode.removeChild(nList[0]);
+// }
 
 //Removes All Buttons from Screen
 function removeButtons() {
@@ -23,7 +34,7 @@ function createSummonButton() {
     revealCursor();
     var center = document.querySelector("center");
     var button = document.createElement("button");
-    button.setAttribute("onclick", "summonButtonPress()");
+    button.setAttribute("onclick", "addButtonPress()");
     button.setAttribute("type", "button");
     button.setAttribute("class", "buttonSummon");
     button.innerText = "+";
@@ -81,55 +92,95 @@ function createButtonTable(buttonFuncts, buttonText) {
         }
         table.appendChild(row);
     }
+
     table.setAttribute("id", "buttonTable");
     body.appendChild(table);
 }
 
-// //Create Add Buttons, Buttons that ask whether you want a shape or model
-// function createAddButtons() {
-//     var bF = [["modelButtonPress1()", "shapeButtonPress1()"]];
-//     var bT = [["Models", "Shapes"]];
-//     createButtonTable(bF, bT);
+
+//make buttons visible, have functionality, and transition up
+function createAddButtonMenu() {
+  var modelButton = document.querySelector("#modelButton");
+  var cubeButton = document.querySelector("#cubeButton");
+  var pyramidButton = document.querySelector("#pyramidButton");
+  var moreButton = document.querySelector("#moreButton");
+  modelButton.setAttribute('data-state', 'final');
+  cubeButton.setAttribute('data-state', 'final');
+  pyramidButton.setAttribute('data-state', 'final');
+  moreButton.setAttribute('data-state', 'final');
+  //modelButton.setAttribute("onclick", "addButtonPress()");
+  //cubeButton.setAttribute("onclick", "addButtonPress()");
+}
+
+// function createModelButton(funct) {
+//   var table = document.querySelector("#bTable");
+//   var button = document.createElement("button");
+//   button.setAttribute("onclick", "addButtonPress()");
+//   button.setAttribute("style", "background-image: url(assets/images/model-icon.png) !important;");
+//   button.setAttribute('data-state', 'initial');
+//   button.setAttribute("class", "add-button-align buttonSummon mdl-button mdl-js-button mdl-button--fab mdl-button--colored modelButton");
+//   button.setAttribute('id', 'modelButton');
+//   table.appendChild(button);
+//   createModalInitialComplete = true;
 // }
 
-// //Adds Model Buttons, Button that asks which model you want
-// function createModelButtons() {
-//     var bF = [["modelButtonPress(0)", "addNewModelButtonPress()"]];
-//     var bT = [["Pokeball", "Add New Model"]];
-//     createButtonTable(bF, bT);
+// function moveModelButton() {
+//   if (createModalInitialComplete) {
+//     document.querySelector("#modelButton").setAttribute('data-state', 'final');
+//   } else {
+//     setTimeout(moveModelButton(), 10000);
+//   }
 // }
 
-// //Adds Shape Buttons, Button that asks which shape you want
-// function createShapeButtons() {
-//     var bF = [["shapeButtonPress(0)", "shapeButtonPress(1)", "shapeButtonPress(2)"],
-//             ["shapeButtonPress(3)", "shapeButtonPress(4)", "shapeButtonPress(5)"],
-//             ["shapeButtonPress(6)", "shapeButtonPress(7)", "shapeButtonPress(8)"]];
-//     var bT = [["Box", "Sphere", "Circle"], ["Cone", "Plane", "Ring"], ["Torus", "Torus Knot", "Triangle"]];
-//     createButtonTable(bF, bT);
-// }
+//Create Add Buttons, Buttons that ask whether you want a shape or model
+function createAddButtons() {
+    var bF = [["modelButtonPress1()", "shapeButtonPress1()"]];
+    var bT = [["Models", "Shapes"]];
+    createButtonTable(bF, bT);
+}
 
-// //Add Edit, Undo, Delete, Finish, and Gravity
-// function createOptions() {
-//     var bF = [["editButtonPress()", "undoButtonPress()"],["gravityButtonPress()", "deleteButtonPress()"]];
-//     var bT = [["Edit", "Undo"],["Gravity", "Delete"]];
-//     createButtonTable(bF, bT);
+//Adds Model Buttons, Button that asks which model you want
+function createModelButtons() {
+    var bF = [["modelButtonPress(0)", "addNewModelButtonPress()"]];
+    var bT = [["Pokeball", "Add New Model"]];
+    createButtonTable(bF, bT);
+}
 
-//     //Finish Button
-//     var body = document.querySelector("center");
-//     body.appendChild(createFinishButton(1));
-// }
+//Adds Shape Buttons, Button that asks which shape you want
+function createShapeButtons() {
+    var bF = [["shapeButtonPress(0)", "shapeButtonPress(1)", "shapeButtonPress(2)"],
+            ["shapeButtonPress(3)", "shapeButtonPress(4)", "shapeButtonPress(5)"],
+            ["shapeButtonPress(6)", "shapeButtonPress(7)", "shapeButtonPress(8)"]];
+    var bT = [["Box", "Sphere", "Circle"], ["Cone", "Plane", "Ring"], ["Torus", "Torus Knot", "Triangle"]];
+    createButtonTable(bF, bT);
+}
+
+//Add Edit, Undo, Delete, Finish, and Gravity
+function createOptions() {
+    var bF = [["editButtonPress()", "undoButtonPress()"],["gravityButtonPress()", "deleteButtonPress()"]];
+    var bT = [["Edit", "Undo"],["Gravity", "Delete"]];
+    createButtonTable(bF, bT);
+
+    //Finish Button
+    var body = document.querySelector("center");
+    body.appendChild(createFinishButton(1));
+}
 
 
-// //Creates Buttons to edit current object: location, rotation, size, color
-// function createEditButtons() {
-//     var bF = [["moveButtonPress()", "rotateButtonPress()"], ["sizeButtonPress()", "colorButtonPress()"]];
-//     var bT = [["Move", "Rotate"], ["Resize", "Color"]];
-//     createButtonTable(bF, bT);
-
-//     //Finish Button
-//     var body = document.querySelector("center");
-//     body.appendChild(createFinishButton(2));
-// }
+//Creates Buttons to edit current object: location, rotation, size, color
+function createEditButtonMenu() {
+    deleteButton.setAttribute('data-state', 'final');
+    resizeButton.setAttribute('data-state', 'final');
+    colorButton.setAttribute('data-state', 'final');
+    rotateButton.setAttribute('data-state', 'final');
+    // var bF = [["moveButtonPress()", "rotateButtonPress()"], ["sizeButtonPress()", "colorButtonPress()"]];
+    // var bT = [["Move", "Rotate"], ["Resize", "Color"]];
+    // createButtonTable(bF, bT);
+    //
+    // //Finish Button
+    // var body = document.querySelector("center");
+    // body.appendChild(createFinishButton(2));
+}
 
 /**
  * Creates the editing tools such as x, y, z buttons for user interface
@@ -162,7 +213,6 @@ function createButtonTable(buttonFuncts, buttonText) {
 //     var body = document.querySelector("center");
 //     body.appendChild(createFinishButton(4));
 // }
-
 
 //Creates JsColor color Picker
 function createColorButtons() {
@@ -321,5 +371,11 @@ function onGravity() {
   button.setAttribute("style", "background-color: red");
   button.innerText = "Gravity";
   center.appendChild(button);
+}
+// Reveal Buttons
+function revealButtons(btnList){
+  for(var i = 0; i < btnList.length; i++){
+    btnList[i].classList.remove("hide-button");
+  }
 
 }
