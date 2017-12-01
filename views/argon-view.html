@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>AR-View</title>
+  <title>ARGON-View</title>
   <meta name="description" content="Multiuser community tableu">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
@@ -202,7 +202,7 @@
       <center id="ui" class="hide-center">
       <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
-        <div class="addRemoveButton">
+<!--         <div class="addRemoveButton">
           
           <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
             <i class="material-icons">delete</i>
@@ -216,7 +216,51 @@
             <i class="material-icons">add</i>
           </button>
    
-        </div>
+        </div> -->
+
+        <table id="buttonTable" class="button-display">
+        <tr>
+          <td id="bTable" class="col-1">
+            <button id="addButton" onclick="addButtonPress();" class="buttons mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+              <i class="material-icons">add</i>
+            </button>
+            <button id="modelButton" onclick="" data-state="initial" class="buttons modelButton mdl-button mdl-js-button mdl-button--fab mdl-button--colored"></button>
+            <button id="cubeButton" onclick="" data-state="initial" class="buttons cubeButton mdl-button mdl-js-button mdl-button--fab mdl-button--colored"></button>
+            <button id="pyramidButton" onclick="" data-state="initial" class="buttons pyramidButton mdl-button mdl-js-button mdl-button--fab mdl-button--colored"></button>
+            <button id="moreButton" onclick="" data-state="initial" class="buttons moreButton mdl-button mdl-js-button mdl-button--fab mdl-button--colored"></button>
+            <!-- <td><button onclick="removeButtonPress()" type="button">Remove</button></td> -->
+
+            <!-- when have a selected object, make edit button visible and slide up next to add button -->
+            <button id="editButton" onclick="editButtonPress()" data-state="final" class="buttons editButton mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+              <i class="material-icons">mode_edit</i>
+            </button>
+            <button id="deleteButton" onclick="" data-state="initial" class="buttons deleteButton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">delete</i>
+            </button>
+            <button id="resizeButton" onclick="" data-state="initial" class="buttons resizeButton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">delete</i>
+            </button>
+            <button id="colorButton" onclick="" data-state="initial" class="buttons colorButton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">color_lens</i>
+            </button>
+            <button id="rotateButton" onclick="" data-state="initial" class="buttons rotateButton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">refresh</i>
+            </button>
+
+            <!-- <button id="undoButton" onclick="" class="buttons mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">undo</i>
+            </button> -->
+            <!-- <button id="addButton" onclick="" class="buttons mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">keyboard_backspace</i>
+            </button> -->
+
+            <!-- <i class="material-icons">rotate_left</i>
+            <i class="material-icons">rotate_right</i>
+
+            <i class="material-icons">check</i> -->
+          </td>
+        </tr>
+      </table>
       </div>
       <!-- END STATE A -->
 
