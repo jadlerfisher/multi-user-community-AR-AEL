@@ -2,7 +2,9 @@ var buttonExists = true; //The VR button exists
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
 // var itemNum = 0; //The id of the most recently created object
-var models = ["#pokemon-model", "#box-model", "#sphere-obj"]; //The various object models
+var models = ["#pokemon-model", "#box-model", "#ellipsoid-model", "#icosahedron-model", "#monkey_head-model", "#rectangular_prism-model", 
+              "#short_triangular_prism-model", "#sphere-model", "#square_pyramid-model", "#torus-model", "#torus2-model", "#torus3-model", 
+              "#torus4-model", "#triangle_pyramid-model", "#triangular_prism-model"]; //The various object models
 var materials = ["mtl: #pokemon-mtl"];
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
@@ -20,8 +22,21 @@ function init() {
     // fill in the gallery for adding models / entities
 
     var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"],
-                      ["gallery box shapes cube", "displayModel(1)", "assets/images/cube.png", "box"]];
-    var categories = ['All', 'Shapes', 'Gaming', 'Technology'];
+                      ["gallery box shapes cube", "displayModel(1)", "assets/images/cube.png", "box"],
+                      ["gallery ellipsoid shapes oval", "displayModel(2)", "assets/images/ellipsoid.PNG", "ellipsoid-obj"],
+                      ["gallery icosahedron shapes", "displayModel(3)", "assets/images/icosahedron.PNG", "icosahedron-obj"],
+                      ["gallery monkey_head animals", "displayModel(4)", "assets/images/monkey_head.PNG", "monkey_head-obj"],
+                      ["gallery rectangular_prism shapes cube", "displayModel(5)", "assets/images/rectangular_prism.PNG", "rectangular_prism-obj"],
+                      ["gallery short_triangular_prism shapes", "displayModel(6)", "assets/images/short_triangular_prism.PNG", "short_triangular_prism-obj"],
+                      ["gallery sphere shapes circle", "displayModel(7)", "assets/images/sphere.PNG", "sphere-obj"],
+                      ["gallery square_pyramid shapes", "displayModel(8)", "assets/images/square_pyramid.PNG", "square_pyramid-obj"],
+                      ["gallery torus shapes donut", "displayModel(9)", "assets/images/torus.PNG", "torus-obj"],
+                      ["gallery torus2 shapes donut", "displayModel(10)", "assets/images/torus2.PNG", "torus2-obj"],
+                      ["gallery torus3 shapes donut", "displayModel(11)", "assets/images/torus3.PNG", "torus3-obj"],
+                      ["gallery torus4 shapes donut", "displayModel(12)", "assets/images/torus4.PNG", "torus4-obj"],
+                      ["gallery triangle_pyramid shapes", "displayModel(13)", "assets/images/triangle_pyramid.PNG", "triangle_pyramid-obj"],
+                      ["gallery triangular_prism shapes", "displayModel(14)", "assets/images/triangular_prism.PNG", "triangular_prism-obj"]];
+    var categories = ['All', 'Shapes', 'Gaming', 'Animals'];
     var modelSources = [["pokemon-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.mtl", "pokemon-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj", "pokemon-model"],
                         ["google-glass-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.mtl", "google-glass-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.obj", "google-glass-model"]];
     //makeModelAssets(modelSources);
