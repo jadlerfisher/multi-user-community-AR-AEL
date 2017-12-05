@@ -204,21 +204,22 @@ function disappear() {
   var _zO = object.getAttribute('position').z;
   //object.setAttribute('dynamic-body', 'mass: 5');
   var intFunc = setInterval(function(){
-  var objectId = getObjectId();
-  var object = NAF.entities.getEntity(objectId);
-  var _y = _yO - 0.1;
-  var _x = _xO;
-  var _z = _zO - 0.1;
-  object.setAttribute('position', {x: _x, y: _y, z: _z});
-  var entityData = {
-    networkId: objectId,
-    owner: NAF.clientId,
-    template: object.getAttribute("template").src,
-    components: { position: object.getAttribute('position') }
-  };
-  NAF.entities.updateEntity(NAF.clientId, null, entityData);}, 500);
+    var objectId = getObjectId();
+    var object = NAF.entities.getEntity(objectId);
+    var _y = _yO - 0.1;
+    var _x = _xO;
+    var _z = _zO - 0.1;
+    object.setAttribute('position', {x: _x, y: _y, z: _z});
+    var entityData = {
+      networkId: objectId,
+      owner: NAF.clientId,
+      template: object.getAttribute("template").src,
+      components: { position: object.getAttribute('position') }
+    };
+    NAF.entities.updateEntity(NAF.clientId, null, entityData);}, 1000);
   setTimeout(function(){
   clearInterval(intFunc);
+  console.log("did this stop too early?");
   console.log(objectId+ " was removed from scene.");
   NAF.entities.removeEntity(objectId);}, 5000);
 }
