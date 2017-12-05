@@ -216,7 +216,7 @@ function disappear() {
     template: object.getAttribute("template").src,
     components: { position: object.getAttribute('position') }
   };
-  NAF.entities.updateEntity(NAF.clientId, null, entityData);}, 200);
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);}, 500);
   setTimeout(function(){
   clearInterval(intFunc);
   console.log(objectId+ " was removed from scene.");
