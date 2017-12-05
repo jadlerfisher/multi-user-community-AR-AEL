@@ -206,7 +206,7 @@ function disappear() {
   var intFunc = setInterval(function(){
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
-  var _y = _yO + 2;
+  var _y = _yO - 0.25;
   var _x = _xO;
   var _z = _zO;
   object.setAttribute('position', {x: _x, y: _y, z: _z});
