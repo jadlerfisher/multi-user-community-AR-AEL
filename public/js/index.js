@@ -200,7 +200,7 @@ function disappear() {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
   //object.setAttribute('dynamic-body', 'mass: 5');
-  var int = setInterval(function(){
+  setInterval(function(){
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
   var _y = _yO + 2;
