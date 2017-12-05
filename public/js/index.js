@@ -74,7 +74,7 @@ function makeModelAssets(modelSources) {
     entity.setAttribute("rotation", "");
     entity.setAttribute("scale", "");
     entity.setAttribute("material", "");
-    entity.setAttribute("dynamic-body", "");
+    entity.setAttribute("dynamic-body", "mass: 0");
 
     assetItem.appendChild(entity);
     assets.appendChild(assetItem);
@@ -118,7 +118,7 @@ function createModel(i) {
     rotation: '0 0 0',
     scale: '0.1 0.1 0.1',
     material: 'color: #FFF' 
-    //dynamic-body: 'mass: 0'
+    dynamic-body: 'mass: 0'
   };
   var currentUid = window.localStorage["uid"];
   console.log(i);
