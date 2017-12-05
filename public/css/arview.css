@@ -64,6 +64,26 @@ td, th {
   left: 3vw;
   z-index: 1;
 }
+.annotation{
+  z-index: 1;
+  position: absolute;
+  left: 5vw;
+  right: 5vw;
+  background-color: white;
+  border: #1A237E;
+  border-radius: 5px;
+  top:5vh;
+  padding: 10px;
+}
+.annotationBox{
+  background-color: white;
+  border: #1A237E;
+  width: 80vw;
+  height: 70vh;
+  border-radius: 15px;
+  top:5vh;
+  padding: 10px;
+}
 .backButton{
   display: inline-block;
   box-shadow: none !important;

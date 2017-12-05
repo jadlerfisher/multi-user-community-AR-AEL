@@ -4,7 +4,7 @@ var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "
 // var itemNum = 0; //The id of the most recently created object
 var models = ["#pokemon-model", "#box-model", "#ellipsoid-model", "#icosahedron-model", "#monkey_head-model", "#rectangular_prism-model", 
               "#short_triangular_prism-model", "#sphere-model", "#square_pyramid-model", "#torus-model", "#torus2-model", "#torus3-model", 
-              "#torus4-model", "#triangle_pyramid-model", "#triangular_prism-model"]; //The various object models
+              "#torus4-model", "#triangle_pyramid-model", "#triangular_prism-model" ]; //The various object models
 var materials = ["mtl: #pokemon-mtl"];
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
@@ -192,6 +192,9 @@ function createModelWithComponents(uid, objectId, templateId, components) {
 function setOpacity(object, value){
   var model = object.getElementsByClassName('model')[0];
   model.setAttribute('material','opacity',value);
+}
+function addAnnotationPress() {
+  stateChange('stateD');
 }
 
 //Delete object
