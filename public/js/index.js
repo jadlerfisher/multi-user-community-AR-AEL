@@ -464,29 +464,38 @@ function setRotation(rotationInfo) {
 }
 
 //Creates a new model based on inputed URL from user
-function createNewModel(text, name) {
+function createNewModel(text) {
   var assets = document.querySelector("a-assets");
   var asset = document.createElement("a-asset-item");
-  asset.setAttribute("id", name);
+  asset.setAttribute("id", text);
   asset.setAttribute("src", text);
   assets.appendChild(asset);
-  models.push("obj: #" + name);
-  //bT[0].push(text);
-  //bF[0].push(modelButonPress(1));
-  console.log(models);
+  //var entity = document.createElement("a-entity");
+  //entity.setAttribute("class", "model");
+  //entity.setAttribute("obj-model", "obj: #" + text);
+  //entity.setAttribute("position", "");
+  //entity.setAttribute("rotation", "");
+  //entity.setAttribute("scale", "");
+  //entity.setAttribute("material", "");
 
-  var scene = document.querySelector("a-scene");
+  //asset.appendChild(entity);
+  //assets.appendChild(asset);
+  var model_len = models.length;
+  models.push("obj: #" + text);
+  //var len = galleryList.length;
+  //galleryList.push("gallery " + text, "displayModel("+len+")", "", "pokeball");
+  createModel(model_len);
+  //var scene = document.querySelector("a-scene");
   //creates model
-  var model = document.createElement("a-entity");
-  model.setAttribute("id", "item");
-  model.setAttribute("class", "model");
-  model.setAttribute("obj-model", "obj: "+text);
-  model.setAttribute('position', '0 1.25 -5');
-  model.setAttribute("rotation", "0 0 0");
-  model.setAttribute("scale", "1 1 1");
-  model.setAttribute("material", "color: #0000FF");
-  model.setAttribute("dynamic-body", "mass: 0");
-  scene.appendChild(model);
+  //var model = document.createElement("a-entity");
+  //model.setAttribute("id", "item");
+  //model.setAttribute("class", "model");
+  //model.setAttribute("obj-model", "obj: "+text);
+  //model.setAttribute('position', '0 1.25 -5');
+  //model.setAttribute("rotation", "0 0 0");
+  //model.setAttribute("scale", "1 1 1");
+  //model.setAttribute("material", "color: #0000FF");
+  //scene.appendChild(model);
 }
 
 //Removes item based on its id #
