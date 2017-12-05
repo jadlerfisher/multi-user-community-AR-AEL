@@ -206,9 +206,9 @@ function disappear() {
   var intFunc = setInterval(function(){
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
-  var _y = _yO - 0.25;
+  var _y = _yO - 0.1;
   var _x = _xO;
-  var _z = _zO;
+  var _z = _zO - 0.1;
   object.setAttribute('position', {x: _x, y: _y, z: _z});
   var entityData = {
     networkId: objectId,
