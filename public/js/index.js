@@ -196,7 +196,7 @@ function disappear() {
   // document.querySelector("a-scene").removeChild(document.getElementById("item"));
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
-  objectId.setAttribute("dynamic-body", "mass: 5");
+  object.setAttribute("dynamic-body", "mass: 5");
   setTimeout(function(){
   console.log(objectId+ " was removed from scene.");
   NAF.entities.removeEntity(objectId);}, 5000);
