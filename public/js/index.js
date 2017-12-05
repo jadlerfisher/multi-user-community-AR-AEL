@@ -196,33 +196,15 @@ function setOpacity(object, value){
 
 //Delete object
 function disappear() {
-  // document.querySelector("a-scene").removeChild(document.getElementById("item"));
-  var objectId = getObjectId();
-  var object = NAF.entities.getEntity(objectId);
-//   var _xO = object.getAttribute('position').x;
-//   var _yO = object.getAttribute('position').y;
-//   var _zO = object.getAttribute('position').z;
-  //object.setAttribute('dynamic-body', 'mass: 5');
-//   var intFunc = setInterval(function(){
-//     console.log("is this even working?");
-//     var _y = _yO - 0.1;
-//     var _x = _xO;
-//     var _z = _zO;
-//     object.setAttribute('position', {x: _x, y: _y, z: _z});
-//     var entityData = {
-//       networkId: objectId,
-//       owner: NAF.clientId,
-//       template: object.getAttribute("template").src,
-//       components: { position: object.getAttribute('position') }
-//     };
-//     NAF.entities.updateEntity(NAF.clientId, null, entityData);}, 1000);
-//   setTimeout(function(){
-//   clearInterval(intFunc);
-  console.log("did this stop too early?");
-  console.log(objectId+ " was removed from scene.");
-  NAF.entities.removeEntity(objectId); 
-  //}, 5000);
-}
+    // document.querySelector("a-scene").removeChild(document.getElementById("item"));
+    var objectId = getObjectId();
+    var object = NAF.entities.getEntity(objectId);
+    object.setAttribute("dynamic-body", "mass: 5");
+    setTimeout(function(){
+    console.log(objectId+ " was removed from scene.");
+    NAF.entities.removeEntity(objectId);
+    NAF.entities.removeEntity(objectId);}, 5000);
+  }
 
 // Get the first object's id for now.
 // TODO: need to pick an object from user selection
