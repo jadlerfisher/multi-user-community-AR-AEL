@@ -57,6 +57,19 @@ td, th {
   right: 3vw;
   z-index: 1;
 }
+.backButtonDiv{
+  position: absolute;
+  box-shadow: none !important;
+  top: 3vh;
+  left: 3vw;
+  z-index: 1;
+}
+.backButton{
+  display: inline-block;
+  box-shadow: none !important;
+  width: 60px;
+  height: 60px;
+}
 .addButton{
   display: inline-block;
   box-shadow: none !important;
