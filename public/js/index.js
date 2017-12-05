@@ -118,7 +118,7 @@ function createModel(i) {
     rotation: '0 0 0',
     scale: '0.1 0.1 0.1',
     material: 'color: #FFF' 
-    dynamic-body: 'mass: 0'
+    //dynamic-body: 'mass: 0'
   };
   var currentUid = window.localStorage["uid"];
   console.log(i);
@@ -200,6 +200,20 @@ function disappear() {
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
   //object.setAttribute('dynamic-body', 'mass: 5');
+  var int = setInterval(function(){
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+  var _y = _yO + 2;
+  var _x = _xO;
+  var _z = _zO;
+  object.setAttribute('position', {x: _x, y: _y, z: _z});
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: object.getAttribute("template").src,
+    components: { position: object.getAttribute('position') }
+  };
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);}, 200);
   setTimeout(function(){
   console.log(objectId+ " was removed from scene.");
   NAF.entities.removeEntity(objectId);}, 5000);
@@ -637,3 +651,20 @@ function multiplyMatrix(a,b) {
 
     return [row1C,row2C,row3C,row4C];
   }
+
+function move1(axis, value) {
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+  var _y = _yO + 2;
+  var _x = _xO;
+  var _z = _zO;
+  object.setAttribute('position', {x: _x, y: _y, z: _z});
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: object.getAttribute("template").src,
+    components: { position: object.getAttribute('position') }
+  };
+
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
+}
