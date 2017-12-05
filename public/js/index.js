@@ -199,8 +199,11 @@ function disappear() {
   // document.querySelector("a-scene").removeChild(document.getElementById("item"));
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
+  var _xO = object.getAttribute('position').x;
+  var _yO = object.getAttribute('position').y;
+  var _zO = object.getAttribute('position').z;
   //object.setAttribute('dynamic-body', 'mass: 5');
-  setInterval(function(){
+  var intFunc = setInterval(function(){
   var objectId = getObjectId();
   var object = NAF.entities.getEntity(objectId);
   var _y = _yO + 2;
@@ -215,6 +218,7 @@ function disappear() {
   };
   NAF.entities.updateEntity(NAF.clientId, null, entityData);}, 200);
   setTimeout(function(){
+  clearInterval(intFunc);
   console.log(objectId+ " was removed from scene.");
   NAF.entities.removeEntity(objectId);}, 5000);
 }
