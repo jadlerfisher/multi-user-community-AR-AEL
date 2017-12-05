@@ -64,6 +64,9 @@ function cancelAddButtonPress() {
 //Uploads custom model
 function uploadItemButtonPress() {
     console.log("UPLOAD");
+    var filePath = document.getElementById("fileInputField").value;
+    createNewModel(filePath);
+    stateChange('stateC');
 }
 
 //Check Key, for hitting enter to search
