@@ -204,11 +204,10 @@ function disappear() {
   var _zO = object.getAttribute('position').z;
   //object.setAttribute('dynamic-body', 'mass: 5');
   var intFunc = setInterval(function(){
-    var objectId = getObjectId();
-    var object = NAF.entities.getEntity(objectId);
+    console.log("is this even working?");
     var _y = _yO - 0.1;
     var _x = _xO;
-    var _z = _zO - 0.1;
+    var _z = _zO;
     object.setAttribute('position', {x: _x, y: _y, z: _z});
     var entityData = {
       networkId: objectId,
