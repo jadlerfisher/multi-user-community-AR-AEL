@@ -74,7 +74,7 @@ function makeModelAssets(modelSources) {
     entity.setAttribute("rotation", "");
     entity.setAttribute("scale", "");
     entity.setAttribute("material", "");
-    //entity.setAttribute("dynamic-body", "");
+    entity.setAttribute("dynamic-body", "");
 
     assetItem.appendChild(entity);
     assets.appendChild(assetItem);
@@ -156,7 +156,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
   entity.setAttribute('rotation', entityData.components.rotation);
   entity.setAttribute('scale', entityData.components.scale);
   entity.setAttribute('material', entityData.components.material);
-  //entity.setAttribute('dynamic-body', 'mass: 0');
+  entity.setAttribute('dynamic-body', entityData.components.dynamicBody);
 
   NAF.entities.setNetworkData(entity, entityData, components);
 
@@ -467,6 +467,7 @@ function createNewModel(text, name) {
   model.setAttribute("rotation", "0 0 0");
   model.setAttribute("scale", "1 1 1");
   model.setAttribute("material", "color: #0000FF");
+  model.setAttribute("dynamic-body", "mass: 0");
   scene.appendChild(model);
 }
 
