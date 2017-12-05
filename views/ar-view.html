@@ -93,7 +93,7 @@
       <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
         <div class="backButtonDiv">
-          <button onclick="" class="backButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+          <button onclick="goBack()" class="backButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">arrow_back</i>
           </button>
         </div>
@@ -552,6 +552,11 @@
       // Set the sky to the Google map paranoma image
       document.getElementById("sky").src = "<%= base64 %>";
 
+	  // Back button to Maps back to change panorama
+	  function goBack() {
+		window.location.href = '/maps';
+	  }
+	  
       // Load saved objects fetched from Firebase
       var savedObjects = <%- JSON.stringify(savedObjects) %>;
       for (var objectId in savedObjects) {
