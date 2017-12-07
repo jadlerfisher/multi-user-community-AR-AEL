@@ -24,6 +24,10 @@ button.hide-button{
   display: none;
 }
 
+.hide-annotation{
+  display: none;
+}
+
 
 table {
   margin: 4px 5%;
@@ -67,12 +71,12 @@ td, th {
 .annotation{
   z-index: 1;
   position: absolute;
-  left: 5vw;
+  left: 12vw;
   right: 5vw;
   background-color: white;
   border: #1A237E;
   border-radius: 5px;
-  top:5vh;
+  top:4vh;
   padding: 10px;
 }
 .annotationBox{

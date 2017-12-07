@@ -181,6 +181,19 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       hideButtons(document.getElementsByClassName('optionButton'));
       selectedItem = null;
     });
+    entity.addEventListener('mouseenter', function(evt){
+      setOpacity(this, 0.85);
+      console.log('Mouse entered: ' + this.getAttribute('id'));
+      revealAnnotation(document.getElementsByClassName('annotationObj'));
+      selectedItem = this;
+    });
+
+    entity.addEventListener('mouseleave', function(evt){
+      setOpacity(this,1)
+      console.log('Mouse left: ' + this.getAttribute('id'));
+      hideAnnotation(document.getElementsByClassName('annotationObj'));
+      selectedItem = null;
+    });
   }
 
   // Set the current entity
@@ -571,11 +584,29 @@ function hideButtons(btnList){
   }
 }
 
+// Hide annotation
+function hideAnnotation(annList){
+  for(var i = 0; i < annList.length; i++){
+    if(!annList[i].classList.contains('hide-annotation')){
+      annList[i].classList.add("hide-annotation");
+    }
+  }
+}
+
 // Reveal Buttons
 function revealButtons(btnList){
   for(var i = 0; i < btnList.length; i++){
     if(btnList[i].classList.contains('hide-button')){
       btnList[i].classList.remove("hide-button");
+    }
+  }
+}
+
+// Reveal Annotation
+function revealButtons(annList){
+  for(var i = 0; i < annList.length; i++){
+    if(annList[i].classList.contains('hide-annotation')){
+      annList[i].classList.remove("hide-annotation");
     }
   }
 }
