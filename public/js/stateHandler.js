@@ -13,11 +13,6 @@ function stateChange(nextState){
 
 	if(nextState == "stateA"){
 
-		var obj = document.getElementsByClassName('selected')[0];
-		if(obj !== undefined){
-			obj.classList.remove('selected');
-		}
-
 		if(selectedItem === null){
 			hideButtons(document.getElementsByClassName('optionButton'));
 		}

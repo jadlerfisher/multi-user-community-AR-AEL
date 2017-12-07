@@ -9,9 +9,8 @@
   <script src="js/aframe-physics-system.js"></script>
   <!-- Multiuser connection -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-  <!-- <script src="https://unpkg.com/networked-aframe@0.3.2/dist/networked-aframe.js"></script> -->
-  <!-- <script src="easyrtc/easyrtc.js"></script> -->
-  <!-- <script src="https://cdn.rawgit.com/haydenjameslee/networked-aframe/v0.1.0/dist/networked-aframe.js"></script> -->
+
+  <!-- Networked Aframe v0.1.0 -->
   <script src="library/networked-aframe.js"></script>
   <script src="https://cdn.rawgit.com/priologic/easyrtc/v1.1.0/api/easyrtc.js"></script>
 
@@ -552,11 +551,11 @@
       // Set the sky to the Google map paranoma image
       document.getElementById("sky").src = "<%= base64 %>";
 
-	  // Back button to Maps back to change panorama
-	  function goBack() {
-		window.location.href = '/maps';
-	  }
-	  
+  	  // Back button to Maps back to change panorama
+  	  function goBack() {
+		    window.location.href = '/maps';
+  	  }
+
       // Load saved objects fetched from Firebase
       var savedObjects = <%- JSON.stringify(savedObjects) %>;
       for (var objectId in savedObjects) {
@@ -583,7 +582,9 @@
             position: JSON.stringify(selectedItem.getAttribute("position")),
             rotation: JSON.stringify(selectedItem.getAttribute("rotation")),
             scale: JSON.stringify(selectedItem.getAttribute("scale")),
-            material: JSON.stringify(selectedItem.getAttribute("material")),
+            material: JSON.stringify({
+              color: selectedItem.getAttribute("material").color
+            }),
           },
           success: function(resp) {
 

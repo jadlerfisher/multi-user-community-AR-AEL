@@ -83,7 +83,6 @@ function submitFilepathButtonPress() {
 
 function editModelPress(){
   var oldObj = selectedItem;
-  selectedItem.classList.add('selected');
   console.log('You have decided to edit: '+ selectedItem.id);
   stateChange('stateC');
 }

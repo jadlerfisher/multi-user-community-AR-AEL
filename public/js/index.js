@@ -2,8 +2,8 @@ var buttonExists = true; //The VR button exists
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
 // var itemNum = 0; //The id of the most recently created object
-var models = ["#pokemon-model", "#box-model", "#ellipsoid-model", "#icosahedron-model", "#monkey_head-model", "#rectangular_prism-model", 
-              "#short_triangular_prism-model", "#sphere-model", "#square_pyramid-model", "#torus-model", "#torus2-model", "#torus3-model", 
+var models = ["#pokemon-model", "#box-model", "#ellipsoid-model", "#icosahedron-model", "#monkey_head-model", "#rectangular_prism-model",
+              "#short_triangular_prism-model", "#sphere-model", "#square_pyramid-model", "#torus-model", "#torus2-model", "#torus3-model",
               "#torus4-model", "#triangle_pyramid-model", "#triangular_prism-model"]; //The various object models
 var materials = ["mtl: #pokemon-mtl"];
 var changes = []; //Changes that have been made in editing an object
@@ -117,7 +117,7 @@ function createModel(i) {
     position: objPos,
     rotation: '0 0 0',
     scale: '0.1 0.1 0.1',
-    material: 'color: #FFF' 
+    material: 'color: #FFF'
     //dynamic-body: 'mass: 0'
   };
   var currentUid = window.localStorage["uid"];
@@ -186,7 +186,6 @@ function createModelWithComponents(uid, objectId, templateId, components) {
   // Set the current entity
   selectedItem = entity;
 
-  entity.classList.add('selected');
 }
 
 function setOpacity(object, value){
@@ -210,10 +209,7 @@ function disappear() {
 // TODO: need to pick an object from user selection
 
 function getObjectId() {
-  var object = document.getElementsByClassName('selected')[0];
-  if(object === undefined) {return null}
-  var objectId = object.id.replace('naf-', '');
-  return objectId;
+  return selectedItem !== undefined ? selectedItem.id.replace('naf-', '') : null;
 }
 
 /**
