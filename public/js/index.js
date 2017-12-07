@@ -253,7 +253,7 @@ function move(axis, value) {
     _z = (_zP + r * Math.sin(a));
   } else {
     // Update position
-    var _y = _yO + value;
+    var _y = _yO + (value/10.0);
     var _x = _xO;
     var _z = _zO;
   }
@@ -294,27 +294,34 @@ function rotate(axis, degrees) {
   console.log(axis);
 
   if (axis === "z") {
+    // var _y = _yOR;
+    // var _x = _xOR;
+    // var _z = _zOR;
+
+    // var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
+    // var a = Math.atan2(_zO - _zP, _xO - _xP);
+    // var x_amount = Math.cos(a);
+    // var z_amount = Math.sin(a);
+    // _x = _x + (degrees*x_amount);
+    // _z = _z + (degrees*z_amount);
     var _y = _yOR;
     var _x = _xOR;
-    var _z = _zOR;
-
-    var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
-    var a = Math.atan2(_zO - _zP, _xO - _xP);
-    var x_amount = Math.cos(a);
-    var z_amount = Math.sin(a);
-    _x = _x + (degrees*x_amount);
-    _z = _z + (degrees*z_amount);
+    var _z = _zOR +  degrees;
   } else if (axis === "x") {
-     var _y = _yOR;
-    var _x = _xOR;
-    var _z = _zOR;
+    //  var _y = _yOR;
+    // var _x = _xOR;
+    // var _z = _zOR;
 
-    var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
-    var a = Math.atan2(_zO - _zP, _xO - _xP);
-    var x_amount = Math.sin(a);
-    var z_amount = Math.cos(a);
-    _x = _x + (degrees*x_amount);
-    _z = _z + (degrees*z_amount);
+    // var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
+    // var a = Math.atan2(_zO - _zP, _xO - _xP);
+    // var x_amount = Math.sin(a);
+    // var z_amount = Math.cos(a);
+    // _x = _x + (degrees*x_amount);
+    // _z = _z + (degrees*z_amount);
+
+    var _y = _yOR;
+    var _x = _xOR + degrees;
+    var _z = _zOR;
   } else {
     // Update position
     var _y = _yOR + degrees;
