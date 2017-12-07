@@ -96,6 +96,7 @@
             <i class="material-icons">arrow_back</i>
           </button>
         </div>
+         <p class="annotation hide-button optionButton">Hello World! You have found a wild annotation.</p>
         <div class="addRemoveButton">
 
           <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
@@ -104,6 +105,10 @@
 
           <button onclick="editModelPress()" type="button" class="addButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">create</i>
+          </button>
+
+          <button onclick="addAnnotationPress()" type="button" class="addButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">chat</i>
           </button>
 
           <button onclick="stateChange('stateB')" class="addButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
@@ -407,6 +412,38 @@
           </center> -->
       </div>
       <!-- END STATE C4 -->
+       <!-- STATE D: UI for annotations -->
+      <div id="stateD" class="hide-state">
+         <!-- When addEntity() is pressed, uiElem is shown -->
+         <center id="uiElem">
+          <div class="boxAndButtons">
+            <div class="objectAddBox">
+              <center>
+                <div class="searchbar">
+                  <div class="dropdown">
+                    <button class="dropbtn">All</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    </div>
+                  </div>
+                  <div class="box">
+                    <div class="container-4">
+                       <textarea class="annotationTextArea" rows="4" cols="50">
+                        Hello World!
+                        </textarea>
+                    </div>
+                  </div>
+
+                </div>
+
+              </center>
+            </div>
+
+            <button class="uploadButton" onclick="stateChange('stateB2')">Upload</button>
+            <button class="cancelButton" onclick="stateChange('stateA')">Cancel</button>
+          </div>
+        </center>
+        </div>
+        <!-- END STATE D -->
 
     </center>
     <a-scene physics-world="gravity: 0 -9.81 0" network-scene="
