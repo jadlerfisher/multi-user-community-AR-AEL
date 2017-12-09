@@ -195,10 +195,15 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       var newContent = document.createTextNode(txt); 
       console.log(txt);
       var newDiv = document.createElement("div"); 
+      console.log('new thing created');
       newDiv.setAttribute("id", "newAnno");
-      var box = document.getElementById('annoBox');
+      console.log('attribute set');
+      var box = document.getElementById('annoBoxi');
+      console.log('box created');
       box.appendChild(newDiv);
+      console.log('child appended');
       revealAnnotation(document.getElementsByClassName('annotationObj'));
+      console.log('should be working now');
       selectedItem = this;
     });
 
