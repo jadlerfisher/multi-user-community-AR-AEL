@@ -192,6 +192,8 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       setOpacity(this, 0.85);
       console.log('Mouse entered: ' + this.getAttribute('id'));
       console.log(this.getAttribute('annotation'));
+      var box = document.getElementById('annoBox');
+      box.appendChild(this.getAttribute('annotation'));
       revealAnnotation(document.getElementsByClassName('annotationObj'));
       selectedItem = this;
     });
