@@ -74,6 +74,7 @@ function makeModelAssets(modelSources) {
     entity.setAttribute("rotation", "");
     entity.setAttribute("scale", "");
     entity.setAttribute("material", "");
+    entity.setAttribute("annotation", "");
     //entity.setAttribute("dynamic-body", "mass: 0");
 
     assetItem.appendChild(entity);
@@ -117,7 +118,10 @@ function createModel(i) {
     position: objPos,
     rotation: '0 0 0',
     scale: '0.1 0.1 0.1',
-    material: 'color: #FFF'
+    material: 'color: #FFF',
+    annotation: '"..."',
+    //dynamic_body: 'mass: 0'
+    
     //dynamic-body: 'mass: 0'
   };
   var currentUid = window.localStorage["uid"];
@@ -137,6 +141,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     owner: NAF.clientId,
     template: templateId,
     components: components
+    
   };
 
   // Create local entity
@@ -156,7 +161,8 @@ function createModelWithComponents(uid, objectId, templateId, components) {
   entity.setAttribute('rotation', entityData.components.rotation);
   entity.setAttribute('scale', entityData.components.scale);
   entity.setAttribute('material', entityData.components.material);
-  entity.setAttribute('dynamic-body', entityData.components.dynamicBody);
+  entity.setAttribute('annotation', entityData.components.annotation);
+  //entity.setAttribute('dynamic-body', entityData.components.dynamicBody);
 
   NAF.entities.setNetworkData(entity, entityData, components);
 
@@ -214,7 +220,7 @@ function disappear() {
     // document.querySelector("a-scene").removeChild(document.getElementById("item"));
     var objectId = getObjectId();
     var object = NAF.entities.getEntity(objectId);
-    //object.setAttribute("dynamic-body", "mass: 5");
+    object.setAttribute("dynamicbody", "mass: 5");
     //setTimeout(function(){
     console.log(objectId+ " was removed from scene.");
     NAF.entities.removeEntity(objectId);
