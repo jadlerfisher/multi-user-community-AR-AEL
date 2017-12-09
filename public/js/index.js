@@ -191,7 +191,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     entity.addEventListener('mouseenter', function(evt){
       setOpacity(this, 0.85);
       console.log('Mouse entered: ' + this.getAttribute('id'));
-      console.log(this.getAtrribute('annotation'));
+      console.log(this.getAttribute('annotation'));
       revealAnnotation(document.getElementsByClassName('annotationObj'));
       selectedItem = this;
     });
