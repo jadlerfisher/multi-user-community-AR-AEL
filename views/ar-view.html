@@ -432,10 +432,10 @@
                         </textarea> -->
 			<form name="annotate">
   				Message: <br>
-  				<input type="text" name="message" value="">
+  				<input type="text" id="userInput" value="">
   				<br>
   				<br><br>
-  				<input type="submit" value="Submit">
+  				<input type="submit" value="Submit" onClick="annoPress()">
 			</form> 
                     </div>
                   </div>
@@ -445,7 +445,7 @@
               </center>
             </div>
 
-            <button class="uploadButton" onclick="annoPress()">Upload</button>
+<!--             <button class="uploadButton" onclick="annoPress()">Upload</button> -->
             <button class="cancelButton" onclick="stateChange('stateA')">Cancel</button>
           </div>
         </center>
