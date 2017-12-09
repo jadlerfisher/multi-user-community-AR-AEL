@@ -58,9 +58,20 @@ function sizeButtonPress() {
 function annoPress() {
   stateChange('stateA');
   var objectId = getObjectId();
-  var item = NAF.entities.getEntity(objectId);
+  var object = NAF.entities.getEntity(objectId);
   var txt = document.getElementById('userInput').value;
   console.log(txt);
+  
+  object.setAttribute('annotation', txt);
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: object.getAttribute("template").src,
+    components: { annotation: object.getAttribute('annotation') }
+  };
+
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
+  console.log(object.getAttribute('annotation'));
 }
 
 
