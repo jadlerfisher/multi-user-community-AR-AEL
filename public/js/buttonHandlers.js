@@ -55,6 +55,14 @@ function sizeButtonPress() {
   console.log('Entity is being resized');
 }
 
+function annoPress() {
+  stateChange('stateA');
+  var objectId = getObjectId();
+  var item = NAF.entities.getEntity(objectId);
+  var txt = document.getElementById('annotationTxt')
+  console.log(txt);
+}
+
 
 // //User is done changing size
 // function finishButtonPress6() {
