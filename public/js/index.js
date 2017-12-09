@@ -74,7 +74,7 @@ function makeModelAssets(modelSources) {
     entity.setAttribute("rotation", "");
     entity.setAttribute("scale", "");
     entity.setAttribute("material", "");
-    entity.setAttribute("dynamic-body", "mass: 0");
+    //entity.setAttribute("dynamic-body", "mass: 0");
 
     assetItem.appendChild(entity);
     assets.appendChild(assetItem);
