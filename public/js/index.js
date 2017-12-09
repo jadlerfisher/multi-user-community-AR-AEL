@@ -12,6 +12,7 @@ var userColor;
 var selectedItem = null; // current item that is selected
 var currentObj = 0;
 var colorMode = "color";
+var defaultAnno = "N/A";
 
 //Removes the VR button
 function init() {
@@ -119,7 +120,7 @@ function createModel(i) {
     rotation: '0 0 0',
     scale: '0.1 0.1 0.1',
     material: 'color: #FFF',
-    annotation: '"..."',
+    annotation: '"N/A"'
     //dynamic_body: 'mass: 0'
     
     //dynamic-body: 'mass: 0'
