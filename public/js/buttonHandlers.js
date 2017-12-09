@@ -72,6 +72,7 @@ function annoPress() {
 
   NAF.entities.updateEntity(NAF.clientId, null, entityData);
   console.log(object.getAttribute('annotation'));
+  document.getElementById('userInput').value = '';
 }
 
 
