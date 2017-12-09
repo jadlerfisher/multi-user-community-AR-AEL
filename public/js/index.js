@@ -120,7 +120,7 @@ function createModel(i) {
     rotation: '0 0 0',
     scale: '0.1 0.1 0.1',
     material: 'color: #FFF',
-    annotation: '"N/A"'
+    annotation: ''
     //dynamic_body: 'mass: 0'
     
     //dynamic-body: 'mass: 0'
