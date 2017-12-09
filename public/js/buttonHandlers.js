@@ -59,7 +59,7 @@ function annoPress() {
   stateChange('stateA');
   var objectId = getObjectId();
   var item = NAF.entities.getEntity(objectId);
-  var txt = document.getElementById('annotationTxt')
+  var txt = document.getElementById('userInput').value;
   console.log(txt);
 }
 
