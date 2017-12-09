@@ -193,7 +193,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       console.log('Mouse entered: ' + this.getAttribute('id'));
       var txt = this.getAttribute('annotation')
       var newContent = document.createTextNode(txt); 
-      //console.log(txt);
+      console.log(txt);
       var newDiv = document.createElement("div"); 
       newDiv.setAttribute("id", "newAnno");
       var box = document.getElementById('annoBox');
