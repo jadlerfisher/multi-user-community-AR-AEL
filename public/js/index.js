@@ -603,7 +603,7 @@ function revealButtons(btnList){
 }
 
 // Reveal Annotation
-function revealButtons(annList){
+function revealAnnotation(annList){
   for(var i = 0; i < annList.length; i++){
     if(annList[i].classList.contains('hide-annotation')){
       annList[i].classList.remove("hide-annotation");
