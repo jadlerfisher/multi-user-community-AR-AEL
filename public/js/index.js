@@ -197,6 +197,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       var newDiv = document.createElement("div"); 
       console.log('new thing created');
       newDiv.setAttribute("id", "newAnno");
+      newDiv.appendChild(newContent);
       console.log('attribute set');
       var box = document.getElementById('annoBoxi');
       console.log('box created');
