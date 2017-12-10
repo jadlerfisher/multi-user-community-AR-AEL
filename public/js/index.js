@@ -193,6 +193,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       console.log('Mouse entered: ' + this.getAttribute('id'));
       var txt = this.getAttribute('annotation')
       var newContent = document.createTextNode(txt); 
+      newContent.setAttribute("id", "newTxt");
       console.log(txt);
       var newDiv = document.createElement("div"); 
       newDiv.setAttribute("id", "newAnno");
@@ -208,6 +209,8 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       console.log('Mouse left: ' + this.getAttribute('id'));
       var box = document.getElementById('annoBoxi');
       var oldAnno = document.getElementById('newAnno');
+      var oldText = document.getElementById('newTxt');
+      oldAnno.removeChild(oldText);
       box.removeChild(oldAnno);
       hideAnnotation(document.getElementsByClassName('annotationObj'));
       selectedItem = null;
