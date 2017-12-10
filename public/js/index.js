@@ -195,22 +195,20 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       var newContent = document.createTextNode(txt); 
       console.log(txt);
       var newDiv = document.createElement("div"); 
-      console.log('new thing created');
       newDiv.setAttribute("id", "newAnno");
       newDiv.appendChild(newContent);
-      console.log('attribute set');
       var box = document.getElementById('annoBoxi');
-      console.log('box created');
       box.appendChild(newDiv);
-      console.log('child appended');
       revealAnnotation(document.getElementsByClassName('annotationObj'));
-      console.log('should be working now');
       selectedItem = this;
     });
 
     entity.addEventListener('mouseleave', function(evt){
       setOpacity(this,1)
       console.log('Mouse left: ' + this.getAttribute('id'));
+      var box = document.getElementById('annoBoxi');
+      var oldAnno = document.getElementById('newAnno');
+      box.removeChild(oldAnno);
       hideAnnotation(document.getElementsByClassName('annotationObj'));
       selectedItem = null;
     });
