@@ -183,7 +183,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     });
 
     entity.addEventListener('mouseleave', function(evt){
-      setOpacity(this,1)
+      setOpacity(this,1);
       console.log('Mouse left: ' + this.getAttribute('id'));
       hideButtons(document.getElementsByClassName('optionButton'));
       selectedItem = null;
@@ -210,7 +210,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     });
 
     entity.addEventListener('mouseleave', function(evt){
-      setOpacity(this,1)
+      setOpacity(this,1);
       console.log('Mouse left: ' + this.getAttribute('id'));
       var box = document.getElementById('annoBoxi');
       var oldAnno = document.getElementById('newAnno');
