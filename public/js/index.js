@@ -193,6 +193,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       console.log('Mouse entered: ' + this.getAttribute('id'));
       var oldAnno = document.getElementById('newAnno');
       var box = document.getElementById('annoBoxi');
+      console.log(oldAnno);
       if (oldAnno != null) {
         box.removeChild(oldAnno);
       }
