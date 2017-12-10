@@ -191,13 +191,13 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     entity.addEventListener('mouseenter', function(evt){
       setOpacity(this, 0.85);
       console.log('Mouse entered: ' + this.getAttribute('id'));
-//       var oldAnno = document.getElementById('newAnno');
+      var oldAnno = document.getElementById('newAnno');
       var box = document.getElementById('annoBoxi');
-//       console.log(oldAnno);
-//       if (oldAnno != null) {
-//         box.removeChild(oldAnno);
-//       }
-      var txt = this.getAttribute('annotation')
+      console.log(oldAnno);
+      if (oldAnno != null) {
+        box.removeChild(oldAnno);
+      }
+      var txt = this.getAttribute('annotation');
       var newContent = document.createTextNode(txt); 
       newContent.setAttribute("id", "newTxt");
       console.log(txt);
