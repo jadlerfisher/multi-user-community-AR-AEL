@@ -6,17 +6,6 @@ function moveButtonPress() {
   changes.push(["move", position]);
   console.log('Entity is being moved.');
 }
-//1) Remove: +, Add: Model, Shape
-// Press + button, allows users to choose model or shape to add
-function addButtonPress() {
-  //removeAdd();
-  //removeButtons();
-  //createAddButtons();
-  createAddButtonMenu();
-  // if (buttonExists) {
-  //   init();
-  // }
-}
 
 function rotateButtonPress() {
   stateChange('stateC2');
@@ -56,96 +45,6 @@ function deleteButtonPress() {
     stateChange('stateA');
 }
 
-//4)Undo
-//Undo most recent edit
-function undoButtonPress() {
-  console.log("Undo!");
-  if (changes.length > 0) {
-    var lastMove = changes.pop(changes.length - 1);
-    console.log(lastMove[0]);
-    if (lastMove[0] === "move") {
-      setPosition(lastMove[1][0], lastMove[1][1], lastMove[1][2]);
-    } else if (lastMove[0] === "rotate") {
-      setRotation(lastMove[1]);
-    } else if (lastMove[0] === "size") {
-        var str = "";
-        for (var i = 0; i < lastMove[1].length - 3; i++) {
-            str = str + lastMove[1][i] + " ";
-        }
-        console.log(str);
-      setSize(lastMove[1]);
-    } else if (lastMove[0] === "color") {
-        setColor(lastMove[1]);
-    }
-  }
-}
-
-//User has chosen to add their own model
-function addNewModelButtonPress() {
-    removeButtons();
-    createNewModelInput();
-}
-
-//5) Add: Move, Rotate, Size, Color, Finish, Remove: Edit, Delete, Undo, Finish
-//User has chosen to edit their shape
-function editButtonPress() {
-    //removeButtons();
-    createEditButtonMenu();
-}
-
-//6)Add: Edit, Undo, Delete, Finish, Remove: Move, Rotate, Size, Color, Finish
-//User is done editing their shape
-function finishButtonPress2() {
-    removeButtons();
-    createOptions();
-}
-
-//7) Add +/- X, Y, Z, and Finish, Remove: Move, Rotate, Size, Color, Finish
-//User has chosen to move their shape
-function moveButtonPress() {
-    removeButtons();
-    createMoveButtons();
-}
-
-
-//8)Remove +/- X, Y, Z, Finish, Add: Move, Rotate, Size, Color, Finish
-//User is done moving their shape
-function finishButtonPress3() {
-    removeButtons();
-    createEditButtonMenu();
-}
-
-//9) Add Rotate CounterClockwise, Clockwise, Finish, Remove: Move, Rotate, Size, Color, Finish
-//User has chosen to rotate shape
-function rotateButtonPress() {
-    removeButtons();
-    createRotateButtons();
-}
-
-
-//10)Add Move, Rotate, Size, Color, Finish, Remove: <-, ->, Finish
-//User is done rotating shape
-function finishButtonPress4() {
-    removeButtons();
-    createEditButtonMenu();
-}
-
-//11)Add Color Picker, Finish, Remove: Move, Rotate, Size, Color, Finish
-//User has chosen to change the shape color
-function colorButtonPress() {
-    removeButtons();
-    createColorButtons();
-}
-
-
-//12) Remove COlor Picker, FInish, Add: Move, Rotate, Size, Color, Finish
-//User is done changing shape color
-function finishButtonPress5() {
-    removeButtons();
-    createEditButtonMenu();
-}
-
-//User has chosen to change shape size
 function sizeButtonPress() {
   stateChange('stateC3');
   var objectId = getObjectId();
@@ -171,12 +70,7 @@ function sizeButtonPress() {
 //     createOptions();
 // }
 
-
-//User is done changing size
-function finishButtonPress6() {
-  removeButtons();
-  createEditButtonMenu();
-}
+//User has chosen to remove an object from the scene
 
 function editModelPress(){
   var oldObj = selectedItem;
@@ -192,6 +86,7 @@ function removeButtonPress() {
   NAF.entities.removeEntity(selectedItem.getAttribute('id').substr(4));
 }
 
+
 //Resets the gravity button upon press
 function gravityOffButtonPress() {
   onGravity();
@@ -202,10 +97,4 @@ function gravityOnButtonPress() {
   var scene = document.querySelector("#scene");
   createGravity();
   gravityAll();
-}
-//User has chosen to now not remove an object from the scene
-function backButtonPress() {
-    removeButtons();
-    createSummonButton();
-    createRemoveButton();
 }
