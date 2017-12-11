@@ -193,7 +193,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       console.log('Mouse entered: ' + this.getAttribute('id'));
       var box = document.getElementById('annoBoxi');
       var oldAnno = document.getElementById('newAnno');
-      if (oldAnno == null) {
+      if (oldAnno != null) {
         box.removeChild(oldAnno); 
       }
       var txt = this.getAttribute('annotation');
