@@ -188,7 +188,8 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       hideButtons(document.getElementsByClassName('optionButton'));
       selectedItem = null;
     });
-    entity.addEventListener('mouseenter', function(evt){
+  }
+   entity.addEventListener('mouseenter', function(evt){
       setOpacity(this, 0.85);
       console.log('Mouse entered: ' + this.getAttribute('id'));
       var box = document.getElementById('annoBoxi');
@@ -199,12 +200,17 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       var txt = this.getAttribute('annotation');
       var newContent = document.createTextNode(txt); 
       console.log(txt);
-      var newDiv = document.createElement("div"); 
-      newDiv.setAttribute("id", "newAnno");
-      newDiv.appendChild(newContent);
-      box.appendChild(newDiv);
-      revealAnnotation(document.getElementsByClassName('annotationObj'));
-      selectedItem = this;
+      if (txt === "undefined" || txt === "null") {
+        setOpacity(this,1);
+        console.log('Mouse left: ' + this.getAttribute('id'));
+      } else {
+        var newDiv = document.createElement("div"); 
+        newDiv.setAttribute("id", "newAnno");
+        newDiv.appendChild(newContent);
+        box.appendChild(newDiv);
+        revealAnnotation(document.getElementsByClassName('annotationObj'));
+        selectedItem = this;
+      }
     });
 
     entity.addEventListener('mouseleave', function(evt){
@@ -216,7 +222,6 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       hideAnnotation(document.getElementsByClassName('annotationObj'));
       selectedItem = null;
     });
-  }
 
   // Set the current entity
   selectedItem = entity;

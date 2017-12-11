@@ -99,7 +99,7 @@
 	
 	<div id="annoBoxi" class="annotation hide-annotation annotationObj optionButton">
 		<div>
-			<h3>Annotations</h3>
+			<!-- <h3>Annotations</h3> -->
 		</div>
 	</div>
         
@@ -423,37 +423,21 @@
          <!-- When addEntity() is pressed, uiElem is shown -->
          <center id="uiElem">
           <div class="boxAndButtons">
-            <div class="objectAddBox">
+            <div class="annoBox">
               <center>
-                <div class="searchbar">
-                  <div class="dropdown">
-                    <button class="dropbtn">All</button>
-                    <div id="myDropdown" class="dropdown-content">
-                    </div>
+                <div class="box">
+                  <div class="container-4">
+			              <span class="Message" style="color: #FFF">Message: </span>
+		                <br>
+		                <input type="text" id="userInput" value="">
+		                <br>
+		                <br><br>
                   </div>
-                  <div class="box">
-                    <div class="container-4">
-<!--                        <textarea id="annotationTxt" class="annotationTextArea" rows="4" cols="50">
-                        Hello World!
-                        </textarea> -->
-<!-- 			<form name="annotate"> -->
-				<span style="color: #FFF">Message: </span>
-				<br>
-  				<input type="text" id="userInput" value="">
-  				<br>
-  				<br><br>
-			    <button onClick="annoPress()">Annotate</button>
-<!-- 			</form>  -->
-                    </div>
-                  </div>
-
                 </div>
-
               </center>
             </div>
-
-<!--             <button class="uploadButton" onclick="annoPress()">Upload</button> -->
             <button class="cancelButton" onclick="stateChange('stateA')">Cancel</button>
+            <button class="cancelButton" onClick="annoPress()">Annotate</button>
           </div>
         </center>
         </div>
