@@ -13,6 +13,8 @@
                 ["gallery whale animals", "displayModel(11)", "assets/images/whale.png", "pokeball"],
                 ["gallery mario gaming", "displayModel(12)", "assets/images/mario.png", "pokeball"]*/
 
+var currentFilter = "gallery";
+
 
 function fillDropDown(categories){
     var dd = document.getElementById('myDropdown');

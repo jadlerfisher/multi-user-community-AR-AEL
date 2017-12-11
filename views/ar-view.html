@@ -187,28 +187,55 @@
 
       <!-- STATE C: Editing portion to move/rotate/resize/recolor entities -->
       <div id="stateC" class="hide-state">
-        <div class="editTray">
-          <button onclick="moveButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">open_with</i>
-          </button>
-          <button onclick="rotateButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">3d_rotation</i>
-          </button>
-          <button onclick="sizeButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">picture_in_picture</i>
-          </button>
-          <button onclick="stateChange('stateA')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
-            <i class="material-icons">done</i>
-          </button>
-          <button onclick="colorButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">color_lens</i>
-          </button>
-          <button onclick="undoButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">undo</i>
-          </button>
-          <button onclick="deleteButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">delete</i>
-          </button>
+        <div class="desktopC">
+          <div class="editTray">
+            <button onclick="moveButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">open_with</i>
+            </button>
+            <button onclick="rotateButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">3d_rotation</i>
+            </button>
+            <button onclick="sizeButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">picture_in_picture</i>
+            </button>
+            <button onclick="stateChange('stateA')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+            <button onclick="colorButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">color_lens</i>
+            </button>
+            <button onclick="undoButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">undo</i>
+            </button>
+            <button onclick="deleteButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </div>
+        <div class="mobileC">
+           <div class="editTray">
+            <button onclick="moveButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">open_with</i>
+            </button>
+            <button onclick="rotateButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">3d_rotation</i>
+            </button>
+            <button onclick="sizeButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">picture_in_picture</i>
+            </button>
+            <button onclick="colorButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">color_lens</i>
+            </button>
+            <button onclick="undoButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">undo</i>
+            </button>
+            <button onclick="deleteButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">delete</i>
+            </button>
+          </div>
+            <button onclick="stateChange('stateA')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
         </div>
         <!-- <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
@@ -239,185 +266,166 @@
 
       <!-- STATE C1: MOVE an entity -->
       <div id="stateC1" class="hide-state">
-        <div class="editTray">
-          <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-             <i class="material-icons">arrow_back</i>
-          </button>
-          <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">arrow_forward</i>
-          </button>
-          <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">arrow_upward</i>
-          </button>
-          <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">arrow_downward</i>
-          </button>
-          <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">add</i>
-          </button>
-          <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-             <i class="material-icons">remove</i>
-          </button>
-          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
-            <i class="material-icons">done</i>
-          </button>
-        </div>
-        <!-- <center id = "editBoxCenter" class="editBoxCenter">
-          <div class="editingBox">
-            <div class="editOptionsBox">
-              <button class="moveButtons" onclick="move('x', -1, false)">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="move('y', +1, false)">
-                <i class="fa fa-arrow-up" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="move('z', +1, false)">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="move('x', +1, false)">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="move('y', -1, false)">
-                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="move('z', -1, false)">
-                <i class="fa fa-minus" aria-hidden="true"></i>
-              </button>
-            </div>
-            <div class="finalOptionsButtonBox">
-              <button class="completeButton" onclick="stateChange('stateC')">
-                <i class="fa fa-check" aria-hidden="true"></i>
-              </button>
-              <button class="cancelEditButton" onclick="cancelEditingAttribute()">
-                <i class="fa fa-times" aria-hidden="true"></i>
-              </button>
-            </div>
+        <div class="desktopC">
+          <div class="editTray">
+            <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">arrow_back</i>
+            </button>
+            <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+            <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_downward</i>
+            </button>
+            <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">add</i>
+            </button>
+            <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">remove</i>
+            </button>
+            <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
           </div>
-        </center> -->
+        </div>
+        <div class="mobileC">
+          <div class="editTray">
+            <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">arrow_back</i>
+            </button>
+            <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+            <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_downward</i>
+            </button>
+            <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">add</i>
+            </button>
+            <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">remove</i>
+            </button>
+          </div>
+           <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+        </div>
       </div>
       <!-- END STATE C1 -->
 
       <!-- STATE C2: ROTATE an entity -->
       <div id="stateC2" class="hide-state">
-        <div class="editTray">
-          <button onclick="rotate('y', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-             <i class="material-icons">arrow_back</i>
-          </button>
-          <button onclick="rotate('y', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">arrow_forward</i>
-          </button>
-          <button onclick="rotate('x', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">arrow_upward</i>
-          </button>
-          <button onclick="rotate('x', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">arrow_downward</i>
-          </button>
-          <button onclick="rotate('z', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-               <i class="material-icons">rotate_left</i>
-          </button>
-          <button onclick="rotate('z', 5, false)"class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-             <i class="material-icons">rotate_right</i>
-          </button>
-          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
-            <i class="material-icons">done</i>
-          </button>
-        </div>
-      <!-- <center id = "editBoxCenter" class="editBoxCenter">
-          <div class="editingBox">
-            <div class="editOptionsBox">
-              <button class="moveButtons" onclick="rotate('y', -5, false)">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="rotate('x', -5, false)">
-                <i class="fa fa-arrow-up" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="rotate('z', -5, false)">
-                <i class="fa fa-rotate-left" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="rotate('y', 5, false)">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="rotate('x', 5, false)">
-                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-              </button>
-              <button class="moveButtons" onclick="rotate('z', 5, false)">
-                <i class="fa fa-rotate-right" aria-hidden="true"></i>
-              </button>
-            </div>
-            <div class="finalOptionsButtonBox">
-              <button class="completeButton" onclick="stateChange('stateC')">
-                <i class="fa fa-check" aria-hidden="true"></i>
-              </button>
-              <button class="cancelEditButton" onclick="cancelEditingAttribute()">
-                <i class="fa fa-times" aria-hidden="true"></i>
-              </button>
-            </div>
+        <div class="desktopC">
+          <div class="editTray">
+            <button onclick="rotate('y', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">arrow_back</i>
+            </button>
+            <button onclick="rotate('y', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+            <button onclick="rotate('x', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <button onclick="rotate('x', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_downward</i>
+            </button>
+            <button onclick="rotate('z', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                 <i class="material-icons">rotate_left</i>
+            </button>
+            <button onclick="rotate('z', 5, false)"class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">rotate_right</i>
+            </button>
+            <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
           </div>
-        </center> -->
+        </div>
+        <div class="mobileC">
+          <div class="editTray">
+            <button onclick="rotate('y', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">arrow_back</i>
+            </button>
+            <button onclick="rotate('y', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+            <button onclick="rotate('x', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <button onclick="rotate('x', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_downward</i>
+            </button>
+            <button onclick="rotate('z', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                 <i class="material-icons">rotate_left</i>
+            </button>
+            <button onclick="rotate('z', 5, false)"class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">rotate_right</i>
+            </button>
+          </div>
+          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+        </div>
       </div>
       <!-- END STATE C2 -->
 
       <!-- STATE C3: RESIZE an entity -->
       <div id="stateC3" class="hide-state">
-        <div class="editTray">
-          <button onclick="scale(.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-             <i class="material-icons">add</i>
-          </button>
-          <button onclick="scale(-.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
-              <i class="material-icons">remove</i>
-          </button>
-          <button onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
-            <i class="material-icons">done</i>
-          </button>
-        </div>
-        <!-- <center id = "editBoxCenter" class="editBoxCenter">
-          <div class="editingBox">
-            <div class="editOptionsBox">
-              <button class="resizeButton" onclick="resize(0.1)">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              </button>
-              <button class="resizeButton" onclick="resize(-0.1)">
-                <i class="fa fa-minus" aria-hidden="true"></i>
-              </button>
-            </div>
-            <div class="finalOptionsButtonBox">
-              <button class="completeButton" onclick="stateChange('stateC')">
-                <i class="fa fa-check" aria-hidden="true"></i>
-              </button>
-              <button class="cancelEditButton" onclick="cancelEditingAttribute()">
-                <i class="fa fa-times" aria-hidden="true"></i>
-              </button>
-            </div>
+        <div class="desktopC">
+          <div class="editTray">
+            <button onclick="scale(.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">add</i>
+            </button>
+            <button onclick="scale(-.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">remove</i>
+            </button>
+            <button onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
           </div>
-        </center> -->
+        </div>
+        <div class="mobileC">
+          <div class="editTray">
+            <button onclick="scale(.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">add</i>
+            </button>
+            <button onclick="scale(-.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">remove</i>
+            </button>
+          </div>
+           <button onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+        </div>
       </div>
       <!-- END STATE C3 -->
 
       <!-- STATE C4: RECOLOR an entity -->
       <div id="stateC4" class="hide-state">
-        <div class="editTray">
-          <INPUT class="colorPicker jscolor {onFineChange:'setColor(this.toHEXString())'}" value="cc66ff">
-          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
-            <i class="material-icons">done</i>
-          </button>
+        <div class="desktopC">
+          <div class="editTray">
+            <INPUT class="colorPicker jscolor {onFineChange:'setColor(this.toHEXString())'}" value="cc66ff"></INPUT>
+            <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+          </div>
         </div>
-        <!-- <center id = "editBoxCenter" class="editBoxCenter">
-            <div class="editingBox">
-              <div class="editOptionsBox">
-                <INPUT class="colorPicker jscolor {onFineChange:'setColor(this.toHEXString())'}" value="cc66ff">
-              </div>
-              <div class="finalOptionsButtonBox">
-                <button class="completeButton" onclick="stateChange('stateC')">
-                  <i class="fa fa-check" aria-hidden="true"></i>
-                </button>
-                <button class="cancelEditButton" onclick="cancelEditingAttribute()">
-                  <i class="fa fa-times" aria-hidden="true"></i>
-                </button>
-              </div>
-            </div>
-          </center> -->
+        <div class="mobileC">
+          <div class="editTray">
+            <INPUT class="colorPicker jscolor {onFineChange:'setColor(this.toHEXString())'}" value="cc66ff"></INPUT>
+          </div>
+          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+        </div>
       </div>
       <!-- END STATE C4 -->
+
        <!-- STATE D: UI for annotations -->
       <div id="stateD" class="hide-state">
          <!-- When addEntity() is pressed, uiElem is shown -->

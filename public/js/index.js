@@ -218,7 +218,9 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       console.log('Mouse left: ' + this.getAttribute('id'));
       var box = document.getElementById('annoBoxi');
       var oldAnno = document.getElementById('newAnno');
-      box.removeChild(oldAnno);
+      if (oldAnno != null) {
+        box.removeChild(oldAnno);
+      }
       hideAnnotation(document.getElementsByClassName('annotationObj'));
       selectedItem = null;
     });
