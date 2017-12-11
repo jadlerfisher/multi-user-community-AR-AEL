@@ -111,6 +111,8 @@
 					el.addEventListener( 'click', function( event ) {
 						event.preventDefault();
 						navigator.geolocation.getCurrentPosition(geoSuccess);
+            //Updates Pano view but might redirect to a user submitted pano
+            //sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
 					}, false );
 				navigator.pointer = navigator.pointer || navigator.webkitPointer;
 
@@ -211,3 +213,4 @@
     base64 = img.src;
     return base64;
 }
+

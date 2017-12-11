@@ -4,7 +4,7 @@
   "description": "Community Tableau Vivant AR",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -15,6 +15,7 @@
     "firebase": "^4.4.0",
     "mustache": "^2.3.0",
     "networked-aframe": "^0.3.0",
+    "nodemon": "^1.12.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   }

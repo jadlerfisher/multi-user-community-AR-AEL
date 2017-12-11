@@ -62,6 +62,22 @@ function createOptionsButton(funct, text) {
   return button;
 }
 
+/**
+ * Creates a button for user control
+ * @param {String} funct - function that button should call
+ * @param {String} text - innerText of Button
+ * @return {Object} button - a button object created
+*/
+function createAnnotationButton(funct, text) {
+  var button = document.createElement("button");
+  button.setAttribute("onClick", funct);
+  button.setAttribute("class", "annotationButton");
+  button.setAttribute("type", "button");
+  button.innerText = text;
+
+  return button;
+}
+
 
 //Takes in an array of Button Functions and Button Text
 //Array Should be formated as such:
@@ -247,6 +263,44 @@ function createColorButtons() {
 //     table.setAttribute("id", "buttonTable");
 //     body.appendChild(table);
 // }
+
+function createNewModelInput() {
+    var body = document.querySelector("center");
+    var table = document.createElement("table");
+    var row = document.createElement("tr");
+    var row2 = document.createElement("tr");
+
+    var cell = document.createElement("td");
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("name", "filePath");
+    input.setAttribute("value", "File Path");
+    input.setAttribute("onfocus", "if (this.value=='File Path') this.value='';");
+    input.setAttribute("id", "fileInputField");
+    cell.appendChild(input);
+    row.appendChild(cell);
+
+    var cell = document.createElement("td");
+    var input1 = document.createElement("input");
+    input1.setAttribute("type", "text");
+    input1.setAttribute("name", "modelName");
+    input1.setAttribute("value", "Model Name");
+    input1.setAttribute("onfocus", "if (this.value=='Model Name') this.value='';");
+    input1.setAttribute("id", "modelNameField");
+    cell.appendChild(input1);
+    row.appendChild(cell);
+
+    var cell = document.createElement("td");
+    var button = document.createElement("button");
+    button.setAttribute("id", "optionButton");
+    button.setAttribute("onClick", "submitFilepathButtonPress()");
+    button.innerText = "Submit";
+    cell.appendChild(button);
+    row.appendChild(cell);
+    table.appendChild(row);
+    table.setAttribute("id", "buttonTable");
+    body.appendChild(table);
+}
 
 
 function createRemoveButton() {
