@@ -397,6 +397,21 @@ a {
     outline: none;
     font-family: 'Roboto';
 }
+.annoButton {
+   background-color: #E91E63;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 12pt;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 50px;
+    max-width: 160px;
+    width:40%;
+    margin: 5px;
+    outline: none;
+    font-family: 'Roboto';
+}
 .uploadButton {
     background-color: #E91E63;
     color: white;
@@ -641,6 +656,23 @@ a {
     right: 2vw;
     position: absolute;
 }
+.annoButton {
+    background-color: #E91E63;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 12pt;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 8vh;
+    max-width: 800px;
+    width:43vw;
+    margin: 5px;
+    outline: none;
+    font-family: 'Roboto';
+    left: 2vw;
+    position: absolute;
+}
 .uploadButton {
     background-color: #E91E63;
     color: white;
@@ -819,12 +851,12 @@ a {
   cursor: pointer;
 }
 .annoBox{
-  background: #1A237E;
+  background: none;
   width: 90vw;
   border-radius: 15px;
   top:5vh;
   padding: 10px;
-  height: 14vh;
+  height: 20vh;
 }
 .objectUploadBox{
   position: relative;
@@ -865,6 +897,20 @@ td, th {
   bottom: 2vh;
   left: 1vw;
   right: 1vw;
+}
+.Message{
+   display: none;
+}
+.annotation{
+  z-index: 1;
+  position: absolute;
+  left: 25vw;
+  right: 5vw;
+  background-color: white;
+  border: #1A237E;
+  border-radius: 5px;
+  top:4vh;
+  padding: 10px;
 }
 }
 @media screen and (max-device-width: 400px) {

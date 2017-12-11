@@ -190,7 +190,6 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     });
   }
    entity.addEventListener('mouseenter', function(evt){
-      setOpacity(this, 0.85);
       console.log('Mouse entered: ' + this.getAttribute('id'));
       var box = document.getElementById('annoBoxi');
       var oldAnno = document.getElementById('newAnno');
@@ -200,10 +199,10 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       var txt = this.getAttribute('annotation');
       var newContent = document.createTextNode(txt); 
       console.log(txt);
-      if (txt === "undefined" || txt === "null") {
-        setOpacity(this,1);
+      if (txt === "undefined" || txt === "") {
         console.log('Mouse left: ' + this.getAttribute('id'));
       } else {
+        setOpacity(this, 0.85);
         var newDiv = document.createElement("div"); 
         newDiv.setAttribute("id", "newAnno");
         newDiv.appendChild(newContent);

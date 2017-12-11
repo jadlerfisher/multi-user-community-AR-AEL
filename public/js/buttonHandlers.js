@@ -62,7 +62,7 @@ function annoPress() {
   var txt = document.getElementById('userInput').value;
   console.log(txt);
   if (txt === '') {
-    object.setAttribute('annotation', null);
+    object.setAttribute('annotation', "undefined");
       var entityData = {
         networkId: objectId,
         owner: NAF.clientId,
