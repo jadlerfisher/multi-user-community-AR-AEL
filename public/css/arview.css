@@ -155,6 +155,10 @@ td, th {
 /*NEW CSS*/
 .boxAndButtons{
   z-index: 1;
+  top: 5vh;
+  left: 10vw;
+  right: 10vw;
+  position: absolute;
 }
 .objectAddBox{
   background: #1A237E;
@@ -163,6 +167,14 @@ td, th {
   border-radius: 15px;
   top:5vh;
   padding: 10px;
+}
+.annoBox{
+  background: #1A237E;
+  width: 80vw;
+  border-radius: 15px;
+  top:5vh;
+  padding: 10px;
+  height: 14vh;
 }
 .objectUploadBox{
   position: relative;
@@ -228,6 +240,25 @@ td, th {
   overflow: hidden;
   vertical-align: middle;
   white-space: nowrap;
+}
+.Message{
+   font-size: 12pt;
+ font-family: 'Roboto';
+}
+#userInput{
+   width: 100%;
+  height: 50px;
+  background: #fff;
+  border: none;
+  outline: none;
+  font-size: 12pt;
+ font-family: 'Roboto';
+  float: left;
+  color: #2b303b;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 .container-4 input#search{
   width: 100%;
