@@ -62,6 +62,22 @@ function createOptionsButton(funct, text) {
   return button;
 }
 
+/**
+ * Creates a button for user control
+ * @param {String} funct - function that button should call
+ * @param {String} text - innerText of Button
+ * @return {Object} button - a button object created
+*/
+function createAnnotationButton(funct, text) {
+  var button = document.createElement("button");
+  button.setAttribute("onClick", funct);
+  button.setAttribute("class", "annotationButton");
+  button.setAttribute("type", "button");
+  button.innerText = text;
+
+  return button;
+}
+
 
 //Takes in an array of Button Functions and Button Text
 //Array Should be formated as such:

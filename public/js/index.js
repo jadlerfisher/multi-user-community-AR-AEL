@@ -12,6 +12,7 @@ var userColor;
 var selectedItem = null; // current item that is selected
 var currentObj = 0;
 var colorMode = "color";
+var defaultAnno = "N/A";
 
 //Removes the VR button
 function init() {
@@ -74,7 +75,8 @@ function makeModelAssets(modelSources) {
     entity.setAttribute("rotation", "");
     entity.setAttribute("scale", "");
     entity.setAttribute("material", "");
-    entity.setAttribute("dynamic-body", "mass: 0");
+    entity.setAttribute("annotation", "");
+    //entity.setAttribute("dynamic-body", "mass: 0");
 
     assetItem.appendChild(entity);
     assets.appendChild(assetItem);
@@ -117,7 +119,10 @@ function createModel(i) {
     position: objPos,
     rotation: '0 0 0',
     scale: '0.1 0.1 0.1',
-    material: 'color: #FFF'
+    material: 'color: #FFF',
+    annotation: ''
+    //dynamic_body: 'mass: 0'
+    
     //dynamic-body: 'mass: 0'
   };
   var currentUid = window.localStorage["uid"];
@@ -137,6 +142,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     owner: NAF.clientId,
     template: templateId,
     components: components
+    
   };
 
   // Create local entity
@@ -156,7 +162,8 @@ function createModelWithComponents(uid, objectId, templateId, components) {
   entity.setAttribute('rotation', entityData.components.rotation);
   entity.setAttribute('scale', entityData.components.scale);
   entity.setAttribute('material', entityData.components.material);
-  entity.setAttribute('dynamic-body', entityData.components.dynamicBody);
+  entity.setAttribute('annotation', entityData.components.annotation);
+  //entity.setAttribute('dynamic-body', entityData.components.dynamicBody);
 
   NAF.entities.setNetworkData(entity, entityData, components);
 
@@ -176,7 +183,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     });
 
     entity.addEventListener('mouseleave', function(evt){
-      setOpacity(this,1)
+      setOpacity(this,1);
       console.log('Mouse left: ' + this.getAttribute('id'));
       hideButtons(document.getElementsByClassName('optionButton'));
       selectedItem = null;
@@ -184,13 +191,28 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     entity.addEventListener('mouseenter', function(evt){
       setOpacity(this, 0.85);
       console.log('Mouse entered: ' + this.getAttribute('id'));
+      var box = document.getElementById('annoBoxi');
+      var oldAnno = document.getElementById('newAnno');
+      if (oldAnno != null) {
+        box.removeChild(oldAnno); 
+      }
+      var txt = this.getAttribute('annotation');
+      var newContent = document.createTextNode(txt); 
+      console.log(txt);
+      var newDiv = document.createElement("div"); 
+      newDiv.setAttribute("id", "newAnno");
+      newDiv.appendChild(newContent);
+      box.appendChild(newDiv);
       revealAnnotation(document.getElementsByClassName('annotationObj'));
       selectedItem = this;
     });
 
     entity.addEventListener('mouseleave', function(evt){
-      setOpacity(this,1)
+      setOpacity(this,1);
       console.log('Mouse left: ' + this.getAttribute('id'));
+      var box = document.getElementById('annoBoxi');
+      var oldAnno = document.getElementById('newAnno');
+      box.removeChild(oldAnno);
       hideAnnotation(document.getElementsByClassName('annotationObj'));
       selectedItem = null;
     });
@@ -214,7 +236,7 @@ function disappear() {
     // document.querySelector("a-scene").removeChild(document.getElementById("item"));
     var objectId = getObjectId();
     var object = NAF.entities.getEntity(objectId);
-    //object.setAttribute("dynamic-body", "mass: 5");
+    object.setAttribute("dynamicbody", "mass: 5");
     //setTimeout(function(){
     console.log(objectId+ " was removed from scene.");
     NAF.entities.removeEntity(objectId);
@@ -603,7 +625,7 @@ function revealButtons(btnList){
 }
 
 // Reveal Annotation
-function revealButtons(annList){
+function revealAnnotation(annList){
   for(var i = 0; i < annList.length; i++){
     if(annList[i].classList.contains('hide-annotation')){
       annList[i].classList.remove("hide-annotation");

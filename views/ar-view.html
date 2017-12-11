@@ -96,8 +96,14 @@
             <i class="material-icons">arrow_back</i>
           </button>
         </div>
-         <p class="annotation hide-annotation annotationObj optionButton">Hello World! You have found a wild annotation.</p>
-        <div class="addRemoveButton">
+	
+	<div id="annoBoxi" class="annotation hide-annotation annotationObj optionButton">
+		<div>
+			<h3>Annotations</h3>
+		</div>
+	</div>
+        
+	 <div class="addRemoveButton">
 
           <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
             <i class="material-icons">delete</i>
@@ -107,7 +113,7 @@
             <i class="material-icons">create</i>
           </button>
 
-          <button onclick="addAnnotationPress()" type="button" class="addButton annotationObj hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+          <button onclick="addAnnotationPress()" type="button" class="addButton annotationObj optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">chat</i>
           </button>
 
@@ -427,9 +433,17 @@
                   </div>
                   <div class="box">
                     <div class="container-4">
-                       <textarea class="annotationTextArea" rows="4" cols="50">
+<!--                        <textarea id="annotationTxt" class="annotationTextArea" rows="4" cols="50">
                         Hello World!
-                        </textarea>
+                        </textarea> -->
+<!-- 			<form name="annotate"> -->
+				<span style="color: #FFF">Message: </span>
+				<br>
+  				<input type="text" id="userInput" value="">
+  				<br>
+  				<br><br>
+			    <button onClick="annoPress()">Annotate</button>
+<!-- 			</form>  -->
                     </div>
                   </div>
 
@@ -438,7 +452,7 @@
               </center>
             </div>
 
-            <button class="uploadButton" onclick="stateChange('stateB2')">Upload</button>
+<!--             <button class="uploadButton" onclick="annoPress()">Upload</button> -->
             <button class="cancelButton" onclick="stateChange('stateA')">Cancel</button>
           </div>
         </center>
