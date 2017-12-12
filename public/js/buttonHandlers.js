@@ -49,10 +49,44 @@ function sizeButtonPress() {
   stateChange('stateC3');
   var objectId = getObjectId();
   var item = NAF.entities.getEntity(objectId);
-  var sizeInfo = [[item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z]];
+  var sizeInfo = [item.getAttribute("scale").x, item.getAttribute("scale").y, item.getAttribute("scale").z];
+  console.log(sizeInfo);
   changes.push(["size", sizeInfo]);
   console.log('Entity is being resized');
 }
+
+function annoPress() {
+  stateChange('stateA');
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+  var txt = document.getElementById('userInput').value;
+  console.log(txt);
+  if (txt === '') {
+    object.setAttribute('annotation', "undefined");
+      var entityData = {
+        networkId: objectId,
+        owner: NAF.clientId,
+        template: object.getAttribute("template").src,
+        components: { annotation: object.getAttribute('annotation') }
+      };
+
+      NAF.entities.updateEntity(NAF.clientId, null, entityData);
+      console.log(object.getAttribute('annotation'));
+      document.getElementById('userInput').value = '';
+    }  else {
+     object.setAttribute('annotation', txt);
+      var entityData = {
+        networkId: objectId,
+        owner: NAF.clientId,
+        template: object.getAttribute("template").src,
+        components: { annotation: object.getAttribute('annotation') }
+      };
+
+      NAF.entities.updateEntity(NAF.clientId, null, entityData);
+      console.log(object.getAttribute('annotation'));
+      document.getElementById('userInput').value = '';
+    } 
+  }
 
 
 // //User is done changing size
@@ -69,25 +103,30 @@ function sizeButtonPress() {
 //     removeButtons();
 //     createOptions();
 // }
+function submitFilepathButtonPress() {
+    var filePath = document.getElementById("fileInputField").value;
+    var modelName = document.getElementById("modelNameField").value;
+    //console.log(text);
+    createNewModel(filePath, modelName);
+    removeButtons();
+    createOptions();
+}
 
 //User has chosen to remove an object from the scene
 
 function editModelPress(){
   var oldObj = selectedItem;
-  selectedItem.classList.add('selected');
   console.log('You have decided to edit: '+ selectedItem.id);
   stateChange('stateC');
 }
 
 function removeButtonPress() {
-  // TODO: Need to pick an object that user selected and remove it
-  // document.querySelector("#scene").removeChild(selectedItem);
   console.log(selectedItem.getAttribute('id') + " was removed from scene.");
   NAF.entities.removeEntity(selectedItem.getAttribute('id').substr(4));
 }
 
 
-//Resets the gravity button upon press
+//Resets the gravity button fon press
 function gravityOffButtonPress() {
   onGravity();
 }

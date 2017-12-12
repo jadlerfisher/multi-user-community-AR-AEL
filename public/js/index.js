@@ -2,7 +2,9 @@ var buttonExists = true; //The VR button exists
 var shapes = ["a-box", "a-sphere", "a-circle", "a-cone", "a-plane", "a-ring", "a-torus", "a-torus-knot", "a-triangle"]; //All the possible shapes
 var shapeNames = ["box", "sphere", "circle", "cone", "plane", "ring", "torus", "torusKnot", "triangle"]; //The shape class names
 // var itemNum = 0; //The id of the most recently created object
-var models = ["#pokemon-model", "#box-model", "#sphere-obj"]; //The various object models
+var models = ["#pokemon-model", "#box-model", "#ellipsoid-model", "#icosahedron-model", "#monkey_head-model", "#rectangular_prism-model",
+              "#short_triangular_prism-model", "#sphere-model", "#square_pyramid-model", "#torus-model", "#torus2-model", "#torus3-model",
+              "#torus4-model", "#triangle_pyramid-model", "#triangular_prism-model"]; //The various object models
 var materials = ["mtl: #pokemon-mtl"];
 var changes = []; //Changes that have been made in editing an object
 var items = []; //List of all the ids of objects in the scene
@@ -10,6 +12,7 @@ var userColor;
 var selectedItem = null; // current item that is selected
 var currentObj = 0;
 var colorMode = "color";
+var defaultAnno = "N/A";
 
 //Removes the VR button
 function init() {
@@ -20,8 +23,21 @@ function init() {
     // fill in the gallery for adding models / entities
 
     var galleryList = [["gallery pokeball gaming", "displayModel(0)", "assets/images/pokeball.png", "pokeball"],
-                      ["gallery box shapes cube", "displayModel(1)", "assets/images/cube.png", "box"]];
-    var categories = ['All', 'Shapes', 'Gaming', 'Technology'];
+                      ["gallery box shapes cube", "displayModel(1)", "assets/images/cube.png", "box"],
+                      ["gallery ellipsoid shapes oval", "displayModel(2)", "assets/images/ellipsoid.PNG", "ellipsoid-obj"],
+                      ["gallery icosahedron shapes", "displayModel(3)", "assets/images/icosahedron.PNG", "icosahedron-obj"],
+                      ["gallery monkey_head animals", "displayModel(4)", "assets/images/monkey_head.PNG", "monkey_head-obj"],
+                      ["gallery rectangular_prism shapes cube", "displayModel(5)", "assets/images/rectangular_prism.PNG", "rectangular_prism-obj"],
+                      ["gallery short_triangular_prism shapes", "displayModel(6)", "assets/images/short_triangular_prism.PNG", "short_triangular_prism-obj"],
+                      ["gallery sphere shapes circle", "displayModel(7)", "assets/images/sphere.PNG", "sphere-obj"],
+                      ["gallery square_pyramid shapes", "displayModel(8)", "assets/images/square_pyramid.PNG", "square_pyramid-obj"],
+                      ["gallery torus shapes donut", "displayModel(9)", "assets/images/torus.PNG", "torus-obj"],
+                      ["gallery torus2 shapes donut", "displayModel(10)", "assets/images/torus2.PNG", "torus2-obj"],
+                      ["gallery torus3 shapes donut", "displayModel(11)", "assets/images/torus3.PNG", "torus3-obj"],
+                      ["gallery torus4 shapes donut", "displayModel(12)", "assets/images/torus4.PNG", "torus4-obj"],
+                      ["gallery triangle_pyramid shapes", "displayModel(13)", "assets/images/triangle_pyramid.PNG", "triangle_pyramid-obj"],
+                      ["gallery triangular_prism shapes", "displayModel(14)", "assets/images/triangular_prism.PNG", "triangular_prism-obj"]];
+    var categories = ['All', 'Shapes', 'Gaming', 'Animals'];
     var modelSources = [["pokemon-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.mtl", "pokemon-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj", "pokemon-model"],
                         ["google-glass-mtl", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.mtl", "google-glass-obj", "https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.obj", "google-glass-model"]];
     //makeModelAssets(modelSources);
@@ -59,6 +75,8 @@ function makeModelAssets(modelSources) {
     entity.setAttribute("rotation", "");
     entity.setAttribute("scale", "");
     entity.setAttribute("material", "");
+    entity.setAttribute("annotation", "");
+    //entity.setAttribute("dynamic-body", "mass: 0");
 
     assetItem.appendChild(entity);
     assets.appendChild(assetItem);
@@ -103,27 +121,37 @@ function createModel(i) {
   /* CODE FOR ARGON */
 
   var objPos = {
-      x: 10-Math.random()*20, y: 10-Math.random()*20, z: 0
-  }
-
-  /* END CODE FOR ARGON */
-
-  // Create network entity
-  var networkId = NAF.entities.createEntityId();
-  NAF.log.write('Created network entity', networkId);
+    x: playerPos.x - playerDir.x,
+    y: playerPos.y - playerDir.y,
+    z: playerPos.z - playerDir.z,
+  };
+  var components = {
+    position: objPos,
+    rotation: '0 0 0',
+    scale: '0.1 0.1 0.1',
+    material: 'color: #FFF',
+    annotation: ''
+    //dynamic_body: 'mass: 0'
+    
+    //dynamic-body: 'mass: 0'
+  };
+  var currentUid = window.localStorage["uid"];
   console.log(i);
   console.log(models[i]);
+
+  var networkId = NAF.entities.createEntityId();
+
+  createModelWithComponents(currentUid, networkId, models[i], components);
+}
+
+function createModelWithComponents(uid, objectId, templateId, components) {
+  var currentUid = window.localStorage["uid"];
+  // Create network entity
   var entityData = {
-    networkId: networkId,
+    networkId: objectId,
     owner: NAF.clientId,
-    template: models[i],
-    components: {
-      position: objPos,
-      rotation: '0 0 0',
-      scale: '1 1 1',
-      material: 'color: #FFF'
-      // material: 'color: #FFF'
-    }
+    template: templateId,
+    components: components
   };
 
   // Create local entity
@@ -143,6 +171,8 @@ function createModel(i) {
   entity.setAttribute('rotation', entityData.components.rotation);
   entity.setAttribute('scale', entityData.components.scale);
   entity.setAttribute('material', entityData.components.material);
+  entity.setAttribute('annotation', entityData.components.annotation);
+  //entity.setAttribute('dynamic-body', entityData.components.dynamicBody);
 
   NAF.entities.setNetworkData(entity, entityData, components);
 
@@ -152,45 +182,87 @@ function createModel(i) {
   scene.appendChild(entity);
   NAF.entities.entities[entityData.networkId] = entity;
 
-  entity.addEventListener('mouseenter', function(evt){
-    setOpacity(this, 0.85);
-    console.log('Mouse entered: ' + this.getAttribute('id'));
-    revealButtons(document.getElementsByClassName('optionButton'));
-    selectedItem = this;
-  });
+  // Allow the creator to edit an object
+  if (currentUid === uid) {
+    entity.addEventListener('mouseenter', function(evt){
+      setOpacity(this, 0.85);
+      console.log('Mouse entered: ' + this.getAttribute('id'));
+      revealButtons(document.getElementsByClassName('optionButton'));
+      selectedItem = this;
+    });
 
-  entity.addEventListener('mouseleave', function(evt){
-    setOpacity(this,1)
-    console.log('Mouse left: ' + this.getAttribute('id'));
-    hideButtons(document.getElementsByClassName('optionButton'));
-    selectedItem = null;
-  });
+    entity.addEventListener('mouseleave', function(evt){
+      setOpacity(this,1);
+      console.log('Mouse left: ' + this.getAttribute('id'));
+      hideButtons(document.getElementsByClassName('optionButton'));
+      selectedItem = null;
+    });
+  }
+   entity.addEventListener('mouseenter', function(evt){
+      console.log('Mouse entered: ' + this.getAttribute('id'));
+      var box = document.getElementById('annoBoxi');
+      var oldAnno = document.getElementById('newAnno');
+      if (oldAnno != null) {
+        box.removeChild(oldAnno); 
+      }
+      var txt = this.getAttribute('annotation');
+      var newContent = document.createTextNode(txt); 
+      console.log(txt);
+      if (txt === "undefined" || txt === "") {
+        console.log('Mouse left: ' + this.getAttribute('id'));
+      } else {
+        setOpacity(this, 0.85);
+        var newDiv = document.createElement("div"); 
+        newDiv.setAttribute("id", "newAnno");
+        newDiv.appendChild(newContent);
+        box.appendChild(newDiv);
+        revealAnnotation(document.getElementsByClassName('annotationObj'));
+        selectedItem = this;
+      }
+    });
 
-  entity.classList.add('selected');
+    entity.addEventListener('mouseleave', function(evt){
+      setOpacity(this,1);
+      console.log('Mouse left: ' + this.getAttribute('id'));
+      var box = document.getElementById('annoBoxi');
+      var oldAnno = document.getElementById('newAnno');
+      if (oldAnno != null) {
+        box.removeChild(oldAnno);
+      }
+      hideAnnotation(document.getElementsByClassName('annotationObj'));
+      selectedItem = null;
+    });
+
+  // Set the current entity
+  selectedItem = entity;
+
 }
 
 function setOpacity(object, value){
   var model = object.getElementsByClassName('model')[0];
   model.setAttribute('material','opacity',value);
 }
+function addAnnotationPress() {
+  stateChange('stateD');
+}
 
 //Delete object
 function disappear() {
-  // document.querySelector("#frame").removeChild(document.getElementById("item"));
-  var objectId = getObjectId();
-  var object = NAF.entities.getEntity(objectId);
-  console.log(objectId+ " was removed from scene.");
-  NAF.entities.removeEntity(objectId);
-}
+    // document.querySelector("a-scene").removeChild(document.getElementById("item"));
+    var objectId = getObjectId();
+    var object = NAF.entities.getEntity(objectId);
+    object.setAttribute("dynamicbody", "mass: 5");
+    //setTimeout(function(){
+    console.log(objectId+ " was removed from scene.");
+    NAF.entities.removeEntity(objectId);
+    //NAF.entities.removeEntity(objectId);}, 5000);
+  }
 
 // Get the first object's id for now.
 // TODO: need to pick an object from user selection
 
 function getObjectId() {
-  var object = document.getElementsByClassName('selected')[0];
-  if(object === undefined) {return null}
-  var objectId = object.id.replace('naf-', '');
-  return objectId;
+  return selectedItem !== undefined ? selectedItem.id.replace('naf-', '') : null;
 }
 
 /**
@@ -227,7 +299,7 @@ function move(axis, value) {
     _z = (_zP + r * Math.sin(a));
   } else {
     // Update position
-    var _y = _yO + value;
+    var _y = _yO + (value/10.0);
     var _x = _xO;
     var _z = _zO;
   }
@@ -268,27 +340,34 @@ function rotate(axis, degrees) {
   console.log(axis);
 
   if (axis === "z") {
+    // var _y = _yOR;
+    // var _x = _xOR;
+    // var _z = _zOR;
+
+    // var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
+    // var a = Math.atan2(_zO - _zP, _xO - _xP);
+    // var x_amount = Math.cos(a);
+    // var z_amount = Math.sin(a);
+    // _x = _x + (degrees*x_amount);
+    // _z = _z + (degrees*z_amount);
     var _y = _yOR;
     var _x = _xOR;
-    var _z = _zOR;
-
-    var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
-    var a = Math.atan2(_zO - _zP, _xO - _xP);
-    var x_amount = Math.cos(a);
-    var z_amount = Math.sin(a);
-    _x = _x + (degrees*x_amount);
-    _z = _z + (degrees*z_amount);
+    var _z = _zOR +  degrees;
   } else if (axis === "x") {
-     var _y = _yOR;
-    var _x = _xOR;
-    var _z = _zOR;
+    //  var _y = _yOR;
+    // var _x = _xOR;
+    // var _z = _zOR;
 
-    var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
-    var a = Math.atan2(_zO - _zP, _xO - _xP);
-    var x_amount = Math.sin(a);
-    var z_amount = Math.cos(a);
-    _x = _x + (degrees*x_amount);
-    _z = _z + (degrees*z_amount);
+    // var r = Math.sqrt(Math.pow((_xO - _xP), 2) + Math.pow((_zO - _zP), 2));
+    // var a = Math.atan2(_zO - _zP, _xO - _xP);
+    // var x_amount = Math.sin(a);
+    // var z_amount = Math.cos(a);
+    // _x = _x + (degrees*x_amount);
+    // _z = _z + (degrees*z_amount);
+
+    var _y = _yOR;
+    var _x = _xOR + degrees;
+    var _z = _zOR;
   } else {
     // Update position
     var _y = _yOR + degrees;
@@ -304,6 +383,32 @@ function rotate(axis, degrees) {
     components: { rotation: object.getAttribute('rotation') }
   };
   NAF.entities.updateEntity(NAF.clientId, null, entityData);
+}
+
+/**
+ * rotates the entity
+ * @param {int} amount resized
+*/
+function scale(amount) {
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+
+  var _x = object.getAttribute('scale').x;
+  var _y = object.getAttribute('scale').y;
+  var _z = object.getAttribute('scale').z;
+  if (_x + amount <= 0 || _y + amount <= 0 || _z + amount <= 0) {
+    amount = 0;
+  }
+  object.setAttribute('scale', {x: _x + amount, y: _y + amount, z: _z + amount});
+
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: object.getAttribute("template").src,
+    components: { scale: object.getAttribute('scale') }
+  };
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
+
 }
 
 /**
@@ -364,25 +469,26 @@ function setPosition(_x, _y, _z) {
 }
 
 //Set shape size when undo is called
-function setSize(sizeInfo) {
+function setSize(_x,_y,_z) {
+  console.log(_x + " " + _y + " " + _z);
   var objectId = getObjectId();
-  var sX_change = sizeInfo[0][0];
-  var sY_change = sizeInfo[0][1];
-  var sZ_change = sizeInfo[0][2];
+  var object = NAF.entities.getEntity(objectId);
+
+  object.setAttribute('scale', {x: _x, y: _y, z: _z});
 
   var entityData = {
     networkId: objectId,
     owner: NAF.clientId,
     template: object.getAttribute("template").src,
-    components: { scale: {x: sX_change, y: sY_change, z: sZ_change} }
+    components: { scale: object.getAttribute('scale') }
   };
-
   NAF.entities.updateEntity(NAF.clientId, null, entityData);
 }
 
 //Set shape Rotation when undo is called
 function setRotation(rotationInfo) {
   var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
   var _x = rotationInfo[0];
   var _z = rotationInfo[2];
   var _y = rotationInfo[1];
@@ -400,21 +506,35 @@ function setRotation(rotationInfo) {
 function createNewModel(text) {
   var assets = document.querySelector("a-assets");
   var asset = document.createElement("a-asset-item");
-  asset.setAttribute("id", "new-obj");
+  asset.setAttribute("id", text);
   asset.setAttribute("src", text);
   assets.appendChild(asset);
+  //var entity = document.createElement("a-entity");
+  //entity.setAttribute("class", "model");
+  //entity.setAttribute("obj-model", "obj: #" + text);
+  //entity.setAttribute("position", "");
+  //entity.setAttribute("rotation", "");
+  //entity.setAttribute("scale", "");
+  //entity.setAttribute("material", "");
 
-  var scene = document.querySelector("#frame");
+  //asset.appendChild(entity);
+  //assets.appendChild(asset);
+  var model_len = models.length;
+  models.push("obj: #" + text);
+  //var len = galleryList.length;
+  //galleryList.push("gallery " + text, "displayModel("+len+")", "", "pokeball");
+  createModel(model_len);
+  //var scene = document.querySelector("a-scene");
   //creates model
-  var model = document.createElement("a-entity");
-  model.setAttribute("id", "item");
-  model.setAttribute("class", "model");
-  model.setAttribute("obj-model", "obj: #new-obj");
-  model.setAttribute('position', '0 1.25 -5');
-  model.setAttribute("rotation", "0 0 0");
-  model.setAttribute("scale", "1 1 1");
-  model.setAttribute("material", "color: #0000FF");
-  scene.appendChild(model);
+  //var model = document.createElement("a-entity");
+  //model.setAttribute("id", "item");
+  //model.setAttribute("class", "model");
+  //model.setAttribute("obj-model", "obj: "+text);
+  //model.setAttribute('position', '0 1.25 -5');
+  //model.setAttribute("rotation", "0 0 0");
+  //model.setAttribute("scale", "1 1 1");
+  //model.setAttribute("material", "color: #0000FF");
+  //scene.appendChild(model);
 }
 
 //Removes item based on its id #
@@ -501,11 +621,29 @@ function hideButtons(btnList){
   }
 }
 
+// Hide annotation
+function hideAnnotation(annList){
+  for(var i = 0; i < annList.length; i++){
+    if(!annList[i].classList.contains('hide-annotation')){
+      annList[i].classList.add("hide-annotation");
+    }
+  }
+}
+
 // Reveal Buttons
 function revealButtons(btnList){
   for(var i = 0; i < btnList.length; i++){
     if(btnList[i].classList.contains('hide-button')){
       btnList[i].classList.remove("hide-button");
+    }
+  }
+}
+
+// Reveal Annotation
+function revealAnnotation(annList){
+  for(var i = 0; i < annList.length; i++){
+    if(annList[i].classList.contains('hide-annotation')){
+      annList[i].classList.remove("hide-annotation");
     }
   }
 }
@@ -545,41 +683,58 @@ function multiplyMatrix(a,b) {
     var row2A = a[1];
     var row3A = a[2];
     var row4A = a[3];
-    
+
     //Separating Rows of Second Matrix
     var row1B = b[0];
     var row2B = b[1];
     var row3B = b[2];
     var row4B = b[3];
-    
+
     //Finding first Row of new Matrix
     var spot1 = (row1A[0]*row1B[0]) + (row1A[1]*row2B[0]) + (row1A[2]*row3B[0]) + (row1A[3]*row4B[0]);
     var spot2 = (row1A[0]*row1B[1]) + (row1A[1]*row2B[1]) + (row1A[2]*row3B[1]) + (row1A[3]*row4B[1]);
     var spot3 = (row1A[0]*row1B[2]) + (row1A[1]*row2B[2]) + (row1A[2]*row3B[2]) + (row1A[3]*row4B[2]);
     var spot4 = (row1A[0]*row1B[3]) + (row1A[1]*row2B[3]) + (row1A[2]*row3B[3]) + (row1A[3]*row4B[3]);
     var row1C = [spot1, spot2, spot3, spot4];
-    
+
     //Finding second Row of new Matrix
     spot1 = (row2A[0]*row1B[0]) + (row2A[1]*row2B[0]) + (row2A[2]*row3B[0]) + (row2A[3]*row4B[0]);
     spot2 = (row2A[0]*row1B[1]) + (row2A[1]*row2B[1]) + (row2A[2]*row3B[1]) + (row2A[3]*row4B[1]);
     spot3 = (row2A[0]*row1B[2]) + (row2A[1]*row2B[2]) + (row2A[2]*row3B[2]) + (row2A[3]*row4B[2]);
     spot4 = (row2A[0]*row1B[3]) + (row2A[1]*row2B[3]) + (row2A[2]*row3B[3]) + (row2A[3]*row4B[3]);
     var row2C = [spot1, spot2, spot3, spot4];
-    
+
     //Finding third Row of new Matrix
     spot1 = (row3A[0]*row1B[0]) + (row3A[1]*row2B[0]) + (row3A[2]*row3B[0]) + (row3A[3]*row4B[0]);
     spot2 = (row3A[0]*row1B[1]) + (row3A[1]*row2B[1]) + (row3A[2]*row3B[1]) + (row3A[3]*row4B[1]);
     spot3 = (row3A[0]*row1B[2]) + (row3A[1]*row2B[2]) + (row3A[2]*row3B[2]) + (row3A[3]*row4B[2]);
     spot4 = (row3A[0]*row1B[3]) + (row3A[1]*row2B[3]) + (row3A[2]*row3B[3]) + (row3A[3]*row4B[3]);
     var row3C = [spot1, spot2, spot3, spot4];
-    
+
     //Finding fourth Row of new Matrix
     spot1 = (row4A[0]*row1B[0]) + (row4A[1]*row2B[0]) + (row4A[2]*row3B[0]) + (row4A[3]*row4B[0]);
     spot2 = (row4A[0]*row1B[1]) + (row4A[1]*row2B[1]) + (row4A[2]*row3B[1]) + (row4A[3]*row4B[1]);
     spot3 = (row4A[0]*row1B[2]) + (row4A[1]*row2B[2]) + (row4A[2]*row3B[2]) + (row4A[3]*row4B[2]);
     spot4 = (row4A[0]*row1B[3]) + (row4A[1]*row2B[3]) + (row4A[2]*row3B[3]) + (row4A[3]*row4B[3]);
     var row4C = [spot1, spot2, spot3, spot4];
-    
-    
+
+
     return [row1C,row2C,row3C,row4C];
   }
+
+function move1(axis, value) {
+  var objectId = getObjectId();
+  var object = NAF.entities.getEntity(objectId);
+  var _y = _yO + 2;
+  var _x = _xO;
+  var _z = _zO;
+  object.setAttribute('position', {x: _x, y: _y, z: _z});
+  var entityData = {
+    networkId: objectId,
+    owner: NAF.clientId,
+    template: object.getAttribute("template").src,
+    components: { position: object.getAttribute('position') }
+  };
+
+  NAF.entities.updateEntity(NAF.clientId, null, entityData);
+}

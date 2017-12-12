@@ -1,3 +1,9 @@
+.mobileC{
+  display: none;
+}
+.desktopC{
+  display: initial;
+}
 #uiElem{
   position: absolute;
   top: 0;
@@ -24,7 +30,7 @@ button.hide-button{
   display: none;
 }
 
-center.hide-center{
+.hide-annotation{
   display: none;
 }
 
@@ -60,6 +66,39 @@ td, th {
   bottom: 3vh;
   right: 3vw;
   z-index: 1;
+}
+.backButtonDiv{
+  position: absolute;
+  box-shadow: none !important;
+  top: 3vh;
+  left: 3vw;
+  z-index: 1;
+}
+.annotation{
+  z-index: 1;
+  position: absolute;
+  left: 12vw;
+  right: 5vw;
+  background-color: white;
+  border: #1A237E;
+  border-radius: 5px;
+  top:4vh;
+  padding: 10px;
+}
+.annotationBox{
+  background-color: white;
+  border: #1A237E;
+  width: 80vw;
+  height: 70vh;
+  border-radius: 15px;
+  top:5vh;
+  padding: 10px;
+}
+.backButton{
+  display: inline-block;
+  box-shadow: none !important;
+  width: 60px;
+  height: 60px;
 }
 .addButton{
   display: inline-block;
@@ -104,16 +143,49 @@ td, th {
   border-radius: 9px;
 }
 
+#modelNameField {
+  background: rgb(255,255,255);
+  border: solid #575757 5px;
+  color: #000000;
+  padding: 15px 1px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  display:inline-block;
+  width:100%;
+  border-radius: 9px;
+}
+
 
 
 /*NEW CSS*/
 .boxAndButtons{
   z-index: 1;
+  top: 5vh;
+  left: 10vw;
+  right: 10vw;
+  position: absolute;
 }
 .objectAddBox{
   background: #1A237E;
   width: 80vw;
   height: 70vh;
+  border-radius: 15px;
+  top:5vh;
+  padding: 10px;
+}
+.annoBox{
+  background: #1A237E;
+  width: 80vw;
+  border-radius: 15px;
+  top:5vh;
+  padding: 10px;
+  height: 14vh;
+}
+.objectUploadBox{
+  position: relative;
+  background: #1A237E;
+  width: 80vw;
   border-radius: 15px;
   top:5vh;
   padding: 10px;
@@ -175,6 +247,25 @@ td, th {
   vertical-align: middle;
   white-space: nowrap;
 }
+.Message{
+   font-size: 12pt;
+ font-family: 'Roboto';
+}
+#userInput{
+   width: 100%;
+  height: 50px;
+  background: #fff;
+  border: none;
+  outline: none;
+  font-size: 12pt;
+ font-family: 'Roboto';
+  float: left;
+  color: #2b303b;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
 .container-4 input#search{
   width: 100%;
   height: 50px;
@@ -190,13 +281,52 @@ td, th {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-.container-4 button.icon{
+.container-4 input#fileInputField{
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border: none;
+  outline: none;
+  font-size: 12pt;
+ font-family: 'Roboto';
+  float: left;
+  color: #2b303b;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.container-4 button.check{
   -webkit-border-top-right-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
   -moz-border-radius-topright: 5px;
   -moz-border-radius-bottomright: 5px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+ 
+  border: none;
+  background-color: #E91E63;
+  height: 50px;
+  width: 50px;
+  color: white;
+  font-size: 12pt;
+  font-family: 'Roboto';
+ 
+  outline: none;
+  opacity: 1;
+  margin-left: -50px;
+}
+
+.back{
+  position: relative;
+  float: left;
+  margin-right: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
  
   border: none;
   background: #3F51B5;
@@ -208,12 +338,15 @@ td, th {
  
   outline: none;
   opacity: 1;
-  margin-left: -50px;
+  margin-right: -50px;
 }
   .container-4:hover button.icon:hover{
-    background: #5C6BC0;
+    background-color: #D81B60;
 }
 
+.back:hover{
+  background: #5C6BC0;
+}
 .objects{
   background: #fff;
   height: 58vh;
@@ -251,6 +384,21 @@ a {
 
 .cancelButton {
     background-color: #E91E63;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 12pt;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 50px;
+    max-width: 160px;
+    width:40%;
+    margin: 5px;
+    outline: none;
+    font-family: 'Roboto';
+}
+.annoButton {
+   background-color: #E91E63;
     color: white;
     border: none;
     padding: 15px;
@@ -475,3 +623,302 @@ a {
   margin-top: -1%;
 }
 */
+@media screen and (max-device-width: 800px) {
+  .boxAndButtons{
+    z-index: 1;
+    top: 2vh;
+    left: 2vw;
+    right: 2vw;
+    position: absolute;
+  }
+  .objectAddBox{
+    background: none;
+    width: 96vw;
+    height: 87vh;
+    border-radius: 15px;
+    top:2vh;
+    padding: 10px;
+  }
+  .cancelButton {
+    background-color: #E91E63;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 12pt;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 8vh;
+    max-width: 800px;
+    width:43vw;
+    margin: 5px;
+    outline: none;
+    font-family: 'Roboto';
+    right: 2vw;
+    position: absolute;
+}
+.annoButton {
+    background-color: #E91E63;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 12pt;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 8vh;
+    max-width: 800px;
+    width:43vw;
+    margin: 5px;
+    outline: none;
+    font-family: 'Roboto';
+    left: 2vw;
+    position: absolute;
+}
+.uploadButton {
+    background-color: #E91E63;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 12pt;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 8vh;
+    max-width: 800px;
+    width: 43vw;
+    margin:5px;
+    outline: none;
+    font-family: 'Roboto';
+    position: absolute;
+    left: 2vw;
+}
+.dropdown {
+    position: relative;
+    float: left;
+    width: 160px;
+    margin-right: 5px;
+    display: none;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropbtn {
+    background-color:#3F51B5;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 12pt;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 50px;
+    float: left;
+    min-width: 160px;
+    font-family: 'Roboto';
+}
+.dropdown:hover .dropbtn {
+    background-color:#3949AB;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    float: left;
+    margin-top:50px;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-size: 12pt;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 5px;
+    font-family: 'Roboto';
+}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+.box{
+  width: 100%;
+}
+.container-4{
+  overflow: hidden;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.Message{
+   font-size: 12pt;
+ font-family: 'Roboto';
+}
+#userInput{
+   width: 100%;
+  height: 50px;
+  background: #fff;
+  border: none;
+  outline: none;
+  font-size: 12pt;
+ font-family: 'Roboto';
+  float: left;
+  color: #2b303b;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.container-4 input#search{
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border: none;
+  outline: none;
+  font-size: 12pt;
+ font-family: 'Roboto';
+  float: left;
+  color: #2b303b;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.container-4 input#fileInputField{
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border: none;
+  outline: none;
+  font-size: 12pt;
+ font-family: 'Roboto';
+  float: left;
+  color: #2b303b;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.container-4 button.check{
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+ 
+  border: none;
+  background-color: #E91E63;
+  height: 50px;
+  width: 50px;
+  color: white;
+  font-size: 12pt;
+  font-family: 'Roboto';
+ 
+  outline: none;
+  opacity: 1;
+  margin-left: -50px;
+}
+.objects{
+  background: none;
+  height: 75vh;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+div.gallery {
+    margin: 1vh;
+    border: 0px solid #E91E63;
+    float: left;
+    min-width: 80vw;
+    max-width: 80vw;
+    cursor: pointer;
+    position: relative;
+}
+div.gallery:hover {
+    border: 5px solid #EC407A;
+}
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+.mobileC{
+  display: initial;
+}
+.desktopC{
+  display: none;
+}
+a {
+  cursor: pointer;
+}
+.annoBox{
+  background: none;
+  width: 90vw;
+  border-radius: 15px;
+  top:5vh;
+  padding: 10px;
+  height: 20vh;
+}
+.objectUploadBox{
+  position: relative;
+  background: #1A237E;
+  width: 94vw;
+  border-radius: 15px;
+  top:2vh;
+  padding: 10px;
+}
+table {
+  margin: 4px 5%;
+  width: 90%;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+td, th {
+  text-align: center;
+  width: 33%;
+}
+.doneButton{
+  height: 8vw;
+  width: 8vw;
+  margin: 1vw;
+  min-width: 80px;
+  min-height: 80px;
+  position: absolute;
+  z-index: 1;
+  top: 1vh;
+  right: 1vw;
+}
+.editTray{
+  position: absolute;
+  z-index: 1;
+  bottom: 2vh;
+  left: 1vw;
+  right: 1vw;
+}
+.Message{
+   display: none;
+}
+.annotation{
+  z-index: 1;
+  position: absolute;
+  left: 25vw;
+  right: 5vw;
+  background-color: white;
+  border: #1A237E;
+  border-radius: 5px;
+  top:4vh;
+  padding: 10px;
+}
+}
+@media screen and (max-device-width: 400px) {
+  .editTray{
+    position: absolute;
+    z-index: 1;
+    bottom: 2vh;
+    left: 15vw;
+    right: 15vw;
+  }
+}
