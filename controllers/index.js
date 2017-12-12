@@ -106,13 +106,20 @@ router.get('/ar-view', function(req, res) {
 
 // Argon experience
 router.get('/argon-view', function(req, res) {
-    if (authController.hasLoggedIn()) {
+  if (authController.hasLoggedIn()) {
+    var objectController = require('./objectController');
+
+    objectController.getObjects().then(function(snapshot) {
       res.render('argon-view', {
-        base64: req.session.base64
+        uid: authController.getUid(),
+        base64: req.session.base64,
+        savedObjects: snapshot.val(),
       });
-    } else {
-      req.session.redirect_url = 'argon-view';
-      res.render('login');
+    });
+
+  } else {
+    req.session.redirect_url = 'argon-view';
+    res.render('login');
   }
 });
 

@@ -1,5 +1,5 @@
-document.querySelector("#scene").addEventListener('touchstart', function (evt) {
-	var arScene = document.querySelector('#scene');
+document.querySelector("ar-scene").addEventListener('touchstart', function (evt) {
+	var arScene = document.querySelector('ar-scene');
 	var player = document.querySelector('#player');
 	console.log('The screen was touched');
 	var obj = selectedItem;
@@ -10,18 +10,13 @@ document.querySelector("#scene").addEventListener('touchstart', function (evt) {
 
 }, false);
 
-document.querySelector("#scene").addEventListener('touchend', function (evt) {
+document.querySelector("ar-scene").addEventListener('touchend', function (evt) {
 	console.log('The touch was removed');
-	var arScene = document.querySelector('#scene');
+	var arScene = document.querySelector('ar-scene');
 	var obj = selectedItem;
 	console.log(obj.id);
 	obj.setAttribute('visible',true);
 }, false);
-
-document.querySelector("#frame").addEventListener('mouseenter', function(evt){
-	console.log(evt.detail.intersection);
-})
-
 
 document.querySelector('ar-frame').addEventListener('referenceframe-statuschanged', function(evt) {
 	if (evt.detail.found) {

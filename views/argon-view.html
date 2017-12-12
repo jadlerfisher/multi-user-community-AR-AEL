@@ -6,12 +6,11 @@
 
   <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
   <!-- <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.1.0/dist/aframe-physics-system.min.js"></script> -->
-  <!-- <script src="js/aframe-physics-system.js"></script> -->
+<!--   <script src="js/aframe-physics-system.js"></script> -->
   <!-- Multiuser connection -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-  <!-- <script src="https://unpkg.com/networked-aframe@0.3.2/dist/networked-aframe.js"></script> -->
-  <!-- <script src="easyrtc/easyrtc.js"></script> -->
-  <!-- <script src="https://cdn.rawgit.com/haydenjameslee/networked-aframe/v0.1.0/dist/networked-aframe.js"></script> -->
+
+  <!-- Networked Aframe v0.1.0 -->
   <script src="library/networked-aframe.js"></script>
   <script src="https://cdn.rawgit.com/priologic/easyrtc/v1.1.0/api/easyrtc.js"></script>
 
@@ -21,7 +20,7 @@
   <script src="https://use.fontawesome.com/00712d7803.js"></script>
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
   <!-- Argon -->
@@ -37,7 +36,7 @@
 
   <link rel="stylesheet" href="css/arview.css">
   <meta charset="UTF-8">
-  <title>The Table</title>
+  <title>The ARGON Table</title>
   <!-- Bootstrap -->
   <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 
@@ -45,6 +44,9 @@
 </head>
 
   <body onload="init()">
+    <script type="text/javascript">
+      window.localStorage["uid"] = "<%= uid %>";
+    </script>
     <!-- <script>
       // Argon obj location detect
       AFRAME.registerComponent('showdistance', {
@@ -85,10 +87,8 @@
       <div id="tokyopin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
       <div id="sydneypin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
     </div> -->
-    <div hidden>
-    </div>
 
-    <ar-scene id="scene" vuforiakey="#vuforiakey"
+    <ar-scene vuforiakey="#vuforiakey"
               vuforiadataset__stonesandchips="src:url(library/datasets/StonesAndChips.xml);"
               
               network-scene="
@@ -114,13 +114,27 @@
       debug: true;
     "> -->
       <a-assets>
+
         <a-asset-item id="vuforiakey" src="assets/ngrok-key.txt"></a-asset-item>
-<!--         <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
-        <img id="sky" src="assets/images/sky.png"> -->
+        <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
+
+        <img id="sky" src="assets/images/sky.png">
         <!-- <img id="buzzpin" src="assets/images/buzz-pin.png"> -->
         <a-asset-item id="pokemon-obj" src="https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj"></a-asset-item>
-        <a-asset-item id="google-glass-obj" src="https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/google-glass/google-glass.obj"></a-asset-item>
         <a-asset-item id="box-obj" src="assets/objects/box.obj"></a-asset-item>
+        <a-asset-item id="ellipsoid-obj" src="assets/objects/ellipsoid.obj"></a-asset-item>
+        <a-asset-item id="icosahedron-obj" src="assets/objects/icosahedron.obj"></a-asset-item>
+        <a-asset-item id="monkey_head-obj" src="assets/objects/monkey_head.obj"></a-asset-item>
+        <a-asset-item id="rectangular_prism-obj" src="assets/objects/rectangular_prism.obj"></a-asset-item>
+        <a-asset-item id="short_triangular_prism-obj" src="assets/objects/short_triangular_prism.obj"></a-asset-item>
+        <a-asset-item id="sphere-obj" src="assets/objects/sphere.obj"></a-asset-item>
+        <a-asset-item id="square_pyramid-obj" src="assets/objects/square_pyramid.obj"></a-asset-item>
+        <a-asset-item id="torus-obj" src="assets/objects/torus.obj"></a-asset-item>
+        <a-asset-item id="torus2-obj" src="assets/objects/torus2.obj"></a-asset-item>
+        <a-asset-item id="torus3-obj" src="assets/objects/torus3.obj"></a-asset-item>
+        <a-asset-item id="torus4-obj" src="assets/objects/torus4.obj"></a-asset-item>
+        <a-asset-item id="triangle_pyramid-obj" src="assets/objects/triangle_pyramid.obj"></a-asset-item>
+        <a-asset-item id="triangular_prism-obj" src="assets/objects/triangular_prism.obj"></a-asset-item>
 
         <script id="avatar-template" type="text/html">
           <a-entity class="avatar">
@@ -161,61 +175,101 @@
         <script id="pokemon-model" type="text/html">
           <a-entity class="model" obj-model="obj: #pokemon-obj" position="" rotation="" scale="" material=""></a-entity>
         </script>
-        <script id="google-glass-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #google-glass-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
         <script id="box-model" type="text/html">
           <a-entity class="model" obj-model="obj: #box-obj" position="" rotation="" scale="" material=""></a-entity>
         </script>
-
+        <script id="sphere-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #sphere-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="ellipsoid-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #ellipsoid-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+         <script id="icosahedron-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #icosahedron-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="monkey_head-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #monkey_head-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="rectangular_prism-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #rectangular_prism-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="short_triangular_prism-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #short_triangular_prism-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="square_pyramid-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #square_pyramid-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="torus-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #torus-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="torus2-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #torus2-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="torus3-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #torus3-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="torus4-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #torus4-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="triangle_pyramid-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #triangle_pyramid-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="triangular_prism-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #triangular_prism-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
       </a-assets>
+
+
       <ar-frame position="0 0 0" rotation="0 0 0"
                  trackvisibility="true" visible="false" parent="vuforia.stonesandchips.stones" enable="true">
-        <a-entity id="frame" scale="0.01 0.01 0.01">
 
-<!--       <a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" camera position="0 1.3 0" wasd-controls look-controls>
-                <a-entity cursor id="cursor"
-                  geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.016"
-                  material="color: #EEE"
-                  position="0 0 -0.01"
-                  scale="0.01 0.01 0.01"></a-entity>
-      </a-entity> -->
-
-<!--       <a-sky src="#sky" rotation="0 -90 0"></a-sky> -->
-      
-          <a-sphere radius="1" material="color: #111" position="0 0 0"></a-sphere>
-
+        <a-entity id="scene" scale= "0.1 0.1 0.1">
         </a-entity>
 
       </ar-frame>
 
       <ar-camera id="player">
-      
           <a-entity cursor id="cursor"
                   geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.016"
                   material="color: #EEE"
                   position="0 0 -0.1"
                   scale="0.1 0.1 0.1"></a-entity>
-
       </ar-camera>
 
-      <center id="ui" class="hide-center">
+      <center id="ui">
+
       <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
-        <div class="addRemoveButton">
-          
+        <div class="backButtonDiv">
+          <button onclick="goBack()" class="backButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">arrow_back</i>
+          </button>
+        </div>
+  
+      <div id="annoBoxi" class="annotation hide-annotation annotationObj optionButton">
+        <div>
+          <!-- <h3>Annotations</h3> -->
+        </div>
+      </div>
+        
+      <div class="addRemoveButton">
+
           <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
             <i class="material-icons">delete</i>
           </button>
-          
+
           <button onclick="editModelPress()" type="button" class="addButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">create</i>
+          </button>
+
+          <button onclick="addAnnotationPress()" type="button" class="addButton annotationObj optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+            <i class="material-icons">chat</i>
           </button>
 
           <button onclick="stateChange('stateB')" class="addButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
             <i class="material-icons">add</i>
           </button>
-   
+
         </div>
       </div>
       <!-- END STATE A -->
@@ -236,7 +290,7 @@
                   <div class="box">
                     <div class="container-4">
                       <input onkeypress="checkKey(event)" type="search" class="search" id="search" placeholder="Search...">
-                      <button onclick="searchButtonPress()" class="icon"><i class="material-icons">search</i></button>
+                      <button onclick="searchButtonPress()" class="icon check"><i class="material-icons">search</i></button>
                     </div>
                   </div>
 
@@ -248,8 +302,33 @@
               </center>
             </div>
 
-            <button class="uploadButton" onclick="uploadItemButtonPress()">Upload</button>
+            <button class="uploadButton" onclick="stateChange('stateB2')">Upload</button>
             <button class="cancelButton" onclick="stateChange('stateA')">Cancel</button>
+          </div>
+        </center>
+      </div>
+      <!-- END STATE B -->
+
+       <!-- STATE B2: UI for uploading model -->
+      <div id="stateB2" class="hide-state">
+         <!-- When addEntity() is pressed, uiElem is shown -->
+        <center id="uiElem">
+          <div class="boxAndButtons">
+            <div class="objectUploadBox">
+              <center>
+                <div class="searchbar">
+                  <button onclick="stateChange('stateB')" class="icon back"><i class="material-icons">arrow_back</i></button>
+                  <div class="box">
+                    <div class="container-4">
+                      <input  type="search" class="search" id="fileInputField" placeholder="Enter URL of Model...">
+                      <button onclick="uploadItemButtonPress()" class="icon check"><i class="material-icons">done</i></button>
+                    </div>
+                  </div>
+
+                </div>
+
+              </center>
+            </div>
           </div>
         </center>
       </div>
@@ -257,12 +336,55 @@
 
       <!-- STATE C: Editing portion to move/rotate/resize/recolor entities -->
       <div id="stateC" class="hide-state">
-        <div class="editTray">
-
-          <button onclick="stateChange('stateA')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
-            <i class="material-icons">done</i>
-          </button>
-
+        <div class="desktopC">
+          <div class="editTray">
+            <button onclick="moveButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">open_with</i>
+            </button>
+            <button onclick="rotateButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">3d_rotation</i>
+            </button>
+            <button onclick="sizeButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">picture_in_picture</i>
+            </button>
+            <button onclick="stateChange('stateA')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+            <button onclick="colorButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">color_lens</i>
+            </button>
+            <button onclick="undoButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">undo</i>
+            </button>
+            <button onclick="deleteButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </div>
+        <div class="mobileC">
+           <div class="editTray">
+            <button onclick="moveButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">open_with</i>
+            </button>
+            <button onclick="rotateButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">3d_rotation</i>
+            </button>
+            <button onclick="sizeButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">picture_in_picture</i>
+            </button>
+            <button onclick="colorButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">color_lens</i>
+            </button>
+            <button onclick="undoButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">undo</i>
+            </button>
+            <button onclick="deleteButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">delete</i>
+            </button>
+          </div>
+            <button onclick="stateChange('stateA')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
         </div>
         <!-- <center id = "editBoxCenter" class="editBoxCenter">
           <div class="editingBox">
@@ -291,6 +413,192 @@
       </div>
       <!-- END STATE C -->
 
+      <!-- STATE C1: MOVE an entity -->
+      <div id="stateC1" class="hide-state">
+        <div class="desktopC">
+          <div class="editTray">
+            <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">arrow_back</i>
+            </button>
+            <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+            <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_downward</i>
+            </button>
+            <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">add</i>
+            </button>
+            <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">remove</i>
+            </button>
+            <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+          </div>
+        </div>
+        <div class="mobileC">
+          <div class="editTray">
+            <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">arrow_back</i>
+            </button>
+            <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+            <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_downward</i>
+            </button>
+            <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">add</i>
+            </button>
+            <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">remove</i>
+            </button>
+          </div>
+           <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+        </div>
+      </div>
+      <!-- END STATE C1 -->
+
+      <!-- STATE C2: ROTATE an entity -->
+      <div id="stateC2" class="hide-state">
+        <div class="desktopC">
+          <div class="editTray">
+            <button onclick="rotate('y', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">arrow_back</i>
+            </button>
+            <button onclick="rotate('y', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+            <button onclick="rotate('x', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <button onclick="rotate('x', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_downward</i>
+            </button>
+            <button onclick="rotate('z', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                 <i class="material-icons">rotate_left</i>
+            </button>
+            <button onclick="rotate('z', 5, false)"class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">rotate_right</i>
+            </button>
+            <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+          </div>
+        </div>
+        <div class="mobileC">
+          <div class="editTray">
+            <button onclick="rotate('y', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">arrow_back</i>
+            </button>
+            <button onclick="rotate('y', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+            <button onclick="rotate('x', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <button onclick="rotate('x', 5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">arrow_downward</i>
+            </button>
+            <button onclick="rotate('z', -5, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                 <i class="material-icons">rotate_left</i>
+            </button>
+            <button onclick="rotate('z', 5, false)"class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">rotate_right</i>
+            </button>
+          </div>
+          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+        </div>
+      </div>
+      <!-- END STATE C2 -->
+
+      <!-- STATE C3: RESIZE an entity -->
+      <div id="stateC3" class="hide-state">
+        <div class="desktopC">
+          <div class="editTray">
+            <button onclick="scale(.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">add</i>
+            </button>
+            <button onclick="scale(-.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">remove</i>
+            </button>
+            <button onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+          </div>
+        </div>
+        <div class="mobileC">
+          <div class="editTray">
+            <button onclick="scale(.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+               <i class="material-icons">add</i>
+            </button>
+            <button onclick="scale(-.01)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+                <i class="material-icons">remove</i>
+            </button>
+          </div>
+           <button onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+        </div>
+      </div>
+      <!-- END STATE C3 -->
+
+      <!-- STATE C4: RECOLOR an entity -->
+      <div id="stateC4" class="hide-state">
+        <div class="desktopC">
+          <div class="editTray">
+            <INPUT class="colorPicker jscolor {onFineChange:'setColor(this.toHEXString())'}" value="cc66ff"></INPUT>
+            <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+          </div>
+        </div>
+        <div class="mobileC">
+          <div class="editTray">
+            <INPUT class="colorPicker jscolor {onFineChange:'setColor(this.toHEXString())'}" value="cc66ff"></INPUT>
+          </div>
+          <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
+              <i class="material-icons">done</i>
+            </button>
+        </div>
+      </div>
+      <!-- END STATE C4 -->
+
+       <!-- STATE D: UI for annotations -->
+      <div id="stateD" class="hide-state">
+         <!-- When addEntity() is pressed, uiElem is shown -->
+         <center id="uiElem">
+          <div class="boxAndButtons">
+            <div class="annoBox">
+              <center>
+                <div class="box">
+                  <div class="container-4">
+                    <span class="Message" style="color: #FFF">Message: </span>
+                    <br>
+                    <input type="text" id="userInput" value="">
+                    <br>
+                    <br><br>
+                  </div>
+                </div>
+              </center>
+            </div>
+            <button class="cancelButton" onclick="stateChange('stateA')">Cancel</button>
+            <button class="annoButton" onClick="annoPress()">Annotate</button>
+          </div>
+        </center>
+        </div>
+        <!-- END STATE D -->
 
     </center>
 
@@ -303,15 +611,71 @@
     <script src="js/createButtons.js"></script>
     <script src="library/jscolor.min.js"></script>
     <script src="js/addItem.js"></script>
+    <script src="library/jquery.ajax.js"></script>;
+    
+    <script type="text/javascript">
+      // Back button to Maps back to change panorama
+      function goBack() {
+        window.location.href = '/maps';
+      }
 
- <!--    <script type="text/javascript">
-      // function randomNumString() {
-      //   var max = 3;
-      //   var min = 0;
-      //   return (Math.random() * (max - min) + min).toString();
-      // }
+      // Load saved objects fetched from Firebase
+      var savedObjects = <%- JSON.stringify(savedObjects) %>;
+      for (var objectId in savedObjects) {
+        var templateId = savedObjects[objectId]["templateId"];
+        var creatorUid = savedObjects[objectId]["creatorUid"];
+        var components = {
+          position: JSON.parse(savedObjects[objectId]["position"]),
+          rotation: JSON.parse(savedObjects[objectId]["rotation"]),
+          scale: JSON.parse(savedObjects[objectId]["scale"]),
+          material: JSON.parse(savedObjects[objectId]["material"]),
+        }
+        createModelWithComponents(creatorUid, objectId.replace("naf-", ""), templateId, components);
+      }
 
-    </script> -->
+      // Save an object after a user creates/edits an object
+      $(".doneButton").click(function(ev) {
+        $.ajax({
+          url: "/save-object",
+          method: "POST",
+          data: {
+            creatorUid: window.localStorage["uid"],
+            templateId: selectedItem.getAttribute("template").src,
+            objectId: selectedItem.id,
+            position: JSON.stringify(selectedItem.getAttribute("position")),
+            rotation: JSON.stringify(selectedItem.getAttribute("rotation")),
+            scale: JSON.stringify(selectedItem.getAttribute("scale")),
+            material: JSON.stringify({
+              color: selectedItem.getAttribute("material").color
+            }),
+          },
+          success: function(resp) {
+
+          },
+          error: function(resp) {
+
+          }
+        });
+      });
+
+      // TODO: Allow only creator to remove an object
+      $(".removeButton").click(function() {
+        $.ajax({
+          url: "/remove-object",
+          method: "POST",
+          data: {
+            objectId: selectedItem.id
+          },
+          success: function(resp) {
+
+          },
+          error: function(resp) {
+
+          }
+        })
+      });
+
+    </script>
 
   </body>
   </html>
