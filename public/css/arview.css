@@ -623,7 +623,7 @@ a {
   margin-top: -1%;
 }
 */
-@media screen and (max-device-width: 800px) {
+@media screen and (max-device-width: 1200px) {
   .boxAndButtons{
     z-index: 1;
     top: 2vh;
@@ -823,7 +823,7 @@ a {
   border-radius: 10px;
   margin-top: 5px;
   padding: 10px;
-  overflow-y: scroll;
+  overflow-x: scroll;
 }
 div.gallery {
     margin: 1vh;
@@ -911,6 +911,32 @@ td, th {
   border-radius: 5px;
   top:4vh;
   padding: 10px;
+}
+}
+@media screen and (max-device-width: 500px) {
+  div.gallery {
+    margin: 1vh;
+    border: 0px solid #E91E63;
+    float: left;
+    min-width: 80vw;
+    max-width: 80vw;
+    cursor: pointer;
+    position: relative;
+}
+div.gallery:hover {
+    border: 5px solid #EC407A;
+}
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+.objects{
+  background: none;
+  height: 75vh;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 10px;
+  overflow-y: scroll;
 }
 }
 @media screen and (max-device-width: 400px) {
