@@ -62,7 +62,7 @@ function annoPress() {
   var txt = document.getElementById('userInput').value;
   console.log(txt);
   if (txt === '') {
-    object.setAttribute('annotation', "undefined");
+    object.setAttribute('annotation', "");
       var entityData = {
         networkId: objectId,
         owner: NAF.clientId,
@@ -85,7 +85,22 @@ function annoPress() {
       NAF.entities.updateEntity(NAF.clientId, null, entityData);
       console.log(object.getAttribute('annotation'));
       document.getElementById('userInput').value = '';
-    } 
+    }
+    // Save updated annotation in Firebase
+    $.ajax({
+      url: "/update-annotation",
+      method: "POST",
+      data: {
+        objectId: selectedItem.id,
+        annotation: selectedItem.getAttribute("annotation") || '',
+      },
+      success: function(resp) {
+
+      },
+      error: function(resp) {
+
+      }
+    });
   }
 
 

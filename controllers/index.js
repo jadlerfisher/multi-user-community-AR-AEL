@@ -115,9 +115,29 @@ router.post('/save-object', function(req, res) {
       rotation: req.body.rotation,
       scale: req.body.scale,
       material: req.body.material,
+      annotation: req.body.annotation,
     }
 
   	objectController.saveObject(creatorUid, objectId, templateId, components,
+      function(error) {
+      	if (error) {
+      		return res.status(500).send(error.message);
+      	}
+      }
+    );
+  } else {
+    return res.status(500).send('Login required.');
+  }
+});
+
+// Update annotation
+router.post('/update-annotation', function(req, res) {
+  if (authController.hasLoggedIn()) {
+    var objectController = require('./objectController');
+    var objectId = req.body.objectId;
+    var annotation = req.body.annotation;
+
+  	objectController.updateAnnotation(objectId, annotation,
       function(error) {
       	if (error) {
       		return res.status(500).send(error.message);

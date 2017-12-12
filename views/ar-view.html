@@ -96,14 +96,14 @@
             <i class="material-icons">arrow_back</i>
           </button>
         </div>
-	
-	<div id="annoBoxi" class="annotation hide-annotation annotationObj optionButton">
-		<div>
-			<!-- <h3>Annotations</h3> -->
-		</div>
-	</div>
-        
-	 <div class="addRemoveButton">
+
+        <div id="annoBoxi" class="annotation hide-annotation annotationObj optionButton">
+        	<div>
+        		<!-- <h3>Annotations</h3> -->
+        	</div>
+        </div>
+
+        <div class="addRemoveButton">
 
           <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
             <i class="material-icons">delete</i>
@@ -609,6 +609,7 @@
           rotation: JSON.parse(savedObjects[objectId]["rotation"]),
           scale: JSON.parse(savedObjects[objectId]["scale"]),
           material: JSON.parse(savedObjects[objectId]["material"]),
+          annotation: savedObjects[objectId]["annotation"] || "",
         }
         createModelWithComponents(creatorUid, objectId.replace("naf-", ""), templateId, components);
       }
@@ -628,6 +629,7 @@
             material: JSON.stringify({
               color: selectedItem.getAttribute("material").color
             }),
+            annotation: selectedItem.getAttribute("annotation") || '',
           },
           success: function(resp) {
 

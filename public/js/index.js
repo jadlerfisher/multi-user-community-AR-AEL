@@ -122,7 +122,7 @@ function createModel(i) {
     material: 'color: #FFF',
     annotation: ''
     //dynamic_body: 'mass: 0'
-    
+
     //dynamic-body: 'mass: 0'
   };
   var currentUid = window.localStorage["uid"];
@@ -142,7 +142,6 @@ function createModelWithComponents(uid, objectId, templateId, components) {
     owner: NAF.clientId,
     template: templateId,
     components: components
-    
   };
 
   // Create local entity
@@ -194,16 +193,16 @@ function createModelWithComponents(uid, objectId, templateId, components) {
       var box = document.getElementById('annoBoxi');
       var oldAnno = document.getElementById('newAnno');
       if (oldAnno != null) {
-        box.removeChild(oldAnno); 
+        box.removeChild(oldAnno);
       }
       var txt = this.getAttribute('annotation');
-      var newContent = document.createTextNode(txt); 
+      var newContent = document.createTextNode(txt);
       console.log(txt);
       if (txt === "undefined" || txt === "") {
         console.log('Mouse left: ' + this.getAttribute('id'));
       } else {
         setOpacity(this, 0.85);
-        var newDiv = document.createElement("div"); 
+        var newDiv = document.createElement("div");
         newDiv.setAttribute("id", "newAnno");
         newDiv.appendChild(newContent);
         box.appendChild(newDiv);
