@@ -36,7 +36,7 @@ function createGalleryItem(classString, thisFunction, imageSource, name) {
     var div1 = document.createElement("div");
     div1.setAttribute("class", classString);
     div1.setAttribute("onClick", thisFunction);
-    div1.setAttribute("style", "display: inline !important");
+    div1.setAttribute("style", "display: inline");
 
     var a = document.createElement("a");
     a.setAttribute("target", "_blank");
@@ -44,11 +44,11 @@ function createGalleryItem(classString, thisFunction, imageSource, name) {
     var image = document.createElement("img");
     image.setAttribute("src", imageSource);
     image.setAttribute("alt", name);
-    image.setAttribute("width", "300 !important");
-    image.setAttribute("height", "300 !important");
+    image.setAttribute("width", "300");
+    image.setAttribute("height", "300");
 
     a.appendChild(image);
-    div1.appendChild(image);
+    div1.appendChild(a);
     objs.appendChild(div1);
 }
 

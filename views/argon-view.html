@@ -46,51 +46,14 @@
   <body onload="init()">
     <script type="text/javascript">
       window.localStorage["uid"] = "<%= uid %>";
+      var isArgon = true;
     </script>
-    <!-- <script>
-      // Argon obj location detect
-      AFRAME.registerComponent('showdistance', {
-        schema: {
-          default: ""
-        },
-
-        init: function () {
-            this.text = "";
-        },
-
-        update: function () {
-          this.text = this.data;
-        },
-
-        tick: function (t) {
-          var object3D = this.el.parentEl.parentEl.object3D;
-          var camera = this.el.sceneEl.camera;
-          if (!camera) {return;}
-
-          var cameraPos = camera.getWorldPosition();
-          var thisPos = object3D.getWorldPosition();
-          var distance = Math.round(thisPos.distanceTo(cameraPos));
-
-          var cssDiv = this.el.getObject3D('div');
-          var msg = this.text + distance + " meters away";
-          cssDiv.elements[0].innerHTML = msg;
-          cssDiv.elements[1].innerHTML = msg;
-        }
-      });
-    </script> -->
-    <!-- <div hidden>
-      <div id="gtdiv" class="label">Georgia Tech</div>
-      <div id="londondiv" class="label">Tower of London</div>
-      <div id="tokyodiv" class="label">Tokyo</div>
-      <div id="sydneydiv" class="label">Sydney Opera House</div>
-      <div id="londonpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-      <div id="tokyopin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-      <div id="sydneypin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-    </div> -->
 
     <ar-scene vuforiakey="#vuforiakey"
               vuforiadataset__stonesandchips="src:url(library/datasets/StonesAndChips.xml);"
               
+              physics-world="gravity: 0 -9.81 0"
+
               network-scene="
               app: myApp;
               room: room1;
@@ -99,20 +62,7 @@
               adapter: wseasyrtc;
               debug: true;"
               >
-<!--     <a-scene id="scene" network-scene="
-      app: myApp;
-      room: room1;
-      connectOnLoad: true;
-      onConnect: onConnect;
-      adapter: wseasyrtc;
-      debug: true;
-    "> -->
 
-    <!-- <ar-scene physics-world="gravity: 0 -9.81 0" networked-scene="
-      app: myApp;
-      room: room1;
-      debug: true;
-    "> -->
       <a-assets>
 
         <a-asset-item id="vuforiakey" src="assets/ngrok-key.txt"></a-asset-item>
@@ -361,6 +311,7 @@
             </button>
           </div>
         </div>
+
         <div class="mobileC">
            <div class="editTray">
             <button onclick="moveButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
@@ -417,22 +368,22 @@
       <div id="stateC1" class="hide-state">
         <div class="desktopC">
           <div class="editTray">
-            <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                <i class="material-icons">arrow_back</i>
             </button>
-            <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_forward</i>
             </button>
-            <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_upward</i>
             </button>
-            <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_downward</i>
             </button>
-            <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">add</i>
             </button>
-            <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                <i class="material-icons">remove</i>
             </button>
             <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
@@ -442,22 +393,22 @@
         </div>
         <div class="mobileC">
           <div class="editTray">
-            <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                <i class="material-icons">arrow_back</i>
             </button>
-            <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_forward</i>
             </button>
-            <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_upward</i>
             </button>
-            <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_downward</i>
             </button>
-            <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">add</i>
             </button>
-            <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                <i class="material-icons">remove</i>
             </button>
           </div>

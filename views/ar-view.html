@@ -1,13 +1,12 @@
 <html>
 <head>
   <title>AR-View</title>
-  <!-- THIS IS A COMMENT -->
   <meta name="description" content="Multiuser community tableu">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
   <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
   <!-- <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.1.0/dist/aframe-physics-system.min.js"></script> -->
-<!--   <script src="js/aframe-physics-system.js"></script> -->
+  <script src="js/aframe-physics-system.js"></script>
   <!-- Multiuser connection -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 
@@ -21,7 +20,7 @@
   <script src="https://use.fontawesome.com/00712d7803.js"></script>
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
   <!-- Argon -->
@@ -46,6 +45,7 @@
   <body onload="init()">
     <script type="text/javascript">
       window.localStorage["uid"] = "<%= uid %>";
+      isArgon = false;
     </script>
     <!-- <script>
       // Argon obj location detect
@@ -583,7 +583,6 @@
 
     <!-- </ar-scene> -->
     </a-scene>
-    <!-- <script src="js/index-argon.js"></script> -->
     <script src="js/index.js"></script>
     <script src="js/stateHandler.js"></script>
     <script src="js/buttonHandlers.js"></script>

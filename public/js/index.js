@@ -110,24 +110,28 @@ function chooseColor() {
 function createModel(i) {
 
 
+  var objPos;
 
-
-  // /* CODE FOR ARGON */
-  var objPos = {
-    x: 0, y: 0, z: 0
+  if(isArgon){ // if user is in Argon
+    objPos = {
+      x: 0, y: 0, z: 0 // place model directly in middle of target
+    };
   }
 
-  /* CODE FOR DESKTOP */
-  // var player = document.querySelector("#player");
-  // var playerPos = new THREE.Vector3().copy(player.getAttribute('position'));
-  // var playerDir = new THREE.Vector3().copy(player.object3D.getWorldDirection());  
+  else{
 
-  // var objPos = {
-  //   x: playerPos.x - playerDir.x,
-  //   y: playerPos.y - playerDir.y,
-  //   z: playerPos.z - playerDir.z,
+    /* CODE FOR DESKTOP */
+    var player = document.querySelector("#player");
+    var playerPos = new THREE.Vector3().copy(player.getAttribute('position'));
+    var playerDir = new THREE.Vector3().copy(player.object3D.getWorldDirection());  
 
-  // };
+    var objPos = {
+      x: playerPos.x - playerDir.x,
+      y: playerPos.y - playerDir.y,
+      z: playerPos.z - playerDir.z,
+
+    };
+  }
   var components = {
     position: objPos,
     rotation: '0 0 0',
