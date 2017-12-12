@@ -498,35 +498,31 @@ function setRotation(rotationInfo) {
 function createNewModel(text) {
   var assets = document.querySelector("a-assets");
   var asset = document.createElement("a-asset-item");
-  asset.setAttribute("id", text);
+  asset.setAttribute("id", "newModel");
   asset.setAttribute("src", text);
   assets.appendChild(asset);
-  //var entity = document.createElement("a-entity");
-  //entity.setAttribute("class", "model");
-  //entity.setAttribute("obj-model", "obj: #" + text);
-  //entity.setAttribute("position", "");
-  //entity.setAttribute("rotation", "");
-  //entity.setAttribute("scale", "");
-  //entity.setAttribute("material", "");
 
-  //asset.appendChild(entity);
-  //assets.appendChild(asset);
+  var sc = document.createElement("script");
+  sc.setAttribute("id", "newModel");
+  sc.setAttribute("type", "text/html");
+
+  var entity = document.createElement("a-entity");
+  entity.setAttribute("class", "model");
+  entity.setAttribute("obj-model", "obj: #newModel");
+  entity.setAttribute("position", "");
+  entity.setAttribute("rotation", "");
+  entity.setAttribute("scale", "");
+  entity.setAttribute("material", "");
+  entity.setAttribute("annotation", "");
+
+  sc.appendChild(entity);
+  assets.appendChild(sc);
+
   var model_len = models.length;
-  models.push("obj: #" + text);
-  //var len = galleryList.length;
-  //galleryList.push("gallery " + text, "displayModel("+len+")", "", "pokeball");
+  //models.push("#" + text);
+  models.push("#newModel");
+
   createModel(model_len);
-  //var scene = document.querySelector("a-scene");
-  //creates model
-  //var model = document.createElement("a-entity");
-  //model.setAttribute("id", "item");
-  //model.setAttribute("class", "model");
-  //model.setAttribute("obj-model", "obj: "+text);
-  //model.setAttribute('position', '0 1.25 -5');
-  //model.setAttribute("rotation", "0 0 0");
-  //model.setAttribute("scale", "1 1 1");
-  //model.setAttribute("material", "color: #0000FF");
-  //scene.appendChild(model);
 }
 
 //Removes item based on its id #
