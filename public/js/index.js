@@ -233,6 +233,8 @@ function setOpacity(object, value){
   model.setAttribute('material','opacity',value);
 }
 function addAnnotationPress() {
+  // Display the current annotation
+  document.getElementById('userInput').value = selectedItem.getAttribute('annotation');
   stateChange('stateD');
 }
 
