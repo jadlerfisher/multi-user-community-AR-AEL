@@ -105,16 +105,33 @@ function chooseColor() {
   removeEditingOptionsBox();
   createEditBox("color");
 }
+
 //Displays a Model
 function createModel(i) {
-  var player = document.querySelector("#player");
-  var playerPos = new THREE.Vector3().copy(player.getAttribute('position'));
-  var playerDir = new THREE.Vector3().copy(player.object3D.getWorldDirection());
-  var objPos = {
-    x: playerPos.x - playerDir.x,
-    y: playerPos.y - playerDir.y,
-    z: playerPos.z - playerDir.z,
-  };
+
+
+  var objPos;
+
+  if(isArgon){ // if user is in Argon
+    objPos = {
+      x: 0, y: 0, z: 0 // place model directly in middle of target
+    };
+  }
+
+  else{
+
+    /* CODE FOR DESKTOP */
+    var player = document.querySelector("#player");
+    var playerPos = new THREE.Vector3().copy(player.getAttribute('position'));
+    var playerDir = new THREE.Vector3().copy(player.object3D.getWorldDirection());  
+
+    var objPos = {
+      x: playerPos.x - playerDir.x,
+      y: playerPos.y - playerDir.y,
+      z: playerPos.z - playerDir.z,
+
+    };
+  }
   var components = {
     position: objPos,
     rotation: '0 0 0',
@@ -168,7 +185,7 @@ function createModelWithComponents(uid, objectId, templateId, components) {
 
   entity.initNafData = entityData;
 
-  var scene = document.querySelector('a-scene');
+  var scene = document.querySelector('#scene');
   scene.appendChild(entity);
   NAF.entities.entities[entityData.networkId] = entity;
 
@@ -527,7 +544,7 @@ function createNewModel(text) {
 
 //Removes item based on its id #
 function removeItem(i) {
-  var scene = document.querySelector("a-scene");
+  var scene = document.querySelector("#frame");
   scene.removeChild(document.getElementById(i));
   var index = items.indexOf(i);
   items.splice(index, 1);
@@ -545,14 +562,14 @@ function randomColor() {
 }
 
 function removeItems(i) {
-  var scene = document.querySelector("a-scene");
+  var scene = document.querySelector("#frame");
   scene.removeChild(document.getElementById(i));
   var index = items.indexOf(i);
   items.splice(index, 1);
  }
 
 function removeAll() {
-  var scene = document.querySelector("a-scene");
+  var scene = document.querySelector("#frame");
   console.log('length is', items.length);
 
 
@@ -570,7 +587,7 @@ function removeAll() {
 }
 
 function gravityAll() {
-  var scene = document.querySelector("a-scene");
+  var scene = document.querySelector("#frame");
   for (var i = 0; i < items.length; i++) {
     var item = document.getElementById(items[i])
     item.setAttribute("dynamic-body", "mass: 5");
@@ -593,8 +610,8 @@ function revealCursor(){
   cursor.setAttribute('id', "cursor");
   cursor.setAttribute('geometry','primitive: ring; radiusInner: 0.01; radiusOuter: 0.016');
   cursor.setAttribute('material', "color: #EEE");
-  cursor.setAttribute('position', "0 0 -0.01");
-  cursor.setAttribute('scale', "0.01 0.01 0.01");
+  cursor.setAttribute('position', "0 0 -0.1");
+  cursor.setAttribute('scale', "0.1 0.1 0.1");
 
   camera.appendChild(cursor);
 }

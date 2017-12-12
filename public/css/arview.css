@@ -1,3 +1,7 @@
+center.hide-center{
+  display: none;
+}
+
 .mobileC{
   display: none;
 }
@@ -827,7 +831,7 @@ a {
 }
 div.gallery {
     margin: 1vh;
-    border: 0px solid #E91E63;
+   /* border: 0px solid #E91E63;*/
     float: left;
     min-width: 80vw;
     max-width: 80vw;

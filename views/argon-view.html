@@ -6,7 +6,7 @@
 
   <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
   <!-- <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.1.0/dist/aframe-physics-system.min.js"></script> -->
-  <script src="js/aframe-physics-system.js"></script>
+<!--   <script src="js/aframe-physics-system.js"></script> -->
   <!-- Multiuser connection -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 
@@ -20,75 +20,173 @@
   <script src="https://use.fontawesome.com/00712d7803.js"></script>
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
   <!-- Argon -->
-  <!-- <script src="library/argon/argon.js"></script>
+  <script src="library/argon/argon.js"></script>
   <script src="library/argon/argon-aframe.js"></script>
   <script src="library/argon/CSS3DArgonRenderer.js"></script>
   <script src="library/argon/CSS3DArgonHUD.js"></script>
-  <script src="library/aframe-look-at-component.js"></script> -->
+  <script src="library/aframe-look-at-component.js"></script>
 
   <!-- A-Frame component to register event listeners that set properties -->
   <!-- useful for cursor events -->
-  <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+  <!-- <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script> -->
 
   <link rel="stylesheet" href="css/arview.css">
   <meta charset="UTF-8">
-  <title>The Table</title>
+  <title>The ARGON Table</title>
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 
   <script src="js/main-ar.js"></script>
 </head>
+
   <body onload="init()">
     <script type="text/javascript">
       window.localStorage["uid"] = "<%= uid %>";
-      isArgon = false;
+      var isArgon = true;
     </script>
-    <!-- <script>
-      // Argon obj location detect
-      AFRAME.registerComponent('showdistance', {
-        schema: {
-          default: ""
-        },
 
-        init: function () {
-            this.text = "";
-        },
+    <ar-scene vuforiakey="#vuforiakey"
+              vuforiadataset__stonesandchips="src:url(library/datasets/StonesAndChips.xml);"
+              
+              physics-world="gravity: 0 -9.81 0"
 
-        update: function () {
-          this.text = this.data;
-        },
+              network-scene="
+              app: myApp;
+              room: room1;
+              connectOnLoad: true;
+              onConnect: onConnect;
+              adapter: wseasyrtc;
+              debug: true;"
+              >
 
-        tick: function (t) {
-          var object3D = this.el.parentEl.parentEl.object3D;
-          var camera = this.el.sceneEl.camera;
-          if (!camera) {return;}
+      <a-assets>
 
-          var cameraPos = camera.getWorldPosition();
-          var thisPos = object3D.getWorldPosition();
-          var distance = Math.round(thisPos.distanceTo(cameraPos));
+        <a-asset-item id="vuforiakey" src="assets/ngrok-key.txt"></a-asset-item>
+        <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
 
-          var cssDiv = this.el.getObject3D('div');
-          var msg = this.text + distance + " meters away";
-          cssDiv.elements[0].innerHTML = msg;
-          cssDiv.elements[1].innerHTML = msg;
-        }
-      });
-    </script> -->
-    <!-- <div hidden>
-      <div id="gtdiv" class="label">Georgia Tech</div>
-      <div id="londondiv" class="label">Tower of London</div>
-      <div id="tokyodiv" class="label">Tokyo</div>
-      <div id="sydneydiv" class="label">Sydney Opera House</div>
-      <div id="londonpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-      <div id="tokyopin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-      <div id="sydneypin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-    </div> -->
+        <img id="sky" src="assets/images/sky.png">
+        <!-- <img id="buzzpin" src="assets/images/buzz-pin.png"> -->
+        <a-asset-item id="pokemon-obj" src="https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj"></a-asset-item>
+        <a-asset-item id="box-obj" src="assets/objects/box.obj"></a-asset-item>
+        <a-asset-item id="ellipsoid-obj" src="assets/objects/ellipsoid.obj"></a-asset-item>
+        <a-asset-item id="icosahedron-obj" src="assets/objects/icosahedron.obj"></a-asset-item>
+        <a-asset-item id="monkey_head-obj" src="assets/objects/monkey_head.obj"></a-asset-item>
+        <a-asset-item id="rectangular_prism-obj" src="assets/objects/rectangular_prism.obj"></a-asset-item>
+        <a-asset-item id="short_triangular_prism-obj" src="assets/objects/short_triangular_prism.obj"></a-asset-item>
+        <a-asset-item id="sphere-obj" src="assets/objects/sphere.obj"></a-asset-item>
+        <a-asset-item id="square_pyramid-obj" src="assets/objects/square_pyramid.obj"></a-asset-item>
+        <a-asset-item id="torus-obj" src="assets/objects/torus.obj"></a-asset-item>
+        <a-asset-item id="torus2-obj" src="assets/objects/torus2.obj"></a-asset-item>
+        <a-asset-item id="torus3-obj" src="assets/objects/torus3.obj"></a-asset-item>
+        <a-asset-item id="torus4-obj" src="assets/objects/torus4.obj"></a-asset-item>
+        <a-asset-item id="triangle_pyramid-obj" src="assets/objects/triangle_pyramid.obj"></a-asset-item>
+        <a-asset-item id="triangular_prism-obj" src="assets/objects/triangular_prism.obj"></a-asset-item>
 
-    <center id="ui">
+        <script id="avatar-template" type="text/html">
+          <a-entity class="avatar">
+            <a-sphere class="head"
+              scale="0.45 0.5 0.4"
+              random-color
+            ></a-sphere>
+            <a-entity class="face"
+              position="0 0.05 0"
+            >
+              <a-sphere class="eye"
+                color="#efefef"
+                position="0.16 0.1 -0.35"
+                scale="0.12 0.12 0.12"
+              >
+                <a-sphere class="pupil"
+                  color="#000"
+                  position="0 0 -1"
+                  scale="0.2 0.2 0.2"
+                ></a-sphere>
+              </a-sphere>
+              <a-sphere class="eye"
+                color="#efefef"
+                position="-0.16 0.1 -0.35"
+                scale="0.12 0.12 0.12"
+              >
+                <a-sphere class="pupil"
+                  color="#000"
+                  position="0 0 -1"
+                  scale="0.2 0.2 0.2"
+                ></a-sphere>
+              </a-sphere>
+            </a-entity>
+          </a-entity>
+        </script>
+
+        <!-- Predefined models -->
+        <script id="pokemon-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #pokemon-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="box-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #box-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="sphere-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #sphere-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="ellipsoid-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #ellipsoid-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+         <script id="icosahedron-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #icosahedron-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="monkey_head-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #monkey_head-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="rectangular_prism-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #rectangular_prism-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="short_triangular_prism-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #short_triangular_prism-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="square_pyramid-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #square_pyramid-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="torus-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #torus-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="torus2-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #torus2-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="torus3-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #torus3-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="torus4-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #torus4-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="triangle_pyramid-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #triangle_pyramid-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+        <script id="triangular_prism-model" type="text/html">
+          <a-entity class="model" obj-model="obj: #triangular_prism-obj" position="" rotation="" scale="" material=""></a-entity>
+        </script>
+      </a-assets>
+
+
+      <ar-frame position="0 0 0" rotation="0 0 0"
+                 trackvisibility="true" visible="false" parent="vuforia.stonesandchips.stones" enable="true">
+
+        <a-entity id="scene" scale= "0.1 0.1 0.1">
+        </a-entity>
+
+      </ar-frame>
+
+      <ar-camera id="player">
+          <a-entity cursor id="cursor"
+                  geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.016"
+                  material="color: #EEE"
+                  position="0 0 -0.1"
+                  scale="0.1 0.1 0.1"></a-entity>
+      </ar-camera>
+
+      <center id="ui">
 
       <!-- STATE A: Start screen with adding an entity -->
       <div id="stateA">
@@ -97,14 +195,14 @@
             <i class="material-icons">arrow_back</i>
           </button>
         </div>
-
-        <div id="annoBoxi" class="annotation hide-annotation annotationObj optionButton">
-        	<div>
-        		<!-- <h3>Annotations</h3> -->
-        	</div>
+  
+      <div id="annoBoxi" class="annotation hide-annotation annotationObj optionButton">
+        <div>
+          <!-- <h3>Annotations</h3> -->
         </div>
-
-        <div class="addRemoveButton">
+      </div>
+        
+      <div class="addRemoveButton">
 
           <button onclick="removeButtonPress()" type="button" class="removeButton optionButton hide-button mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
             <i class="material-icons">delete</i>
@@ -213,6 +311,7 @@
             </button>
           </div>
         </div>
+
         <div class="mobileC">
            <div class="editTray">
             <button onclick="moveButtonPress()" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
@@ -269,22 +368,22 @@
       <div id="stateC1" class="hide-state">
         <div class="desktopC">
           <div class="editTray">
-            <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                <i class="material-icons">arrow_back</i>
             </button>
-            <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_forward</i>
             </button>
-            <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_upward</i>
             </button>
-            <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_downward</i>
             </button>
-            <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">add</i>
             </button>
-            <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                <i class="material-icons">remove</i>
             </button>
             <button  onclick="stateChange('stateC')" class="doneButton mdl-button mdl-js-button mdl-button--fab mdl-button--primary">
@@ -294,22 +393,22 @@
         </div>
         <div class="mobileC">
           <div class="editTray">
-            <button onclick="move('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('x', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                <i class="material-icons">arrow_back</i>
             </button>
-            <button onclick="move('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('x', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_forward</i>
             </button>
-            <button onclick="move('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('y', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_upward</i>
             </button>
-            <button onclick="move('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('y', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">arrow_downward</i>
             </button>
-            <button onclick="move('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('z', 1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                 <i class="material-icons">add</i>
             </button>
-            <button onclick="move('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
+            <button onclick="armove('z', -1, false)" class="editButton mdl-button mdl-js-button mdl-button--fab mdl-button--accent">
                <i class="material-icons">remove</i>
             </button>
           </div>
@@ -436,11 +535,11 @@
               <center>
                 <div class="box">
                   <div class="container-4">
-			              <span class="Message" style="color: #FFF">Message: </span>
-		                <br>
-		                <input type="text" id="userInput" value="">
-		                <br>
-		                <br><br>
+                    <span class="Message" style="color: #FFF">Message: </span>
+                    <br>
+                    <input type="text" id="userInput" value="">
+                    <br>
+                    <br><br>
                   </div>
                 </div>
               </center>
@@ -453,151 +552,23 @@
         <!-- END STATE D -->
 
     </center>
-    <a-scene id="scene" physics-world="gravity: 0 -9.81 0" network-scene="
-      app: myApp;
-      room: room1;
-      connectOnLoad: true;
-      onConnect: onConnect;
-      adapter: wseasyrtc;
-      debug: true;
-    ">
-    <!-- <ar-scene physics-world="gravity: 0 -9.81 0" networked-scene="
-      app: myApp;
-      room: room1;
-      debug: true;
-    "> -->
-      <a-assets>
-        <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
-        <img id="sky" src="assets/images/sky.png">
-        <!-- <img id="buzzpin" src="assets/images/buzz-pin.png"> -->
-        <a-asset-item id="pokemon-obj" src="https://raw.githubusercontent.com/argonjs/understanding-argon-twine/master/docs/models/pokemon-go/pokemon-go.obj"></a-asset-item>
-        <a-asset-item id="box-obj" src="assets/objects/box.obj"></a-asset-item>
-        <a-asset-item id="ellipsoid-obj" src="assets/objects/ellipsoid.obj"></a-asset-item>
-        <a-asset-item id="icosahedron-obj" src="assets/objects/icosahedron.obj"></a-asset-item>
-        <a-asset-item id="monkey_head-obj" src="assets/objects/monkey_head.obj"></a-asset-item>
-        <a-asset-item id="rectangular_prism-obj" src="assets/objects/rectangular_prism.obj"></a-asset-item>
-        <a-asset-item id="short_triangular_prism-obj" src="assets/objects/short_triangular_prism.obj"></a-asset-item>
-        <a-asset-item id="sphere-obj" src="assets/objects/sphere.obj"></a-asset-item>
-        <a-asset-item id="square_pyramid-obj" src="assets/objects/square_pyramid.obj"></a-asset-item>
-        <a-asset-item id="torus-obj" src="assets/objects/torus.obj"></a-asset-item>
-        <a-asset-item id="torus2-obj" src="assets/objects/torus2.obj"></a-asset-item>
-        <a-asset-item id="torus3-obj" src="assets/objects/torus3.obj"></a-asset-item>
-        <a-asset-item id="torus4-obj" src="assets/objects/torus4.obj"></a-asset-item>
-        <a-asset-item id="triangle_pyramid-obj" src="assets/objects/triangle_pyramid.obj"></a-asset-item>
-        <a-asset-item id="triangular_prism-obj" src="assets/objects/triangular_prism.obj"></a-asset-item>
 
-        <script id="avatar-template" type="text/html">
-          <a-entity class="avatar">
-            <a-sphere class="head"
-              scale="0.45 0.5 0.4"
-              random-color
-            ></a-sphere>
-            <a-entity class="face"
-              position="0 0.05 0"
-            >
-              <a-sphere class="eye"
-                color="#efefef"
-                position="0.16 0.1 -0.35"
-                scale="0.12 0.12 0.12"
-              >
-                <a-sphere class="pupil"
-                  color="#000"
-                  position="0 0 -1"
-                  scale="0.2 0.2 0.2"
-                ></a-sphere>
-              </a-sphere>
-              <a-sphere class="eye"
-                color="#efefef"
-                position="-0.16 0.1 -0.35"
-                scale="0.12 0.12 0.12"
-              >
-                <a-sphere class="pupil"
-                  color="#000"
-                  position="0 0 -1"
-                  scale="0.2 0.2 0.2"
-                ></a-sphere>
-              </a-sphere>
-            </a-entity>
-          </a-entity>
-        </script>
-
-        <!-- Predefined models -->
-        <script id="pokemon-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #pokemon-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="box-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #box-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="sphere-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #sphere-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="ellipsoid-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #ellipsoid-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-         <script id="icosahedron-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #icosahedron-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="monkey_head-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #monkey_head-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="rectangular_prism-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #rectangular_prism-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="short_triangular_prism-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #short_triangular_prism-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="square_pyramid-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #square_pyramid-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="torus-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #torus-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="torus2-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #torus2-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="torus3-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #torus3-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="torus4-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #torus4-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="triangle_pyramid-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #triangle_pyramid-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-        <script id="triangular_prism-model" type="text/html">
-          <a-entity class="model" obj-model="obj: #triangular_prism-obj" position="" rotation="" scale="" material=""></a-entity>
-        </script>
-
-      </a-assets>
-      <!-- <a-sky src="#sky"></a-sky> -->
-      <a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" camera position="0 1.3 0" wasd-controls look-controls>
-                <a-entity cursor id="cursor"
-                  geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.016"
-                  material="color: #EEE"
-                  position="0 0 -0.01"
-                  scale="0.01 0.01 0.01"></a-entity>
-      </a-entity>
-
-      <a-sky src="#sky" rotation="0 -90 0"></a-sky>
-
-
-    <!-- </ar-scene> -->
-    </a-scene>
+    </ar-scene>
+    <!-- </a-scene> -->
+    <script src="js/index-argon.js"></script>
     <script src="js/index.js"></script>
     <script src="js/stateHandler.js"></script>
     <script src="js/buttonHandlers.js"></script>
     <script src="js/createButtons.js"></script>
     <script src="library/jscolor.min.js"></script>
     <script src="js/addItem.js"></script>
-    <script src="library/jquery.ajax.js"></script>
+    <script src="library/jquery.ajax.js"></script>;
+    
     <script type="text/javascript">
-      // Set the sky to the Google map paranoma image
-      document.getElementById("sky").src = "<%= base64 %>";
-
-  	  // Back button to Maps back to change panorama
-  	  function goBack() {
-		    window.location.href = '/maps';
-  	  }
+      // Back button to Maps back to change panorama
+      function goBack() {
+        window.location.href = '/maps';
+      }
 
       // Load saved objects fetched from Firebase
       var savedObjects = <%- JSON.stringify(savedObjects) %>;
@@ -609,7 +580,6 @@
           rotation: JSON.parse(savedObjects[objectId]["rotation"]),
           scale: JSON.parse(savedObjects[objectId]["scale"]),
           material: JSON.parse(savedObjects[objectId]["material"]),
-          annotation: savedObjects[objectId]["annotation"] || "",
         }
         createModelWithComponents(creatorUid, objectId.replace("naf-", ""), templateId, components);
       }
@@ -629,7 +599,6 @@
             material: JSON.stringify({
               color: selectedItem.getAttribute("material").color
             }),
-            annotation: selectedItem.getAttribute("annotation") || '',
           },
           success: function(resp) {
 

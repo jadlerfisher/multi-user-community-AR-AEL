@@ -85,6 +85,7 @@ router.post('/save-base64', function(req, res) {
   return res.status(200).send({message: 'Successfully stored base64'});
 });
 
+// Desktop experience
 router.get('/ar-view', function(req, res) {
   if (authController.hasLoggedIn()) {
     var objectController = require('./objectController');
@@ -99,6 +100,25 @@ router.get('/ar-view', function(req, res) {
 
   } else {
     req.session.redirect_url = 'ar-view';
+    res.render('login');
+  }
+});
+
+// Argon experience
+router.get('/argon-view', function(req, res) {
+  if (authController.hasLoggedIn()) {
+    var objectController = require('./objectController');
+
+    objectController.getObjects().then(function(snapshot) {
+      res.render('argon-view', {
+        uid: authController.getUid(),
+        base64: req.session.base64,
+        savedObjects: snapshot.val(),
+      });
+    });
+
+  } else {
+    req.session.redirect_url = 'argon-view';
     res.render('login');
   }
 });

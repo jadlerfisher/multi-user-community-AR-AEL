@@ -148,7 +148,7 @@ function gravityOffButtonPress() {
 
 //Resets the gravity button upon press
 function gravityOnButtonPress() {
-  var scene = document.querySelector("a-scene");
+  var scene = document.querySelector("#scene");
   createGravity();
   gravityAll();
 }
