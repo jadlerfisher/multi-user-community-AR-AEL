@@ -38,17 +38,25 @@ function createGalleryItem(classString, thisFunction, imageSource, name) {
     div1.setAttribute("onClick", thisFunction);
     div1.setAttribute("style", "display: inline");
 
-    var a = document.createElement("a");
-    a.setAttribute("target", "_blank");
+    var para = document.createElement("p");
+    var nodeTextList = classString.split(" ");
+    var nodeText = nodeTextList[1];
+    nodeText = nodeText.replace("_", " ");
+    var node = document.createTextNode(nodeText);
+    para.appendChild(node);
+    para.setAttribute("class", "paraButton");
+    // var a = document.createElement("a");
+    // a.setAttribute("target", "_blank");
 
-    var image = document.createElement("img");
-    image.setAttribute("src", imageSource);
-    image.setAttribute("alt", name);
-    image.setAttribute("width", "300");
-    image.setAttribute("height", "300");
+    // var image = document.createElement("img");
+    // image.setAttribute("src", imageSource);
+    // image.setAttribute("alt", name);
+    // image.setAttribute("width", "300");
+    // image.setAttribute("height", "300");
 
-    a.appendChild(image);
-    div1.appendChild(a);
+    // a.appendChild(image);
+    // div1.appendChild(a);
+    div1.appendChild(para);
     objs.appendChild(div1);
 }
 
@@ -216,7 +224,7 @@ function undoButtonPress() {
     } else if (lastMove[0] === "size") {
         console.log("UNDOING SIZE CHANGE");
         console.log(lastMove[1]);
-      setSize(lastMove[1][0], lastMove[1][1], lastMove[1][2]);
+      setSize(lastMove[1][0], lasaddItemtMove[1][1], lastMove[1][2]);
     } else if (lastMove[0] === "color") {
         setColor(lastMove[1]);
     }
