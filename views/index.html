@@ -230,8 +230,8 @@
         padding-top: 14px;
     }
     .home {
-        border: solid white;
-        padding: 9px;
+      /*  border: solid white;
+        padding: 9px;*/
         text-decoration: none;
     }
     .nav {
@@ -261,6 +261,22 @@
       font-family: 'Karla', sans-serif;
       width: auto;
     }
+    .homeNav{
+      display: inline;
+    }
+    @media screen and (max-device-width: 800px) {
+      .homeNav{
+        display: none;
+      }
+      .element {
+      color: white;
+      margin: 15px 11px;
+      font-family: 'Karla', sans-serif;
+      font-size: 20pt;
+      width: auto;
+      text-transform: uppercase;
+    }
+    }
 
   </style>
 </head>
@@ -268,7 +284,7 @@
   <div class="main">
     <nav id="main-nav" class="navbar navbar-default navbar-fixed-top navbar-element">
       <ul class="navb-pad">
-        <li style="display: inline;">
+        <li class="homeNav">
           <a href="" class="element home page-scroll ">HOME</a>
           <a href="#section1" class="element section-Tabs page-scroll">The Initiative</a>
           <a href="#section2" class="element section-Tabs page-scroll">Multi-user Augmented Reality</a>
@@ -279,6 +295,9 @@
           <% if (hasLoggedIn) { %>
             <li>
               <a href="/maps" class="element">STREETVIEW</a>
+            </li>
+            <li>
+              <a href="/argon-view" class="element">ARGON</a>
             </li>
             <li>
               <a href="/" class="element" id="logout-btn">LOGOUT</a>

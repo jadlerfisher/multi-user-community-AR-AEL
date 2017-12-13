@@ -281,8 +281,8 @@
         margin: 0px
       }
       .home {
-        border: solid white;
-        padding: 9px;
+/*        border: solid white;
+        padding: 9px;*/
         text-decoration: none;
       }
 
@@ -327,4 +327,20 @@
     }
     .btn-Border{
       border-color:  #000000;
+    }
+/*    .homeNav{
+      
+    }*/
+    @media screen and (max-device-width: 800px) {
+      .homeNav{
+        display: none;
+      }
+      .element {
+      color: white;
+      margin: 15px 11px;
+      font-family: 'Karla', sans-serif;
+      font-size: 20pt;
+      width: auto;
+      text-transform: uppercase;
+    }
     }

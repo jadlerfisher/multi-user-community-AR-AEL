@@ -19,13 +19,16 @@
       <ul class="navb-pad">
         <li style="display: inline;">
           <a href="/" class="element home page-scroll ">HOME</a>
-          <a href="/#section1" class="element section-Tabs page-scroll">The Initiative</a>
-          <a href="/#section2" class="element section-Tabs page-scroll">Multi-user Augmented Reality</a>
-          <a href="/#section3" class="element section-Tabs page-scroll">Future Work</a>
-          <a href="/#section4" class="element section-Tabs page-scroll">Meet the Creators</a>
+          <a href="/#section1" class="homeNav element section-Tabs page-scroll">The Initiative</a>
+          <a href="/#section2" class="homeNav element section-Tabs page-scroll">Multi-user Augmented Reality</a>
+          <a href="/#section3" class="homeNav element section-Tabs page-scroll">Future Work</a>
+          <a href="/#section4" class="homeNav element section-Tabs page-scroll">Meet the Creators</a>
         </li>
         <ul class="nav">
           <% if (hasLoggedIn) { %>
+            <li>
+              <a href="/argon-view" class="element">ARGON</a>
+            </li>
             <li>
               <a href="/" class="element" id="logout-btn">LOGOUT</a>
             </li>
